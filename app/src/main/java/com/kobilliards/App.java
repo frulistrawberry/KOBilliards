@@ -7,18 +7,25 @@ import android.os.Bundle;
 import com.kobilliards.base.ActivityManager;
 import com.kobilliards.constants.PreferenceConstant;
 import com.kobilliards.utils.AppUtils;
+import com.kobilliards.utils.CommonUtils;
 import com.kobilliards.utils.SPUtils;
 import com.kobilliards.utils.log.LogUtil;
+import com.netease.nimlib.sdk.NIMClient;
 
 public class App extends Application implements Application.ActivityLifecycleCallbacks {
+
+
 
     @Override
     public void onCreate() {
         super.onCreate();
+        NIMClient.init(this, CommonUtils.getLoginInfo(), null);
+
         AppUtils.init(this);
         SPUtils.init(PreferenceConstant.PREFERENCE_NAME,this);
         LogUtil.init(BuildConfig.DEBUG);
         registerActivityLifecycleCallbacks(this);
+
     }
 
     @Override

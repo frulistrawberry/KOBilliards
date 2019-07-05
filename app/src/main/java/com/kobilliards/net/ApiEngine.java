@@ -4,6 +4,7 @@ package com.kobilliards.net;
 import com.kobilliards.constants.UrlConstant;
 import com.kobilliards.utils.AppUtils;
 import com.kobilliards.utils.JsonUtils;
+import com.kobilliards.utils.PhoneUtils;
 import com.kobilliards.utils.log.LogUtil;
 
 import java.io.File;
@@ -11,6 +12,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
+import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.SSLContext;
@@ -39,6 +41,7 @@ public class ApiEngine {
         OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder()
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)//设置请求超时时长
                 .addInterceptor(getHttpLoggingInterceptor())//启用Log日志
+                .addInterceptor(getHttpHeaderInterceptor())
                 .sslSocketFactory(createSSLSocketFactory())//设置https访问(验证证书)
                 .hostnameVerifier(org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
@@ -92,6 +95,15 @@ public class ApiEngine {
         });
         loggingInterceptor.setLevel(HttpLoggingInterceptor.Level.BODY);
         return loggingInterceptor;
+    }
+
+    private HttpHeaderInterceptor getHttpHeaderInterceptor(){
+        HashMap<String,String> headers = new HashMap<>();
+        headers.put("Proxy-Client-IP", PhoneUtils.getIPAddress(AppUtils.getAppContext()));
+        headers.put("WL-Proxy-Client-IP", PhoneUtils.getIPAddress(AppUtils.getAppContext()));
+        headers.put("HTTP_CLIENT_IPHTTP_X_FORWARDED_FOR", PhoneUtils.getIPAddress(AppUtils.getAppContext()));
+        headers.put("deviceId",PhoneUtils.getDeviceId(AppUtils.getAppContext()));
+        return new HttpHeaderInterceptor(headers);
     }
 
 
