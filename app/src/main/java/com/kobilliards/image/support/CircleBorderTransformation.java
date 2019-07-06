@@ -19,7 +19,7 @@ public class CircleBorderTransformation extends BitmapTransformation {
 
     private static final int VERSION = 1;
     private static final String ID =
-            "com.shoujinwang.shoujinlicai." + VERSION;
+            "com.kobilliards." + VERSION;
     private static final byte[] ID_BYTES = ID.getBytes(CHARSET);
 
     private Paint mBorderPaint;
