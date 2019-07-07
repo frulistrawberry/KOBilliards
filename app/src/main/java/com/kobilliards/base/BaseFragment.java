@@ -23,7 +23,7 @@ public abstract class BaseFragment extends RxFragment {
 
     protected BaseActivity mActivity;
     //根布局
-    private ViewGroup mRoot;
+    protected ViewGroup mRoot;
     /**
      * 显示圆形进度对话框
      */

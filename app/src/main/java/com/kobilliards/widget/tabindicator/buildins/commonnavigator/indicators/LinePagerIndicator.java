@@ -2,8 +2,10 @@ package com.kobilliards.widget.tabindicator.buildins.commonnavigator.indicators;
 
 import android.content.Context;
 import android.graphics.Canvas;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
 import android.graphics.RectF;
+import android.graphics.Shader;
 import android.view.View;
 import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
@@ -69,13 +71,7 @@ public class LinePagerIndicator extends View implements IPagerIndicator {
             return;
         }
 
-        // 计算颜色
-        if (mColors != null && mColors.size() > 0) {
-            int currentColor = mColors.get(Math.abs(position) % mColors.size());
-            int nextColor = mColors.get(Math.abs(position + 1) % mColors.size());
-            int color = ArgbEvaluatorHolder.eval(positionOffset, currentColor, nextColor);
-            mPaint.setColor(color);
-        }
+
 
         // 计算锚点位置
         PositionData current = FragmentContainerHelper.getImitativePositionData(mPositionDataList, position);
@@ -106,6 +102,15 @@ public class LinePagerIndicator extends View implements IPagerIndicator {
         mLineRect.right = rightX + (nextRightX - rightX) * mEndInterpolator.getInterpolation(positionOffset);
         mLineRect.top = getHeight() - mLineHeight - mYOffset;
         mLineRect.bottom = getHeight() - mYOffset;
+
+        // 计算颜色
+        if (mColors != null && mColors.size() > 1) {
+            LinearGradient linearGradient = new LinearGradient(mLineRect.left, mLineRect.bottom, mLineRect.right, mLineRect.bottom,mColors.get(0),mColors.get(1), Shader.TileMode.CLAMP);
+            mPaint.setShader(linearGradient);
+
+        }else if (mColors != null){
+            mPaint.setColor(mColors.get(0));
+        }
 
         invalidate();
     }

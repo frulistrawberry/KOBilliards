@@ -22,8 +22,8 @@ public class App extends MultiDexApplication implements Application.ActivityLife
     public void onCreate() {
         super.onCreate();
 
-        AppUtils.init(this);
         MultiDex.install(this);
+        AppUtils.init(this);
         SPUtils.init(PreferenceConstant.PREFERENCE_NAME,this);
         LogUtil.init(BuildConfig.DEBUG);
         registerActivityLifecycleCallbacks(this);
