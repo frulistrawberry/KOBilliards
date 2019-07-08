@@ -21,6 +21,8 @@ import com.kobilliards.utils.BarUtils;
 import com.kobilliards.widget.TitleBar;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.ButterKnife;
 
 public abstract class BaseActivity extends RxAppCompatActivity {
@@ -87,6 +89,9 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     protected void onDestroy() {
         if (mProgressDialog != null&&mProgressDialog.isShowing()) {
             mProgressDialog.dismiss();
+        }
+        if (EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().unregister(this);
         }
         super.onDestroy();
     }
@@ -176,6 +181,8 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         linearLayout.setLayoutParams(params);
         return linearLayout;
     }
+
+
 
 
 

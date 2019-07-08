@@ -9,11 +9,15 @@ public class BilliardsRoomAdapter extends BaseQuickAdapter<BilliardsRoomPojo, Ba
 
 
     public BilliardsRoomAdapter() {
-        super(R.layout.item_default_drop_down);
+        super(R.layout.item_billiards_room);
     }
 
     @Override
     protected void convert(BaseViewHolder helper, BilliardsRoomPojo item) {
-
+        if (helper.getAdapterPosition() - getHeaderLayoutCount() == 0){
+            helper.setGone(R.id.v_divider,true);
+        }else {
+            helper.setGone(R.id.v_divider,false);
+        }
     }
 }

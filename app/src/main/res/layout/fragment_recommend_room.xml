@@ -1,23 +1,86 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-    <com.kobilliards.widget.DropDownMenu
-        android:id="@+id/drop_down_menu"
+    android:orientation="vertical">
+    <View
+        android:id="@+id/v_status_bar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        app:ddmenuTextSize="13sp"
-        app:ddtextUnselectedColor="@color/drop_down_unselected"
-        app:ddtextSelectedColor="@color/drop_down_selected"
-        app:dddividerColor="@color/gray"
-        app:ddunderlineColor="@color/gray"
-        app:ddmenuMenuHeightPercent="0.5"
-        app:ddmenuSelectedIcon="@mipmap/drop_down_selected_icon"
-        app:ddmaskColor="@color/mask_color"
-        app:ddmenuBackgroundColor="@color/white"
-        app:ddmenuUnselectedIcon="@mipmap/drop_down_unselected_icon">
+        android:visibility="gone"
+        android:background="@color/bg_status_bar"
+        android:layout_height="0dp"/>
+    <LinearLayout
+        android:id="@+id/ll_sort_parent"
+        android:layout_width="match_parent"
+        android:layout_height="34dp"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:id="@+id/ll_sort_nearby"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_weight="1">
+            <ImageView
+                android:id="@+id/iv_back_to_top"
+                android:layout_width="22dp"
+                android:layout_height="22dp"
+                android:src="@mipmap/ic_nearby_room_back_to_top"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="#808080"
+                android:layout_marginLeft="5dp"
+                android:text="我附近"
+                android:gravity="center"
+                android:drawablePadding="2dp"
+                android:drawableRight="@mipmap/sort_arrow_down"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_sort_level"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="#808080"
+                android:layout_marginLeft="5dp"
+                android:text="星级/价格"
+                android:gravity="center"
+                android:drawablePadding="2dp"
+                android:drawableRight="@mipmap/sort_arrow_down"/>
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/ll_filter"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_weight="1">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="13sp"
+                android:textColor="#808080"
+                android:layout_marginLeft="5dp"
+                android:text="筛选"
+                android:gravity="center"
+                android:drawablePadding="2dp"
+                android:drawableRight="@mipmap/sort_arrow_down"/>
+        </LinearLayout>
 
-    </com.kobilliards.widget.DropDownMenu>
 
-</FrameLayout>
+    </LinearLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#f5f5f5"/>
+    <include
+        layout="@layout/include_ptr_recycler"/>
+
+</LinearLayout>

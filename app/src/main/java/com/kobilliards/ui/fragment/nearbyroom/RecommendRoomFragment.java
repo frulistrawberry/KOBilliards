@@ -1,45 +1,50 @@
 package com.kobilliards.ui.fragment.nearbyroom;
 
-import android.content.Context;
-import android.graphics.Color;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.BaseAdapter;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.kobilliards.R;
-import com.kobilliards.base.BaseFragment;
+import com.kobilliards.base.BaseListFragment;
+import com.kobilliards.event.OffsetChangeEvent;
+import com.kobilliards.mvp.contract.rearbyroom.RecommendRoomContract;
+import com.kobilliards.mvp.presenter.nearbyroom.RecommendRoomPresenter;
 import com.kobilliards.pojo.BilliardsRoomPojo;
 import com.kobilliards.ui.adapter.BilliardsRoomAdapter;
-import com.kobilliards.widget.DropDownMenu;
+import com.kobilliards.utils.BarUtils;
+import com.kobilliards.widget.AppBarStateChangeListener;
 
-import java.util.ArrayList;
-import java.util.Arrays;
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
-public class RecommendRoomFragment extends BaseFragment {
-    @BindView(R.id.drop_down_menu)
-    DropDownMenu mDropDownMenu;
-    private List<View> popupViews = new ArrayList<>();
-    View mContentView;
-    PtrClassicFrameLayout mPtrLayout;
-    RecyclerView mRecyclerView;
-    BilliardsRoomAdapter mAdapter;
+public class RecommendRoomFragment extends BaseListFragment<RecommendRoomPresenter> implements RecommendRoomContract.IRecommendRoomView {
+    @BindView(R.id.ll_sort_level)
+    LinearLayout mLevelSortLayout;
+    @BindView(R.id.ll_sort_nearby)
+    LinearLayout mNearbySortLayout;
+    @BindView(R.id.ll_filter)
+    LinearLayout mFilterLayout;
+    @BindView(R.id.iv_back_to_top)
+    ImageView mBackToTopIv;
+    @BindView(R.id.ll_sort_parent)
+    LinearLayout mSortParentLayout;
+    @BindView(R.id.v_status_bar)
+    View mStatusBarView;
 
-    String[] mMenuTitles = {"我附近","星级/价格","筛选"};
-    private String locations[] = {"1000m", "2000m", "3000m", "4000m", "5000m"};
-    private String levels[] = {"按星级升序", "按星级降序", "按价格升序", "按价格降序"};
-    private String filters[] = {"筛选1", "筛选2", "筛选3", "筛选4", "筛选5"};
+    String sort;
+    String filter;
+
+
+    private boolean isHeaderOpened = true;
 
     @Override
     protected View createView(LayoutInflater inflater, ViewGroup parent) {
@@ -49,112 +54,84 @@ public class RecommendRoomFragment extends BaseFragment {
     @Override
     protected void initData() {
         mAdapter = new BilliardsRoomAdapter();
+        EventBus.getDefault().register(this);
     }
 
     @Override
     protected void initView() {
-        mContentView = LayoutInflater.from(getContext()).inflate(R.layout.include_ptr_recycler,null);
-        mPtrLayout = mContentView.findViewById(R.id.layout_ptr);
-        mRecyclerView = mContentView.findViewById(R.id.recycler_view);
-
-        mPtrLayout.setPtrHandler(new PtrDefaultHandler() {
-            @Override
-            public void onRefreshBegin(PtrFrameLayout frame) {
-                mPtrLayout.refreshComplete();
-            }
-        });
-
-        final ListView locationView = new ListView(getContext());
-        locationView.setDividerHeight(0);
-        ListDropDownAdapter ageAdapter = new ListDropDownAdapter(getContext(), Arrays.asList(locations));
-        locationView.setAdapter(ageAdapter);
-        final ListView levelView = new ListView(getContext());
-        levelView.setDividerHeight(0);
-        ListDropDownAdapter levelAdapter = new ListDropDownAdapter(getContext(), Arrays.asList(levels));
-        levelView.setAdapter(levelAdapter);
-        final ListView filterView = new ListView(getContext());
-        filterView.setDividerHeight(0);
-        ListDropDownAdapter filterAdapter = new ListDropDownAdapter(getContext(), Arrays.asList(filters));
-        filterView.setAdapter(filterAdapter);
-        popupViews.add(locationView);
-        popupViews.add(levelView);
-        popupViews.add(filterView);
-        mDropDownMenu.setDropDownMenu(Arrays.asList(mMenuTitles),popupViews,mContentView);
+        super.initView();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
-        List<BilliardsRoomPojo> data = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            data.add(new BilliardsRoomPojo());
-        }
-        mAdapter.setNewData(data);
+        mStatusBarView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, BarUtils.getStatusBarHeight(getContext())));
+        mPtrLayout.setPtrHandler(new PtrDefaultHandler() {
+
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                if (isHeaderOpened)
+                    return super.checkCanDoRefresh(frame, content, header);
+                else
+                    return false;
+            }
+
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                onRefresh();
+
+            }
+        });
+        onRefresh();
+
 
     }
 
-    static class ListDropDownAdapter extends BaseAdapter {
+    @Override
+    protected void onRefresh() {
+        mCurrentPage=1;
+        mPresenter.getRecommendRoomList(sort,filter,mCurrentPage);
+    }
 
-        private Context context;
-        private List<String> list;
-        private int checkItemPosition = 0;
+    @Override
+    protected void onLoadMore() {
+        super.onLoadMore();
+        mCurrentPage++;
+        mPresenter.getRecommendRoomList(sort,filter,mCurrentPage);
 
-        public void setCheckItem(int position) {
-            checkItemPosition = position;
-            notifyDataSetChanged();
-        }
+    }
 
-        public ListDropDownAdapter(Context context, List<String> list) {
-            this.context = context;
-            this.list = list;
-        }
+    @Override
+    protected boolean isLoadMoreEnable() {
+        return true;
+    }
 
-        @Override
-        public int getCount() {
-            return list.size();
-        }
 
-        @Override
-        public Object getItem(int position) {
-            return null;
-        }
 
-        @Override
-        public long getItemId(int position) {
-            return position;
-        }
+    @Subscribe
+    public void onEvent(OffsetChangeEvent event){
+        if (event.from.equals("NearbyRoomActivity")){
+            isHeaderOpened = event.state== AppBarStateChangeListener.State.EXPANDED;
 
-        @Override
-        public View getView(int position, View convertView, ViewGroup parent) {
-            ViewHolder viewHolder;
-            if (convertView != null) {
-                viewHolder = (ViewHolder) convertView.getTag();
-            } else {
-                convertView = LayoutInflater.from(context).inflate(R.layout.item_default_drop_down, null);
-                viewHolder = new ViewHolder(convertView);
-                convertView.setTag(viewHolder);
-            }
-            fillValue(position, viewHolder);
-            return convertView;
-        }
 
-        private void fillValue(int position, ViewHolder viewHolder) {
-            viewHolder.mText.setText(list.get(position));
-            if (checkItemPosition != -1) {
-                if (checkItemPosition == position) {
-                    viewHolder.mText.setTextColor(Color.RED);
-                    viewHolder.mText.setBackgroundColor(Color.GRAY);
-                } else {
-                    viewHolder.mText.setTextColor(Color.BLACK);
-                    viewHolder.mText.setBackgroundColor(Color.WHITE);
-                }
+            if (event.state != AppBarStateChangeListener.State.COLLAPSED){
+                mStatusBarView.setVisibility(View.GONE);
+                mBackToTopIv.setVisibility(View.INVISIBLE);
+            }else {
+                mStatusBarView.setVisibility(View.VISIBLE);
+                mBackToTopIv.setVisibility(View.VISIBLE);
             }
         }
+    }
 
-        static class ViewHolder {
-            @BindView(R.id.text)
-            TextView mText;
+    @Override
+    protected RecommendRoomPresenter getPresenter() {
+        return new RecommendRoomPresenter(this);
+    }
 
-            ViewHolder(View view) {
-                ButterKnife.bind(this, view);
-            }
+    @Override
+    public void showRecommendRoomList(List<BilliardsRoomPojo> roomList) {
+        if (mCurrentPage == 1){
+            mAdapter.setNewData(roomList);
+        }else {
+            mAdapter.addData(roomList);
         }
     }
 }

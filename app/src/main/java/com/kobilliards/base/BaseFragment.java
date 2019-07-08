@@ -16,6 +16,8 @@ import android.widget.LinearLayout;
 import com.kobilliards.widget.TitleBar;
 import com.trello.rxlifecycle2.components.support.RxFragment;
 
+import org.greenrobot.eventbus.EventBus;
+
 import butterknife.ButterKnife;
 
 
@@ -117,4 +119,11 @@ public abstract class BaseFragment extends RxFragment {
         return linearLayout;
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (EventBus.getDefault().isRegistered(this)){
+            EventBus.getDefault().unregister(this);
+        }
+    }
 }

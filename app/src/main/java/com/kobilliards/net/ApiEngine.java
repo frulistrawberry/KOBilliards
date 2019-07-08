@@ -25,6 +25,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 public class ApiEngine {
@@ -40,9 +41,10 @@ public class ApiEngine {
         Cache cache = new Cache(cacheFile, DEFAULT_CACHE_SIZE);
         OkHttpClient.Builder okHttpClientBuilder = new OkHttpClient.Builder()
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)//设置请求超时时长
-                .addInterceptor(getHttpLoggingInterceptor())//启用Log日志
                 .addInterceptor(getHttpHeaderInterceptor())
+                .addInterceptor(new CommonParamsInterceptor())
                 .sslSocketFactory(createSSLSocketFactory())//设置https访问(验证证书)
+                .addInterceptor(getHttpLoggingInterceptor())//启用Log日志
                 .hostnameVerifier(org.apache.http.conn.ssl.SSLSocketFactory.ALLOW_ALL_HOSTNAME_VERIFIER)
                 .connectTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
                 .readTimeout(DEFAULT_TIMEOUT, TimeUnit.SECONDS)
@@ -102,7 +104,6 @@ public class ApiEngine {
         headers.put("Proxy-Client-IP", PhoneUtils.getIPAddress(AppUtils.getAppContext()));
         headers.put("WL-Proxy-Client-IP", PhoneUtils.getIPAddress(AppUtils.getAppContext()));
         headers.put("HTTP_CLIENT_IPHTTP_X_FORWARDED_FOR", PhoneUtils.getIPAddress(AppUtils.getAppContext()));
-        headers.put("deviceId",PhoneUtils.getDeviceId(AppUtils.getAppContext()));
         return new HttpHeaderInterceptor(headers);
     }
 

@@ -202,8 +202,8 @@ public class DropDownMenu extends LinearLayout {
      */
     public void closeMenu() {
         if (current_tab_position != -1) {
-            ((TextView) tabMenuView.getChildAt(current_tab_position)).setTextColor(textUnselectedColor);
-            ((TextView) tabMenuView.getChildAt(current_tab_position)).setCompoundDrawablesWithIntrinsicBounds(null, null,
+            ((TextView) ((LinearLayout)tabMenuView.getChildAt(current_tab_position)).getChildAt(0)).setTextColor(textUnselectedColor);
+            ((TextView) ((LinearLayout)tabMenuView.getChildAt(current_tab_position)).getChildAt(0)).setCompoundDrawablesWithIntrinsicBounds(null, null,
                     getResources().getDrawable(menuUnselectedIcon), null);
             popupMenuViews.setVisibility(View.GONE);
             popupMenuViews.setAnimation(AnimationUtils.loadAnimation(getContext(), R.anim.dd_menu_out));
@@ -231,7 +231,7 @@ public class DropDownMenu extends LinearLayout {
     private void switchMenu(View target) {
         System.out.println(current_tab_position);
         for (int i = 0; i < tabMenuView.getChildCount(); i = i + 2) {
-            if (target == tabMenuView.getChildAt(i)) {
+            if (target == ((LinearLayout)tabMenuView.getChildAt(i)).getChildAt(0)) {
                 if (current_tab_position == i) {
                     closeMenu();
                 } else {
