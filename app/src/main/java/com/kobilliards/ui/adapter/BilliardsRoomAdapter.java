@@ -1,9 +1,12 @@
 package com.kobilliards.ui.adapter;
 
+import android.view.View;
+
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.kobilliards.R;
 import com.kobilliards.pojo.BilliardsRoomPojo;
+import com.kobilliards.ui.activity.BilliardsRoomDetailActivity;
 
 public class BilliardsRoomAdapter extends BaseQuickAdapter<BilliardsRoomPojo, BaseViewHolder> {
 
@@ -19,5 +22,11 @@ public class BilliardsRoomAdapter extends BaseQuickAdapter<BilliardsRoomPojo, Ba
         }else {
             helper.setGone(R.id.v_divider,false);
         }
+        helper.getConvertView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BilliardsRoomDetailActivity.launcher(mContext);
+            }
+        });
     }
 }

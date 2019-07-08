@@ -85,7 +85,7 @@ public class TitleBar extends LinearLayout {
 
 
     public TitleBar showBack(){
-        return setLeftImage(R.mipmap.icon_title_back,new OnClickListener() {
+        return setLeftImage(R.mipmap.ic_nearby_room_back,new OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (getContext() instanceof Activity){
