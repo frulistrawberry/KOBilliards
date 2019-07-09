@@ -5,17 +5,17 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="bg_window">#ffffff</color>
-    <color name="bg_status_bar">#65cd65</color>
+    <color name="bg_status_bar">#66CC66</color>
 
-    <color name="bg_title_bar">#65cd65</color>
+    <color name="bg_title_bar">#66CC66</color>
     <color name="text_color_title">#ffffff</color>
     <color name="text_color_title_menu">#ffffff</color>
     <color name="tab_text_select_color">#f26312</color>
     <color name="tab_text_normal_color">#656565</color>
-    <color name="tab_indicator_start_color">#f36413</color>
+    <color name="tab_indicator_start_color">#f46113</color>
     <color name="tab_indicator_end_color">#f4cf86</color>
 
-    <color name="color_spline">#efefef</color>
+    <color name="color_spline">#f4f4f4</color>
 
     <color name="white">#ffffff</color>
     <color name="gray">#cccccc</color>
@@ -26,4 +26,14 @@
     <color name="mask_color">#88888888</color>
     <color name="check_bg">#f2f2f2</color>
     <color name="un_press_color">#9C27B0</color>
+
+    <color name="text_color_1">#656565</color>
+    <color name="text_color_2">#f46113</color>
+    <color name="text_color_3">#8e8e93</color>
+    <color name="text_color_4">#000000</color>
+    <color name="text_color_5">#ff7c7c</color>
+    <color name="text_color_6">#f1a82a</color>
+    <color name="text_color_7">#6795fc</color>
+    <color name="text_color_8">#0099ff</color>
+    <color name="text_color_9">#707070</color>
 </resources>

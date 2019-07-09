@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import com.kobilliards.R;
 import com.kobilliards.base.BaseActivity;
 import com.kobilliards.event.OffsetChangeEvent;
+import com.kobilliards.ui.adapter.NavigatorAdapter;
 import com.kobilliards.ui.adapter.PagerAdapter;
 import com.kobilliards.ui.fragment.nearbyroom.CollectionRoomFragment;
 import com.kobilliards.ui.fragment.nearbyroom.RecommendRoomFragment;
@@ -72,31 +73,7 @@ public class NearbyRoomActivity extends BaseActivity {
         mTabLayout.setBackgroundColor(Color.WHITE);
         CommonNavigator commonNavigator = new CommonNavigator(getContext());
         commonNavigator.setAdjustMode(true);
-        commonNavigator.setAdapter(new CommonNavigatorAdapter() {
-
-            @Override
-            public int getCount() {
-                return mFragmentList.size();
-            }
-
-            @Override
-            public IPagerTitleView getTitleView(Context context, final int index) {
-                SimplePagerTitleView simplePagerTitleView = new ColorTransitionPagerTitleView(context);
-                simplePagerTitleView.setNormalColor(getResourceColor(R.color.tab_text_normal_color));
-                simplePagerTitleView.setSelectedColor(getResourceColor(R.color.tab_text_select_color));
-                simplePagerTitleView.setText(mAdapter.getPageTitle(index));
-                simplePagerTitleView.setOnClickListener(v -> mViewPager.setCurrentItem(index));
-                return simplePagerTitleView;
-            }
-
-            @Override
-            public IPagerIndicator getIndicator(Context context) {
-                LinePagerIndicator linePagerIndicator = new LinePagerIndicator(context);
-                linePagerIndicator.setMode(LinePagerIndicator.MODE_WRAP_CONTENT);
-                linePagerIndicator.setColors(getResourceColor(R.color.tab_indicator_start_color),getResourceColor(R.color.tab_indicator_end_color));
-                return linePagerIndicator;
-            }
-        });
+        commonNavigator.setAdapter(new NavigatorAdapter(mFragmentList,mViewPager,mAdapter));
         mTabLayout.setNavigator(commonNavigator);
         ViewPagerHelper.bind(mTabLayout, mViewPager);
         mViewPager.setOffscreenPageLimit(2);
