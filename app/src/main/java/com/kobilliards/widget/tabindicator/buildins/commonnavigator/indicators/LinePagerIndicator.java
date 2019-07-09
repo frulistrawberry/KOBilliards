@@ -11,6 +11,7 @@ import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 
 
+import com.kobilliards.utils.log.LogUtil;
 import com.kobilliards.widget.tabindicator.FragmentContainerHelper;
 import com.kobilliards.widget.tabindicator.buildins.ArgbEvaluatorHolder;
 import com.kobilliards.widget.tabindicator.buildins.UIUtil;
@@ -121,6 +122,7 @@ public class LinePagerIndicator extends View implements IPagerIndicator {
 
     @Override
     public void onPageScrollStateChanged(int state) {
+
     }
 
     @Override

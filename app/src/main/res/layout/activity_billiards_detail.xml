@@ -236,20 +236,27 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
-        <View
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="#f4f4f4"/>
-        <com.kobilliards.widget.tabindicator.MagicIndicator
-            android:id="@+id/tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="30dp"
-            android:background="@color/white" />
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="4dp"
-            android:background="@color/color_spline"/>
-        <android.support.v4.widget.NestedScrollView
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="#f4f4f4"/>
+            <com.kobilliards.widget.tabindicator.MagicIndicator
+                android:id="@+id/tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:background="@color/white" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="4dp"
+                android:background="@color/color_spline"/>
+        </LinearLayout>
+
+        <com.kobilliards.widget.ObservableNestedScrollView
+            android:id="@+id/scroll_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
@@ -257,6 +264,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <LinearLayout
+                    android:id="@+id/ll_reserve"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -290,6 +298,7 @@
                         android:id="@+id/container_reserve"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:paddingBottom="9dp"
                         android:orientation="vertical">
                         <include layout="@layout/item_reserve"/>
                         <include layout="@layout/item_reserve"/>
@@ -301,6 +310,7 @@
                     android:layout_height="4dp"
                     android:background="@color/color_spline"/>
                 <LinearLayout
+                    android:id="@+id/ll_active"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -325,7 +335,6 @@
                             android:text="(5)"/>
                     </LinearLayout>
                     <LinearLayout
-                        android:id="@+id/ll_active"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
@@ -342,6 +351,7 @@
                     android:background="#f4f4f4"/>
 
                 <LinearLayout
+                    android:id="@+id/ll_star"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
@@ -401,16 +411,13 @@
                     </RelativeLayout>
                 </LinearLayout>
 
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="4dp"
-                    android:background="#f4f4f4"/>
 
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="4dp"
                     android:background="@color/color_spline"/>
                 <LinearLayout
+                    android:id="@+id/ll_comment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingLeft="10dp"
@@ -753,6 +760,7 @@
                     android:background="@color/color_spline"
                     />
                 <LinearLayout
+                    android:id="@+id/ll_facilities"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical"
@@ -779,7 +787,7 @@
                             android:text="查看详情"/>
                     </LinearLayout>
                     <LinearLayout
-                        android:id="@+id/ll_facilities"
+                        android:id="@+id/ll_facilities_containers"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
@@ -805,6 +813,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
+                    android:paddingLeft="10dp"
+                    android:paddingTop="7dp"
+                    android:paddingBottom="7dp"
                     android:textColor="@color/text_color_1"
                     android:text="驻场教练"/>
                 <android.support.v4.view.ViewPager
@@ -814,6 +825,6 @@
 
 
             </LinearLayout>
-        </android.support.v4.widget.NestedScrollView>
+        </com.kobilliards.widget.ObservableNestedScrollView>
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

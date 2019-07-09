@@ -17,6 +17,10 @@ public class PagerAdapter extends FragmentPagerAdapter {
         this.mTitles = titles;
     }
 
+    public PagerAdapter(FragmentManager fm, List<Fragment> fragments) {
+       this(fm,fragments,null);
+    }
+
     @Override
     public CharSequence getPageTitle(int position) {
         return mTitles[position];
