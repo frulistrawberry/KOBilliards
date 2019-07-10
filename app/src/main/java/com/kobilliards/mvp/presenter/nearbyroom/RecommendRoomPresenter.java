@@ -34,19 +34,19 @@ public class RecommendRoomPresenter extends BasePresenter<RecommendRoomContract.
                             getView().showEmpty();
                             return;
                         }
-                        Type type = new TypeToken<List<BilliardsRoomPojo>>(){}.getType();
-                        List<BilliardsRoomPojo> data = new Gson().fromJson(bizContent,type);
-
-                        if (CollectionUtils.isEmpty(data))
-                            getView().showEmpty();
-                        else
-                            getView().showRecommendRoomList(data);
+//                        Type type = new TypeToken<List<BilliardsRoomPojo>>(){}.getType();
+//                        List<BilliardsRoomPojo> data = new Gson().fromJson(bizContent,type);
+//
+//                        if (CollectionUtils.isEmpty(data))
+//                            getView().showEmpty();
+//                        else
+//                            getView().showRecommendRoomList(data);
                     }
 
                     @Override
                     public void onError(int errCode, String errMsg) {
-                        getView().hideLoading();
-                        getView().showError(errMsg);
+//                        getView().hideLoading();
+//                        getView().showError(errMsg);
                     }
                 });
 

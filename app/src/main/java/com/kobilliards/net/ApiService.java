@@ -13,7 +13,7 @@ import retrofit2.http.POST;
 
 public interface ApiService {
     @FormUrlEncoded
-    @POST(UrlConstant.API_HOST)
+    @POST(UrlConstant.PATH)
     Observable<HttpResult> simpleRequest(@Field("method")String method, @Field("bizContent")String bizContent);
 
 }

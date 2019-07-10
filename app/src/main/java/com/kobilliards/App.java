@@ -30,14 +30,14 @@ public class App extends MultiDexApplication implements Application.ActivityLife
         SPUtils.init(PreferenceConstant.PREFERENCE_NAME,this);
         LogUtil.init(BuildConfig.DEBUG);
         registerActivityLifecycleCallbacks(this);
-        SDKOptions options = new SDKOptions();
-        MixPushConfig config = new MixPushConfig();
-        config.xmAppId = Config.XM_APP_ID;
-        config.xmAppKey = Config.XM_APP_KEY;
-        config.xmCertificateName = Config.XM_CERTIFICATE_NAME;
-
-        options.mixPushConfig = config;
-        NIMClient.init(this, CommonUtils.getLoginInfo(), options);
+//        SDKOptions options = new SDKOptions();
+//        MixPushConfig config = new MixPushConfig();
+//        config.xmAppId = Config.XM_APP_ID;
+//        config.xmAppKey = Config.XM_APP_KEY;
+//        config.xmCertificateName = Config.XM_CERTIFICATE_NAME;
+//
+//        options.mixPushConfig = config;
+//        NIMClient.init(this, CommonUtils.getLoginInfo(), options);
 
     }
 

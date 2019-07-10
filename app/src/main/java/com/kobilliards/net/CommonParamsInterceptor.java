@@ -8,6 +8,7 @@ import com.kobilliards.utils.AppUtils;
 import com.kobilliards.utils.MD5Utils;
 import com.kobilliards.utils.PhoneUtils;
 import com.kobilliards.utils.SPUtils;
+import com.kobilliards.utils.log.LogUtil;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -31,11 +32,12 @@ public class CommonParamsInterceptor implements Interceptor {
                 }
                 formBody = bodyBuilder
                         .addEncoded("channelCode", Config.CHANNEL_CODE)
-                        .addEncoded("timestamp", System.currentTimeMillis() + "")
+                        .addEncoded("timestamp", System.currentTimeMillis()/1000 + "")
                         .addEncoded("authToken", SPUtils.getString(PreferenceConstant.TOKEN))
                         .addEncoded("deviceInfo", PhoneUtils.getDeviceId(AppUtils.getAppContext()))
-                        .addEncoded("sign",sign(formBody))
                         .build();
+                formBody  = bodyBuilder.addEncoded("sign",sign(formBody)).build();
+
 
                 request = request.newBuilder().post(formBody).build();
             }
@@ -47,12 +49,13 @@ public class CommonParamsInterceptor implements Interceptor {
         String bizContent = "";
         try {
             for (int i = 0; i < body.size(); i++) {
-                if (URLDecoder.decode(body.name(i),"utf-8").equals("channelCode")) {
+                if (body.name(i).equals("channelCode")) {
                     channelCode = URLDecoder.decode(body.value(i), "utf-8");
                 }
-                if (URLDecoder.decode(body.name(i),"utf-8").equals("bizContent")){
+                if (body.name(i).equals("bizContent")){
                     bizContent = URLDecoder.decode(body.value(i), "utf-8");
                 }
+                LogUtil.d("HttpLog",body.name(i)+":"+body.value(i));
             }
         } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
@@ -63,6 +66,7 @@ public class CommonParamsInterceptor implements Interceptor {
             sign.append(bizContent);
         }
         sign.append(Config.SIGN_KEY);
+        LogUtil.d("HttpLog",sign.toString());
 
         return MD5Utils.MD5(sign.toString());
     }

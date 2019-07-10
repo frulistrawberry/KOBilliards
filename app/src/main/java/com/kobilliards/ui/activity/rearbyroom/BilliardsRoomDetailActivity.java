@@ -6,6 +6,7 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
@@ -32,6 +33,7 @@ import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class BilliardsRoomDetailActivity extends BaseActivity {
 
@@ -58,6 +60,8 @@ public class BilliardsRoomDetailActivity extends BaseActivity {
     MagicIndicator mReserveTabLayout;
     @BindView(R.id.app_bar_layout)
     AppBarLayout mAppbarLayout;
+    @BindView(R.id.ll_room_desc)
+    LinearLayout mllroom;
 
     public static void launcher(Context context){
         Intent intent = new Intent(context,BilliardsRoomDetailActivity.class);
@@ -202,6 +206,15 @@ public class BilliardsRoomDetailActivity extends BaseActivity {
     @Override
     protected void initData() {
         mDateTitle = getDateTitles();
+    }
+
+    @OnClick(R.id.rl_comment)
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.rl_comment:
+                CommentActivity.launcher(this);
+                break;
+        }
     }
 
     private String[] getDateTitles(){

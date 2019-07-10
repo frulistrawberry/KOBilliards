@@ -9,8 +9,7 @@ import com.kobilliards.net.BizContent;
 import io.reactivex.Observable;
 
 public interface IBaseModel {
-    ApiService mService = ApiEngine.getInstance().getApiService();
-    Gson mGson = new Gson();
+
 
     String convertBizContent(BizContent content);
 
