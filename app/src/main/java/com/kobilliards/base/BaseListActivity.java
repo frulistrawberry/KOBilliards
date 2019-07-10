@@ -31,8 +31,8 @@ public abstract class BaseListActivity<P extends BasePresenter> extends BaseRefr
 
 
     @Override
-    protected void initEvent() {
-        super.initEvent();
+    protected void initView() {
+        super.initView();
         if (isLoadMoreEnable()) {
             mAdapter.setOnLoadMoreListener(this::onLoadMore, mRecyclerView);
         }

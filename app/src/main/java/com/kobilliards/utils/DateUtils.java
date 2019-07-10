@@ -22,10 +22,12 @@ import java.util.Locale;
 @SuppressLint("SimpleDateFormat")
 public class DateUtils {
 
-    private static final String FORMAT = "yyyy-MM-dd HH:mm:ss";
-    private static final SimpleDateFormat datetimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-    private static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-    private static final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+    public static final String FORMAT = "yyyy-MM-dd HH:mm:ss";
+    public static final SimpleDateFormat datetimeFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    public static final SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    public static final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
+    public static final String MM_DD = "MM-dd";
+    public static final String EEEE = "EEEE";
 
     public static Date str2Date(String str) {
         return str2Date(str, null);

@@ -15,6 +15,10 @@
     <color name="tab_indicator_start_color">#f46113</color>
     <color name="tab_indicator_end_color">#f4cf86</color>
 
+    <color name="reserve_tab_indicator_start_color">#F1A82A</color>
+    <color name="reserve_tab_indicator_end_color">#F6E3C2</color>
+
+
     <color name="color_spline">#f4f4f4</color>
 
     <color name="white">#ffffff</color>

@@ -1,24 +1,21 @@
-package com.kobilliards.ui.activity;
+package com.kobilliards.ui.activity.rearbyroom;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
+import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.NestedScrollView;
-import android.view.View;
+import android.view.Gravity;
 import android.view.ViewGroup;
-import android.view.ViewPropertyAnimator;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.kobilliards.R;
 import com.kobilliards.base.BaseActivity;
 import com.kobilliards.ui.adapter.PagerAdapter;
 import com.kobilliards.ui.fragment.nearbyroom.BilliardsRoomCoachFragment;
+import com.kobilliards.utils.DateUtils;
 import com.kobilliards.utils.ScreenUtils;
-import com.kobilliards.utils.log.LogUtil;
+import com.kobilliards.utils.SizeUtils;
 import com.kobilliards.widget.ObservableNestedScrollView;
 import com.kobilliards.widget.tabindicator.MagicIndicator;
 import com.kobilliards.widget.tabindicator.buildins.commonnavigator.CommonNavigator;
@@ -31,6 +28,7 @@ import com.kobilliards.widget.tabindicator.buildins.commonnavigator.titles.Simpl
 
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
@@ -39,6 +37,7 @@ public class BilliardsRoomDetailActivity extends BaseActivity {
 
 
     private String[] mTitle = {"球台预定","球房活动","球友点评","设施亮点"};
+    private String[] mDateTitle;
     @BindView(R.id.tab_layout)
     MagicIndicator mTabLayout;
     @BindView(R.id.view_pager)
@@ -55,6 +54,10 @@ public class BilliardsRoomDetailActivity extends BaseActivity {
     LinearLayout mFacilitiesLayout;
     @BindView(R.id.ll_star)
     LinearLayout mStarLayout;
+    @BindView(R.id.tab_layout_reserve)
+    MagicIndicator mReserveTabLayout;
+    @BindView(R.id.app_bar_layout)
+    AppBarLayout mAppbarLayout;
 
     public static void launcher(Context context){
         Intent intent = new Intent(context,BilliardsRoomDetailActivity.class);
@@ -90,6 +93,7 @@ public class BilliardsRoomDetailActivity extends BaseActivity {
                     int activeTop = mActiveLayout.getTop();
                     int facilitiesTop = mFacilitiesLayout.getTop()-100;
                     int commentTop = mCommentLayut.getTop();
+                    mAppbarLayout.setExpanded(false);
                     switch (index){
                         case 0:
                             mScrollView.scrollTo(0,reserveTop);
@@ -117,6 +121,42 @@ public class BilliardsRoomDetailActivity extends BaseActivity {
             }
         });
         mTabLayout.setNavigator(commonNavigator);
+
+        CommonNavigator weekNavigator = new CommonNavigator(getContext());
+        weekNavigator.setAdjustMode(true);
+        weekNavigator.setAdapter(new CommonNavigatorAdapter() {
+
+            @Override
+            public int getCount() {
+                return  mDateTitle.length;
+            }
+
+            @Override
+            public IPagerTitleView getTitleView(Context context, final int index) {
+                SimplePagerTitleView simplePagerTitleView = new ColorTransitionPagerTitleView(context);
+                simplePagerTitleView.setNormalColor(getResourceColor(R.color.text_color_3));
+                simplePagerTitleView.setSelectedColor(getResourceColor(R.color.text_color_6));
+                simplePagerTitleView.setText(mDateTitle[index]);
+                simplePagerTitleView.setTextSize(12);
+                simplePagerTitleView.setSingleLine(false);
+                simplePagerTitleView.setGravity(Gravity.CENTER);
+                simplePagerTitleView.setPadding(0,0,0, SizeUtils.dp2px(getContext(),5));
+                simplePagerTitleView.setOnClickListener(v -> {
+                    mReserveTabLayout.onPageSelected(index);
+                    mReserveTabLayout.onPageScrolled(index,0,0);
+                });
+                return simplePagerTitleView;
+            }
+
+            @Override
+            public IPagerIndicator getIndicator(Context context) {
+                LinePagerIndicator linePagerIndicator = new LinePagerIndicator(context);
+                linePagerIndicator.setMode(LinePagerIndicator.MODE_WRAP_CONTENT);
+                linePagerIndicator.setColors(getResourceColor(R.color.reserve_tab_indicator_start_color),getResourceColor(R.color.reserve_tab_indicator_end_color));
+                return linePagerIndicator;
+            }
+        });
+        mReserveTabLayout.setNavigator(weekNavigator);
         List<Fragment> coachList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
             coachList.add(new BilliardsRoomCoachFragment());
@@ -134,28 +174,47 @@ public class BilliardsRoomDetailActivity extends BaseActivity {
             int commentTop = mCommentLayut.getTop();
 
             if (y>=reserveTop && y<=reserveBottom){
-                mTabLayout.onPageScrolled(0,Float.valueOf(y-reserveTop)/reserveBottom,0);
+                mTabLayout.onPageSelected(0);
+                mTabLayout.onPageScrolled(0,0,0);
+
             }
             if (y>=activeTop && y<=activeBottom){
-                mTabLayout.onPageScrolled(1,Float.valueOf(y-activeTop)/activeBottom,0);
+                mTabLayout.onPageSelected(1);
+                mTabLayout.onPageScrolled(1,0,0);
+
             }
 
             if (y>=commentTop && y<=commentBottom){
-                mTabLayout.onPageScrolled(2,Float.valueOf(y-commentTop)/commentBottom,0);
+                mTabLayout.onPageSelected(2);
+                mTabLayout.onPageScrolled(2,0,0);
+
             }
 
             if (y>=facilitiesTop && y<=facilitiesBottom){
-                mTabLayout.onPageScrolled(3,Float.valueOf(y-facilitiesTop)/facilitiesBottom,0);
+                mTabLayout.onPageSelected(3);
+                mTabLayout.onPageScrolled(3,0,0);
+
             }
 
-            LogUtil.d("onScroll","reserveTop:"+mReserveLayout.getTop()+"reserveBottom:"+mReserveLayout.getBottom());
-            LogUtil.d("onScroll","activeTop:"+mActiveLayout.getTop()+"activeBottom:"+mActiveLayout.getBottom());
-            LogUtil.d("onScroll","tabBottom:"+y);
         });
     }
 
     @Override
     protected void initData() {
+        mDateTitle = getDateTitles();
+    }
 
+    private String[] getDateTitles(){
+        String[] result = new String[5];
+        long today = System.currentTimeMillis();
+        for (int i = 0; i < result.length; i++) {
+            long temp = 60*60*24*1000*i+today;
+            String date = DateUtils.date2Str(new Date(temp),DateUtils.MM_DD);
+            String week = DateUtils.date2Str(new Date(temp),DateUtils.EEEE);
+            if (i==0)
+                week = "今天";
+            result[i] = date+"\n"+week;
+        }
+        return result;
     }
 }

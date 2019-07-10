@@ -6,7 +6,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.kobilliards.R;
 import com.kobilliards.pojo.BilliardsRoomPojo;
-import com.kobilliards.ui.activity.BilliardsRoomDetailActivity;
+import com.kobilliards.ui.activity.rearbyroom.BilliardsRoomDetailActivity;
 
 public class BilliardsRoomAdapter extends BaseQuickAdapter<BilliardsRoomPojo, BaseViewHolder> {
 

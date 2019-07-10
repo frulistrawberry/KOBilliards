@@ -39,6 +39,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class NearbyRoomActivity extends BaseActivity {
     @BindView(R.id.v_header)
@@ -127,5 +128,23 @@ public class NearbyRoomActivity extends BaseActivity {
         mFragmentList.add(new RecommendRoomFragment());
         mFragmentList.add(new CollectionRoomFragment());
         mAdapter = new PagerAdapter(getSupportFragmentManager(),mFragmentList,mTitles);
+    }
+
+    @OnClick({R.id.fl_auth,R.id.fl_save,R.id.fl_rank,R.id.fl_coach})
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.fl_auth:
+                BilliardsRoomListActivity.launcher(this,"KO认证");
+                break;
+            case R.id.fl_save:
+                BilliardsRoomListActivity.launcher(this,"今日特价");
+                break;
+            case R.id.fl_rank:
+                BilliardsRoomListActivity.launcher(this,"热门榜单");
+                break;
+            case R.id.fl_coach:
+                BilliardsCoachListActivity.launcher(this);
+                break;
+        }
     }
 }

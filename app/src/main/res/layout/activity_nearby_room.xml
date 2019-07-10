@@ -23,7 +23,7 @@
                 android:id="@+id/v_header"
                 android:layout_width="match_parent"
                 android:layout_height="88dp"
-                android:background="#00B7FF" />
+                android:background="@mipmap/img_bg_banner" />
 
             <LinearLayout
                 android:id="@+id/ll_header"
@@ -135,6 +135,7 @@
                     android:paddingTop="10dp"
                     android:paddingBottom="10dp">
                     <FrameLayout
+                        android:id="@+id/fl_auth"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content">
@@ -150,6 +151,7 @@
                             />
                     </FrameLayout>
                     <FrameLayout
+                        android:id="@+id/fl_save"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content">
@@ -165,6 +167,7 @@
                             />
                     </FrameLayout>
                     <FrameLayout
+                        android:id="@+id/fl_rank"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content">
@@ -180,6 +183,7 @@
                             />
                     </FrameLayout>
                     <FrameLayout
+                        android:id="@+id/fl_coach"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content">

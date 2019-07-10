@@ -25,11 +25,9 @@ public abstract class BaseRefreshActivity<P extends BasePresenter> extends BaseM
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        initEvent();
     }
 
-    @SuppressLint("ClickableViewAccessibility")
-    protected void initEvent() {
+    protected void initView() {
         mPtrLayout.setPtrHandler(new PtrDefaultHandler() {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
