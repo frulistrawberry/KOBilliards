@@ -44,6 +44,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.activity.BilliardsRoomDetailActivity" />
+        <activity android:name=".ui.activity.CommentActivity"/>
         <!-- 网易云信 -->
         <meta-data
             android:name="com.netease.nim.appKey"

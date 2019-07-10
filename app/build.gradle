@@ -97,4 +97,5 @@ dependencies {
     implementation 'com.netease.nimlib:lucene:6.1.1'
     // 小米、华为、魅族、fcm 推送
     implementation 'com.netease.nimlib:push:6.1.1'
+
 }

@@ -11,4 +11,5 @@
         <item name="elevation">0dp</item>
         <item name="android:background">?attr/colorPrimary</item>
     </style>
+
 </resources>

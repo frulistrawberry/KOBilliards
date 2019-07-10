@@ -55,6 +55,8 @@ public class BilliardsRoomDetailActivity extends BaseActivity {
     LinearLayout mFacilitiesLayout;
     @BindView(R.id.ll_star)
     LinearLayout mStarLayout;
+    @BindView(R.id.ll_room_desc)
+    LinearLayout mllroom;
 
     public static void launcher(Context context){
         Intent intent = new Intent(context,BilliardsRoomDetailActivity.class);
@@ -151,6 +153,12 @@ public class BilliardsRoomDetailActivity extends BaseActivity {
             LogUtil.d("onScroll","reserveTop:"+mReserveLayout.getTop()+"reserveBottom:"+mReserveLayout.getBottom());
             LogUtil.d("onScroll","activeTop:"+mActiveLayout.getTop()+"activeBottom:"+mActiveLayout.getBottom());
             LogUtil.d("onScroll","tabBottom:"+y);
+        });
+        mllroom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                CommentActivity.launcher(getContext());
+            }
         });
     }
 
