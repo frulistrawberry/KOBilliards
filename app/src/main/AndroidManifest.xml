@@ -20,6 +20,9 @@
         android:name="com.kobilliards.permission.permission.RECEIVE_MSG"
         android:protectionLevel="signature" /> <!-- 接收 SDK 消息广播权限， 第三方 APP 接入时，请将 com.netease.nim.demo 替换为自己的包名 -->
     <uses-permission android:name="com.kobilliards.permission.RECEIVE_MSG" />
+    <permission android:name="com.kobilliards.permission.MIPUSH_RECEIVE"
+        android:protectionLevel="signature" />
+    <uses-permission android:name="com.kobilliards.permission.MIPUSH_RECEIVE" />
 
     <application
         android:name=".App"
@@ -49,7 +52,7 @@
         <!-- 网易云信 -->
         <meta-data
             android:name="com.netease.nim.appKey"
-            android:value="key_of_your_app" /> <!-- 云信后台服务，请使用独立进程。 -->
+            android:value="7c2eff2928ea671f6769bb51de136f754ff29f42cddc" /> <!-- 云信后台服务，请使用独立进程。 -->
         <service
             android:name="com.netease.nimlib.service.NimService"
             android:process=":core" /> <!-- 云信后台辅助服务 -->
@@ -78,6 +81,55 @@
             android:authorities="com.kobilliards.ipc.provider"
             android:exported="false"
             android:process=":core" />
+        <!-- 网易云配置至结束 -->
+        <!-- 小米推送配置开始 -->
+        <!--配置的service和receiver-->
+        <service
+            android:name="com.xiaomi.push.service.XMPushService"
+            android:enabled="true"
+            android:process=":mixpush"/>
+        <service
+            android:name="com.xiaomi.push.service.XMJobService"
+            android:enabled="true"
+            android:exported="false"
+            android:permission="android.permission.BIND_JOB_SERVICE"
+            android:process=":mixpush" />
+        <!--注：此service必须在3.0.1版本以后（包括3.0.1版本）加入-->
+        <service
+            android:enabled="true"
+            android:exported="true"
+            android:name="com.xiaomi.mipush.sdk.PushMessageHandler" />
+
+        <service android:enabled="true"
+            android:name="com.xiaomi.mipush.sdk.MessageHandleService" />
+        <!--注：此service必须在2.2.5版本以后（包括2.2.5版本）加入-->
+        <receiver
+            android:exported="true"
+            android:name="com.xiaomi.push.service.receivers.NetworkStatusReceiver" >
+            <intent-filter>
+                <action android:name="android.net.conn.CONNECTIVITY_CHANGE" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:exported="false"
+            android:process=":mixpush"
+            android:name="com.xiaomi.push.service.receivers.PingReceiver" >
+            <intent-filter>
+                <action android:name="com.xiaomi.push.PING_TIMER" />
+            </intent-filter>
+        </receiver>
+        <receiver
+            android:name="com.netease.nimlib.mixpush.mi.MiPushReceiver"
+            android:exported="true">
+            <intent-filter android:priority="0x7fffffff">
+                <action android:name="com.xiaomi.mipush.RECEIVE_MESSAGE"/>
+                <action android:name="com.xiaomi.mipush.MESSAGE_ARRIVED"/>
+                <action android:name="com.xiaomi.mipush.ERROR"/>
+            </intent-filter>
+        </receiver>
+        <!-- 小米推送配置结束 -->
+
     </application>
 
 </manifest>

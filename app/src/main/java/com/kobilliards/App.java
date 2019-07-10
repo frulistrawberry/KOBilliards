@@ -7,12 +7,15 @@ import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
 import com.kobilliards.base.ActivityManager;
+import com.kobilliards.constants.Config;
 import com.kobilliards.constants.PreferenceConstant;
 import com.kobilliards.utils.AppUtils;
 import com.kobilliards.utils.CommonUtils;
 import com.kobilliards.utils.SPUtils;
 import com.kobilliards.utils.log.LogUtil;
 import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.SDKOptions;
+import com.netease.nimlib.sdk.mixpush.MixPushConfig;
 
 public class App extends MultiDexApplication implements Application.ActivityLifecycleCallbacks {
 
@@ -27,7 +30,14 @@ public class App extends MultiDexApplication implements Application.ActivityLife
         SPUtils.init(PreferenceConstant.PREFERENCE_NAME,this);
         LogUtil.init(BuildConfig.DEBUG);
         registerActivityLifecycleCallbacks(this);
-        NIMClient.init(this, CommonUtils.getLoginInfo(), null);
+        SDKOptions options = new SDKOptions();
+        MixPushConfig config = new MixPushConfig();
+        config.xmAppId = Config.XM_APP_ID;
+        config.xmAppKey = Config.XM_APP_KEY;
+        config.xmCertificateName = Config.XM_CERTIFICATE_NAME;
+
+        options.mixPushConfig = config;
+        NIMClient.init(this, CommonUtils.getLoginInfo(), options);
 
     }
 
