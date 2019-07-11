@@ -1,7 +1,7 @@
 package com.kobilliards.constants;
 
 public class UrlConstant {
-    public static final String API_HOST = "http://server.natappfree.cc:35295/";
+    public static final String API_HOST = "http://gatewayapi.natapp1.cc/";
 
     public static final String PATH = "api/gateway";
 

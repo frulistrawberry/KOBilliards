@@ -45,8 +45,8 @@ public class RecommendRoomPresenter extends BasePresenter<RecommendRoomContract.
 
                     @Override
                     public void onError(int errCode, String errMsg) {
-//                        getView().hideLoading();
-//                        getView().showError(errMsg);
+                        getView().hideLoading();
+                        getView().showError(errMsg);
                     }
                 });
 

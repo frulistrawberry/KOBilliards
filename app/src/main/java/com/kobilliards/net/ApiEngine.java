@@ -104,6 +104,7 @@ public class ApiEngine {
         headers.put("Proxy-Client-IP", PhoneUtils.getIPAddress(AppUtils.getAppContext()));
         headers.put("WL-Proxy-Client-IP", PhoneUtils.getIPAddress(AppUtils.getAppContext()));
         headers.put("HTTP_CLIENT_IPHTTP_X_FORWARDED_FOR", PhoneUtils.getIPAddress(AppUtils.getAppContext()));
+        headers.put("Content-Type", "application/json");
         return new HttpHeaderInterceptor(headers);
     }
 

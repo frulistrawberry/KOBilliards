@@ -6,6 +6,7 @@ import com.kobilliards.constants.UrlConstant;
 import com.kobilliards.mvp.contract.rearbyroom.RecommendRoomContract;
 import com.kobilliards.net.BizContent;
 import com.kobilliards.net.HttpResult;
+import com.kobilliards.net.RequestParam;
 import com.kobilliards.pojo.BilliardsRoomPojo;
 
 import java.util.ArrayList;
@@ -18,7 +19,8 @@ public class RecommendRoomModel extends BaseModel implements RecommendRoomContra
     public Observable<HttpResult> getRecommendRoomList(int page, String sort, String filter) {
         BizContent content = new BizContent();
         content.mobile = "18631565231";
-        return mService.simpleRequest(UrlConstant.GET_RECOMMEND_ROOM_LIST,convertBizContent(content));
+        RequestParam requestParam = new RequestParam(UrlConstant.GET_RECOMMEND_ROOM_LIST,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
 //        return Observable.create(emitter -> {
 //            Thread.sleep(3000);
 //            List<BilliardsRoomPojo> bizEntity = new ArrayList<>();

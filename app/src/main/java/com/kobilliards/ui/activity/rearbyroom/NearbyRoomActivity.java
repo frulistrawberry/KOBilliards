@@ -130,7 +130,7 @@ public class NearbyRoomActivity extends BaseActivity {
         mAdapter = new PagerAdapter(getSupportFragmentManager(),mFragmentList,mTitles);
     }
 
-    @OnClick({R.id.fl_auth,R.id.fl_save,R.id.fl_rank,R.id.fl_coach})
+    @OnClick({R.id.fl_auth,R.id.fl_save,R.id.fl_rank,R.id.fl_coach,R.id.iv_map})
     public void onClick(View v){
         switch (v.getId()){
             case R.id.fl_auth:
@@ -144,6 +144,9 @@ public class NearbyRoomActivity extends BaseActivity {
                 break;
             case R.id.fl_coach:
                 BilliardsCoachListActivity.launcher(this);
+                break;
+            case R.id.iv_map:
+                MapActivity.launcher(this);
                 break;
         }
     }

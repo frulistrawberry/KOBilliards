@@ -34,6 +34,21 @@ android {
         preDexLibraries = false
     }
 
+    signingConfigs {
+        release {
+            storeFile file("../key/keystore.jks")
+            storePassword "123456"
+            keyAlias "kobilliards"
+            keyPassword "123456"
+        }
+        debug{
+            storeFile file("../key/keystore.jks")
+            storePassword "123456"
+            keyAlias "kobilliards"
+            keyPassword "123456"
+        }
+    }
+
 
 }
 
@@ -79,7 +94,7 @@ dependencies {
     //pickerView
     implementation 'com.contrarywind:Android-PickerView:4.1.7'
     //高德地图
-    implementation 'com.amap.api:location:4.6.0'
+    implementation 'com.amap.api:navi-3dmap:6.8.0_3dmap6.9.0'
 
     //网易云信
 

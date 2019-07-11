@@ -15,7 +15,22 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" /> <!-- SDK 权限申明, 第三方 APP 接入时，请将 com.netease.nim.demo 替换为自己的包名 -->
+    <!--允许程序打开网络套接字-->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!--允许程序设置内置sd卡的写权限-->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!--允许程序获取网络状态-->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!--允许程序访问WiFi网络信息-->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!--允许程序读写手机状态和身份-->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!--允许程序访问CellID或WiFi热点来获取粗略的位置-->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+
     <!-- 和下面的 uses-permission 一起加入到你的 AndroidManifest 文件中。 -->
+
+
     <permission
         android:name="com.kobilliards.permission.permission.RECEIVE_MSG"
         android:protectionLevel="signature" /> <!-- 接收 SDK 消息广播权限， 第三方 APP 接入时，请将 com.netease.nim.demo 替换为自己的包名 -->
@@ -33,6 +48,13 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="GoogleAppIndexingWarning">
+
+        <meta-data
+            android:name="com.amap.api.v2.apikey"
+            android:value="3977c7476d67502ad731acd217af40ac"/>
+
+        <service android:name="com.amap.api.location.APSService"/>
+
         <activity
             android:name=".ui.activity.MainActivity"
             android:screenOrientation="portrait"
@@ -50,10 +72,11 @@
         <activity android:name=".ui.activity.rearbyroom.BilliardsRoomListActivity" />
         <activity android:name=".ui.activity.rearbyroom.BilliardsCoachListActivity" />
         <activity android:name=".ui.activity.rearbyroom.CommentActivity"/>
+        <activity android:name=".ui.activity.rearbyroom.MapActivity" />
         <!-- 网易云信 -->
         <meta-data
             android:name="com.netease.nim.appKey"
-            android:value="7c2eff2928ea671f6769bb51de136f754ff29f42cddc" /> <!-- 云信后台服务，请使用独立进程。 -->
+            android:value="7c2eff2928ea671f6769bb51de136f75" /> <!-- 云信后台服务，请使用独立进程。 -->
         <service
             android:name="com.netease.nimlib.service.NimService"
             android:process=":core" /> <!-- 云信后台辅助服务 -->

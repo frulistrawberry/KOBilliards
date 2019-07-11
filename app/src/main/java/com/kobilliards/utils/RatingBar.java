@@ -36,7 +36,7 @@ public class RatingBar extends LinearLayout{
     /**
      * 星星的显示数量，支持小数点
      */
-    private float starStep;
+    private int starStep;
     /**
      * 空白的默认星星图片
      */
@@ -53,6 +53,24 @@ public class RatingBar extends LinearLayout{
      * 每次点击星星所增加的量是整个还是半个
      */
     private StepSize stepSize;
+
+    private Mode mode;
+
+    private Drawable[] starFillDrawableList;
+
+    private Drawable[] starEmptyDrawableList;
+
+    public void setMode(Mode mode) {
+        this.mode = mode;
+    }
+
+    public void setStarFillDrawableList(Drawable[] starFillDrawableList) {
+        this.starFillDrawableList = starFillDrawableList;
+    }
+
+    public void setStarEmptyDrawableList(Drawable[] starEmptyDrawableList) {
+        this.starEmptyDrawableList = starEmptyDrawableList;
+    }
 
     /**
      * 设置半星的图片资源文件
@@ -71,6 +89,7 @@ public class RatingBar extends LinearLayout{
     public void setStarFillDrawable(Drawable starFillDrawable) {
         this.starFillDrawable = starFillDrawable;
     }
+
 
     /**
      * 设置空白和默认的图片资源文件
@@ -125,7 +144,8 @@ public class RatingBar extends LinearLayout{
         TypedArray mTypedArray = context.obtainStyledAttributes(attrs, R.styleable.RatingBar);
         starImageSize = mTypedArray.getDimension(R.styleable.RatingBar_starImageSize, 20);
         starPadding = mTypedArray.getDimension(R.styleable.RatingBar_starPadding, 10);
-        starStep = mTypedArray.getFloat(R.styleable.RatingBar_starStep, 1.0f);
+        starStep = mTypedArray.getInteger(R.styleable.RatingBar_starStep, 1);
+        mode = Mode.fromStep(mTypedArray.getInt(R.styleable.RatingBar_mode, 0));
         stepSize = StepSize.fromStep(mTypedArray.getInt(R.styleable.RatingBar_stepSize, 1));
         starCount = mTypedArray.getInteger(R.styleable.RatingBar_starCount, 5);
         starEmptyDrawable = mTypedArray.getDrawable(R.styleable.RatingBar_starEmpty);
@@ -133,43 +153,39 @@ public class RatingBar extends LinearLayout{
         starHalfDrawable = mTypedArray.getDrawable(R.styleable.RatingBar_starHalf);
         mClickable = mTypedArray.getBoolean(R.styleable.RatingBar_clickable, true);
         mTypedArray.recycle();
+
+    }
+
+
+    public void init(){
         for (int i = 0; i < starCount; ++i) {
-            final ImageView imageView = getStarImageView();
+            final ImageView imageView = getStarImageView(i);
             imageView.setImageDrawable(starEmptyDrawable);
             imageView.setOnClickListener(
-                    new OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            if (mClickable) {
-                                //浮点数的整数部分
-                                int fint = (int) starStep;
-                                BigDecimal b1 = new BigDecimal(Float.toString(starStep));
-                                BigDecimal b2 = new BigDecimal(Integer.toString(fint));
-                                //浮点数的小数部分
-                                float fPoint = b1.subtract(b2).floatValue();
-                                if (fPoint == 0) {
-                                    fint -= 1;
-                                }
+                    v -> {
+                        if (mClickable) {
+                            //浮点数的整数部分
+                            int fint = (int) starStep;
+                            BigDecimal b1 = new BigDecimal(Float.toString(starStep));
+                            BigDecimal b2 = new BigDecimal(Integer.toString(fint));
+                            //浮点数的小数部分
+                            float fPoint = b1.subtract(b2).floatValue();
+                            if (fPoint == 0) {
+                                fint -= 1;
+                            }
 
-                                if (indexOfChild(v) > fint) {
-                                    setStar(indexOfChild(v) + 1);
-                                } else if (indexOfChild(v) == fint) {
-                                    if (stepSize == StepSize.Full) {//如果是满星 就不考虑半颗星了
-                                        return;
-                                    }
-                                    //点击之后默认每次先增加一颗星，再次点击变为半颗星
-                                    if (imageView.getDrawable().getCurrent().getConstantState().equals(starHalfDrawable.getConstantState())) {
-                                        setStar(indexOfChild(v) + 1);
-                                    } else {
-                                        setStar(indexOfChild(v) + 0.5f);
-                                    }
-                                } else {
-                                    setStar(indexOfChild(v) + 1f);
+                            if (indexOfChild(v) > fint) {
+                                setStar(indexOfChild(v) + 1);
+                            } else if (indexOfChild(v) == fint) {
+                                if (stepSize == StepSize.Full) {//如果是满星 就不考虑半颗星了
+                                    return;
                                 }
-
+                            } else {
+                                setStar(indexOfChild(v) + 1);
                             }
 
                         }
+
                     }
             );
             addView(imageView);
@@ -182,7 +198,7 @@ public class RatingBar extends LinearLayout{
      *
      * @return
      */
-    private ImageView getStarImageView() {
+    private ImageView getStarImageView(int i) {
         ImageView imageView = new ImageView(getContext());
 
         LinearLayout.LayoutParams layout = new LinearLayout.LayoutParams(
@@ -191,7 +207,10 @@ public class RatingBar extends LinearLayout{
         imageView.setLayoutParams(layout);
         imageView.setAdjustViewBounds(true);
         imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
-        imageView.setImageDrawable(starEmptyDrawable);
+        if (mode == Mode.Multi)
+            imageView.setImageDrawable(starEmptyDrawableList[i]);
+        else
+            imageView.setImageDrawable(starEmptyDrawable);
         imageView.setMinimumWidth(10);
         imageView.setMaxHeight(10);
         return imageView;
@@ -205,7 +224,7 @@ public class RatingBar extends LinearLayout{
      * @param rating
      */
 
-    public void setStar(float rating) {
+    public void setStar(int rating) {
 
         if (onRatingChangeListener != null) {
             onRatingChangeListener.onRatingChange(rating);
@@ -220,11 +239,18 @@ public class RatingBar extends LinearLayout{
 
         //设置选中的星星
         for (int i = 0; i < fint; ++i) {
-            ((ImageView) getChildAt(i)).setImageDrawable(starFillDrawable);
+            if (mode == Mode.Multi)
+                ((ImageView) getChildAt(i)).setImageDrawable(starFillDrawableList[i]);
+            else
+                ((ImageView) getChildAt(i)).setImageDrawable(starFillDrawable);
         }
         //设置没有选中的星星
         for (int i = fint; i < starCount; i++) {
-            ((ImageView) getChildAt(i)).setImageDrawable(starEmptyDrawable);
+            if (mode == Mode.Multi)
+                ((ImageView) getChildAt(i)).setImageDrawable(starEmptyDrawableList[i]);
+            else
+                ((ImageView) getChildAt(i)).setImageDrawable(starEmptyDrawable);
+
         }
         //小数点默认增加半颗星
         if (fPoint > 0) {
@@ -239,9 +265,9 @@ public class RatingBar extends LinearLayout{
         /**
          * 选中的星星的个数
          *
-         * @param RatingCount
+         * @param ratingCount
          */
-        void onRatingChange(float ratingCount);
+        void onRatingChange(int ratingCount);
 
     }
 
@@ -266,4 +292,26 @@ public class RatingBar extends LinearLayout{
             throw new IllegalArgumentException();
         }
     }
+
+    public enum Mode{
+        Multi(1),Single(0);
+        int mode;
+
+        Mode(int mode){
+            this.mode = mode;
+        }
+
+        public static Mode fromStep(int mode) {
+            for (Mode f : values()) {
+                if (f.mode == mode) {
+                    return f;
+                }
+            }
+            throw new IllegalArgumentException();
+        }
+    }
+
+
+
 }
+
