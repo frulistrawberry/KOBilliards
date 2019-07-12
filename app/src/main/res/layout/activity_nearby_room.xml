@@ -58,7 +58,7 @@
                         android:layout_height="wrap_content"
                         android:orientation="vertical">
 
-                        <com.kobilliards.widget.tabindicator.MagicIndicator
+                        <com.yuyuka.billiards.widget.tabindicator.MagicIndicator
                             android:id="@+id/tab_layout"
                             android:layout_width="match_parent"
                             android:layout_height="44dp"
@@ -208,7 +208,7 @@
 
     </android.support.design.widget.AppBarLayout>
 
-    <com.kobilliards.widget.NoScrollViewPager
+    <com.yuyuka.billiards.widget.NoScrollViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
