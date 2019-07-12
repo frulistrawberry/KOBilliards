@@ -10,7 +10,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.kobilliards.R;
+import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseActivity;
 import com.yuyuka.billiards.ui.adapter.PagerAdapter;
 import com.yuyuka.billiards.ui.fragment.nearbyroom.BilliardsRoomCoachFragment;

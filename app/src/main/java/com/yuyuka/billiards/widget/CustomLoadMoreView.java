@@ -1,7 +1,7 @@
 package com.yuyuka.billiards.widget;
 
 import com.chad.library.adapter.base.loadmore.LoadMoreView;
-import com.kobilliards.R;
+import com.yuyuka.billiards.R;
 
 public  class CustomLoadMoreView extends LoadMoreView {
 

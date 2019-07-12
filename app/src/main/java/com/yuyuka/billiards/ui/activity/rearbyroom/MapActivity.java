@@ -8,7 +8,7 @@ import android.support.annotation.Nullable;
 import com.amap.api.maps.AMap;
 import com.amap.api.maps.TextureMapView;
 import com.amap.api.maps.model.MyLocationStyle;
-import com.kobilliards.R;
+import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseActivity;
 
 import butterknife.BindView;

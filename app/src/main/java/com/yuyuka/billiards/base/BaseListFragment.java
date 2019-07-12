@@ -4,7 +4,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
-import com.kobilliards.R;
+import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.utils.NetworkUtils;
 import com.yuyuka.billiards.utils.ToastUtils;
 import com.yuyuka.billiards.utils.ViewUtils;

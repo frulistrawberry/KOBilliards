@@ -10,7 +10,7 @@ import android.support.v7.widget.AppCompatButton;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 
-import com.kobilliards.R;
+import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.utils.SizeUtils;
 
 /**

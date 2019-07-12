@@ -16,7 +16,7 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
-import com.kobilliards.R;
+import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.utils.BarUtils;
 import com.yuyuka.billiards.widget.TitleBar;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;

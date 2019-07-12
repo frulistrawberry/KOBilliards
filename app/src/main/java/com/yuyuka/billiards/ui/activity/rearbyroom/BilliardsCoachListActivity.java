@@ -4,7 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 
-import com.kobilliards.R;
+import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseListActivity;
 import com.yuyuka.billiards.mvp.contract.rearbyroom.BilliardsCoachListContract;
 import com.yuyuka.billiards.mvp.presenter.nearbyroom.BilliardsCoachListPresenter;

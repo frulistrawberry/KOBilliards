@@ -1,7 +1,7 @@
 package com.yuyuka.billiards.base;
 
 
-import com.kobilliards.R;
+import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.utils.ToastUtils;
 
 import butterknife.BindView;

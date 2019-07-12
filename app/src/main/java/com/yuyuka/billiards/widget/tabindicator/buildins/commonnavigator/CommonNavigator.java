@@ -10,7 +10,7 @@ import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 
 
-import com.kobilliards.R;
+import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.widget.tabindicator.NavigatorHelper;
 import com.yuyuka.billiards.widget.tabindicator.ScrollState;
 import com.yuyuka.billiards.widget.tabindicator.abs.IPagerNavigator;

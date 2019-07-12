@@ -3,7 +3,7 @@ package com.yuyuka.billiards.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
-import com.kobilliards.R;
+import com.yuyuka.billiards.R;
 
 import butterknife.BindView;
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;

@@ -7,7 +7,7 @@ import android.util.AttributeSet;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.kobilliards.R;
+import com.yuyuka.billiards.R;
 
 import java.math.BigDecimal;
 
