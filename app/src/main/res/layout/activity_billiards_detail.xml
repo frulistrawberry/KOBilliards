@@ -244,7 +244,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="4dp"
                 android:background="#f4f4f4"/>
-            <com.kobilliards.widget.tabindicator.MagicIndicator
+            <com.yuyuka.billiards.widget.tabindicator.MagicIndicator
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="30dp"
@@ -255,7 +255,7 @@
                 android:background="@color/color_spline"/>
         </LinearLayout>
 
-        <com.kobilliards.widget.ObservableNestedScrollView
+        <com.yuyuka.billiards.widget.ObservableNestedScrollView
             android:id="@+id/scroll_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
@@ -288,10 +288,10 @@
                             android:textColor="@color/text_color_3"
                             android:text="(已预定81281次)"/>
                     </LinearLayout>
-                    <com.kobilliards.widget.tabindicator.MagicIndicator
+                    <com.yuyuka.billiards.widget.tabindicator.MagicIndicator
                         android:id="@+id/tab_layout_reserve"
                         android:layout_width="match_parent"
-                        android:layout_height="30dp"
+                        android:layout_height="wrap_content"
                         android:background="@color/white" />
 
                     <LinearLayout
@@ -577,7 +577,7 @@
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:src="@mipmap/ic_good"/>
-                        <com.kobilliards.widget.TagLayout
+                        <com.yuyuka.billiards.widget.TagLayout
                             android:id="@+id/tag_layout_positive"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -641,7 +641,7 @@
                                 android:background="@drawable/bg_tag_comment_positive"/>
 
 
-                        </com.kobilliards.widget.TagLayout>
+                        </com.yuyuka.billiards.widget.TagLayout>
                     </LinearLayout>
                     <LinearLayout
                         android:layout_width="match_parent"
@@ -653,7 +653,7 @@
                             android:layout_width="25dp"
                             android:layout_height="25dp"
                             android:src="@mipmap/ic_bad"/>
-                        <com.kobilliards.widget.TagLayout
+                        <com.yuyuka.billiards.widget.TagLayout
                             android:id="@+id/tag_layout_negative"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -692,7 +692,7 @@
                                 android:gravity="center"
                                 android:background="@drawable/bg_tag_comment_negative"/>
 
-                        </com.kobilliards.widget.TagLayout>
+                        </com.yuyuka.billiards.widget.TagLayout>
                     </LinearLayout>
                     <TextView
                         android:layout_width="wrap_content"
@@ -702,6 +702,7 @@
                         android:layout_marginTop="10dp"
                         android:text="留言点赞"/>
                     <RelativeLayout
+                        android:id="@+id/rl_comment"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="10dp">
@@ -825,6 +826,6 @@
 
 
             </LinearLayout>
-        </com.kobilliards.widget.ObservableNestedScrollView>
+        </com.yuyuka.billiards.widget.ObservableNestedScrollView>
     </LinearLayout>
 </android.support.design.widget.CoordinatorLayout>

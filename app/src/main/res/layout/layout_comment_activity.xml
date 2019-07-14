@@ -16,13 +16,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
                 android:background="@color/white"
                 >
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginLeft="23dp"
                     android:layout_marginTop="9dp"
                     >
                     <TextView
@@ -30,28 +33,29 @@
                         android:layout_height="wrap_content"
                         android:text="总体"
                         android:textSize="14sp"
-                        android:textColor="#656565"
+                        android:textColor="@color/text_color_1"
                         android:layout_gravity="center"
                         />
-                    <com.kobilliards.utils.RatingBar
-                        android:layout_marginLeft="10dp"
+                    <com.yuyuka.billiards.utils.RatingBar
+                        android:id="@+id/rb_total"
+                        android:layout_marginLeft="15dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:id="@+id/ratingbar"
                         app:starEmpty="@mipmap/starhui"
                         app:starFill="@mipmap/star"
                         app:starImageSize="32dp"
-                        app:starPadding="10dp"
-                        app:starStep="0"
-                        app:clickable="true"
+                        app:starPadding="13dp"
+                        app:starStep="1"
+                        app:mode="single"
                         app:stepSize="Full"/>
 
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tv_total"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="不佳"
                         android:textSize="14sp"
-                        android:layout_marginLeft="10dp"
                         android:textColor="#656565"
                         android:layout_gravity="center"
                         />
@@ -61,7 +65,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginLeft="23dp"
                     android:layout_marginTop="9dp"
                     >
                     <TextView
@@ -69,85 +72,29 @@
                         android:layout_height="wrap_content"
                         android:text="位置"
                         android:textSize="14sp"
-                        android:textColor="#656565"
+                        android:textColor="@color/text_color_1"
                         android:layout_gravity="center"
                         />
-                    <com.kobilliards.utils.RatingBar
-                        android:id="@+id/rb"
-                        app:clickable="true"
+                    <com.yuyuka.billiards.utils.RatingBar
+                        android:id="@+id/rb_location"
+                        android:layout_marginLeft="15dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
                         app:starEmpty="@mipmap/sorry"
                         app:starFill="@mipmap/sorryl"
                         app:starImageSize="32dp"
-                        app:starPadding="10dp"
-                        app:starStep="0"
-                        app:starCount="1"
-                        app:stepSize="Full"
-                        />
-                    <com.kobilliards.utils.RatingBar
-                        android:id="@+id/rb1"
-                        app:clickable="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        app:starEmpty="@mipmap/flat"
-                        app:starFill="@mipmap/flatl"
-                        app:starImageSize="32dp"
-                        app:starPadding="10dp"
-                        app:starStep="0"
-                        app:starCount="1"
-                        app:stepSize="Full"
-                        />
-                    <com.kobilliards.utils.RatingBar
-                        android:id="@+id/rb2"
-                        app:clickable="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        app:starEmpty="@mipmap/smilel"
-                        app:starFill="@mipmap/smile"
-                        app:starImageSize="32dp"
-                        app:starPadding="10dp"
-                        app:starStep="0"
-                        app:starCount="1"
-                        app:stepSize="Full"
-                        />
-                    <com.kobilliards.utils.RatingBar
-                        android:id="@+id/rb3"
-                        app:clickable="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        app:starEmpty="@mipmap/happy"
-                        app:starFill="@mipmap/happyl"
-                        app:starImageSize="32dp"
-                        app:starPadding="10dp"
-                        app:starStep="0"
-                        app:starCount="1"
-                        app:stepSize="Full"
-                        />
-                    <com.kobilliards.utils.RatingBar
-                        android:id="@+id/rb4"
-                        app:clickable="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        app:starEmpty="@mipmap/ciyahui"
-                        app:starFill="@mipmap/ciyaxiao"
-                        app:starImageSize="32dp"
-                        app:starPadding="10dp"
-                        app:starStep="0"
-                        app:starCount="1"
-                        app:stepSize="Full"
-                        />
+                        app:starPadding="13dp"
+                        app:starStep="1"
+                        app:mode="multi"
+                        app:stepSize="Full"/>
+
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tv_location"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="不佳"
                         android:textSize="14sp"
-                        android:layout_marginLeft="10dp"
                         android:textColor="#656565"
                         android:layout_gravity="center"
                         />
@@ -157,7 +104,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginLeft="23dp"
                     android:layout_marginTop="9dp"
                     >
                     <TextView
@@ -165,85 +111,29 @@
                         android:layout_height="wrap_content"
                         android:text="服务"
                         android:textSize="14sp"
-                        android:textColor="#656565"
+                        android:textColor="@color/text_color_1"
                         android:layout_gravity="center"
                         />
-                    <com.kobilliards.utils.RatingBar
-                        android:id="@+id/rb5"
+                    <com.yuyuka.billiards.utils.RatingBar
+                        android:id="@+id/rb_service"
+                        android:layout_marginLeft="15dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
                         app:starEmpty="@mipmap/sorry"
                         app:starFill="@mipmap/sorryl"
                         app:starImageSize="32dp"
-                        app:starPadding="10dp"
-                        app:starStep="0"
-                        app:starCount="1"
-                        app:clickable="true"
-                        app:stepSize="Full"
-                        />
-                    <com.kobilliards.utils.RatingBar
-                        android:id="@+id/rb6"
-                        app:clickable="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        app:starEmpty="@mipmap/flat"
-                        app:starFill="@mipmap/flatl"
-                        app:starImageSize="32dp"
-                        app:starPadding="10dp"
-                        app:starStep="0"
-                        app:starCount="1"
-                        app:stepSize="Full"
-                        />
-                    <com.kobilliards.utils.RatingBar
-                        android:id="@+id/rb7"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        app:starEmpty="@mipmap/smilel"
-                        app:starFill="@mipmap/smile"
-                        app:starImageSize="32dp"
-                        app:clickable="true"
-                        app:starPadding="10dp"
-                        app:starStep="0"
-                        app:starCount="1"
-                        app:stepSize="Full"
-                        />
-                    <com.kobilliards.utils.RatingBar
-                        android:id="@+id/rb8"
-                        app:clickable="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        app:starEmpty="@mipmap/happy"
-                        app:starFill="@mipmap/happyl"
-                        app:starImageSize="32dp"
-                        app:starPadding="10dp"
-                        app:starStep="0"
-                        app:starCount="1"
-                        app:stepSize="Full"
-                        />
-                    <com.kobilliards.utils.RatingBar
-                        android:id="@+id/rb9"
-                        app:clickable="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        app:starEmpty="@mipmap/ciyahui"
-                        app:starFill="@mipmap/ciyaxiao"
-                        app:starImageSize="32dp"
-                        app:starPadding="10dp"
-                        app:starStep="0"
-                        app:starCount="1"
-                        app:stepSize="Full"
-                        />
+                        app:starPadding="13dp"
+                        app:starStep="1"
+                        app:mode="multi"
+                        app:stepSize="Full"/>
+
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tv_service"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="不佳"
                         android:textSize="14sp"
-                        android:layout_marginLeft="10dp"
                         android:textColor="#656565"
                         android:layout_gravity="center"
                         />
@@ -253,7 +143,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginLeft="23dp"
                     android:layout_marginTop="9dp"
                     >
                     <TextView
@@ -261,85 +150,29 @@
                         android:layout_height="wrap_content"
                         android:text="卫生"
                         android:textSize="14sp"
-                        android:textColor="#656565"
+                        android:textColor="@color/text_color_1"
                         android:layout_gravity="center"
                         />
-                    <com.kobilliards.utils.RatingBar
-                        android:id="@+id/rb11"
+                    <com.yuyuka.billiards.utils.RatingBar
+                        android:id="@+id/rb_hygiene"
+                        android:layout_marginLeft="15dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
                         app:starEmpty="@mipmap/sorry"
                         app:starFill="@mipmap/sorryl"
                         app:starImageSize="32dp"
-                        app:clickable="true"
-                        app:starPadding="10dp"
-                        app:starStep="0"
-                        app:starCount="1"
-                        app:stepSize="Full"
-                        />
-                    <com.kobilliards.utils.RatingBar
-                        android:id="@+id/rb12"
-                        app:clickable="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        app:starEmpty="@mipmap/flat"
-                        app:starFill="@mipmap/flatl"
-                        app:starImageSize="32dp"
-                        app:starPadding="10dp"
-                        app:starStep="0"
-                        app:starCount="1"
-                        app:stepSize="Full"
-                        />
-                    <com.kobilliards.utils.RatingBar
-                        android:id="@+id/rb13"
-                        app:clickable="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        app:starEmpty="@mipmap/smilel"
-                        app:starFill="@mipmap/smile"
-                        app:starImageSize="32dp"
-                        app:starPadding="10dp"
-                        app:starStep="0"
-                        app:starCount="1"
-                        app:stepSize="Full"
-                        />
-                    <com.kobilliards.utils.RatingBar
-                        android:id="@+id/rb14"
-                        app:clickable="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        app:starEmpty="@mipmap/happy"
-                        app:starFill="@mipmap/happyl"
-                        app:starImageSize="32dp"
-                        app:starPadding="10dp"
-                        app:starStep="0"
-                        app:starCount="1"
-                        app:stepSize="Full"
-                        />
-                    <com.kobilliards.utils.RatingBar
-                        android:id="@+id/rb15"
-                        app:clickable="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        app:starEmpty="@mipmap/ciyahui"
-                        app:starFill="@mipmap/ciyaxiao"
-                        app:starImageSize="32dp"
-                        app:starPadding="10dp"
-                        app:starStep="0"
-                        app:starCount="1"
-                        app:stepSize="Full"
-                        />
+                        app:starPadding="13dp"
+                        app:starStep="1"
+                        app:mode="multi"
+                        app:stepSize="Full"/>
+
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tv_hygiene"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="不佳"
                         android:textSize="14sp"
-                        android:layout_marginLeft="10dp"
                         android:textColor="#656565"
                         android:layout_gravity="center"
                         />
@@ -349,99 +182,42 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginLeft="23dp"
                     android:layout_marginTop="9dp"
-                    android:layout_marginBottom="9dp"
                     >
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="设施"
                         android:textSize="14sp"
-                        android:textColor="#656565"
+                        android:textColor="@color/text_color_1"
                         android:layout_gravity="center"
                         />
-                    <com.kobilliards.utils.RatingBar
-                        android:id="@+id/rb17"
-                        app:clickable="true"
+                    <com.yuyuka.billiards.utils.RatingBar
+                        android:id="@+id/rb_facilities"
+                        android:layout_marginLeft="15dp"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
                         app:starEmpty="@mipmap/sorry"
                         app:starFill="@mipmap/sorryl"
                         app:starImageSize="32dp"
-                        app:starPadding="10dp"
-                        app:starStep="0"
-                        app:starCount="1"
-                        app:stepSize="Full"
-                        />
-                    <com.kobilliards.utils.RatingBar
-                        android:id="@+id/rb18"
-                        app:clickable="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        app:starEmpty="@mipmap/flat"
-                        app:starFill="@mipmap/flatl"
-                        app:starImageSize="32dp"
-                        app:starPadding="10dp"
-                        app:starStep="0"
-                        app:starCount="1"
-                        app:stepSize="Full"
-                        />
-                    <com.kobilliards.utils.RatingBar
-                        android:id="@+id/rb19"
-                        app:clickable="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        app:starEmpty="@mipmap/smilel"
-                        app:starFill="@mipmap/smile"
-                        app:starImageSize="32dp"
-                        app:starPadding="10dp"
-                        app:starStep="0"
-                        app:starCount="1"
-                        app:stepSize="Full"
-                        />
-                    <com.kobilliards.utils.RatingBar
-                        android:id="@+id/rb20"
-                        app:clickable="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        app:starEmpty="@mipmap/happy"
-                        app:starFill="@mipmap/happyl"
-                        app:starImageSize="32dp"
-                        app:starPadding="10dp"
-                        app:starStep="0"
-                        app:starCount="1"
-                        app:stepSize="Full"
-                        />
-                    <com.kobilliards.utils.RatingBar
-                        android:id="@+id/rb21"
-                        app:clickable="true"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        app:starEmpty="@mipmap/ciyahui"
-                        app:starFill="@mipmap/ciyaxiao"
-                        app:starImageSize="32dp"
-                        app:starPadding="10dp"
-                        app:starStep="0"
-                        app:starCount="1"
-                        app:stepSize="Full"
-                        />
+                        app:starPadding="13dp"
+                        app:starStep="1"
+                        app:mode="multi"
+                        app:stepSize="Full"/>
+
                     <TextView
-                        android:layout_width="wrap_content"
+                        android:id="@+id/tv_facilities"
+                        android:layout_width="0dp"
+                        android:layout_weight="1"
                         android:layout_height="wrap_content"
                         android:text="不佳"
                         android:textSize="14sp"
                         android:textColor="#656565"
-                        android:layout_marginLeft="10dp"
                         android:layout_gravity="center"
                         />
 
                 </LinearLayout>
+
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -464,71 +240,76 @@
                     android:layout_marginLeft="24dp"
                     android:layout_marginTop="7dp"
                     />
-                <com.kobilliards.widget.TagLayout
+
+                <com.yuyuka.billiards.widget.TagLayout
                     android:id="@+id/tag_layout_positive"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="24dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:layout_height="20dp"
-                        android:text="环境很好"
-                        android:textSize="14sp"
-                        android:layout_margin="5dp"
-                        android:textColor="@color/white"
-                        android:gravity="center"
-                        android:background="@drawable/bg_tag_comment_positive"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:layout_height="20dp"
-                        android:text="环境很好"
-                        android:layout_margin="5dp"
-                        android:textSize="14sp"
-                        android:textColor="@color/white"
-                        android:gravity="center"
-                        android:background="@drawable/bg_tag_comment_positive"/>
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:paddingLeft="15dp"
-                        android:paddingRight="15dp"
-                        android:layout_height="20dp"
-                        android:text="环境很好"
-                        android:layout_margin="5dp"
-                        android:textSize="14sp"
-                        android:textColor="@color/white"
-                        android:gravity="center"
-                        android:background="@drawable/bg_tag_comment_positive"/>
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp">
 
                     <TextView
                         android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/bg_tag_comment_positive"
+                        android:gravity="center"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
-                        android:layout_height="20dp"
                         android:text="环境很好"
-                        android:layout_margin="5dp"
-                        android:textSize="14sp"
                         android:textColor="@color/white"
-                        android:gravity="center"
-                        android:background="@drawable/bg_tag_comment_positive"/>
+                        android:textSize="14sp" />
 
                     <TextView
                         android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/bg_tag_comment_positive"
+                        android:gravity="center"
                         android:paddingLeft="15dp"
                         android:paddingRight="15dp"
-                        android:layout_height="20dp"
                         android:text="环境很好"
-                        android:layout_margin="5dp"
-                        android:textSize="14sp"
                         android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/bg_tag_comment_positive"
                         android:gravity="center"
-                        android:background="@drawable/bg_tag_comment_positive"/>
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:text="环境很好"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/bg_tag_comment_positive"
+                        android:gravity="center"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:text="环境很好"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="20dp"
+                        android:layout_margin="5dp"
+                        android:background="@drawable/bg_tag_comment_positive"
+                        android:gravity="center"
+                        android:paddingLeft="15dp"
+                        android:paddingRight="15dp"
+                        android:text="环境很好"
+                        android:textColor="@color/white"
+                        android:textSize="14sp" />
 
 
-                </com.kobilliards.widget.TagLayout>
+                </com.yuyuka.billiards.widget.TagLayout>
             </LinearLayout>
             <View
                 android:layout_width="match_parent"
@@ -557,14 +338,15 @@
                     android:layout_marginLeft="24dp"
                     android:layout_marginRight="24dp"
                     android:layout_marginTop="10dp"
+                    android:gravity="top"
                     android:background="@drawable/edit_bg"
-                    android:textSize="14dp"
+                    android:textSize="14sp"
                     />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
 
-    <com.kobilliards.widget.StateButton
+    <com.yuyuka.billiards.widget.StateButton
         android:id="@+id/btn_join"
         android:layout_width="match_parent"
         android:layout_height="40dp"
