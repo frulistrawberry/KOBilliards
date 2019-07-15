@@ -208,11 +208,14 @@ public class BilliardsRoomDetailActivity extends BaseActivity {
         mDateTitle = getDateTitles();
     }
 
-    @OnClick(R.id.rl_comment)
+    @OnClick({R.id.rl_comment,R.id.images})
     public void onClick(View v){
         switch (v.getId()){
             case R.id.rl_comment:
                 CommentActivity.launcher(this);
+                break;
+            case R.id.images:
+                AlbumActivity.launcher(this);
                 break;
         }
     }

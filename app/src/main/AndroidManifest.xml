@@ -72,6 +72,7 @@
         <activity android:name=".ui.activity.rearbyroom.BilliardsCoachListActivity" />
         <activity android:name=".ui.activity.rearbyroom.CommentActivity"/>
         <activity android:name=".ui.activity.rearbyroom.MapActivity" />
+        <activity android:name=".ui.activity.rearbyroom.AlbumActivity"/>
         <!-- 网易云信 -->
         <meta-data
             android:name="com.netease.nim.appKey"
