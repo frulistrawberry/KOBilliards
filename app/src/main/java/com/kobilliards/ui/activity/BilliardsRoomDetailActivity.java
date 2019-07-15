@@ -2,16 +2,13 @@ package com.kobilliards.ui.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
+import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.NestedScrollView;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewPropertyAnimator;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 
 import com.kobilliards.R;
 import com.kobilliards.base.BaseActivity;
@@ -29,16 +26,19 @@ import com.kobilliards.widget.tabindicator.buildins.commonnavigator.indicators.L
 import com.kobilliards.widget.tabindicator.buildins.commonnavigator.titles.ColorTransitionPagerTitleView;
 import com.kobilliards.widget.tabindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class BilliardsRoomDetailActivity extends BaseActivity {
 
 
-    private String[] mTitle = {"球台预定","球房活动","球友点评","设施亮点"};
+    @BindView(R.id.images)
+    FrameLayout images;
+    private String[] mTitle = {"球台预定", "球房活动", "球友点评", "设施亮点"};
     @BindView(R.id.tab_layout)
     MagicIndicator mTabLayout;
     @BindView(R.id.view_pager)
@@ -58,8 +58,8 @@ public class BilliardsRoomDetailActivity extends BaseActivity {
     @BindView(R.id.ll_room_desc)
     LinearLayout mllroom;
 
-    public static void launcher(Context context){
-        Intent intent = new Intent(context,BilliardsRoomDetailActivity.class);
+    public static void launcher(Context context) {
+        Intent intent = new Intent(context, BilliardsRoomDetailActivity.class);
         context.startActivity(intent);
     }
 
@@ -78,7 +78,7 @@ public class BilliardsRoomDetailActivity extends BaseActivity {
 
             @Override
             public int getCount() {
-                return  mTitle.length;
+                return mTitle.length;
             }
 
             @Override
@@ -90,20 +90,20 @@ public class BilliardsRoomDetailActivity extends BaseActivity {
                 simplePagerTitleView.setOnClickListener(v -> {
                     int reserveTop = mReserveLayout.getTop();
                     int activeTop = mActiveLayout.getTop();
-                    int facilitiesTop = mFacilitiesLayout.getTop()-100;
+                    int facilitiesTop = mFacilitiesLayout.getTop() - 100;
                     int commentTop = mCommentLayut.getTop();
-                    switch (index){
+                    switch (index) {
                         case 0:
-                            mScrollView.scrollTo(0,reserveTop);
+                            mScrollView.scrollTo(0, reserveTop);
                             break;
                         case 1:
-                            mScrollView.scrollTo(0,activeTop);
+                            mScrollView.scrollTo(0, activeTop);
                             break;
                         case 2:
-                            mScrollView.scrollTo(0,commentTop);
+                            mScrollView.scrollTo(0, commentTop);
                             break;
                         case 3:
-                            mScrollView.scrollTo(0,facilitiesTop);
+                            mScrollView.scrollTo(0, facilitiesTop);
                             break;
                     }
                 });
@@ -114,7 +114,7 @@ public class BilliardsRoomDetailActivity extends BaseActivity {
             public IPagerIndicator getIndicator(Context context) {
                 LinePagerIndicator linePagerIndicator = new LinePagerIndicator(context);
                 linePagerIndicator.setMode(LinePagerIndicator.MODE_WRAP_CONTENT);
-                linePagerIndicator.setColors(getResourceColor(R.color.tab_indicator_start_color),getResourceColor(R.color.tab_indicator_end_color));
+                linePagerIndicator.setColors(getResourceColor(R.color.tab_indicator_start_color), getResourceColor(R.color.tab_indicator_end_color));
                 return linePagerIndicator;
             }
         });
@@ -124,35 +124,35 @@ public class BilliardsRoomDetailActivity extends BaseActivity {
             coachList.add(new BilliardsRoomCoachFragment());
         }
         mViewPager.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtils.getScreenWidth(this)));
-        mViewPager.setAdapter(new PagerAdapter(getSupportFragmentManager(),coachList));
+        mViewPager.setAdapter(new PagerAdapter(getSupportFragmentManager(), coachList));
         mScrollView.setScrollViewListener((scrollView, x, y, oldx, oldy) -> {
             int reserveTop = mReserveLayout.getTop();
             int reserveBottom = mReserveLayout.getBottom();
             int activeTop = mActiveLayout.getTop();
             int activeBottom = mStarLayout.getBottom();
-            int facilitiesTop = mFacilitiesLayout.getTop()-100;
-            int facilitiesBottom = mFacilitiesLayout.getBottom()-100;
-            int commentBottom = mCommentLayut.getBottom()-100;
+            int facilitiesTop = mFacilitiesLayout.getTop() - 100;
+            int facilitiesBottom = mFacilitiesLayout.getBottom() - 100;
+            int commentBottom = mCommentLayut.getBottom() - 100;
             int commentTop = mCommentLayut.getTop();
 
-            if (y>=reserveTop && y<=reserveBottom){
-                mTabLayout.onPageScrolled(0,Float.valueOf(y-reserveTop)/reserveBottom,0);
+            if (y >= reserveTop && y <= reserveBottom) {
+                mTabLayout.onPageScrolled(0, Float.valueOf(y - reserveTop) / reserveBottom, 0);
             }
-            if (y>=activeTop && y<=activeBottom){
-                mTabLayout.onPageScrolled(1,Float.valueOf(y-activeTop)/activeBottom,0);
-            }
-
-            if (y>=commentTop && y<=commentBottom){
-                mTabLayout.onPageScrolled(2,Float.valueOf(y-commentTop)/commentBottom,0);
+            if (y >= activeTop && y <= activeBottom) {
+                mTabLayout.onPageScrolled(1, Float.valueOf(y - activeTop) / activeBottom, 0);
             }
 
-            if (y>=facilitiesTop && y<=facilitiesBottom){
-                mTabLayout.onPageScrolled(3,Float.valueOf(y-facilitiesTop)/facilitiesBottom,0);
+            if (y >= commentTop && y <= commentBottom) {
+                mTabLayout.onPageScrolled(2, Float.valueOf(y - commentTop) / commentBottom, 0);
             }
 
-            LogUtil.d("onScroll","reserveTop:"+mReserveLayout.getTop()+"reserveBottom:"+mReserveLayout.getBottom());
-            LogUtil.d("onScroll","activeTop:"+mActiveLayout.getTop()+"activeBottom:"+mActiveLayout.getBottom());
-            LogUtil.d("onScroll","tabBottom:"+y);
+            if (y >= facilitiesTop && y <= facilitiesBottom) {
+                mTabLayout.onPageScrolled(3, Float.valueOf(y - facilitiesTop) / facilitiesBottom, 0);
+            }
+
+            LogUtil.d("onScroll", "reserveTop:" + mReserveLayout.getTop() + "reserveBottom:" + mReserveLayout.getBottom());
+            LogUtil.d("onScroll", "activeTop:" + mActiveLayout.getTop() + "activeBottom:" + mActiveLayout.getBottom());
+            LogUtil.d("onScroll", "tabBottom:" + y);
         });
         mllroom.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -165,5 +165,11 @@ public class BilliardsRoomDetailActivity extends BaseActivity {
     @Override
     protected void initData() {
 
+    }
+
+
+    @OnClick(R.id.images)
+    public void onViewClicked() {
+        AlbumActivity.launcher(getContext());
     }
 }
