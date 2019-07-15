@@ -6,12 +6,9 @@ import android.os.Bundle;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
-import com.kobilliards.BuildConfig;
 import com.yuyuka.billiards.base.ActivityManager;
-import com.yuyuka.billiards.constants.Config;
 import com.yuyuka.billiards.constants.PreferenceConstant;
 import com.yuyuka.billiards.utils.AppUtils;
-import com.yuyuka.billiards.utils.CommonUtils;
 import com.yuyuka.billiards.utils.SPUtils;
 import com.yuyuka.billiards.utils.log.LogUtil;
 
