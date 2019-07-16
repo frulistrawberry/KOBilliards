@@ -18,6 +18,7 @@ import com.yuyuka.billiards.utils.DateUtils;
 import com.yuyuka.billiards.utils.ScreenUtils;
 import com.yuyuka.billiards.utils.SizeUtils;
 import com.yuyuka.billiards.widget.ObservableNestedScrollView;
+import com.yuyuka.billiards.widget.dialog.SelectTimeDialog;
 import com.yuyuka.billiards.widget.tabindicator.MagicIndicator;
 import com.yuyuka.billiards.widget.tabindicator.buildins.commonnavigator.CommonNavigator;
 import com.yuyuka.billiards.widget.tabindicator.buildins.commonnavigator.abs.CommonNavigatorAdapter;
@@ -163,7 +164,7 @@ public class BilliardsRoomDetailActivity extends BaseActivity {
         mReserveTabLayout.setNavigator(weekNavigator);
         List<Fragment> coachList = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            coachList.add(new BilliardsRoomCoachFragment());
+            coachList.add(BilliardsRoomCoachFragment.newFragment(0));
         }
         mViewPager.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ScreenUtils.getScreenWidth(this)));
         mViewPager.setAdapter(new PagerAdapter(getSupportFragmentManager(),coachList));
@@ -208,7 +209,7 @@ public class BilliardsRoomDetailActivity extends BaseActivity {
         mDateTitle = getDateTitles();
     }
 
-    @OnClick({R.id.rl_comment,R.id.images})
+    @OnClick({R.id.rl_comment,R.id.images,R.id.ll_facilities,R.id.btn_reserve})
     public void onClick(View v){
         switch (v.getId()){
             case R.id.rl_comment:
@@ -216,6 +217,12 @@ public class BilliardsRoomDetailActivity extends BaseActivity {
                 break;
             case R.id.images:
                 AlbumActivity.launcher(this);
+                break;
+            case R.id.ll_facilities:
+                RoomFaclitiesActivity.launcher(this);
+                break;
+            case R.id.btn_reserve:
+                new SelectTimeDialog(this).show();
                 break;
         }
     }

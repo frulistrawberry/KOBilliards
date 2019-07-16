@@ -5,42 +5,38 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.TextView;
 
 import com.yuyuka.billiards.R;
+import com.yuyuka.billiards.base.BaseActivity;
+import com.yuyuka.billiards.ui.activity.nearbymatch.NearbyMatchActivity;
+import com.yuyuka.billiards.ui.activity.rearbyroom.NearbyRoomActivity;
 
-public class MainActivity extends AppCompatActivity {
+import butterknife.OnClick;
 
-    private TextView mTextMessage;
+public class MainActivity extends BaseActivity {
 
-    private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
-
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-            switch (item.getItemId()) {
-                case R.id.navigation_home:
-                    mTextMessage.setText(R.string.title_home);
-                    return true;
-                case R.id.navigation_dashboard:
-                    mTextMessage.setText(R.string.title_dashboard);
-                    return true;
-                case R.id.navigation_notifications:
-                    mTextMessage.setText(R.string.title_notifications);
-                    return true;
-            }
-            return false;
-        }
-    };
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void initView() {
         setContentView(R.layout.activity_main);
-
-        mTextMessage = (TextView) findViewById(R.id.message);
-        BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
-        navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
     }
 
+    @Override
+    protected void initData() {
+
+    }
+
+    @OnClick({R.id.btn_room,R.id.btn_match})
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.btn_room:
+                NearbyRoomActivity.launcher(this);
+                break;
+            case R.id.btn_match:
+                NearbyMatchActivity.launcher(this);
+                break;
+        }
+    }
 }

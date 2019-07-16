@@ -301,7 +301,10 @@
                         android:layout_height="wrap_content"
                         android:paddingBottom="9dp"
                         android:orientation="vertical">
-                        <include layout="@layout/item_reserve"/>
+
+                        <include
+                            android:id="@+id/btn_reserve"
+                            layout="@layout/item_reserve" />
                         <include layout="@layout/item_reserve"/>
                         <include layout="@layout/item_reserve"/>
                     </LinearLayout>
@@ -794,6 +797,7 @@
                         android:layout_height="wrap_content"
                         android:paddingTop="10dp"
                         android:paddingBottom="10dp"
+                        android:paddingLeft="10dp"
                         android:orientation="horizontal">
                         <include
                             layout="@layout/item_facilities"/>

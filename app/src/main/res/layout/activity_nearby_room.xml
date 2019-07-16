@@ -85,6 +85,7 @@
                                 android:paddingBottom="6dp">
 
                                 <TextView
+                                    android:id="@+id/btn_city"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:drawableRight="@mipmap/ic_arrow_down"
@@ -106,6 +107,7 @@
                                     android:src="@mipmap/ic_search" />
 
                                 <TextView
+                                    android:id="@+id/btn_search"
                                     android:layout_width="0dp"
                                     android:layout_height="wrap_content"
                                     android:layout_marginLeft="5dp"

@@ -1,4 +1,4 @@
-package com.kobilliards.utils;
+package com.yuyuka.billiards.utils;
 
 import android.content.Context;
 import android.content.res.TypedArray;

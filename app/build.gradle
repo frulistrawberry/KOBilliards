@@ -93,8 +93,12 @@ dependencies {
     implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
     //pickerView
     implementation 'com.contrarywind:Android-PickerView:4.1.7'
+    //拼音
+    implementation 'com.belerweb:pinyin4j:2.5.0'
     //高德地图
     implementation 'com.amap.api:navi-3dmap:6.8.0_3dmap6.9.0'
+    implementation 'com.amap.api:location:4.6.0'
+    implementation 'com.amap.api:search:6.9.0'
 
     //网易云信
 

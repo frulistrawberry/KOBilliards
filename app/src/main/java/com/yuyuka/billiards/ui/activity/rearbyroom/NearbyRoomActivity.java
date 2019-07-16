@@ -1,5 +1,7 @@
 package com.yuyuka.billiards.ui.activity.rearbyroom;
 
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
@@ -53,6 +55,11 @@ public class NearbyRoomActivity extends BaseActivity {
     PagerAdapter mAdapter;
     String[] mTitles = {"推荐球馆","我的收藏"};
     List<Fragment> mFragmentList;
+
+    public static void launcher(Context context){
+        context.startActivity(new Intent(context,NearbyRoomActivity.class));
+    }
+
     @Override
     protected void initView() {
         setContentView(R.layout.activity_nearby_room);
@@ -122,7 +129,7 @@ public class NearbyRoomActivity extends BaseActivity {
         mAdapter = new PagerAdapter(getSupportFragmentManager(),mFragmentList,mTitles);
     }
 
-    @OnClick({R.id.fl_auth,R.id.fl_save,R.id.fl_rank,R.id.fl_coach,R.id.iv_map})
+    @OnClick({R.id.fl_auth,R.id.fl_save,R.id.fl_rank,R.id.fl_coach,R.id.iv_map,R.id.btn_search,R.id.btn_city})
     public void onClick(View v){
         switch (v.getId()){
             case R.id.fl_auth:
@@ -139,6 +146,12 @@ public class NearbyRoomActivity extends BaseActivity {
                 break;
             case R.id.iv_map:
                 MapActivity.launcher(this);
+                break;
+            case R.id.btn_search:
+                BilliardsSearchActivity.launcher(this);
+                break;
+            case R.id.btn_city:
+                CityListActivity.launcher(this);
                 break;
         }
     }

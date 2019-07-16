@@ -2,6 +2,8 @@ package com.yuyuka.billiards.mvp.presenter.nearbyroom;
 
 import android.text.TextUtils;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.yuyuka.billiards.base.BasePresenter;
 import com.yuyuka.billiards.mvp.contract.rearbyroom.RecommendRoomContract;
 import com.yuyuka.billiards.mvp.model.nearbyroom.RecommendRoomModel;
@@ -9,6 +11,9 @@ import com.yuyuka.billiards.net.RespObserver;
 import com.yuyuka.billiards.pojo.BilliardsRoomPojo;
 import com.yuyuka.billiards.utils.CollectionUtils;
 import com.yuyuka.billiards.utils.RxUtils;
+
+import java.lang.reflect.Type;
+import java.util.List;
 
 public class RecommendRoomPresenter extends BasePresenter<RecommendRoomContract.IRecommendRoomView, RecommendRoomContract.IRecommendRoomModel> {
 
@@ -29,13 +34,13 @@ public class RecommendRoomPresenter extends BasePresenter<RecommendRoomContract.
                             getView().showEmpty();
                             return;
                         }
-//                        Type type = new TypeToken<List<BilliardsRoomPojo>>(){}.getType();
-//                        List<BilliardsRoomPojo> data = new Gson().fromJson(bizContent,type);
-//
-//                        if (CollectionUtils.isEmpty(data))
-//                            getView().showEmpty();
-//                        else
-//                            getView().showRecommendRoomList(data);
+                        Type type = new TypeToken<List<BilliardsRoomPojo>>(){}.getType();
+                        List<BilliardsRoomPojo> data = new Gson().fromJson(bizContent,type);
+
+                        if (CollectionUtils.isEmpty(data))
+                            getView().showEmpty();
+                        else
+                            getView().showRecommendRoomList(data);
                     }
 
                     @Override

@@ -33,7 +33,7 @@ public class NavigatorAdapter extends CommonNavigatorAdapter {
     @Override
     public IPagerTitleView getTitleView(Context context, final int index) {
         SimplePagerTitleView simplePagerTitleView = new ColorTransitionPagerTitleView(context);
-        simplePagerTitleView.setNormalColor((R.color.text_color_1));
+        simplePagerTitleView.setNormalColor(context.getResources().getColor(R.color.text_color_1));
         simplePagerTitleView.setSelectedColor(context.getResources().getColor(R.color.text_color_2));
         simplePagerTitleView.setText(mAdapter.getPageTitle(index));
         simplePagerTitleView.setTextSize(18);

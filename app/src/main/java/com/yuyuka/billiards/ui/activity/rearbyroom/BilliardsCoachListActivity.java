@@ -53,6 +53,7 @@ public class BilliardsCoachListActivity extends BaseListActivity<BilliardsCoachL
         super.initView();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
         mRecyclerView.setAdapter(mAdapter);
+        onRefresh();
     }
 
     @Override

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="8dp"
+        android:paddingBottom="8dp"
+        android:paddingLeft="13dp"
+        android:paddingRight="13dp"
+        android:gravity="center_vertical"
+        android:background="@color/bg_status_bar"
+        android:orientation="horizontal">
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_search"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:gravity="center_vertical"
+            android:layout_weight="1">
+            <ImageView
+                android:layout_width="14dp"
+                android:layout_height="14dp"
+                android:src="@mipmap/ic_search"/>
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:textSize="13sp"
+                android:layout_marginLeft="3dp"
+                android:textColor="@color/text_color_1"
+                android:hint="输入城市名或拼音查询"/>
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:layout_marginLeft="10dp"
+            android:text="取消"/>
+    </LinearLayout>
+    <com.yuyuka.billiards.widget.tabindicator.MagicIndicator
+        android:id="@+id/tab_layout"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@color/white" />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="4dp"
+        android:background="@color/color_spline"/>
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+</LinearLayout>

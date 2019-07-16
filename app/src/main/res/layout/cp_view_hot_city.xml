@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingBottom="8dp"
+    android:background="@color/white"
+    tools:ignore="RtlHardcoded">
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        android:textColor="@color/text_color_3"
+        android:paddingTop="16dp"
+        android:paddingBottom="16dp"
+        android:paddingLeft="13dp"
+        android:text="国内热门城市" />
+
+    <com.yuyuka.billiards.widget.WrapHeightGridView
+        android:id="@+id/gridview_hot_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="@android:color/transparent"
+        android:horizontalSpacing="12dp"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="3"
+        android:paddingLeft="16dp"
+        android:paddingRight="36dp"
+        android:scrollbars="none"
+        android:background="@color/white"
+        android:verticalSpacing="12dp" />
+</LinearLayout>

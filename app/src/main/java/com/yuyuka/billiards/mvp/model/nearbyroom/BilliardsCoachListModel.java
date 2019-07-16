@@ -15,7 +15,7 @@ public class BilliardsCoachListModel extends BaseModel implements BilliardsCoach
     @Override
     public Observable<HttpResult> getBilliardsCoachList(int page) {
         return Observable.create(emitter -> {
-            Thread.sleep(3000);
+            Thread.sleep(1000);
             List<BilliardsCoachPojo> bizEntity = new ArrayList<>();
             for (int i = 0; i < 10; i++) {
                 bizEntity.add(new BilliardsCoachPojo());
