@@ -10,7 +10,7 @@ import android.view.WindowManager;
 import android.widget.TextView;
 
 import com.yuyuka.billiards.R;
-import com.yuyuka.billiards.ui.activity.rearbyroom.PayActivity;
+import com.yuyuka.billiards.ui.activity.room.PayActivity;
 import com.yuyuka.billiards.utils.ScreenUtils;
 
 public class ReserveConfirmDialog extends Dialog {

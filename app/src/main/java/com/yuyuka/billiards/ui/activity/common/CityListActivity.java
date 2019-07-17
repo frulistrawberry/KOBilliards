@@ -1,4 +1,4 @@
-package com.yuyuka.billiards.ui.activity.rearbyroom;
+package com.yuyuka.billiards.ui.activity.common;
 
 import android.content.Context;
 import android.content.Intent;

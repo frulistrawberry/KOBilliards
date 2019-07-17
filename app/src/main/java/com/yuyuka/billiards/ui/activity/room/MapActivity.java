@@ -1,4 +1,4 @@
-package com.yuyuka.billiards.ui.activity.rearbyroom;
+package com.yuyuka.billiards.ui.activity.room;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,7 +9,6 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.amap.api.maps.AMap;
-import com.amap.api.maps.CameraUpdate;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.TextureMapView;
 import com.amap.api.maps.model.CameraPosition;
@@ -21,7 +20,6 @@ import com.yuyuka.billiards.base.BaseActivity;
 import com.yuyuka.billiards.utils.SizeUtils;
 import com.yuyuka.billiards.widget.StateButton;
 
-import butterknife.BindInt;
 import butterknife.BindView;
 
 public class MapActivity extends BaseActivity implements AMap.InfoWindowAdapter {

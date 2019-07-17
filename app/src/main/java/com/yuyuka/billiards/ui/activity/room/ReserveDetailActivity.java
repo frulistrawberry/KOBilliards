@@ -1,10 +1,9 @@
-package com.yuyuka.billiards.ui.activity.rearbyroom;
+package com.yuyuka.billiards.ui.activity.room;
 
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseActivity;

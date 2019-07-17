@@ -10,8 +10,7 @@ import android.widget.ImageView;
 
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseFragment;
-import com.yuyuka.billiards.ui.activity.rearbyroom.BilliardsSearchActivity;
-import com.yuyuka.billiards.ui.activity.rearbyroom.CoachDetailActivity;
+import com.yuyuka.billiards.ui.activity.room.CoachDetailActivity;
 import com.yuyuka.billiards.utils.ScreenUtils;
 
 import butterknife.BindView;

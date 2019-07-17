@@ -63,25 +63,25 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.rearbyroom.NearbyRoomActivity"
+        <activity android:name=".ui.activity.room.NearbyRoomActivity"
             android:screenOrientation="portrait">
 
         </activity>
-        <activity android:name=".ui.activity.rearbyroom.BilliardsRoomDetailActivity"
+        <activity android:name=".ui.activity.room.BilliardsRoomDetailActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.rearbyroom.BilliardsRoomListActivity" />
-        <activity android:name=".ui.activity.rearbyroom.BilliardsCoachListActivity" />
-        <activity android:name=".ui.activity.rearbyroom.CommentActivity"/>
-        <activity android:name=".ui.activity.rearbyroom.MapActivity" />
-        <activity android:name=".ui.activity.rearbyroom.AlbumActivity"/>
-        <activity android:name=".ui.activity.rearbyroom.BilliardsSearchActivity" />
-        <activity android:name=".ui.activity.rearbyroom.CityListActivity" />
-        <activity android:name=".ui.activity.rearbyroom.RoomFaclitiesActivity" />
-        <activity android:name=".ui.activity.rearbyroom.CoachDetailActivity"
+        <activity android:name=".ui.activity.room.BilliardsRoomListActivity" />
+        <activity android:name=".ui.activity.room.BilliardsCoachListActivity" />
+        <activity android:name=".ui.activity.room.CommentActivity"/>
+        <activity android:name=".ui.activity.room.MapActivity" />
+        <activity android:name=".ui.activity.room.AlbumActivity"/>
+        <activity android:name=".ui.activity.room.BilliardsSearchActivity" />
+        <activity android:name=".ui.activity.common.CityListActivity" />
+        <activity android:name=".ui.activity.room.RoomFaclitiesActivity" />
+        <activity android:name=".ui.activity.room.CoachDetailActivity"
             android:screenOrientation="landscape"/>
-        <activity android:name=".ui.activity.rearbyroom.ReserveDetailActivity" />
-        <activity android:name=".ui.activity.rearbyroom.PayActivity" />
-        <activity android:name=".ui.activity.nearbymatch.NearbyMatchActivity" />
+        <activity android:name=".ui.activity.room.ReserveDetailActivity" />
+        <activity android:name=".ui.activity.room.PayActivity" />
+        <activity android:name=".ui.activity.match.NearbyMatchActivity" />
         <!-- 网易云信 -->
         <meta-data
             android:name="com.netease.nim.appKey"

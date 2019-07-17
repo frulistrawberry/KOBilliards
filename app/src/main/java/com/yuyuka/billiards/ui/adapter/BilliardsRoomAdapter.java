@@ -6,7 +6,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.pojo.BilliardsRoomPojo;
-import com.yuyuka.billiards.ui.activity.rearbyroom.BilliardsRoomDetailActivity;
+import com.yuyuka.billiards.ui.activity.room.BilliardsRoomDetailActivity;
 
 public class BilliardsRoomAdapter extends BaseQuickAdapter<BilliardsRoomPojo, BaseViewHolder> {
 

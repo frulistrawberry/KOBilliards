@@ -1,17 +1,11 @@
 package com.yuyuka.billiards.ui.activity;
 
-import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.design.widget.BottomNavigationView;
-import android.support.v7.app.AppCompatActivity;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.TextView;
 
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseActivity;
-import com.yuyuka.billiards.ui.activity.nearbymatch.NearbyMatchActivity;
-import com.yuyuka.billiards.ui.activity.rearbyroom.NearbyRoomActivity;
+import com.yuyuka.billiards.ui.activity.match.NearbyMatchActivity;
+import com.yuyuka.billiards.ui.activity.room.NearbyRoomActivity;
 
 import butterknife.OnClick;
 

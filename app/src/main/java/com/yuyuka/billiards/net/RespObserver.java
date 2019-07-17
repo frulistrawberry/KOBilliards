@@ -15,6 +15,7 @@ public abstract class RespObserver implements Observer<HttpResult> {
 
     @Override
     public void onNext(HttpResult httpResult) {
+        LogUtil.json("bizContent",httpResult.getBizContent());
         if (httpResult.getCode()!=10000){
             onError(httpResult.getCode(),httpResult.getMsg());
         }else {

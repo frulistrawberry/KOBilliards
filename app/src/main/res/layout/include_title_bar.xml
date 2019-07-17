@@ -5,7 +5,7 @@
     android:layout_height="wrap_content">
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="48dp"
+        android:layout_height="30dp"
         android:background="@color/bg_title_bar">
         <FrameLayout
             android:layout_width="wrap_content"
@@ -111,5 +111,6 @@
         android:id="@+id/v_title_divider"
         android:layout_width="match_parent"
         android:layout_height="0.5dp"
+        android:visibility="gone"
         android:background="@color/color_spline"/>
 </merge>

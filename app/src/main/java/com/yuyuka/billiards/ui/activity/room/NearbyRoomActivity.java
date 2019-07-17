@@ -1,4 +1,4 @@
-package com.yuyuka.billiards.ui.activity.rearbyroom;
+package com.yuyuka.billiards.ui.activity.room;
 
 import android.content.Context;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import android.widget.LinearLayout;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseActivity;
 import com.yuyuka.billiards.event.OffsetChangeEvent;
+import com.yuyuka.billiards.ui.activity.common.CityListActivity;
 import com.yuyuka.billiards.ui.adapter.NavigatorAdapter;
 import com.yuyuka.billiards.ui.adapter.PagerAdapter;
 import com.yuyuka.billiards.ui.fragment.nearbyroom.CollectionRoomFragment;

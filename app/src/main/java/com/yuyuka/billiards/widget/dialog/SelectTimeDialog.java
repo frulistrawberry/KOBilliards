@@ -12,7 +12,7 @@ import android.view.WindowManager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.pojo.SelectTimePojo;
-import com.yuyuka.billiards.ui.activity.rearbyroom.ReserveDetailActivity;
+import com.yuyuka.billiards.ui.activity.room.ReserveDetailActivity;
 import com.yuyuka.billiards.ui.adapter.SelectTimeAdapter;
 import com.yuyuka.billiards.utils.SizeUtils;
 import com.yuyuka.billiards.widget.StateButton;
