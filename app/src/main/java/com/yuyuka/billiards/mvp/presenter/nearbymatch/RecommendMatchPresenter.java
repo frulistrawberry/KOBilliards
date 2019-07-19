@@ -10,7 +10,7 @@ import com.yuyuka.billiards.mvp.contract.nearbymatch.RecommendMatchContract;
 import com.yuyuka.billiards.mvp.model.nearbymatch.RecommendMatchModel;
 import com.yuyuka.billiards.net.RespObserver;
 import com.yuyuka.billiards.pojo.ListData;
-import com.yuyuka.billiards.pojo.MatchPojo;
+import com.yuyuka.billiards.pojo.BilliardsMatchPojo;
 import com.yuyuka.billiards.utils.CollectionUtils;
 import com.yuyuka.billiards.utils.RxUtils;
 
@@ -37,8 +37,8 @@ public class RecommendMatchPresenter extends BasePresenter<RecommendMatchContrac
                             getView().showEmpty();
                             return;
                         }
-                        Type type = new TypeToken<ListData<MatchPojo>>(){}.getType();
-                        ListData<MatchPojo> data = new Gson().fromJson(bizContent,type);
+                        Type type = new TypeToken<ListData<BilliardsMatchPojo>>(){}.getType();
+                        ListData<BilliardsMatchPojo> data = new Gson().fromJson(bizContent,type);
 
                         if (CollectionUtils.isEmpty(data.getDataList()))
                             getView().showEmpty();

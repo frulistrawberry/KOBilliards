@@ -8,4 +8,6 @@ public class UrlConstant {
     public static String VERIFICATION_CODE = "com.yuyuka.api.verification.code";
 
     public static String MATCH_NEARBY_LIST_BEGINNING = "com.yuyuka.billiards.api.match.nearby.list.beginning";
+
+    public static String LIST = "com.yuyuka.billiards.api.list";
 }

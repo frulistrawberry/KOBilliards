@@ -1,6 +1,13 @@
 package com.yuyuka.billiards.utils;
 
 import android.text.TextUtils;
+import android.widget.TextView;
+
+import com.amap.api.maps.AMapUtils;
+import com.amap.api.maps.model.LatLng;
+import com.yuyuka.billiards.constants.PreferenceConstant;
+
+import java.math.BigDecimal;
 
 public class DataOptionUtils {
 
@@ -39,4 +46,45 @@ public class DataOptionUtils {
         }
         return stringBuilder;
     }
+
+    /**
+     *  四舍五入方式保留两位小数
+     * 例如：300.905 -->300.91
+     */
+
+    public static String getStringWithRound(String money){
+        if(TextUtils.isEmpty(money)){
+            return "";
+        }
+        BigDecimal bd = new BigDecimal(String.valueOf(money));
+        double  d = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+        return String.format("%.2f", d);
+
+    }
+
+    /**
+     * 计算直线距离
+     * @param lat
+     * @param lng
+     * @return
+     */
+    public static String calculateLineDistance(double lat,double lng){
+        String distance = "";
+        float latitude = SPUtils.getFloat(PreferenceConstant.LATITUDE);
+        float longitude = SPUtils.getFloat(PreferenceConstant.LONGITUDE);
+        if (latitude != -1 && longitude !=-1){
+            LatLng latLng1 = new LatLng(lat,lng);
+            LatLng latLng2 = new LatLng(latitude,longitude);
+            float lineDistance = AMapUtils.calculateLineDistance(latLng1,latLng2);
+            if (lineDistance > 1000){
+                distance = getStringWithRound(String.valueOf(lineDistance / 1000)) + "km";
+            }else {
+                distance = getStringWithRound(String.valueOf(lineDistance)) + "m";
+            }
+        }
+
+        return distance;
+    }
+
+
 }

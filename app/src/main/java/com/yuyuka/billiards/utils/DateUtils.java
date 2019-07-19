@@ -436,8 +436,13 @@ public class DateUtils {
      * @param datetime
      * @return
      */
-    public static Date parseDatetime(String datetime) throws ParseException {
-        return datetimeFormat.parse(datetime);
+    public static Date parseDatetime(String datetime) {
+        try {
+            return datetimeFormat.parse(datetime);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return new Date();
     }
 
     /**
@@ -564,20 +569,24 @@ public class DateUtils {
     }
 
     /**
-     * 获得天数差
+     * 计算时间差
      * @param begin
      * @param end
      * @return
      */
-    public long getDayDiff(Date begin, Date end){
-        long day = 1;
-        if(end.getTime() < begin.getTime()){
-            day = -1;
-        }else if(end.getTime() == begin.getTime()){
-            day = 1;
+    public static String getDayDiff(Date begin, Date end){
+        long day = 0;
+        long hour = 0;
+        long min = 0;
+        String result = "";
+        if(end.getTime() <= begin.getTime()){
+            result = "0天0时0分";
         }else {
-            day += (end.getTime() - begin.getTime())/(24 * 60 * 60 * 1000) ;
+            day = (end.getTime() - begin.getTime())/(24 * 60 * 60 * 1000) ;
+            hour = ((end.getTime() - begin.getTime())%(24 * 60 * 60 * 1000))/(60 * 60 * 1000) ;
+            min = ((end.getTime() - begin.getTime())%(60 * 60 * 1000))/(60 * 1000) ;
+            result = day+"天"+hour+"时"+min+"分";
         }
-        return day;
+        return result;
     }
 }

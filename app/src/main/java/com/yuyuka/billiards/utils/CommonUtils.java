@@ -21,4 +21,9 @@ public class CommonUtils {
     public static String getToken(){
         return SPUtils.getString(PreferenceConstant.TOKEN);
     }
+
+    public static void saveLocationInfo(double lat,double lng){
+        SPUtils.putFloat(PreferenceConstant.LATITUDE, (float) lat);
+        SPUtils.putFloat(PreferenceConstant.LONGITUDE, (float) lng);
+    }
 }

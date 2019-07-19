@@ -1,6 +1,5 @@
 package com.yuyuka.billiards.ui.adapter;
 
-import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
@@ -22,11 +21,9 @@ public class BilliardsRoomAdapter extends BaseQuickAdapter<BilliardsRoomPojo, Ba
         }else {
             helper.setGone(R.id.v_divider,false);
         }
-        helper.getConvertView().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                BilliardsRoomDetailActivity.launcher(mContext);
-            }
-        });
+
+        helper.setText(R.id.tv_billiards_name,item.getBilliardsName());
+
+        helper.getConvertView().setOnClickListener(v -> BilliardsRoomDetailActivity.launcher(mContext));
     }
 }

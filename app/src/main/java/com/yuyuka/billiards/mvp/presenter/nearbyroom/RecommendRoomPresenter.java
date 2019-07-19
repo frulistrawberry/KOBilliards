@@ -9,6 +9,7 @@ import com.yuyuka.billiards.mvp.contract.rearbyroom.RecommendRoomContract;
 import com.yuyuka.billiards.mvp.model.nearbyroom.RecommendRoomModel;
 import com.yuyuka.billiards.net.RespObserver;
 import com.yuyuka.billiards.pojo.BilliardsRoomPojo;
+import com.yuyuka.billiards.pojo.ListData;
 import com.yuyuka.billiards.utils.CollectionUtils;
 import com.yuyuka.billiards.utils.RxUtils;
 
@@ -21,9 +22,9 @@ public class RecommendRoomPresenter extends BasePresenter<RecommendRoomContract.
         super(view,new RecommendRoomModel());
     }
 
-    public void getRecommendRoomList(String sort,String filter,int page){
+    public void getRecommendRoomList(double lat,double lng,int page){
         getView().showLoading();
-        mModel.getRecommendRoomList(page,sort,filter)
+        mModel.getRecommendRoomList(lat,lng,page)
                 .compose(RxUtils.transform(getView()))
                 .subscribe(new RespObserver() {
 
@@ -34,13 +35,13 @@ public class RecommendRoomPresenter extends BasePresenter<RecommendRoomContract.
                             getView().showEmpty();
                             return;
                         }
-                        Type type = new TypeToken<List<BilliardsRoomPojo>>(){}.getType();
-                        List<BilliardsRoomPojo> data = new Gson().fromJson(bizContent,type);
+                        Type type = new TypeToken<ListData<BilliardsRoomPojo>>(){}.getType();
+                        ListData<BilliardsRoomPojo> data = new Gson().fromJson(bizContent,type);
 
-                        if (CollectionUtils.isEmpty(data))
+                        if (CollectionUtils.isEmpty(data.getDataList()))
                             getView().showEmpty();
                         else
-                            getView().showRecommendRoomList(data);
+                            getView().showRecommendRoomList(data.getDataList());
                     }
 
                     @Override

@@ -5,4 +5,6 @@ public class PreferenceConstant {
     public static String IS_LOGIN = "isLogin";
     public static String USER_ID = "userId";
     public static String TOKEN = "token";
+    public static String LATITUDE = "latitude";
+    public static String LONGITUDE = "longitude";
 }

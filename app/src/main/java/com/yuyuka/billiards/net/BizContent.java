@@ -6,6 +6,8 @@ public class BizContent {
     private PageQueryDto pageQueryDto;
     private Double latitude;
     private Double longitude;
+    private Double positionLatitude;
+    private Double positionLongitude;
     private Integer status;
 
     public void setPageQueryDto(PageQueryDto pageQueryDto) {
@@ -28,8 +30,15 @@ public class BizContent {
         this.mobile = mobile;
     }
 
+    public void setPositionLatitude(Double positionLatitude) {
+        this.positionLatitude = positionLatitude;
+    }
 
-    public void buildPageQueryDto(int start,int limit) {
+    public void setPositionLongitude(Double positionLongitude) {
+        this.positionLongitude = positionLongitude;
+    }
+
+    public void buildPageQueryDto(int start, int limit) {
         this.pageQueryDto = new PageQueryDto(start,limit);
     }
 

@@ -16,6 +16,6 @@ public interface RecommendRoomContract {
     }
 
     interface  IRecommendRoomModel extends IBaseModel {
-        Observable<HttpResult> getRecommendRoomList(int page, String sort, String filter);
+        Observable<HttpResult> getRecommendRoomList(double lat, double lng, int page);
     }
 }

@@ -13,8 +13,9 @@ import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseListFragment;
 import com.yuyuka.billiards.mvp.contract.nearbymatch.RecommendMatchContract;
 import com.yuyuka.billiards.mvp.presenter.nearbymatch.RecommendMatchPresenter;
-import com.yuyuka.billiards.pojo.MatchPojo;
+import com.yuyuka.billiards.pojo.BilliardsMatchPojo;
 import com.yuyuka.billiards.ui.adapter.MatchListAdapter;
+import com.yuyuka.billiards.utils.CommonUtils;
 
 import java.util.List;
 
@@ -79,7 +80,7 @@ public class RecommendMatchFragment extends BaseListFragment<RecommendMatchPrese
 
 
     @Override
-    public void showRecommendMatchList(List<MatchPojo> matchList) {
+    public void showRecommendMatchList(List<BilliardsMatchPojo> matchList) {
         if (mCurrentPage == 1){
             mAdapter.setNewData(matchList);
         }else {
@@ -91,6 +92,7 @@ public class RecommendMatchFragment extends BaseListFragment<RecommendMatchPrese
     public void onLocationChanged(AMapLocation aMapLocation) {
         lat = aMapLocation.getLatitude();
         lng = aMapLocation.getLongitude();
+        CommonUtils.saveLocationInfo(lat,lng);
         onRefresh();
 
 

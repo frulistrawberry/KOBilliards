@@ -7,6 +7,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseListFragment;
 import com.yuyuka.billiards.event.OffsetChangeEvent;
@@ -15,6 +19,7 @@ import com.yuyuka.billiards.mvp.presenter.nearbyroom.RecommendRoomPresenter;
 import com.yuyuka.billiards.pojo.BilliardsRoomPojo;
 import com.yuyuka.billiards.ui.adapter.BilliardsRoomAdapter;
 import com.yuyuka.billiards.utils.BarUtils;
+import com.yuyuka.billiards.utils.CommonUtils;
 import com.yuyuka.billiards.widget.AppBarStateChangeListener;
 
 import org.greenrobot.eventbus.EventBus;
@@ -26,7 +31,7 @@ import butterknife.BindView;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
-public class RecommendRoomFragment extends BaseListFragment<RecommendRoomPresenter> implements RecommendRoomContract.IRecommendRoomView {
+public class RecommendRoomFragment extends BaseListFragment<RecommendRoomPresenter> implements RecommendRoomContract.IRecommendRoomView, AMapLocationListener {
     @BindView(R.id.ll_sort_level)
     LinearLayout mLevelSortLayout;
     @BindView(R.id.ll_sort_nearby)
@@ -40,8 +45,12 @@ public class RecommendRoomFragment extends BaseListFragment<RecommendRoomPresent
     @BindView(R.id.v_status_bar)
     View mStatusBarView;
 
-    String sort;
-    String filter;
+    public AMapLocationClient mLocationClient = null;
+    public AMapLocationClientOption mLocationOption = null;
+
+    double lat;
+    double lng;
+
 
 
     private boolean isHeaderOpened = true;
@@ -54,6 +63,12 @@ public class RecommendRoomFragment extends BaseListFragment<RecommendRoomPresent
     @Override
     protected void initData() {
         mAdapter = new BilliardsRoomAdapter();
+        mLocationClient = new AMapLocationClient(getContext());
+        mLocationClient.setLocationListener(this);
+        mLocationOption = new AMapLocationClientOption();
+        mLocationOption.setOnceLocation(true);
+        mLocationClient.setLocationOption(mLocationOption);
+        mLocationClient.startLocation();
         EventBus.getDefault().register(this);
     }
 
@@ -87,14 +102,14 @@ public class RecommendRoomFragment extends BaseListFragment<RecommendRoomPresent
     @Override
     protected void onRefresh() {
         mCurrentPage=1;
-        mPresenter.getRecommendRoomList(sort,filter,mCurrentPage);
+        mPresenter.getRecommendRoomList(lat,lng,mCurrentPage);
     }
 
     @Override
     protected void onLoadMore() {
         super.onLoadMore();
         mCurrentPage++;
-        mPresenter.getRecommendRoomList(sort,filter,mCurrentPage);
+        mPresenter.getRecommendRoomList(lat,lng,mCurrentPage);
 
     }
 
@@ -133,5 +148,13 @@ public class RecommendRoomFragment extends BaseListFragment<RecommendRoomPresent
         }else {
             mAdapter.addData(roomList);
         }
+    }
+
+    @Override
+    public void onLocationChanged(AMapLocation aMapLocation) {
+        lat = aMapLocation.getLatitude();
+        lng = aMapLocation.getLongitude();
+        CommonUtils.saveLocationInfo(lat,lng);
+        onRefresh();
     }
 }
