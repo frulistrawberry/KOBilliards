@@ -28,6 +28,8 @@ import butterknife.ButterKnife;
 public abstract class BaseActivity extends RxAppCompatActivity {
 
 
+    protected static final int REQUEST_CODE_SETTING = 106;
+
     private ProgressDialog mProgressDialog;
     private OnKeyClickListener mOnKeyClickListener;
     protected ViewGroup mRoot;

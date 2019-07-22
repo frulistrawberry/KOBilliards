@@ -9,9 +9,9 @@ import android.view.View;
 
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseActivity;
-import com.yuyuka.billiards.ui.adapter.NavigatorAdapter;
-import com.yuyuka.billiards.ui.adapter.PagerAdapter;
-import com.yuyuka.billiards.ui.fragment.nearbymatch.RecommendMatchFragment;
+import com.yuyuka.billiards.ui.adapter.common.NavigatorAdapter;
+import com.yuyuka.billiards.ui.adapter.common.PagerAdapter;
+import com.yuyuka.billiards.ui.fragment.match.RecommendMatchFragment;
 import com.yuyuka.billiards.widget.tabindicator.MagicIndicator;
 import com.yuyuka.billiards.widget.tabindicator.ViewPagerHelper;
 import com.yuyuka.billiards.widget.tabindicator.buildins.commonnavigator.CommonNavigator;

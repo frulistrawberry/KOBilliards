@@ -10,7 +10,7 @@ import com.kobilliards.pojo.AlbumBean;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseListActivity;
 import com.yuyuka.billiards.base.BasePresenter;
-import com.yuyuka.billiards.ui.adapter.AlbumActivityAdapter;
+import com.yuyuka.billiards.ui.adapter.room.AlbumAdapter;
 import com.yuyuka.billiards.utils.DividerGridItemDecoration;
 
 import java.util.ArrayList;
@@ -77,7 +77,7 @@ public class AlbumActivity extends BaseListActivity {
 
     @Override
     protected void initData() {
-        mAdapter = new AlbumActivityAdapter();
+        mAdapter = new AlbumAdapter();
         data=new ArrayList<>();
     }
 

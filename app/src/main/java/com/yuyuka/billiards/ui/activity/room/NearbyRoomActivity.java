@@ -16,10 +16,11 @@ import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseActivity;
 import com.yuyuka.billiards.event.OffsetChangeEvent;
 import com.yuyuka.billiards.ui.activity.common.CityListActivity;
-import com.yuyuka.billiards.ui.adapter.NavigatorAdapter;
-import com.yuyuka.billiards.ui.adapter.PagerAdapter;
-import com.yuyuka.billiards.ui.fragment.nearbyroom.CollectionRoomFragment;
-import com.yuyuka.billiards.ui.fragment.nearbyroom.RecommendRoomFragment;
+import com.yuyuka.billiards.ui.activity.common.MapActivity;
+import com.yuyuka.billiards.ui.adapter.common.NavigatorAdapter;
+import com.yuyuka.billiards.ui.adapter.common.PagerAdapter;
+import com.yuyuka.billiards.ui.fragment.room.CollectRoomFragment;
+import com.yuyuka.billiards.ui.fragment.room.RecommendRoomFragment;
 import com.yuyuka.billiards.utils.BarUtils;
 import com.yuyuka.billiards.utils.SizeUtils;
 import com.yuyuka.billiards.widget.AppBarStateChangeListener;
@@ -53,6 +54,8 @@ public class NearbyRoomActivity extends BaseActivity {
     LinearLayout mSearchLayout;
     @BindView(R.id.collapsing_layout)
     CollapsingToolbarLayout mCollToolBarLayout;
+    @BindView(R.id.v_status_bar)
+    View mStatusBarView;
     PagerAdapter mAdapter;
     String[] mTitles = {"推荐球馆","我的收藏"};
     List<Fragment> mFragmentList;
@@ -126,7 +129,7 @@ public class NearbyRoomActivity extends BaseActivity {
     protected void initData() {
         mFragmentList = new ArrayList<>();
         mFragmentList.add(new RecommendRoomFragment());
-        mFragmentList.add(new CollectionRoomFragment());
+        mFragmentList.add(new CollectRoomFragment());
         mAdapter = new PagerAdapter(getSupportFragmentManager(),mFragmentList,mTitles);
     }
 
@@ -134,22 +137,22 @@ public class NearbyRoomActivity extends BaseActivity {
     public void onClick(View v){
         switch (v.getId()){
             case R.id.fl_auth:
-                BilliardsRoomListActivity.launcher(this,"KO认证");
+                RoomListActivity.launcher(this,"KO认证");
                 break;
             case R.id.fl_save:
-                BilliardsRoomListActivity.launcher(this,"今日特价");
+                RoomListActivity.launcher(this,"今日特价");
                 break;
             case R.id.fl_rank:
-                BilliardsRoomListActivity.launcher(this,"热门榜单");
+                RoomListActivity.launcher(this,"热门榜单");
                 break;
             case R.id.fl_coach:
-                BilliardsCoachListActivity.launcher(this);
+                AssistantListActivity.launcher(this);
                 break;
             case R.id.iv_map:
                 MapActivity.launcher(this);
                 break;
             case R.id.btn_search:
-                BilliardsSearchActivity.launcher(this);
+                RoomSearchActivity.launcher(this);
                 break;
             case R.id.btn_city:
                 CityListActivity.launcher(this);

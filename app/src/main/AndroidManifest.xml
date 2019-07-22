@@ -28,6 +28,15 @@
     <!--允许程序访问CellID或WiFi热点来获取粗略的位置-->
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.READ_CALL_LOG"/>
+    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
+    <uses-permission android:name="android.permission.READ_CONTACTS"/>
+    <uses-permission android:name="android.permission.READ_CALENDAR"/>
+    <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+
     <!-- 和下面的 uses-permission 一起加入到你的 AndroidManifest 文件中。 -->
 
 
@@ -67,20 +76,20 @@
             android:screenOrientation="portrait">
 
         </activity>
-        <activity android:name=".ui.activity.room.BilliardsRoomDetailActivity"
+        <activity android:name=".ui.activity.room.RoomDetailActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.room.BilliardsRoomListActivity" />
-        <activity android:name=".ui.activity.room.BilliardsCoachListActivity" />
-        <activity android:name=".ui.activity.room.CommentActivity"/>
-        <activity android:name=".ui.activity.room.MapActivity" />
+        <activity android:name=".ui.activity.room.RoomListActivity" />
+        <activity android:name=".ui.activity.room.AssistantListActivity" />
+        <activity android:name=".ui.activity.room.RoomCommentActivity"/>
+        <activity android:name=".ui.activity.common.MapActivity" />
         <activity android:name=".ui.activity.room.AlbumActivity"/>
-        <activity android:name=".ui.activity.room.BilliardsSearchActivity" />
+        <activity android:name=".ui.activity.room.RoomSearchActivity" />
         <activity android:name=".ui.activity.common.CityListActivity" />
         <activity android:name=".ui.activity.room.RoomFaclitiesActivity" />
-        <activity android:name=".ui.activity.room.CoachDetailActivity"
+        <activity android:name=".ui.activity.room.AssistantPreviewActivity"
             android:screenOrientation="landscape"/>
-        <activity android:name=".ui.activity.room.ReserveDetailActivity" />
-        <activity android:name=".ui.activity.room.PayActivity" />
+        <activity android:name=".ui.activity.room.RoomReserveActivity" />
+        <activity android:name=".ui.activity.common.PayActivity" />
         <activity android:name=".ui.activity.match.NearbyMatchActivity" />
         <!-- 网易云信 -->
         <meta-data

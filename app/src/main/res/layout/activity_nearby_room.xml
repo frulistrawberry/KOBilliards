@@ -16,8 +16,10 @@
             android:id="@+id/collapsing_layout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+
             android:background="@color/white"
-            app:layout_scrollFlags="enterAlwaysCollapsed|scroll">
+            app:layout_collapseMode="pin"
+            app:layout_scrollFlags="exitUntilCollapsed|scroll">
 
             <View
                 android:id="@+id/v_header"
