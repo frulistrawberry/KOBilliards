@@ -22,6 +22,11 @@ public class BilliardsRoomPojo implements Serializable {
     private int limit;
     private List<BilliardsImage> billiardsImages;
     private BilliardsUser billiardsUsers;
+    private int minimumPayment;
+
+    public int getMinimumPayment() {
+        return minimumPayment;
+    }
 
     public int getBilliardsId() {
         return billiardsId;

@@ -3,12 +3,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <View
-        android:id="@+id/v_status_bar"
-        android:layout_width="match_parent"
-        android:visibility="gone"
-        android:background="@color/bg_status_bar"
-        android:layout_height="0dp"/>
     <LinearLayout
         android:id="@+id/ll_sort_parent"
         android:layout_width="match_parent"

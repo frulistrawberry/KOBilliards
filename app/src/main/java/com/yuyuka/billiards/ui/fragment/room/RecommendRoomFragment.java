@@ -42,8 +42,7 @@ public class RecommendRoomFragment extends BaseListFragment<RecommendRoomPresent
     ImageView mBackToTopIv;
     @BindView(R.id.ll_sort_parent)
     LinearLayout mSortParentLayout;
-    @BindView(R.id.v_status_bar)
-    View mStatusBarView;
+
 
     public AMapLocationClient mLocationClient = null;
     public AMapLocationClientOption mLocationOption = null;
@@ -77,7 +76,6 @@ public class RecommendRoomFragment extends BaseListFragment<RecommendRoomPresent
         super.initView();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
-        mStatusBarView.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, BarUtils.getStatusBarHeight(getContext())));
         mPtrLayout.setPtrHandler(new PtrDefaultHandler() {
 
             @Override
@@ -124,13 +122,9 @@ public class RecommendRoomFragment extends BaseListFragment<RecommendRoomPresent
     public void onEvent(OffsetChangeEvent event){
         if (event.from.equals("NearbyRoomActivity")){
             isHeaderOpened = event.state== AppBarStateChangeListener.State.EXPANDED;
-
-
             if (event.state != AppBarStateChangeListener.State.COLLAPSED){
-                mStatusBarView.setVisibility(View.GONE);
                 mBackToTopIv.setVisibility(View.INVISIBLE);
             }else {
-                mStatusBarView.setVisibility(View.VISIBLE);
                 mBackToTopIv.setVisibility(View.VISIBLE);
             }
         }

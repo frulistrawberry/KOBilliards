@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.yuyuka.billiards.base.BaseFragment;
-import com.yuyuka.billiards.base.BaseMvpFragment;
 import com.yuyuka.billiards.ui.activity.room.NearbyRoomActivity;
 
 public class HomeFragment extends BaseFragment {

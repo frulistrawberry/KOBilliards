@@ -10,8 +10,10 @@ import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.autonavi.rtbt.IFrameForRTBT;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseActivity;
 import com.yuyuka.billiards.event.OffsetChangeEvent;
@@ -54,8 +56,8 @@ public class NearbyRoomActivity extends BaseActivity {
     LinearLayout mSearchLayout;
     @BindView(R.id.collapsing_layout)
     CollapsingToolbarLayout mCollToolBarLayout;
-    @BindView(R.id.v_status_bar)
-    View mStatusBarView;
+    @BindView(R.id.v_status_view)
+    View mStatusView;
     PagerAdapter mAdapter;
     String[] mTitles = {"推荐球馆","我的收藏"};
     List<Fragment> mFragmentList;
@@ -71,7 +73,9 @@ public class NearbyRoomActivity extends BaseActivity {
         mHeaderView.setLayoutParams(new CollapsingToolbarLayout.LayoutParams(CollapsingToolbarLayout.LayoutParams.MATCH_PARENT, SizeUtils.dp2px(this,88)+ BarUtils.getStatusBarHeight(this)));
         mHeaderLayout.setPadding(SizeUtils.dp2px(this,13),
                 SizeUtils.dp2px(this,13)+ BarUtils.getStatusBarHeight(this),
-                SizeUtils.dp2px(this,13),SizeUtils.dp2px(this,10));
+                SizeUtils.dp2px(this,13),SizeUtils.dp2px(this,0));
+        mStatusView.setVisibility(View.INVISIBLE);
+        mStatusView.setLayoutParams(new AppBarLayout.LayoutParams(AppBarLayout.LayoutParams.MATCH_PARENT,BarUtils.getStatusBarHeight(this)));
 
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setBackgroundColor(Color.WHITE);
@@ -93,22 +97,9 @@ public class NearbyRoomActivity extends BaseActivity {
                 if (i == 0){
                     mSearchLayout.setVisibility(View.VISIBLE);
                     mRecommendTopicLayout.setVisibility(View.VISIBLE);
-                    AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) mCollToolBarLayout.getLayoutParams();
-                    //可以滑动，实现折叠悬浮效果
-                    params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL|AppBarLayout.LayoutParams.SCROLL_FLAG_ENTER_ALWAYS_COLLAPSED);
-                    mCollToolBarLayout.getLayoutParams();
-
                 }else {
                     mSearchLayout.setVisibility(View.GONE);
                     mRecommendTopicLayout.setVisibility(View.GONE);
-                    AppBarLayout.LayoutParams params = (AppBarLayout.LayoutParams) mCollToolBarLayout.getLayoutParams();
-
-                    //设置不能滑动
-                    params.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED);
-
-
-
-
                 }
             }
 
@@ -121,6 +112,11 @@ public class NearbyRoomActivity extends BaseActivity {
             @Override
             public void onStateChanged(AppBarLayout appBarLayout, State state) {
                 EventBus.getDefault().post(new OffsetChangeEvent("NearbyRoomActivity",state));
+                if (state == State.COLLAPSED){
+                    mStatusView.setVisibility(View.VISIBLE);
+                }else {
+                    mStatusView.setVisibility(View.INVISIBLE);
+                }
             }
         });
     }

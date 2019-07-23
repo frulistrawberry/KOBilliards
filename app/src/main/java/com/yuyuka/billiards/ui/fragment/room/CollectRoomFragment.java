@@ -7,15 +7,24 @@ import android.view.ViewGroup;
 
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseListFragment;
+import com.yuyuka.billiards.event.OffsetChangeEvent;
 import com.yuyuka.billiards.mvp.contract.room.CollectionRoomContract;
 import com.yuyuka.billiards.mvp.presenter.room.CollectionRoomPresenter;
 import com.yuyuka.billiards.pojo.BilliardsRoomPojo;
 import com.yuyuka.billiards.ui.adapter.room.RoomAdapter;
+import com.yuyuka.billiards.widget.AppBarStateChangeListener;
+
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.List;
 
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
+
 public class CollectRoomFragment extends BaseListFragment<CollectionRoomPresenter> implements  CollectionRoomContract.ICollectionRoomView {
 
+
+    private boolean isHeaderOpened;
 
     @Override
     protected View createView(LayoutInflater inflater, ViewGroup parent) {
@@ -32,6 +41,23 @@ public class CollectRoomFragment extends BaseListFragment<CollectionRoomPresente
         super.initView();
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         mRecyclerView.setAdapter(mAdapter);
+        mPtrLayout.setPtrHandler(new PtrDefaultHandler() {
+
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                if (isHeaderOpened)
+                    return super.checkCanDoRefresh(frame, content, header);
+                else
+                    return false;
+            }
+
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                onRefresh();
+
+            }
+        });
+
         onRefresh();
 
     }
@@ -72,6 +98,14 @@ public class CollectRoomFragment extends BaseListFragment<CollectionRoomPresente
             mAdapter.addData(roomList);
         }
     }
+
+    @Subscribe
+    public void onEvent(OffsetChangeEvent event){
+        if (event.from.equals("NearbyRoomActivity")){
+            isHeaderOpened = event.state== AppBarStateChangeListener.State.EXPANDED;
+        }
+    }
+
 
 
 }

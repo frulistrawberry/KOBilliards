@@ -9,6 +9,11 @@ public class BizContent {
     private Double positionLatitude;
     private Double positionLongitude;
     private Integer status;
+    private Integer cityId;
+
+    public void setCityId(Integer cityId) {
+        this.cityId = cityId;
+    }
 
     public void setPageQueryDto(PageQueryDto pageQueryDto) {
         this.pageQueryDto = pageQueryDto;

@@ -15,6 +15,7 @@ public class RecommendRoomModel extends BaseModel implements RecommendRoomContra
         BizContent content = new BizContent();
         content.setPositionLatitude(lat);
         content.setPositionLongitude(lng);
+        content.setCityId(1);
         content.buildPageQueryDto(page);
         RequestParam requestParam = new RequestParam(UrlConstant.LIST,convertBizContent(content));
         return mService.simpleRequest(requestParam);
