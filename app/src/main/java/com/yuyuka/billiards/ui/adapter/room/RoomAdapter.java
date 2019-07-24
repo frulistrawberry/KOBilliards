@@ -7,6 +7,7 @@ import android.widget.LinearLayout;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.yuyuka.billiards.R;
+import com.yuyuka.billiards.image.ImageManager;
 import com.yuyuka.billiards.pojo.BilliardsRoomPojo;
 import com.yuyuka.billiards.ui.activity.room.RoomDetailActivity;
 import com.yuyuka.billiards.utils.DataOptionUtils;
@@ -25,6 +26,9 @@ public class RoomAdapter extends BaseQuickAdapter<BilliardsRoomPojo, BaseViewHol
         }else {
             helper.setGone(R.id.v_divider,false);
         }
+
+        ImageView headIv = helper.getView(R.id.iv_head_image_add);
+        ImageManager.getInstance().loadNet(item.getHeadImage(),headIv);
 
         helper.setText(R.id.tv_billiards_name,item.getBilliardsName());
         LinearLayout levelLayout = helper.getView(R.id.ll_level);
