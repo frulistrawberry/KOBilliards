@@ -8,11 +8,21 @@ import android.text.Selection;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.bigkoo.convenientbanner.holder.CBViewHolderCreator;
+import com.bigkoo.convenientbanner.holder.Holder;
 import com.yuyuka.billiards.R;
+import com.yuyuka.billiards.image.ImageManager;
+import com.yuyuka.billiards.image.support.LoadOption;
+import com.yuyuka.billiards.pojo.ImagePojo;
+
+import java.util.List;
 
 
 public class ViewUtils {
@@ -257,7 +267,67 @@ public class ViewUtils {
         return emptyView;
     }
 
+    public static void loadBanner(List<ImagePojo> bannerList, ConvenientBanner<ImagePojo> banner, boolean canLoop, boolean pointViewVisible, final boolean isCornerRound){
+        if (banner == null) {
+            return;
+        }
+        if (CollectionUtils.isEmpty(bannerList)){
+            banner.setVisibility(View.GONE);
+        }else {
+            banner.setVisibility(View.VISIBLE);
+            if (bannerList.size()>1 && canLoop){
+                banner.setCanLoop(true);
+                banner.startTurning(3000);
+            }else {
+                banner.setCanLoop(false);
+            }
+            if (bannerList.size()>1&&pointViewVisible){
+                banner.setPointViewVisible(true)
+                        .setPageIndicator(new int[]{R.drawable.banner_indecator_nav, R.drawable.banner_indicator_act})
+                        .setPageIndicatorAlign(ConvenientBanner.PageIndicatorAlign.CENTER_HORIZONTAL);
+            }
+            banner.setPages((CBViewHolderCreator<BannerHolder>) () -> new BannerHolder(isCornerRound),bannerList);
+
+
+        }
+    }
+
+    public static class BannerHolder implements Holder<ImagePojo> {
+        private ImageView mImageView;
+        private LoadOption mOption;
+        private boolean isCornerRound;
+
+        public BannerHolder(boolean isCornerRound) {
+            mOption = new LoadOption();
+            this.isCornerRound = isCornerRound;
+            if (isCornerRound)
+                mOption.setRoundRadius(SizeUtils.dp2px(AppUtils.getAppContext(),5));
+        }
+
+        @Override
+        public View createView(Context context) {
+            mImageView= new ImageView(context);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+                    LinearLayout.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT );
+            mImageView.setLayoutParams(params);
+            if (!isCornerRound)
+                mImageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
+            return mImageView;
+        }
+
+        @Override
+        public void UpdateUI(final Context context, int position, ImagePojo data) {
+            String url = data.getImageUrl();
+            final String toAction = data.getToAction();
+            ImageManager.getInstance().loadNet(url,mImageView,mOption);
+            mImageView.setOnClickListener(v -> {
+
+            });
+        }
 
 
 
+
+
+    }
 }

@@ -22,8 +22,6 @@ import com.yuyuka.billiards.ui.fragment.MineFragment;
 import com.yuyuka.billiards.ui.fragment.NewsFragment;
 import com.yuyuka.billiards.widget.TabBar;
 
-import org.greenrobot.eventbus.EventBus;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -87,7 +85,7 @@ public class MainActivity extends BaseActivity implements TabBar.OnTabCheckListe
     @SuppressLint("CheckResult")
     private void requestPermissions(){
         mPermissions
-                .requestEach(Manifest.permission.ACCESS_FINE_LOCATION,
+                .requestEachCombined(Manifest.permission.ACCESS_FINE_LOCATION,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
                         Manifest.permission.READ_CALENDAR,
                         Manifest.permission.READ_PHONE_STATE,
@@ -97,7 +95,7 @@ public class MainActivity extends BaseActivity implements TabBar.OnTabCheckListe
                         Manifest.permission.CALL_PHONE )
                 .subscribe(permission -> {
                     if (permission.granted) {
-                        // 用户已经同意该权限
+                        // 用户已经同意所有权限
                         mViewPager.setAdapter(mAdapter);
                         mTabIndicator.setCurrentItem(0);
                     } else if (permission.shouldShowRequestPermissionRationale) {

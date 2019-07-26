@@ -12,6 +12,7 @@ public abstract class AppBarStateChangeListener implements AppBarLayout.OnOffset
 
     private State mCurrentState = State.IDLE;
 
+
     @Override
     public final void onOffsetChanged(AppBarLayout appBarLayout, int i) {
         if (i == 0) {

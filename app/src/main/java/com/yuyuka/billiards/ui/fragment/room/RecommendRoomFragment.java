@@ -80,10 +80,10 @@ public class RecommendRoomFragment extends BaseListFragment<RecommendRoomPresent
 
             @Override
             public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                if (isHeaderOpened)
-                    return super.checkCanDoRefresh(frame, content, header);
-                else
+                if (mRecyclerView.isNestedScrollingEnabled())
                     return false;
+                else
+                    return super.checkCanDoRefresh(frame, content, header);
             }
 
             @Override

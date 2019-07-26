@@ -27,7 +27,7 @@ public class RoomAdapter extends BaseQuickAdapter<BilliardsRoomPojo, BaseViewHol
             helper.setGone(R.id.v_divider,false);
         }
 
-        ImageView headIv = helper.getView(R.id.iv_head_image_add);
+        ImageView headIv = helper.getView(R.id.iv_img);
         ImageManager.getInstance().loadNet(item.getHeadImage(),headIv);
 
         helper.setText(R.id.tv_billiards_name,item.getBilliardsName());

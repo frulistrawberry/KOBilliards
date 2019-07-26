@@ -9,6 +9,10 @@ public class ListData<T> implements Serializable {
     private int currentPageNo;
     private List<T> dataList;
 
+    public ListData(List<T> dataList) {
+        this.dataList = dataList;
+    }
+
     public int getPageSize() {
         return pageSize;
     }

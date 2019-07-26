@@ -8,6 +8,8 @@
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
+        android:background="@color/white"
+        style="@style/AppBarLayoutStyle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -15,14 +17,13 @@
             android:id="@+id/toolbar_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
+            app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
             <FrameLayout
+                android:id="@+id/fl_header"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="44dp"
-                app:layout_collapseMode="parallax"
-                app:layout_collapseParallaxMultiplier="0.7">
+                android:layout_marginTop="44dp">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -75,8 +76,17 @@
                                 android:layout_height="wrap_content"
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="5dp"
-                                android:text="付钱"
+                                android:text="关灯结算"
                                 android:textColor="@color/white"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="0dp"
+                            android:orientation="vertical"
+                            android:layout_weight="2"
+                            android:layout_height="match_parent">
+
 
                         </LinearLayout>
 
@@ -85,26 +95,26 @@
                     </LinearLayout>
                     <FrameLayout
                         android:layout_width="match_parent"
-                        android:layout_height="160dp">
-                        <android.support.v4.view.ViewPager
+                        android:layout_height="wrap_content">
+                        <com.yuyuka.billiards.widget.ModularPager
+                            android:id="@+id/vp_modular"
                             android:layout_width="match_parent"
                             android:layout_height="160dp"/>
                         <com.yuyuka.billiards.widget.CircleIndicator
+                            android:id="@+id/ci_modular"
                             android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
+                            android:layout_height="5dp"
+                            android:layout_gravity="bottom"
+                            app:ci_animator="@null"
+                            app:ci_drawable="@drawable/shape_or_circle"
+                            app:ci_drawable_unselected="@drawable/shape_gray_circle"
+                            android:layout_marginBottom="5dp"
                             />
                     </FrameLayout>
-                    <FrameLayout
+                    <com.bigkoo.convenientbanner.ConvenientBanner
+                        android:id="@+id/banner"
                         android:layout_width="match_parent"
-                        android:layout_height="175dp">
-                        <android.support.v4.view.ViewPager
-                            android:layout_width="match_parent"
-                            android:layout_height="160dp"/>
-                        <com.yuyuka.billiards.widget.CircleIndicator
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            />
-                    </FrameLayout>
+                        android:layout_height="175dp"/>
                 </LinearLayout>
 
 
@@ -124,6 +134,7 @@
 
                 <RelativeLayout
                     android:id="@+id/toolbar_open"
+                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
                     android:background="@color/bg_status_bar"
@@ -148,13 +159,15 @@
                             android:layout_centerVertical="true"
                             android:src="@mipmap/ic_search"/>
 
-                        <EditText
+                        <TextView
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:layout_centerVertical="true"
                             android:layout_toRightOf="@+id/iv_search"
                             android:background="@null"
-                            android:hint="输入球房、器具、地点、人名ID"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/text_color_3"
+                            android:text="输入球房、器具、地点、人名ID"
                             android:paddingLeft="10dp"
                             android:textSize="14sp"/>
                     </RelativeLayout>
@@ -177,11 +190,6 @@
                         android:layout_toLeftOf="@+id/iv_msg"
                         android:src="@mipmap/ic_friends"/>
 
-                    <View
-                        android:id="@+id/bg_toolbar_open"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
-
                 </RelativeLayout>
 
                 <RelativeLayout
@@ -192,19 +200,19 @@
 
                     <ImageView
                         android:id="@+id/iv_scan"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="17dp"
                         android:src="@mipmap/ic_scan"/>
 
                     <ImageView
                         android:id="@+id/iv_pay"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="30dp"
                         android:layout_toRightOf="@+id/iv_scan"
                         android:src="@mipmap/ic_payment"/>
 
@@ -212,46 +220,58 @@
 
                     <ImageView
                         android:id="@+id/btn_search"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="27dp"
+                        android:layout_height="27dp"
                         android:layout_toRightOf="@id/iv_pay"
                         android:layout_centerVertical="true"
-                        android:layout_marginLeft="20dp"
+                        android:layout_marginLeft="30dp"
                         android:src="@mipmap/ic_home_search"/>
 
                     <ImageView
+                        android:id="@+id/iv_rank"
+                        android:layout_width="33dp"
+                        android:layout_height="33dp"
+                        android:layout_toRightOf="@id/btn_search"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="30dp"
+                        android:src="@mipmap/ic_rank"/>
+
+                    <ImageView
+                        android:layout_width="33dp"
+                        android:layout_height="33dp"
+                        android:layout_toRightOf="@id/iv_rank"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="30dp"
+                        android:src="@mipmap/ic_face_to_face"/>
+
+                    <ImageView
                         android:id="@+id/btn_top"
-                        android:layout_width="25dp"
-                        android:layout_height="25dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
                         android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
                         android:layout_marginRight="20dp"
                         android:src="@mipmap/ic_home_back_to_top"/>
 
 
-                    <View
-                        android:id="@+id/bg_toolbar_close"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"/>
+
 
                 </RelativeLayout>
 
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.CollapsingToolbarLayout>
+        <com.yuyuka.billiards.widget.tabindicator.MagicIndicator
+            android:id="@+id/tab_layout"
+            android:layout_width="match_parent"
+            android:layout_height="41dp"
+            android:background="@color/white" />
     </android.support.design.widget.AppBarLayout>
-
-    <android.support.v4.widget.NestedScrollView
+    <android.support.v4.view.ViewPager
+        android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            android:text="@string/large_text"/>
-
-    </android.support.v4.widget.NestedScrollView>
 
 </android.support.design.widget.CoordinatorLayout>
