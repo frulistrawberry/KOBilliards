@@ -92,8 +92,6 @@ public class RecommendRoomFragment extends BaseListFragment<RecommendRoomPresent
 
             }
         });
-        onRefresh();
-
 
     }
 

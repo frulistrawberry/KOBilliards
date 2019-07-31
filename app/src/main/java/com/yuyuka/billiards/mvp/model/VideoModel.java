@@ -1,25 +1,26 @@
-package com.yuyuka.billiards.mvp.model.live;
+package com.yuyuka.billiards.mvp.model;
 
 import com.google.gson.Gson;
 import com.yuyuka.billiards.base.BaseModel;
 import com.yuyuka.billiards.mvp.contract.live.NearbyLiveContract;
+import com.yuyuka.billiards.mvp.contract.video.VideoListContract;
 import com.yuyuka.billiards.net.HttpResult;
-import com.yuyuka.billiards.pojo.BilliardsRoomPojo;
 import com.yuyuka.billiards.pojo.ListData;
 import com.yuyuka.billiards.pojo.LivePojo;
+import com.yuyuka.billiards.pojo.VideoPojo;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import io.reactivex.Observable;
 
-public class NearbyLiveModel extends BaseModel implements NearbyLiveContract.INearbyLiveModel {
+public class VideoModel extends BaseModel implements VideoListContract.IVideoListModel {
     @Override
-    public Observable<HttpResult> getNearbyLiveList(int page) {
+    public Observable<HttpResult> getVideoList(int page) {
         return Observable.create(emitter -> {
-            List<LivePojo> bizEntity = new ArrayList<>();
+            List<VideoPojo> bizEntity = new ArrayList<>();
             for (int i = 0; i < 10; i++) {
-                bizEntity.add(new LivePojo());
+                bizEntity.add(new VideoPojo());
             }
             HttpResult result = new HttpResult();
             result.setCode(10000);

@@ -1,4 +1,4 @@
-package com.yuyuka.billiards.mvp.model.match;
+package com.yuyuka.billiards.mvp.model;
 
 import com.yuyuka.billiards.base.BaseModel;
 import com.yuyuka.billiards.constants.UrlConstant;
@@ -7,12 +7,11 @@ import com.yuyuka.billiards.net.BizContent;
 import com.yuyuka.billiards.net.HttpResult;
 import com.yuyuka.billiards.net.RequestParam;
 
-
 import io.reactivex.Observable;
 
-public class RecommendMatchModel extends BaseModel implements RecommendMatchContract.IRecommendMatchModel {
+public class MatchModel extends BaseModel implements RecommendMatchContract.IRecommendMatchModel {
     @Override
-    public Observable<HttpResult> getRecommendMatchList(double lat, double lng, int status,int page) {
+    public Observable<HttpResult> getRecommendMatchList(double lat, double lng, int status, int page) {
         BizContent content = new BizContent();
         content.setLatitude(lat);
         content.setLongitude(lng);
@@ -20,6 +19,5 @@ public class RecommendMatchModel extends BaseModel implements RecommendMatchCont
         content.buildPageQueryDto(page);
         RequestParam requestParam = new RequestParam(UrlConstant.MATCH_NEARBY_LIST_BEGINNING,convertBizContent(content));
         return mService.simpleRequest(requestParam);
-
     }
 }

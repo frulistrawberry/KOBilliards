@@ -7,7 +7,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yuyuka.billiards.base.BasePresenter;
 import com.yuyuka.billiards.mvp.contract.match.RecommendMatchContract;
-import com.yuyuka.billiards.mvp.model.match.RecommendMatchModel;
+import com.yuyuka.billiards.mvp.model.MatchModel;
 import com.yuyuka.billiards.net.RespObserver;
 import com.yuyuka.billiards.pojo.ListData;
 import com.yuyuka.billiards.pojo.BilliardsMatchPojo;
@@ -20,7 +20,7 @@ import java.lang.reflect.Type;
 public class RecommendMatchPresenter extends BasePresenter<RecommendMatchContract.IRecommendMatchView, RecommendMatchContract.IRecommendMatchModel> {
 
     public RecommendMatchPresenter(RecommendMatchContract.IRecommendMatchView view) {
-        super(view,new RecommendMatchModel());
+        super(view,new MatchModel());
     }
 
     public void getRecommendMatchList(double lat,double lng,int status,int page){

@@ -6,7 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yuyuka.billiards.base.BasePresenter;
 import com.yuyuka.billiards.mvp.contract.room.RecommendRoomContract;
-import com.yuyuka.billiards.mvp.model.room.RecommendRoomModel;
+import com.yuyuka.billiards.mvp.model.RoomModel;
 import com.yuyuka.billiards.net.RespObserver;
 import com.yuyuka.billiards.pojo.BilliardsRoomPojo;
 import com.yuyuka.billiards.pojo.ListData;
@@ -18,7 +18,7 @@ import java.lang.reflect.Type;
 public class RecommendRoomPresenter extends BasePresenter<RecommendRoomContract.IRecommendRoomView, RecommendRoomContract.IRecommendRoomModel> {
 
     public RecommendRoomPresenter(RecommendRoomContract.IRecommendRoomView view) {
-        super(view,new RecommendRoomModel());
+        super(view,new RoomModel());
     }
 
     public void getRecommendRoomList(double lat,double lng,int page){

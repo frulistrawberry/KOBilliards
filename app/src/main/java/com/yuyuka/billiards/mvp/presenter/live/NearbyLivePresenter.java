@@ -6,6 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yuyuka.billiards.base.BasePresenter;
 import com.yuyuka.billiards.mvp.contract.live.NearbyLiveContract;
+import com.yuyuka.billiards.mvp.model.LiveModel;
 import com.yuyuka.billiards.mvp.model.live.NearbyLiveModel;
 import com.yuyuka.billiards.net.RespObserver;
 import com.yuyuka.billiards.pojo.ListData;
@@ -16,7 +17,7 @@ import java.lang.reflect.Type;
 
 public class NearbyLivePresenter extends BasePresenter<NearbyLiveContract.INearbyLiveView, NearbyLiveContract.INearbyLiveModel> {
     public NearbyLivePresenter(NearbyLiveContract.INearbyLiveView view) {
-        super(view, new NearbyLiveModel());
+        super(view, new LiveModel());
     }
 
     public void getNearbyLiveList(int page){

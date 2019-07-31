@@ -6,7 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yuyuka.billiards.base.BasePresenter;
 import com.yuyuka.billiards.mvp.contract.room.BilliardsCoachListContract;
-import com.yuyuka.billiards.mvp.model.room.BilliardsCoachListModel;
+import com.yuyuka.billiards.mvp.model.RoomModel;
 import com.yuyuka.billiards.net.RespObserver;
 import com.yuyuka.billiards.pojo.BilliardsCoachPojo;
 import com.yuyuka.billiards.utils.CollectionUtils;
@@ -17,7 +17,7 @@ import java.util.List;
 
 public class BilliardsCoachListPresenter extends BasePresenter<BilliardsCoachListContract.IBilliardsCoachListView, BilliardsCoachListContract.IBilliardsCoachListModel> {
     public BilliardsCoachListPresenter(BilliardsCoachListContract.IBilliardsCoachListView view) {
-        super(view, new BilliardsCoachListModel());
+        super(view, new RoomModel());
     }
 
     public void getBilliardsCoachList(int page){

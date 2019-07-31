@@ -6,7 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yuyuka.billiards.base.BasePresenter;
 import com.yuyuka.billiards.mvp.contract.live.RecommendLiveContract;
-import com.yuyuka.billiards.mvp.model.live.RecommendLiveModel;
+import com.yuyuka.billiards.mvp.model.LiveModel;
 import com.yuyuka.billiards.net.RespObserver;
 import com.yuyuka.billiards.pojo.ListData;
 import com.yuyuka.billiards.pojo.LivePojo;
@@ -16,7 +16,7 @@ import java.lang.reflect.Type;
 
 public class RecommendLivePresenter extends BasePresenter<RecommendLiveContract.IRecommendLiveView, RecommendLiveContract.IRecommendLiveModel> {
     public RecommendLivePresenter(RecommendLiveContract.IRecommendLiveView view) {
-        super(view, new RecommendLiveModel());
+        super(view, new LiveModel());
     }
 
     public void getRecommendLiveList(int page){

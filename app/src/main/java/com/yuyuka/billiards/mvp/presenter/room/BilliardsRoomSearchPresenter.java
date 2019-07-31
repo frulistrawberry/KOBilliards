@@ -6,7 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yuyuka.billiards.base.BasePresenter;
 import com.yuyuka.billiards.mvp.contract.room.BilliardsRoomSearchContract;
-import com.yuyuka.billiards.mvp.model.room.BilliardsRoomSearchModel;
+import com.yuyuka.billiards.mvp.model.RoomModel;
 import com.yuyuka.billiards.net.RespObserver;
 import com.yuyuka.billiards.pojo.BilliardsRoomPojo;
 import com.yuyuka.billiards.utils.CollectionUtils;
@@ -18,7 +18,7 @@ import java.util.List;
 public class BilliardsRoomSearchPresenter extends BasePresenter<BilliardsRoomSearchContract.IBilliardsRoomSearchView, BilliardsRoomSearchContract.IBilliardsRoomSearchModel> {
 
     public BilliardsRoomSearchPresenter(BilliardsRoomSearchContract.IBilliardsRoomSearchView view) {
-        super(view,new BilliardsRoomSearchModel());
+        super(view,new RoomModel());
     }
 
     public void getBilliardsRoomList(int page){

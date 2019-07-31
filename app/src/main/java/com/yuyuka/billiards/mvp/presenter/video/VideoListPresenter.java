@@ -6,7 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yuyuka.billiards.base.BasePresenter;
 import com.yuyuka.billiards.mvp.contract.video.VideoListContract;
-import com.yuyuka.billiards.mvp.model.video.VideoListModel;
+import com.yuyuka.billiards.mvp.model.VideoModel;
 import com.yuyuka.billiards.net.RespObserver;
 import com.yuyuka.billiards.pojo.ListData;
 import com.yuyuka.billiards.pojo.VideoPojo;
@@ -16,7 +16,7 @@ import java.lang.reflect.Type;
 
 public class VideoListPresenter extends BasePresenter<VideoListContract.IVideoListView, VideoListContract.IVideoListModel> {
     public VideoListPresenter(VideoListContract.IVideoListView view) {
-        super(view, new VideoListModel());
+        super(view, new VideoModel());
     }
 
     public void getVideoList(int page){
