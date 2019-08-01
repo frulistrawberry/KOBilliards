@@ -1,27 +1,31 @@
-package com.yuyuka.billiards.mvp.presenter.live;
+package com.yuyuka.billiards.mvp.presenter.goods;
 
 import android.text.TextUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.yuyuka.billiards.base.BasePresenter;
-import com.yuyuka.billiards.mvp.contract.live.NearbyLiveContract;
-import com.yuyuka.billiards.mvp.model.LiveModel;
+import com.yuyuka.billiards.base.IBaseModel;
+import com.yuyuka.billiards.base.IBaseView;
+import com.yuyuka.billiards.mvp.contract.goods.GoodsListContract;
+import com.yuyuka.billiards.mvp.model.GoodsModel;
 import com.yuyuka.billiards.net.RespObserver;
+import com.yuyuka.billiards.pojo.GoodsPojo;
 import com.yuyuka.billiards.pojo.ListData;
 import com.yuyuka.billiards.pojo.LivePojo;
 import com.yuyuka.billiards.utils.CollectionUtils;
 
 import java.lang.reflect.Type;
 
-public class NearbyLivePresenter extends BasePresenter<NearbyLiveContract.INearbyLiveView, NearbyLiveContract.INearbyLiveModel> {
-    public NearbyLivePresenter(NearbyLiveContract.INearbyLiveView view) {
-        super(view, new LiveModel());
+public class GoodsListPresenter extends BasePresenter<GoodsListContract.IGoodsListView, GoodsListContract.IGoodsListModel> {
+    public GoodsListPresenter(GoodsListContract.IGoodsListView view) {
+        super(view, new GoodsModel());
     }
 
-    public void getNearbyLiveList(int page){
+
+    public void getGoodsList(int page){
         getView().showLoading();
-        mModel.getNearbyLiveList(page)
+        mModel.getGoodsList(page)
                 .compose(getView().bindToLifecycle())
                 .subscribe(new RespObserver() {
                     @Override
@@ -31,13 +35,13 @@ public class NearbyLivePresenter extends BasePresenter<NearbyLiveContract.INearb
                             getView().showEmpty();
                             return;
                         }
-                        Type type = new TypeToken<ListData<LivePojo>>(){}.getType();
-                        ListData<LivePojo> data = new Gson().fromJson(bizEntity,type);
+                        Type type = new TypeToken<ListData<GoodsPojo>>(){}.getType();
+                        ListData<GoodsPojo> data = new Gson().fromJson(bizEntity,type);
 
                         if (CollectionUtils.isEmpty(data.getDataList()))
                             getView().showEmpty();
                         else
-                            getView().showNearbyLiveList(data.getDataList());
+                            getView().showGoodsList(data.getDataList());
                     }
 
                     @Override

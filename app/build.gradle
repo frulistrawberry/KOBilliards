@@ -94,6 +94,8 @@ dependencies {
     implementation 'com.bigkoo:convenientbanner:2.0.5'
     //拼音
     implementation 'com.belerweb:pinyin4j:2.5.0'
+    //popupwindow
+    implementation 'com.github.zyyoona7:EasyPopup:1.0.1'
 
 
     //高德地图

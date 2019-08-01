@@ -23,11 +23,19 @@ public class TitleBar extends LinearLayout {
     private ImageView mRightTitleIv;
     private ImageView mRightTitleIv2;
     private TextView mRightTitleTv;
+    private int style;
 
     public TitleBar(Context context) {
         super(context);
         init();
     }
+
+    public TitleBar(Context context,int style) {
+        super(context);
+        this.style = style;
+        init();
+    }
+
 
     public TitleBar(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -85,12 +93,9 @@ public class TitleBar extends LinearLayout {
 
 
     public TitleBar showBack(){
-        return setLeftImage(R.mipmap.ic_nearby_room_back,new OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (getContext() instanceof Activity){
-                    ((Activity) getContext()).onBackPressed();
-                }
+        return setLeftImage(style==0?R.mipmap.ic_nearby_room_back:R.mipmap.icon_title_back, v -> {
+            if (getContext() instanceof Activity){
+                ((Activity) getContext()).onBackPressed();
             }
         });
     }
@@ -147,7 +152,10 @@ public class TitleBar extends LinearLayout {
         setOrientation(VERTICAL);
         LayoutInflater inflater = (LayoutInflater) getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         assert inflater != null;
-        inflater.inflate(R.layout.include_title_bar,this,true);
+        if (style == 0)
+            inflater.inflate(R.layout.include_title_bar,this,true);
+        else
+            inflater.inflate(R.layout.include_title_bar_white,this,true);
         mLeftTitleIv = findViewById(R.id.iv_title_left);
         mLeftTitleTv = findViewById(R.id.tv_title_left);
         mTitleTv = findViewById(R.id.tv_title);

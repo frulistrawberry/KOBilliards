@@ -35,6 +35,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     protected ViewGroup mRoot;
     private TitleBar mTitleBar;
     protected View mStatusBar;
+    private int titleStyle;
 
     /**
      * 按键的监听，供页面设置自定义的按键行为
@@ -129,8 +130,9 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         mRoot = genRootView();
         mStatusBar = new View(this);
         mStatusBar.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, BarUtils.getStatusBarHeight(this)));
-        mStatusBar.setBackgroundColor(getResourceColor(R.color.bg_status_bar));
-        mTitleBar = new TitleBar(this);
+
+        mStatusBar.setBackgroundColor(getResourceColor(titleStyle == 0?R.color.bg_status_bar:R.color.bg_status_bar_white));
+        mTitleBar = new TitleBar(this,titleStyle);
         mTitleBar.hide();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT){
             getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
@@ -184,12 +186,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         return linearLayout;
     }
 
-
-
-
-
-
-
-
-
+    public void setTitleStyle(int titleStyle) {
+        this.titleStyle = titleStyle;
+    }
 }

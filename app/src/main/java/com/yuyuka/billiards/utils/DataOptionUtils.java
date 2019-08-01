@@ -87,4 +87,19 @@ public class DataOptionUtils {
     }
 
 
+    public static int getGoodsSortParam(String str){
+        switch (str){
+            case "价格从高到低":
+                return 1;
+            case "价格从低到高":
+                return 2;
+            case "最新发布":
+                return 3;
+            case "离我最近":
+                return 4;
+                default:
+                    return 0;
+        }
+    }
+
 }

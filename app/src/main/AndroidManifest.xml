@@ -91,6 +91,7 @@
         <activity android:name=".ui.activity.room.RoomReserveActivity" />
         <activity android:name=".ui.activity.common.PayActivity" />
         <activity android:name=".ui.activity.match.NearbyMatchActivity" />
+        <activity android:name=".ui.activity.mail.MailActivity" />
         <!-- 网易云信 -->
         <meta-data
             android:name="com.netease.nim.appKey"
