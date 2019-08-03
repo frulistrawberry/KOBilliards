@@ -50,7 +50,7 @@
         <item name="android:backgroundDimEnabled">true</item>
     </style>
 
-    <style name="TopPopStyle">
+    <style name="TopPopStyle" parent="@android:style/Animation">
          <item name="android:windowEnterAnimation">@anim/dd_menu_in</item>
          <item name="android:windowExitAnimation">@anim/dd_menu_out</item>
     </style>

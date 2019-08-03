@@ -8,7 +8,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.PopupWindow;
 import android.widget.TextView;
 
 import com.yuyuka.billiards.R;
@@ -19,7 +18,7 @@ import com.yuyuka.billiards.pojo.GoodsPojo;
 import com.yuyuka.billiards.ui.adapter.goods.GoodsAdapter;
 import com.yuyuka.billiards.utils.DataOptionUtils;
 import com.yuyuka.billiards.widget.AppBarStateChangeListener;
-import com.zyyoona7.lib.EasyPopup;
+import com.yuyuka.billiards.widget.EasyPopup;
 
 import java.util.List;
 

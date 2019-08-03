@@ -42,7 +42,7 @@ public abstract class BaseListActivity<P extends BasePresenter> extends BaseRefr
     @Override
     public void showLoading() {
         if (!mPtrLayout.isRefreshing()&&!mAdapter.isLoading()){
-            showProgressDialog();
+            mAdapter.setEmptyView(ViewUtils.genLoadingView(this));
         }
     }
 

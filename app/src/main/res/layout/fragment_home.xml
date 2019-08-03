@@ -8,10 +8,10 @@
 
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar"
-        android:background="@color/white"
         style="@style/AppBarLayoutStyle"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/white">
 
         <android.support.design.widget.CollapsingToolbarLayout
             android:id="@+id/toolbar_layout"
@@ -29,24 +29,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="vertical">
+
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="80dp"
                         android:background="@color/bg_status_bar"
-                        android:orientation="horizontal">
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp">
 
                         <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
                             android:gravity="center"
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@mipmap/ic_scan"/>
+                                android:src="@mipmap/ic_scan" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -54,22 +57,22 @@
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="5dp"
                                 android:text="扫一扫"
-                                android:textColor="@color/white"/>
+                                android:textColor="@color/white" />
 
                         </LinearLayout>
 
                         <LinearLayout
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight="1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="40dp"
                             android:gravity="center"
                             android:orientation="vertical">
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="35dp"
+                                android:layout_height="35dp"
                                 android:layout_gravity="center_horizontal"
-                                android:src="@mipmap/ic_payment"/>
+                                android:src="@mipmap/ic_payment" />
 
                             <TextView
                                 android:layout_width="wrap_content"
@@ -77,51 +80,171 @@
                                 android:layout_gravity="center_horizontal"
                                 android:layout_marginTop="5dp"
                                 android:text="关灯结算"
-                                android:textColor="@color/white"/>
+                                android:textColor="@color/white" />
 
                         </LinearLayout>
 
-                        <com.yuyuka.billiards.widget.CoinTextView
+                        <View
                             android:layout_width="0dp"
-                            android:layout_weight="2"
-                            android:background="#f0cf5d"
-                            android:layout_height="match_parent">
+                            android:layout_height="1dp"
+                            android:layout_weight="1" />
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="150dp"
+                                android:layout_height="35dp"
+                                android:background="@drawable/bg_pool"
+                                android:gravity="center_vertical"
+                                android:orientation="horizontal">
+
+                                <ImageView
+                                    android:layout_width="27dp"
+                                    android:layout_height="19dp"
+                                    android:layout_marginLeft="5dp"
+                                    android:scaleType="centerInside"
+                                    android:src="@mipmap/ic_coin_small" />
+
+                                <View
+                                    android:layout_width="2dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginLeft="5dp"
+                                    android:background="#EFB118" />
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:scaleType="centerInside"
+                                    android:src="@mipmap/num_small_1" />
+
+                                <View
+                                    android:layout_width="2dp"
+                                    android:layout_height="match_parent"
+                                    android:background="#EFB118" />
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:scaleType="centerInside"
+                                    android:src="@mipmap/num_small_2" />
+
+                                <View
+                                    android:layout_width="2dp"
+                                    android:layout_height="match_parent"
+                                    android:background="#EFB118" />
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:scaleType="centerInside"
+                                    android:src="@mipmap/num_small_3" />
+
+                                <View
+                                    android:layout_width="2dp"
+                                    android:layout_height="match_parent"
+                                    android:background="#EFB118" />
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:scaleType="centerInside"
+                                    android:src="@mipmap/num_small_4" />
+
+                                <View
+                                    android:layout_width="2dp"
+                                    android:layout_height="match_parent"
+                                    android:background="#EFB118" />
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:scaleType="centerInside"
+                                    android:src="@mipmap/num_small_5" />
+
+                                <View
+                                    android:layout_width="2dp"
+                                    android:layout_height="match_parent"
+                                    android:background="#EFB118" />
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:scaleType="centerInside"
+                                    android:src="@mipmap/num_small_6" />
+
+                                <View
+                                    android:layout_width="2dp"
+                                    android:layout_height="match_parent"
+                                    android:background="#EFB118" />
+
+                                <ImageView
+                                    android:layout_width="0dp"
+                                    android:layout_height="match_parent"
+                                    android:layout_weight="1"
+                                    android:scaleType="centerInside"
+                                    android:src="@mipmap/num_small_7" />
+
+                                <View
+                                    android:layout_width="2dp"
+                                    android:layout_height="match_parent"
+                                    android:background="#EFB118" />
 
 
-                        </com.yuyuka.billiards.widget.CoinTextView>
+                            </LinearLayout>
 
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="5dp"
+                                android:text="K1奖金池"
+                                android:textColor="@color/white"
+                                android:textSize="14sp" />
+                        </LinearLayout>
 
 
                     </LinearLayout>
+
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
+
                         <com.yuyuka.billiards.widget.ModularPager
                             android:id="@+id/vp_modular"
                             android:layout_width="match_parent"
-                            android:layout_height="160dp"/>
+                            android:layout_height="160dp" />
+
                         <com.yuyuka.billiards.widget.CircleIndicator
                             android:id="@+id/ci_modular"
                             android:layout_width="match_parent"
                             android:layout_height="5dp"
                             android:layout_gravity="bottom"
+                            android:layout_marginBottom="5dp"
                             app:ci_animator="@null"
                             app:ci_drawable="@drawable/shape_or_circle"
-                            app:ci_drawable_unselected="@drawable/shape_gray_circle"
-                            android:layout_marginBottom="5dp"
-                            />
+                            app:ci_drawable_unselected="@drawable/shape_gray_circle" />
                     </FrameLayout>
+
                     <com.bigkoo.convenientbanner.ConvenientBanner
                         android:id="@+id/banner"
                         android:layout_width="match_parent"
-                        android:layout_height="175dp"/>
+                        android:layout_height="175dp" />
                 </LinearLayout>
 
 
                 <View
                     android:id="@+id/bg_content"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
 
             </FrameLayout>
 
@@ -134,19 +257,19 @@
 
                 <RelativeLayout
                     android:id="@+id/toolbar_open"
-                    android:visibility="gone"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
                     android:background="@color/bg_status_bar"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:visibility="visible">
 
                     <RelativeLayout
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_marginTop="5dp"
-                        android:layout_marginBottom="5dp"
                         android:layout_marginLeft="13dp"
+                        android:layout_marginTop="5dp"
                         android:layout_marginRight="13dp"
+                        android:layout_marginBottom="5dp"
                         android:layout_toLeftOf="@+id/iv_contact"
                         android:background="@drawable/bg_search"
                         android:paddingLeft="10dp"
@@ -157,7 +280,7 @@
                             android:layout_width="20dp"
                             android:layout_height="20dp"
                             android:layout_centerVertical="true"
-                            android:src="@mipmap/ic_search"/>
+                            android:src="@mipmap/ic_search" />
 
                         <TextView
                             android:layout_width="match_parent"
@@ -166,10 +289,10 @@
                             android:layout_toRightOf="@+id/iv_search"
                             android:background="@null"
                             android:gravity="center_vertical"
-                            android:textColor="@color/text_color_3"
-                            android:text="输入球房、器具、地点、人名ID"
                             android:paddingLeft="10dp"
-                            android:textSize="14sp"/>
+                            android:text="输入球房、器具、地点、人名ID"
+                            android:textColor="@color/text_color_3"
+                            android:textSize="14sp" />
                     </RelativeLayout>
 
                     <ImageView
@@ -179,7 +302,7 @@
                         android:layout_alignParentRight="true"
                         android:layout_centerVertical="true"
                         android:layout_marginRight="10dp"
-                        android:src="@mipmap/ic_msg"/>
+                        android:src="@mipmap/ic_msg" />
 
                     <ImageView
                         android:id="@+id/iv_contact"
@@ -188,7 +311,7 @@
                         android:layout_centerVertical="true"
                         android:layout_marginRight="10dp"
                         android:layout_toLeftOf="@+id/iv_msg"
-                        android:src="@mipmap/ic_friends"/>
+                        android:src="@mipmap/ic_friends" />
 
                 </RelativeLayout>
 
@@ -196,7 +319,8 @@
                     android:id="@+id/toolbar_close"
                     android:layout_width="match_parent"
                     android:layout_height="44dp"
-                    android:background="@color/bg_status_bar">
+                    android:background="@color/bg_status_bar"
+                    android:visibility="gone">
 
                     <ImageView
                         android:id="@+id/iv_scan"
@@ -205,7 +329,7 @@
                         android:layout_alignParentLeft="true"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="17dp"
-                        android:src="@mipmap/ic_scan"/>
+                        android:src="@mipmap/ic_scan" />
 
                     <ImageView
                         android:id="@+id/iv_pay"
@@ -214,46 +338,43 @@
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="30dp"
                         android:layout_toRightOf="@+id/iv_scan"
-                        android:src="@mipmap/ic_payment"/>
-
+                        android:src="@mipmap/ic_payment" />
 
 
                     <ImageView
                         android:id="@+id/btn_search"
                         android:layout_width="27dp"
                         android:layout_height="27dp"
-                        android:layout_toRightOf="@id/iv_pay"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="30dp"
-                        android:src="@mipmap/ic_home_search"/>
+                        android:layout_toRightOf="@id/iv_pay"
+                        android:src="@mipmap/ic_home_search" />
 
                     <ImageView
                         android:id="@+id/iv_rank"
                         android:layout_width="33dp"
                         android:layout_height="33dp"
-                        android:layout_toRightOf="@id/btn_search"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="30dp"
-                        android:src="@mipmap/ic_rank"/>
+                        android:layout_toRightOf="@id/btn_search"
+                        android:src="@mipmap/ic_rank" />
 
                     <ImageView
                         android:layout_width="33dp"
                         android:layout_height="33dp"
-                        android:layout_toRightOf="@id/iv_rank"
                         android:layout_centerVertical="true"
                         android:layout_marginLeft="30dp"
-                        android:src="@mipmap/ic_face_to_face"/>
+                        android:layout_toRightOf="@id/iv_rank"
+                        android:src="@mipmap/ic_face_to_face" />
 
                     <ImageView
                         android:id="@+id/btn_top"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_centerVertical="true"
                         android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
                         android:layout_marginRight="20dp"
-                        android:src="@mipmap/ic_home_back_to_top"/>
-
-
+                        android:src="@mipmap/ic_home_back_to_top" />
 
 
                 </RelativeLayout>
@@ -261,17 +382,19 @@
             </android.support.v7.widget.Toolbar>
 
         </android.support.design.widget.CollapsingToolbarLayout>
+
         <com.yuyuka.billiards.widget.tabindicator.MagicIndicator
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
             android:layout_height="41dp"
             android:background="@color/white" />
     </android.support.design.widget.AppBarLayout>
+
     <android.support.v4.view.ViewPager
         android:id="@+id/view_pager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 
 </android.support.design.widget.CoordinatorLayout>

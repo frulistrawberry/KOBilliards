@@ -246,6 +246,10 @@ public class ViewUtils {
         return emptyView;
     }
 
+    public static View genLoadingView(Context context){
+        return View.inflate(context, R.layout.layout_loading,null);
+    }
+
     /**
      *
      * @param context 上下文
