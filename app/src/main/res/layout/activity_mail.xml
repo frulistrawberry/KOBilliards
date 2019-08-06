@@ -17,6 +17,7 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
                 <LinearLayout
+                    android:id="@+id/btn_search"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
@@ -188,6 +189,7 @@
     <include
         layout="@layout/include_ptr_recycler"/>
     <LinearLayout
+        android:id="@+id/btn_release"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|center_horizontal"

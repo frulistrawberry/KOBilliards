@@ -7,9 +7,11 @@
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <com.bigkoo.convenientbanner.ConvenientBanner
+        <View
             android:layout_width="match_parent"
-            android:layout_height="88dp"/>
+            android:layout_height="125dp"
+            android:background="@mipmap/img_bg_banner"/>
+
         <LinearLayout
             android:id="@+id/ll_header"
             android:layout_width="match_parent"
@@ -20,6 +22,9 @@
             android:paddingRight="13dp"
             android:paddingBottom="10dp">
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="25dp"/>
             <ImageView
                 android:id="@+id/iv_back"
                 android:layout_width="22dp"

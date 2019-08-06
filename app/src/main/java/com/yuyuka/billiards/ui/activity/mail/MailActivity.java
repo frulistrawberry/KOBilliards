@@ -15,10 +15,12 @@ import com.yuyuka.billiards.base.BaseListActivity;
 import com.yuyuka.billiards.mvp.contract.goods.GoodsListContract;
 import com.yuyuka.billiards.mvp.presenter.goods.GoodsListPresenter;
 import com.yuyuka.billiards.pojo.GoodsPojo;
+import com.yuyuka.billiards.ui.activity.room.RoomSearchActivity;
 import com.yuyuka.billiards.ui.adapter.goods.GoodsAdapter;
 import com.yuyuka.billiards.utils.DataOptionUtils;
 import com.yuyuka.billiards.widget.AppBarStateChangeListener;
 import com.yuyuka.billiards.widget.EasyPopup;
+import com.yuyuka.billiards.widget.dialog.FilterDialog;
 
 import java.util.List;
 
@@ -47,7 +49,7 @@ public class MailActivity extends BaseListActivity<GoodsListPresenter> implement
     private int location;
     private EasyPopup mSortPop;
     private EasyPopup mLocationPop;
-    private EasyPopup mFilterPop;
+    private FilterDialog mFilterPop;
 
     public static void launcher(Context context){
         Intent intent = new Intent(context,MailActivity.class);
@@ -86,9 +88,9 @@ public class MailActivity extends BaseListActivity<GoodsListPresenter> implement
         mRecyclerView.setAdapter(mAdapter);
         initSortPop();
         initLocationPop();
+        initFilterPop();
         onRefresh();
     }
-
 
 
     @Override
@@ -128,7 +130,7 @@ public class MailActivity extends BaseListActivity<GoodsListPresenter> implement
         }
     }
 
-    @OnClick({R.id.ll_sort,R.id.ll_location,R.id.ll_filter})
+    @OnClick({R.id.ll_sort,R.id.ll_location,R.id.ll_filter,R.id.btn_search,R.id.btn_release})
     public void onClick(View v){
         switch (v.getId()){
             case R.id.ll_sort:
@@ -140,6 +142,13 @@ public class MailActivity extends BaseListActivity<GoodsListPresenter> implement
                 mLocationPop.showAsDropDown(v);
                 break;
             case R.id.ll_filter:
+                mFilterPop.show();
+                break;
+            case R.id.btn_search:
+                RoomSearchActivity.launcher(this,1);
+                break;
+            case R.id.btn_release:
+                startActivity(new Intent(this,ReleaseGoodsActivity.class));
                 break;
         }
     }
@@ -204,5 +213,12 @@ public class MailActivity extends BaseListActivity<GoodsListPresenter> implement
             mLocationIv.setImageResource(R.mipmap.ic_arrow_down);
         });
     }
+
+    private void initFilterPop() {
+        mFilterPop = new FilterDialog(this);
+
+    }
+
+
 
 }

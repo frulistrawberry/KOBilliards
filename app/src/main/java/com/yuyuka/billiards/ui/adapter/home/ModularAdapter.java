@@ -1,11 +1,13 @@
 package com.yuyuka.billiards.ui.adapter.home;
 
+import android.content.Intent;
 import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.pojo.ModularPojo;
+import com.yuyuka.billiards.ui.activity.ko.KOClassActivity;
 import com.yuyuka.billiards.ui.activity.mail.MailActivity;
 import com.yuyuka.billiards.ui.activity.match.NearbyMatchActivity;
 import com.yuyuka.billiards.ui.activity.room.NearbyRoomActivity;
@@ -33,6 +35,9 @@ public class ModularAdapter extends BaseQuickAdapter<ModularPojo, BaseViewHolder
                         break;
                     case "台球二手":
                         MailActivity.launcher(mContext);
+                        break;
+                    case "残局模式":
+                        mContext.startActivity(new Intent(mContext, KOClassActivity.class));
                         break;
             }
         });

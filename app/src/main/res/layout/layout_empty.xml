@@ -22,8 +22,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
         android:text=""
-        android:textColor="#333333"
-        android:textSize="18dp" />
+        android:textColor="@color/text_color_3"
+        android:textSize="15dp" />
     <TextView
         android:id="@+id/tv_sub_msg"
         android:layout_width="wrap_content"
@@ -31,7 +31,7 @@
         android:layout_marginTop="10dp"
         android:text=""
         android:visibility="gone"
-        android:textColor="#333333"
-        android:textSize="14dp" />
+        android:textColor="@color/text_color_3"
+        android:textSize="12dp" />
 
 </LinearLayout>

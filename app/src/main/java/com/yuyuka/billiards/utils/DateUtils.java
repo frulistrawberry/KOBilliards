@@ -28,6 +28,7 @@ public class DateUtils {
     public static final SimpleDateFormat timeFormat = new SimpleDateFormat("HH:mm:ss");
     public static final String MM_DD = "MM-dd";
     public static final String EEEE = "EEEE";
+    public static final String YYYY_MM_DD = "yyyy-MM-dd";
 
     public static Date str2Date(String str) {
         return str2Date(str, null);
@@ -218,6 +219,11 @@ public class DateUtils {
     public static String currentDatetime() {
         return datetimeFormat.format(now());
     }
+
+    public static String currentDate() {
+        return dateFormat.format(now());
+    }
+
 
     /**
      * 格式化日期时间 日期时间格式yyyy-MM-dd HH:mm:ss
@@ -589,4 +595,22 @@ public class DateUtils {
         }
         return result;
     }
+
+    public static int dateToWeek(String datetime) {
+        SimpleDateFormat f = new SimpleDateFormat("yyyy-MM-dd");
+        int[] weekDays = { 7, 1, 2, 3, 4, 5, 6 };
+        Calendar cal = Calendar.getInstance(); // 获得一个日历
+        Date datet = null;
+        try {
+            datet = f.parse(datetime);
+            cal.setTime(datet);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        int w = cal.get(Calendar.DAY_OF_WEEK) - 1; // 指示一个星期中的某天。
+        if (w < 0)
+            w = 0;
+        return weekDays[w];
+    }
+
 }

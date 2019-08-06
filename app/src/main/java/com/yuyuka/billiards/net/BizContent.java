@@ -10,6 +10,18 @@ public class BizContent {
     private Double positionLongitude;
     private Integer status;
     private Integer cityId;
+    private Integer weekNum;
+    private Integer billiardsInfoId;
+    private Integer modeType;
+    private Integer typeId;
+
+    public void setTypeId(Integer typeId) {
+        this.typeId = typeId;
+    }
+
+    public void setModeType(Integer modeType) {
+        this.modeType = modeType;
+    }
 
     public void setCityId(Integer cityId) {
         this.cityId = cityId;
@@ -33,6 +45,14 @@ public class BizContent {
 
     public void setMobile(String mobile) {
         this.mobile = mobile;
+    }
+
+    public void setWeekNum(Integer weekNum) {
+        this.weekNum = weekNum;
+    }
+
+    public void setBilliardsInfoId(Integer billiardsInfoId) {
+        this.billiardsInfoId = billiardsInfoId;
     }
 
     public void setPositionLatitude(Double positionLatitude) {

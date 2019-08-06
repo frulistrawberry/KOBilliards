@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:gravity="center"
+    android:orientation="vertical">
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_color_1"
+        android:textSize="10sp"
+        android:text="所有的体育运动只有耐得住寂寞、下得了苦工的人，才能成为顶尖高手"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/text_color_11"
+        android:textSize="10sp"
+        android:layout_marginTop="10dp"
+        android:text="-KO台球语录-"/>
+
+</LinearLayout>

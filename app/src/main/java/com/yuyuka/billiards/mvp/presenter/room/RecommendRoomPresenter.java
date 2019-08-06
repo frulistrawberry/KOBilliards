@@ -29,7 +29,6 @@ public class RecommendRoomPresenter extends BasePresenter<RecommendRoomContract.
 
                     @Override
                     public void onResult(String msg, String bizContent) {
-                        getView().hideLoading();
                         if (TextUtils.isEmpty(bizContent)){
                             getView().showEmpty();
                             return;
@@ -41,6 +40,8 @@ public class RecommendRoomPresenter extends BasePresenter<RecommendRoomContract.
                             getView().showEmpty();
                         else
                             getView().showRecommendRoomList(data.getDataList());
+                        getView().hideLoading();
+
                     }
 
                     @Override

@@ -1,5 +1,6 @@
 package com.yuyuka.billiards.ui.fragment.room;
 
+import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -28,6 +29,7 @@ import org.greenrobot.eventbus.Subscribe;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
@@ -52,7 +54,7 @@ public class RecommendRoomFragment extends BaseListFragment<RecommendRoomPresent
 
 
 
-    private boolean isHeaderOpened = true;
+    private boolean canRefresh;
 
     @Override
     protected View createView(LayoutInflater inflater, ViewGroup parent) {
@@ -80,10 +82,7 @@ public class RecommendRoomFragment extends BaseListFragment<RecommendRoomPresent
 
             @Override
             public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                if (mRecyclerView.isNestedScrollingEnabled())
-                    return false;
-                else
-                    return super.checkCanDoRefresh(frame, content, header);
+                return canRefresh && super.checkCanDoRefresh(frame, content, header);
             }
 
             @Override
@@ -119,7 +118,7 @@ public class RecommendRoomFragment extends BaseListFragment<RecommendRoomPresent
     @Subscribe
     public void onEvent(OffsetChangeEvent event){
         if (event.from.equals("NearbyRoomActivity")){
-            isHeaderOpened = event.state== AppBarStateChangeListener.State.EXPANDED;
+            canRefresh = event.state == AppBarStateChangeListener.State.EXPANDED;
             if (event.state != AppBarStateChangeListener.State.COLLAPSED){
                 mBackToTopIv.setVisibility(View.INVISIBLE);
             }else {
@@ -148,5 +147,15 @@ public class RecommendRoomFragment extends BaseListFragment<RecommendRoomPresent
         lng = aMapLocation.getLongitude();
         CommonUtils.saveLocationInfo(lat,lng);
         onRefresh();
+    }
+
+
+
+    @OnClick({R.id.iv_back_to_top})
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.iv_back_to_top:
+                break;
+        }
     }
 }

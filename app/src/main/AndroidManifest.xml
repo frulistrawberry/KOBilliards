@@ -55,7 +55,9 @@
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
-        tools:ignore="GoogleAppIndexingWarning">
+        android:networkSecurityConfig="@xml/network_security_config"
+        tools:ignore="GoogleAppIndexingWarning"
+        tools:targetApi="n">
 
         <meta-data
             android:name="com.amap.api.v2.apikey"
@@ -92,6 +94,10 @@
         <activity android:name=".ui.activity.common.PayActivity" />
         <activity android:name=".ui.activity.match.NearbyMatchActivity" />
         <activity android:name=".ui.activity.mail.MailActivity" />
+        <activity android:name=".ui.activity.mail.GoodsDetailActivity" />
+        <activity android:name=".ui.activity.mail.ReleaseGoodsActivity" />
+        <activity android:name=".ui.activity.ko.KOClassActivity" />
+        <activity android:name=".ui.adapter.ko.KOListActivity" />
         <!-- 网易云信 -->
         <meta-data
             android:name="com.netease.nim.appKey"

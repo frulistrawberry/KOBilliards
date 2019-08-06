@@ -19,11 +19,24 @@ public class NavigatorAdapter extends CommonNavigatorAdapter {
     private List<Fragment> mFragmentList;
     private ViewPager mViewPager;
     private PagerAdapter mAdapter;
+    private int selectColor = R.color.text_color_1;
+    private int startColor = R.color.tab_indicator_start_color;
+    private int endColor = R.color.tab_indicator_end_color;
 
     public NavigatorAdapter(List<Fragment> mFragmentList, ViewPager mViewPager, PagerAdapter mAdapter) {
         this.mFragmentList = mFragmentList;
         this.mViewPager = mViewPager;
         this.mAdapter = mAdapter;
+    }
+
+
+    public NavigatorAdapter(List<Fragment> mFragmentList, ViewPager mViewPager, PagerAdapter mAdapter, int selectColor, int startColor, int endColor) {
+        this.mFragmentList = mFragmentList;
+        this.mViewPager = mViewPager;
+        this.mAdapter = mAdapter;
+        this.selectColor = selectColor;
+        this.startColor = startColor;
+        this.endColor = endColor;
     }
 
     @Override
@@ -35,7 +48,7 @@ public class NavigatorAdapter extends CommonNavigatorAdapter {
     public IPagerTitleView getTitleView(Context context, final int index) {
         SimplePagerTitleView simplePagerTitleView = new ColorTransitionPagerTitleView(context);
         simplePagerTitleView.setNormalColor(context.getResources().getColor(R.color.text_color_1));
-        simplePagerTitleView.setSelectedColor(context.getResources().getColor(R.color.text_color_2));
+        simplePagerTitleView.setSelectedColor(context.getResources().getColor(selectColor));
         simplePagerTitleView.setText(mAdapter.getPageTitle(index));
         simplePagerTitleView.setTextSize(18);
         simplePagerTitleView.setOnClickListener(v -> mViewPager.setCurrentItem(index));
@@ -46,7 +59,8 @@ public class NavigatorAdapter extends CommonNavigatorAdapter {
     public IPagerIndicator getIndicator(Context context) {
         LinePagerIndicator linePagerIndicator = new LinePagerIndicator(context);
         linePagerIndicator.setMode(LinePagerIndicator.MODE_WRAP_CONTENT);
-        linePagerIndicator.setColors(context.getResources().getColor(R.color.tab_indicator_start_color),context.getResources().getColor(R.color.tab_indicator_end_color));
+        linePagerIndicator.setColors(context.getResources().getColor(startColor),
+                context.getResources().getColor(endColor));
         return linePagerIndicator;
     }
 }

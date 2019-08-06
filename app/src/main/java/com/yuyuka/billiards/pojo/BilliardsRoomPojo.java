@@ -2,6 +2,7 @@ package com.yuyuka.billiards.pojo;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Map;
 
 public class BilliardsRoomPojo implements Serializable {
     private int billiardsId;
@@ -18,8 +19,11 @@ public class BilliardsRoomPojo implements Serializable {
     private String created;
     private int examine;
     private String headImage;
+    private int appraiseCount;
+    private int doBusiness;
     private int start;
     private int limit;
+    private Map<String,String> tag;
     private List<BilliardsImage> billiardsImages;
     private BilliardsUser billiardsUsers;
     private int minimumPayment;
@@ -90,6 +94,18 @@ public class BilliardsRoomPojo implements Serializable {
 
     public int getLimit() {
         return limit;
+    }
+
+    public int getAppraiseCount() {
+        return appraiseCount;
+    }
+
+    public int getDoBusiness() {
+        return doBusiness;
+    }
+
+    public Map<String, String> getTag() {
+        return tag;
     }
 
     public List<BilliardsImage> getBilliardsImages() {

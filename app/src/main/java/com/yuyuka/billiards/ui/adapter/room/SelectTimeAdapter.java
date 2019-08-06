@@ -19,5 +19,17 @@ public class SelectTimeAdapter extends BaseQuickAdapter<SelectTimePojo, BaseView
             helper.setTextColor(R.id.tv_time,mContext.getResources().getColor(R.color.text_color_3));
             helper.setBackgroundRes(R.id.ll_time,R.drawable.bg_select_time_un_selected);
         }
+
+        if (item.isActive()){
+            helper.setTextColor(R.id.tv_price,mContext.getResources().getColor(R.color.red));
+            helper.setText(R.id.tv_price,"优惠价"+item.getAmount());
+
+        }else {
+            helper.setTextColor(R.id.tv_price,mContext.getResources().getColor(R.color.text_color_3));
+            helper.setText(R.id.tv_price,"正常价"+item.getAmount());
+
+        }
+        helper.setText(R.id.tv_time,item.getClock());
+
     }
 }

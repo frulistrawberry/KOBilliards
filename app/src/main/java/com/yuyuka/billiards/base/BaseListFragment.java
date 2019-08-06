@@ -23,9 +23,9 @@ import butterknife.BindView;
  */
 public abstract class BaseListFragment<P extends BasePresenter> extends BaseRefreshFragment<P>{
 
-    protected String mEmptyMsg;
+    protected String mEmptyMsg = "空空如也";
     protected String mEmptySubMsg;
-    protected int mEmptyIcon;
+    protected int mEmptyIcon = R.mipmap.ic_empty;
     protected int mCurrentPage = 1;
 
     @BindView(R.id.recycler_view)
@@ -46,7 +46,7 @@ public abstract class BaseListFragment<P extends BasePresenter> extends BaseRefr
     @Override
     public void showLoading() {
         if (!mPtrLayout.isRefreshing()&&!mAdapter.isLoading()){
-            showProgressDialog();
+            mAdapter.setEmptyView(ViewUtils.genLoadingView(getContext()));
         }
     }
 
@@ -81,7 +81,7 @@ public abstract class BaseListFragment<P extends BasePresenter> extends BaseRefr
         if (mCurrentPage == 1){
             if (!NetworkUtils.isNetWorkAvailable(getContext())){
                 //网络不可用
-                View errorView = ViewUtils.genErrorView(getContext(),R.mipmap.ic_network_diabled,"网络不可用","点击刷新");
+                View errorView = ViewUtils.genErrorView(getContext(),R.mipmap.ic_error,"网络不可用","点击刷新");
                 errorView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
@@ -91,7 +91,7 @@ public abstract class BaseListFragment<P extends BasePresenter> extends BaseRefr
                 mAdapter.setEmptyView(errorView);
             }else {
                 //加载失败
-                View errorView = ViewUtils.genErrorView(getContext(),R.mipmap.ic_network_diabled,"加载失败","试试点击屏幕重新获取数据");
+                View errorView = ViewUtils.genErrorView(getContext(),R.mipmap.ic_error,"加载失败","试试点击屏幕重新获取数据");
                 errorView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

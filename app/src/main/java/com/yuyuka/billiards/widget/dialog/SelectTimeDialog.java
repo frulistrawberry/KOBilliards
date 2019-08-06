@@ -32,10 +32,6 @@ public class SelectTimeDialog extends Dialog implements BaseQuickAdapter.OnItemC
     public SelectTimeDialog(Context context, int themeResId) {
         super(context, themeResId);
         mAdapter = new SelectTimeAdapter();
-        mData = new ArrayList<>();
-        for (int i = 0; i < 20; i++) {
-            mData.add(new SelectTimePojo());
-        }
         View contentView = LayoutInflater.from(context).inflate(R.layout.dialog_select_time, null);
         RecyclerView recyclerView = contentView.findViewById(R.id.recycler_view);
         reserveBtn = contentView.findViewById(R.id.btn_reserve);
@@ -51,6 +47,10 @@ public class SelectTimeDialog extends Dialog implements BaseQuickAdapter.OnItemC
         getWindow().setWindowAnimations(R.style.BottomDialog_Animation);
         setCancelable(true);
         setCanceledOnTouchOutside(true);
+    }
+
+    public  void  setData(List<SelectTimePojo> data){
+        this.mData = data;
         mAdapter.setNewData(mData);
     }
 

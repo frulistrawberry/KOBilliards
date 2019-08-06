@@ -6,17 +6,31 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseActivity;
+import com.yuyuka.billiards.base.BaseMvpActivity;
+import com.yuyuka.billiards.base.BaseRefreshActivity;
+import com.yuyuka.billiards.image.ImageManager;
+import com.yuyuka.billiards.mvp.contract.room.RoomDetailContract;
+import com.yuyuka.billiards.mvp.presenter.room.RoomDetailPresenter;
+import com.yuyuka.billiards.pojo.BilliardsGoods;
+import com.yuyuka.billiards.pojo.RoomInfoPojo;
+import com.yuyuka.billiards.pojo.SelectTimePojo;
 import com.yuyuka.billiards.ui.adapter.common.PagerAdapter;
 import com.yuyuka.billiards.ui.fragment.room.AssistantListFragment;
+import com.yuyuka.billiards.utils.CollectionUtils;
 import com.yuyuka.billiards.utils.DateUtils;
 import com.yuyuka.billiards.utils.ScreenUtils;
 import com.yuyuka.billiards.utils.SizeUtils;
+import com.yuyuka.billiards.utils.ViewUtils;
+import com.yuyuka.billiards.widget.AppBarStateChangeListener;
 import com.yuyuka.billiards.widget.ObservableNestedScrollView;
 import com.yuyuka.billiards.widget.dialog.SelectTimeDialog;
 import com.yuyuka.billiards.widget.tabindicator.MagicIndicator;
@@ -30,13 +44,16 @@ import com.yuyuka.billiards.widget.tabindicator.buildins.commonnavigator.titles.
 
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
 
-public class RoomDetailActivity extends BaseActivity {
+public class RoomDetailActivity extends BaseRefreshActivity<RoomDetailPresenter> implements RoomDetailContract.IRoomDetailView {
 
 
     private String[] mTitle = {"球台预定","球房活动","球友点评","设施亮点"};
@@ -63,9 +80,15 @@ public class RoomDetailActivity extends BaseActivity {
     AppBarLayout mAppbarLayout;
     @BindView(R.id.ll_room_desc)
     LinearLayout mllroom;
+    @BindView(R.id.container_reserve)
+    LinearLayout mReserveContainer;
+    boolean canRefresh = true;
+    int billiardsId;
+    int weekNum;
 
-    public static void launcher(Context context){
+    public static void launcher(Context context,int billiardsId){
         Intent intent = new Intent(context, RoomDetailActivity.class);
+        intent.putExtra("billiardsId",billiardsId);
         context.startActivity(intent);
     }
 
@@ -149,6 +172,12 @@ public class RoomDetailActivity extends BaseActivity {
                 simplePagerTitleView.setOnClickListener(v -> {
                     mReserveTabLayout.onPageSelected(index);
                     mReserveTabLayout.onPageScrolled(index,0,0);
+                    long today = System.currentTimeMillis();
+                    long temp = 60*60*24*1000*index+today;
+                    String date = DateUtils.date2Str(new Date(temp),DateUtils.YYYY_MM_DD);
+                    weekNum = DateUtils.dateToWeek(date);
+                    getPresenter().getGoodsInfo(billiardsId,weekNum,true);
+
                 });
                 return simplePagerTitleView;
             }
@@ -202,14 +231,41 @@ public class RoomDetailActivity extends BaseActivity {
             }
 
         });
+        mAppbarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
+            @Override
+            public void onStateChanged(AppBarLayout appBarLayout, State state) {
+                canRefresh = state == State.EXPANDED;
+            }
+        });
+        mPtrLayout.setPtrHandler(new PtrDefaultHandler() {
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                onRefresh();
+            }
+
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                return canRefresh;
+            }
+        });
+
+        onRefresh();
+    }
+
+    @Override
+    protected void onRefresh() {
+        getPresenter().getGoodsInfo(billiardsId,weekNum,false);
     }
 
     @Override
     protected void initData() {
         mDateTitle = getDateTitles();
+        weekNum = DateUtils.dateToWeek(DateUtils.currentDate());
+        billiardsId = getIntent().getIntExtra("billiardsId",0);
+
     }
 
-    @OnClick({R.id.rl_comment,R.id.images,R.id.ll_facilities,R.id.btn_reserve})
+    @OnClick({R.id.rl_comment,R.id.images,R.id.ll_facilities})
     public void onClick(View v){
         switch (v.getId()){
             case R.id.rl_comment:
@@ -221,9 +277,7 @@ public class RoomDetailActivity extends BaseActivity {
             case R.id.ll_facilities:
                 RoomFaclitiesActivity.launcher(this);
                 break;
-            case R.id.btn_reserve:
-                new SelectTimeDialog(this).show();
-                break;
+
         }
     }
 
@@ -239,5 +293,85 @@ public class RoomDetailActivity extends BaseActivity {
             result[i] = date+"\n"+week;
         }
         return result;
+    }
+
+    @Override
+    protected RoomDetailPresenter getPresenter() {
+        return new RoomDetailPresenter(this);
+    }
+
+    @Override
+    public void showRoomInfo(RoomInfoPojo info) {
+
+    }
+
+    @Override
+    public void showGoodsInfo(List<BilliardsGoods> goods) {
+        mReserveContainer.removeAllViews();
+        if (CollectionUtils.isEmpty(goods)){
+            View emptyView = ViewUtils.genEmptyView(this,R.mipmap.ic_empty,"空空如也");
+            emptyView.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,SizeUtils.dp2px(this,300)));
+            mReserveContainer.addView(emptyView);
+        }else {
+
+            for (BilliardsGoods good : goods) {
+                View itemView = LayoutInflater.from(this).inflate(R.layout.item_reserve,null);
+                ImageView goodsIv = itemView.findViewById(R.id.iv_img);
+                TextView goodsNameTv = itemView.findViewById(R.id.tv_goods_name);
+                TextView goodsInfoTv = itemView.findViewById(R.id.tv_goods_info);
+                TextView promotionTv = itemView.findViewById(R.id.tv_protion);
+                TextView amountTv = itemView.findViewById(R.id.tv_amount);
+                ImageManager.getInstance().loadNet(good.getGoodsImage(),goodsIv);
+                goodsNameTv.setText(good.getGoodsName());
+                goodsInfoTv.setText(good.getGoodsInfo());
+                if (CollectionUtils.isEmpty(good.getBilliardsPromotionList())){
+                    promotionTv.setText("");
+                }else {
+                    List<BilliardsGoods.BilliardsPromotionList> promotionList = good.getBilliardsPromotionList();
+                    StringBuilder protionSb = new StringBuilder();
+                    protionSb.append("优惠时段")
+                            .append(promotionList.get(0).getClock())
+                            .append(":00");
+                    if (promotionList.size()>1){
+                        protionSb.append("-")
+                                .append(promotionList.get(promotionList.size()-1))
+                                .append(":00");
+                    }
+                    protionSb.append("\n")
+                            .append("优惠时段")
+                            .append(promotionList.get(0).getAmount())
+                            .append("元/小时");
+                    promotionTv.setText(protionSb);
+                }
+                amountTv.setText("￥"+good.getGoodsAmount());
+                itemView.setOnClickListener(v -> {
+                    SelectTimeDialog dialog = new SelectTimeDialog(getContext());
+                    List<SelectTimePojo> data = new ArrayList<>();
+                    for (int i = 0; i < good.getBilliardsGoodsScheduledTimeDtoList().size(); i++) {
+                        boolean hasActive = false;
+                        SelectTimePojo selectTimePojo = new SelectTimePojo();
+                        selectTimePojo.setSelected(false);
+                        selectTimePojo.setActive(false);
+                        selectTimePojo.setAmount(good.getGoodsAmount()+"");
+                        selectTimePojo.setClock(good.getBilliardsGoodsScheduledTimeDtoList().get(i).getClock()+":00");
+
+                        for (int i1 = 0; i1 < good.getBilliardsPromotionList().size(); i1++) {
+
+                            if (good.getBilliardsPromotionList().get(i1).getClock() == good.getBilliardsGoodsScheduledTimeDtoList().get(i).getClock()){
+                                selectTimePojo.setActive(true);
+                                hasActive = true;
+                                selectTimePojo.setAmount(good.getBilliardsPromotionList().get(i1).getAmount()+"");
+                                break;
+                            }
+                        }
+                        selectTimePojo.setActive(hasActive);
+                    }
+                    dialog.setData(data);
+                    dialog.show();
+
+                });
+                mReserveContainer.addView(itemView);
+            }
+        }
     }
 }

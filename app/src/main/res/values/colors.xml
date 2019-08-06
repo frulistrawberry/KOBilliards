@@ -5,10 +5,10 @@
     <color name="colorAccent">#D81B60</color>
 
     <color name="bg_window">#ffffff</color>
-    <color name="bg_status_bar">#66CC66</color>
+    <color name="bg_status_bar">#1DB710</color>
     <color name="bg_status_bar_white">#757575</color>
 
-    <color name="bg_title_bar">#66CC66</color>
+    <color name="bg_title_bar">#1DB710</color>
     <color name="text_color_title">#ffffff</color>
     <color name="text_color_title_menu">#ffffff</color>
     <color name="tab_text_select_color">#f26312</color>
@@ -24,6 +24,7 @@
 
     <color name="white">#ffffff</color>
     <color name="gray">#cccccc</color>
+    <color name="red">#ff0000</color>
 
     <color name="drop_down_selected">#7B1FA2</color>
     <color name="drop_down_unselected">#111111</color>
@@ -41,4 +42,9 @@
     <color name="text_color_7">#6795fc</color>
     <color name="text_color_8">#0099ff</color>
     <color name="text_color_9">#707070</color>
+    <color name="text_color_10">#1DB710</color>
+    <color name="text_color_11">#08BD84</color>
+    <color name="ko_start_color">#08BD84</color>
+    <color name="ko_end_color">#9AFFDF</color>
+    <color name="text_color_12">#C5C5C6</color>
 </resources>

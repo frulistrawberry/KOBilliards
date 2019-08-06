@@ -43,7 +43,27 @@ public class RoomAdapter extends BaseQuickAdapter<BilliardsRoomPojo, BaseViewHol
         helper.setText(R.id.tv_distance, DataOptionUtils.calculateLineDistance(item.getPositionLatitude(),item.getPositionLongitude()));
         helper.setText(R.id.tv_business_date,"营业时间:"+item.getBusinessDate());
         helper.setText(R.id.tv_minimum_payment,"￥"+item.getMinimumPayment());
+        if (item.getTag() == null || item.getTag().isEmpty()){
+            helper.setGone(R.id.ll_service,false);
+            helper.setGone(R.id.ll_tag,false);
+        } else{
+            helper.setGone(R.id.ll_service,true);
+        }
+        helper.setText(R.id.tv_comment_count,item.getAppraiseCount()+"条");
+        helper.setText(R.id.tv_location,item.getPosition());
+        if (item.getDoBusiness() == 1){
+            helper.setTextColor(R.id.tv_business_status,mContext.getResources().getColor(R.color.text_color_10));
+            helper.setText(R.id.tv_business_status,"(营业中)");
 
-        helper.getConvertView().setOnClickListener(v -> RoomDetailActivity.launcher(mContext));
+        }else if (item.getDoBusiness() == 2){
+            helper.setTextColor(R.id.tv_business_status,mContext.getResources().getColor(R.color.text_color_1));
+            helper.setText(R.id.tv_business_status,"(打烊)");
+        }else {
+            helper.setText(R.id.tv_business_status,"");
+        }
+
+
+
+        helper.getConvertView().setOnClickListener(v -> RoomDetailActivity.launcher(mContext,item.getBilliardsId()));
     }
 }

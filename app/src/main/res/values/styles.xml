@@ -4,6 +4,7 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="windowNoTitle">true</item>
+        <item name="android:fitsSystemWindows">false</item>
         <item name="android:windowBackground">@color/bg_window</item>
     </style>
 
@@ -54,5 +55,20 @@
          <item name="android:windowEnterAnimation">@anim/dd_menu_in</item>
          <item name="android:windowExitAnimation">@anim/dd_menu_out</item>
     </style>
+
+    <style name="RightAnimation" parent="Animation.AppCompat.Dialog">
+         <item name="android:windowEnterAnimation">@anim/right_in</item>
+         <item name="android:windowExitAnimation">@anim/right_out</item>
+    </style>
+
+    <style name="NormalDialogAnim" parent="android:Animation">
+        <item name="android:windowEnterAnimation">@anim/alpha_in</item>
+        <item name="android:windowExitAnimation">@anim/alpha_out</item>
+    </style>
+
+    <style name="ProgressDialogTheme" parent="DialogTheme">
+        <item name="android:backgroundDimEnabled">false</item><!-- 背景高亮 -->
+    </style>
+
 
 </resources>
