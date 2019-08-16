@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <FrameLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingTop="10dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp"
+        android:background="@color/bg_title_bar_gold">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp"
+            android:src="@mipmap/bonus_bg"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerInside"
+                    android:layout_marginLeft="2dp"
+                    android:src="@mipmap/num_big_pre" />
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerInside"
+                    android:layout_marginLeft="4dp"
+                    android:src="@mipmap/num_big_1" />
+
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerInside"
+                    android:layout_marginLeft="2dp"
+                    android:src="@mipmap/num_big_2" />
+
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerInside"
+                    android:layout_marginLeft="2dp"
+                    android:src="@mipmap/num_big_3" />
+
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerInside"
+                    android:layout_marginLeft="2dp"
+                    android:src="@mipmap/num_big_4" />
+
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerInside"
+                    android:layout_marginLeft="2dp"
+                    android:src="@mipmap/num_big_5" />
+
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerInside"
+                    android:layout_marginLeft="2dp"
+                    android:src="@mipmap/num_big_6" />
+
+
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:scaleType="centerInside"
+                    android:layout_marginLeft="2dp"
+                    android:src="@mipmap/num_big_7" />
+
+
+
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:textSize="29sp"
+                android:layout_marginTop="8dp"
+                android:textColor="@color/text_color_13"
+                android:background="@color/white"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="K1奖池(乔氏主赞助)"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:padding="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:background="@drawable/bg_bonus_pool_rank">
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="24sp"
+                            android:textColor="@color/text_color_13"
+                            android:text="1."/>
+                        <FrameLayout
+                            android:layout_width="31dp"
+                            android:layout_height="31dp"
+                            android:layout_marginLeft="5dp"
+                            android:background="@drawable/bg_bonus_pool_avatar">
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                />
+                        </FrameLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:textColor="@color/text_color_13"
+                            android:textSize="24sp"
+                            android:text="JOY乔氏"/>
+
+
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="24sp"
+                            android:textColor="@color/text_color_13"
+                            android:text="1."/>
+                        <FrameLayout
+                            android:layout_width="31dp"
+                            android:layout_height="31dp"
+                            android:layout_marginLeft="5dp"
+                            android:background="@drawable/bg_bonus_pool_avatar">
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                />
+                        </FrameLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:textColor="@color/text_color_13"
+                            android:textSize="24sp"
+                            android:text="JOY乔氏"/>
+
+
+                    </LinearLayout>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="24sp"
+                            android:textColor="@color/text_color_13"
+                            android:text="1."/>
+                        <FrameLayout
+                            android:layout_width="31dp"
+                            android:layout_height="31dp"
+                            android:layout_marginLeft="5dp"
+                            android:background="@drawable/bg_bonus_pool_avatar">
+                            <ImageView
+                                android:layout_width="30dp"
+                                android:layout_height="30dp"
+                                android:layout_gravity="center"
+                                />
+                        </FrameLayout>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="5dp"
+                            android:textColor="@color/text_color_13"
+                            android:textSize="24sp"
+                            android:text="JOY乔氏"/>
+
+
+                    </LinearLayout>
+                </LinearLayout>
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="13dp"
+                android:padding="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:background="@drawable/bg_bonus_pool_rank">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color_13"
+                    android:textSize="24sp"
+                    android:text="奖金池里的奖金用途"/>
+                <View
+                    android:layout_width="200dp"
+                    android:layout_height="1dp"
+                    android:background="@color/text_color_13"
+                    android:layout_marginTop="2dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:textColor="@color/text_color_13"
+                    android:text="1.K系列赛事（奖金池70%）\n2.排位赛（奖金池20%）\n3.贫困地区台球设备捐赠（10%）"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color_13"
+                    android:textSize="24sp"
+                    android:layout_marginTop="20dp"
+                    android:text="打赏奖金池的好处"/>
+                <View
+                    android:layout_width="200dp"
+                    android:layout_height="1dp"
+                    android:background="@color/text_color_13"
+                    android:layout_marginTop="2dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:gravity="center"
+                    android:textColor="@color/text_color_13"
+                    android:text="1.K系列赛事门票及座次\n2.K系列赛事赞助冠名"/>
+            </LinearLayout>
+
+            <FrameLayout
+                android:id="@+id/btn_bonus_rewards"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/bg_bonus_reward">
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@mipmap/icon_bonus_reward"
+                    android:layout_gravity="center" />
+            </FrameLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="20dp"/>
+
+
+
+
+        </LinearLayout>
+
+
+
+
+
+    </FrameLayout>
+
+</ScrollView>

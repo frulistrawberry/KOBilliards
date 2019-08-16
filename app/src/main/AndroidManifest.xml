@@ -98,6 +98,11 @@
         <activity android:name=".ui.activity.mail.ReleaseGoodsActivity" />
         <activity android:name=".ui.activity.ko.KOClassActivity" />
         <activity android:name=".ui.adapter.ko.KOListActivity" />
+        <activity android:name=".ui.activity.bonus.BonusPoolActivity" />
+        <activity android:name=".ui.activity.bonus.RewardBonusActivity" />
+        <activity android:name=".ui.activity.merchant.AddMerchantActivity" />
+        <activity android:name=".ui.activity.merchant.AddBusinessDateActivity" />
+        <activity android:name=".ui.activity.merchant.AddSuccessActivity" />
         <!-- 网易云信 -->
         <meta-data
             android:name="com.netease.nim.appKey"

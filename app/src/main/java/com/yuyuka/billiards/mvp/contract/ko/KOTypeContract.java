@@ -4,7 +4,6 @@ import com.yuyuka.billiards.base.IBaseModel;
 import com.yuyuka.billiards.base.IBaseView;
 import com.yuyuka.billiards.net.HttpResult;
 import com.yuyuka.billiards.pojo.KOClassPojo;
-import com.yuyuka.billiards.ui.activity.ko.KOClassActivity;
 
 import java.util.List;
 

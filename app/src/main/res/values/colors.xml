@@ -9,6 +9,7 @@
     <color name="bg_status_bar_white">#757575</color>
 
     <color name="bg_title_bar">#1DB710</color>
+    <color name="bg_title_bar_gold">#F5CF41</color>
     <color name="text_color_title">#ffffff</color>
     <color name="text_color_title_menu">#ffffff</color>
     <color name="tab_text_select_color">#f26312</color>
@@ -23,6 +24,7 @@
     <color name="color_spline">#f4f4f4</color>
 
     <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
     <color name="gray">#cccccc</color>
     <color name="red">#ff0000</color>
 
@@ -47,4 +49,21 @@
     <color name="ko_start_color">#08BD84</color>
     <color name="ko_end_color">#9AFFDF</color>
     <color name="text_color_12">#C5C5C6</color>
+    <color name="text_color_13">#7B4E00</color>
+    <color name="text_color_14">#D8D8E3</color>
+
+    <!-- new -->
+    <color name="c_333333">#333333</color>
+
+    <color name="c_d8d3cf">#d8d3cf</color>
+
+
+    <color name="c_a59a93">#a59a93</color>
+
+    <!--pressed-->
+    <color name="c_b9afa9">#b9afa9</color>
+
+    <color name="c_c35b3a">#fa5552</color>
+
+    <color name="c_9d472c">#ddfa5552</color>
 </resources>

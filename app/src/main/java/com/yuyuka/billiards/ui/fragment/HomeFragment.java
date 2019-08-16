@@ -1,5 +1,6 @@
 package com.yuyuka.billiards.ui.fragment;
 
+import android.content.Intent;
 import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CoordinatorLayout;
@@ -17,6 +18,7 @@ import com.yuyuka.billiards.base.BaseFragment;
 import com.yuyuka.billiards.event.OffsetChangeEvent;
 import com.yuyuka.billiards.pojo.ImagePojo;
 import com.yuyuka.billiards.pojo.ModularPojo;
+import com.yuyuka.billiards.ui.activity.bonus.BonusPoolActivity;
 import com.yuyuka.billiards.ui.adapter.common.NavigatorAdapter;
 import com.yuyuka.billiards.ui.adapter.common.PagerAdapter;
 import com.yuyuka.billiards.ui.fragment.live.NearbyLiveFragment;
@@ -157,13 +159,16 @@ public class HomeFragment extends BaseFragment{
 
     }
 
-    @OnClick({R.id.btn_top})
+    @OnClick({R.id.btn_top,R.id.btn_bonus_rewards})
     public void onClick(View v){
         switch (v.getId()){
             case R.id.btn_top:
                 mToolbarOpenLayout.setVisibility(View.VISIBLE);
                 mHeaderLayout.setVisibility(View.VISIBLE);
                 banAppBarScroll(true);
+                break;
+            case R.id.btn_bonus_rewards:
+                startActivity(new Intent(getContext(),BonusPoolActivity.class));
                 break;
         }
     }

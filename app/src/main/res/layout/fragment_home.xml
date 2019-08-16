@@ -90,124 +90,101 @@
                             android:layout_weight="1" />
 
                         <LinearLayout
+                            android:id="@+id/btn_bonus_rewards"
                             android:layout_width="wrap_content"
                             android:layout_height="match_parent"
                             android:gravity="center"
                             android:orientation="vertical">
 
                             <LinearLayout
-                                android:layout_width="150dp"
-                                android:layout_height="35dp"
-                                android:background="@drawable/bg_pool"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
                                 android:gravity="center_vertical"
                                 android:orientation="horizontal">
 
                                 <ImageView
-                                    android:layout_width="27dp"
-                                    android:layout_height="19dp"
-                                    android:layout_marginLeft="5dp"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:scaleType="centerInside"
-                                    android:src="@mipmap/ic_coin_small" />
+                                    android:layout_marginLeft="2dp"
+                                    android:src="@mipmap/num_small_pre" />
 
-                                <View
-                                    android:layout_width="2dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_marginLeft="5dp"
-                                    android:background="#EFB118" />
 
                                 <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:scaleType="centerInside"
+                                    android:layout_marginLeft="4dp"
                                     android:src="@mipmap/num_small_1" />
 
-                                <View
-                                    android:layout_width="2dp"
-                                    android:layout_height="match_parent"
-                                    android:background="#EFB118" />
+
 
                                 <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:scaleType="centerInside"
+                                    android:layout_marginLeft="2dp"
                                     android:src="@mipmap/num_small_2" />
 
-                                <View
-                                    android:layout_width="2dp"
-                                    android:layout_height="match_parent"
-                                    android:background="#EFB118" />
+
 
                                 <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:scaleType="centerInside"
+                                    android:layout_marginLeft="2dp"
                                     android:src="@mipmap/num_small_3" />
 
-                                <View
-                                    android:layout_width="2dp"
-                                    android:layout_height="match_parent"
-                                    android:background="#EFB118" />
+
 
                                 <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:scaleType="centerInside"
+                                    android:layout_marginLeft="2dp"
                                     android:src="@mipmap/num_small_4" />
 
-                                <View
-                                    android:layout_width="2dp"
-                                    android:layout_height="match_parent"
-                                    android:background="#EFB118" />
+
 
                                 <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:scaleType="centerInside"
+                                    android:layout_marginLeft="2dp"
                                     android:src="@mipmap/num_small_5" />
 
-                                <View
-                                    android:layout_width="2dp"
-                                    android:layout_height="match_parent"
-                                    android:background="#EFB118" />
+
 
                                 <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:scaleType="centerInside"
+                                    android:layout_marginLeft="2dp"
                                     android:src="@mipmap/num_small_6" />
 
-                                <View
-                                    android:layout_width="2dp"
-                                    android:layout_height="match_parent"
-                                    android:background="#EFB118" />
+
 
                                 <ImageView
-                                    android:layout_width="0dp"
-                                    android:layout_height="match_parent"
-                                    android:layout_weight="1"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
                                     android:scaleType="centerInside"
+                                    android:layout_marginLeft="2dp"
                                     android:src="@mipmap/num_small_7" />
 
-                                <View
-                                    android:layout_width="2dp"
-                                    android:layout_height="match_parent"
-                                    android:background="#EFB118" />
+
 
 
                             </LinearLayout>
 
                             <TextView
+                                android:background="@color/white"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginTop="5dp"
-                                android:text="K1奖金池"
-                                android:textColor="@color/white"
+                                android:text="K1奖池(乔氏主赞助)"
+                                android:paddingLeft="5dp"
+                                android:paddingRight="5dp"
+                                android:textColor="@color/text_color_10"
                                 android:textSize="14sp" />
                         </LinearLayout>
 

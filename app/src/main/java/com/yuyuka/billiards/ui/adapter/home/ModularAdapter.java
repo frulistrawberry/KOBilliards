@@ -10,6 +10,7 @@ import com.yuyuka.billiards.pojo.ModularPojo;
 import com.yuyuka.billiards.ui.activity.ko.KOClassActivity;
 import com.yuyuka.billiards.ui.activity.mail.MailActivity;
 import com.yuyuka.billiards.ui.activity.match.NearbyMatchActivity;
+import com.yuyuka.billiards.ui.activity.merchant.AddMerchantActivity;
 import com.yuyuka.billiards.ui.activity.room.NearbyRoomActivity;
 
 ;
@@ -38,6 +39,9 @@ public class ModularAdapter extends BaseQuickAdapter<ModularPojo, BaseViewHolder
                         break;
                     case "残局模式":
                         mContext.startActivity(new Intent(mContext, KOClassActivity.class));
+                        break;
+                    case "添加商户":
+                        mContext.startActivity(new Intent(mContext, AddMerchantActivity.class));
                         break;
             }
         });

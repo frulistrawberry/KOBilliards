@@ -93,7 +93,16 @@ public class TitleBar extends LinearLayout {
 
 
     public TitleBar showBack(){
-        return setLeftImage(style==0?R.mipmap.ic_nearby_room_back:R.mipmap.icon_title_back, v -> {
+        int backIcon = R.mipmap.ic_nearby_room_back;
+        if (style == 0){
+            backIcon = R.mipmap.ic_nearby_room_back;
+        }else if (style == 1){
+            backIcon = R.mipmap.icon_title_back;
+
+        }else if (style == 2){
+            backIcon = R.mipmap.icon_back_white;
+        }
+        return setLeftImage(backIcon, v -> {
             if (getContext() instanceof Activity){
                 ((Activity) getContext()).onBackPressed();
             }
@@ -154,8 +163,10 @@ public class TitleBar extends LinearLayout {
         assert inflater != null;
         if (style == 0)
             inflater.inflate(R.layout.include_title_bar,this,true);
-        else
+        else if (style == 1)
             inflater.inflate(R.layout.include_title_bar_white,this,true);
+        else if (style == 2)
+            inflater.inflate(R.layout.include_title_bar_gold,this,true);
         mLeftTitleIv = findViewById(R.id.iv_title_left);
         mLeftTitleTv = findViewById(R.id.tv_title_left);
         mTitleTv = findViewById(R.id.tv_title);

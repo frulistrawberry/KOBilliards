@@ -8,9 +8,7 @@ import com.yuyuka.billiards.base.BasePresenter;
 import com.yuyuka.billiards.mvp.contract.ko.KOTypeContract;
 import com.yuyuka.billiards.mvp.model.KOModel;
 import com.yuyuka.billiards.net.RespObserver;
-import com.yuyuka.billiards.pojo.BilliardsMatchPojo;
 import com.yuyuka.billiards.pojo.KOClassPojo;
-import com.yuyuka.billiards.pojo.ListData;
 import com.yuyuka.billiards.utils.CollectionUtils;
 import com.yuyuka.billiards.utils.RxUtils;
 

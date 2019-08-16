@@ -133,7 +133,13 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         mStatusBar = new View(this);
         mStatusBar.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, BarUtils.getStatusBarHeight(this)));
 
-        mStatusBar.setBackgroundColor(getResourceColor(titleStyle == 0?R.color.bg_status_bar:R.color.bg_status_bar_white));
+        if (titleStyle == 0){
+            mStatusBar.setBackgroundColor(getResourceColor(R.color.bg_status_bar));
+        }else if (titleStyle == 1){
+            mStatusBar.setBackgroundColor(getResourceColor(R.color.bg_status_bar_white));
+        }else if (titleStyle == 2){
+            mStatusBar.setBackgroundColor(getResourceColor(R.color.bg_title_bar_gold));
+        }
         mTitleBar = new TitleBar(this,titleStyle);
         mTitleBar.hide();
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT && Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP){

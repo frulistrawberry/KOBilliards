@@ -31,41 +31,8 @@ public class KOListAdapter extends BaseQuickAdapter<KOListPojo, BaseViewHolder> 
         ImageView headIv = helper.getView(R.id.iv_img);
         ImageManager.getInstance().loadNet(item.getImageAdd(),headIv);
 
-//
         helper.setText(R.id.tv_title,item.getTitle());
         helper.setText(R.id.tv_info,item.getInfo());
 
-//        LinearLayout levelLayout = helper.getView(R.id.ll_level);
-//        for (int i = 0; i < levelLayout.getChildCount(); i++) {
-//            ImageView imageView = (ImageView) levelLayout.getChildAt(i);
-//            if (i<item.getBillLevel()){
-//                imageView.setImageResource(R.mipmap.ic_start_light);
-//            }else {
-//                imageView.setImageResource(R.mipmap.ic_start_dark);
-//            }
-//        }
-//        helper.setText(R.id.tv_distance, DataOptionUtils.calculateLineDistance(item.getPositionLatitude(),item.getPositionLongitude()));
-//        if (item.getTag() == null || item.getTag().isEmpty()){
-//            helper.setGone(R.id.ll_service,false);
-//            helper.setGone(R.id.ll_tag,false);
-//        } else{
-//            helper.setGone(R.id.ll_service,true);
-//        }
-//        helper.setText(R.id.tv_comment_count,item.getAppraiseCount()+"条");
-//        helper.setText(R.id.tv_location,item.getPosition());
-//        if (item.getDoBusiness() == 1){
-//            helper.setTextColor(R.id.tv_business_status,mContext.getResources().getColor(R.color.text_color_10));
-//            helper.setText(R.id.tv_business_status,"(营业中)");
-//
-//        }else if (item.getDoBusiness() == 2){
-//            helper.setTextColor(R.id.tv_business_status,mContext.getResources().getColor(R.color.text_color_1));
-//            helper.setText(R.id.tv_business_status,"(打烊)");
-//        }else {
-//            helper.setText(R.id.tv_business_status,"");
-//        }
-//
-//
-//
-//        helper.getConvertView().setOnClickListener(v -> RoomDetailActivity.launcher(mContext,item.getBilliardsId()));
     }
 }
