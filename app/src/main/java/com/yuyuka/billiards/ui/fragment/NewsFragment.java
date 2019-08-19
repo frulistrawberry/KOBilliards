@@ -8,9 +8,16 @@ import android.view.ViewGroup;
 
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseFragment;
+import com.yuyuka.billiards.ui.adapter.common.NavigatorAdapter;
 import com.yuyuka.billiards.ui.adapter.common.PagerAdapter;
+import com.yuyuka.billiards.ui.fragment.live.NearbyLiveFragment;
+import com.yuyuka.billiards.ui.fragment.live.RecommendLiveFragment;
+import com.yuyuka.billiards.ui.fragment.video.VideoListFragment;
 import com.yuyuka.billiards.widget.tabindicator.MagicIndicator;
+import com.yuyuka.billiards.widget.tabindicator.ViewPagerHelper;
+import com.yuyuka.billiards.widget.tabindicator.buildins.commonnavigator.CommonNavigator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
@@ -31,11 +38,22 @@ public class NewsFragment extends BaseFragment {
 
     @Override
     protected void initData() {
-
+        mFragmentList = new ArrayList<>();
+        mFragmentList.add(new RecommendLiveFragment());
+        mFragmentList.add(new NearbyLiveFragment());
+        mFragmentList.add(new VideoListFragment());
+        mFragmentList.add(new VideoListFragment());
+        mFragmentList.add(new VideoListFragment());
+        mAdapter = new PagerAdapter(getChildFragmentManager(),mFragmentList,mTitles);
     }
 
     @Override
     protected void initView() {
-
+        CommonNavigator commonNavigator = new CommonNavigator(getContext());
+        commonNavigator.setAdjustMode(false);
+        commonNavigator.setAdapter(new NavigatorAdapter(mFragmentList,mViewPager,mAdapter));
+        mIndicator.setNavigator(commonNavigator);
+        mViewPager.setAdapter(mAdapter);
+        ViewPagerHelper.bind(mIndicator, mViewPager);
     }
 }

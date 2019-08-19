@@ -19,7 +19,7 @@ public class NavigatorAdapter extends CommonNavigatorAdapter {
     private List<Fragment> mFragmentList;
     private ViewPager mViewPager;
     private PagerAdapter mAdapter;
-    private int selectColor = R.color.text_color_1;
+    private int selectColor = R.color.text_color_6;
     private int startColor = R.color.tab_indicator_start_color;
     private int endColor = R.color.tab_indicator_end_color;
 
