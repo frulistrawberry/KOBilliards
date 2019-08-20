@@ -3,7 +3,7 @@
     android:id="@+id/ll_parent"
     android:layout_width="match_parent"
     android:layout_height="220dp"
-    android:background="#efefef"
+    android:background="@color/white"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,6 +14,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
             <ImageView
+                android:id="@+id/iv_cover"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scaleType="centerCrop"
@@ -52,14 +53,16 @@
                         />
 
                 </LinearLayout>
+
                 <TextView
+                    android:id="@+id/tv_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/white"
-                    android:textSize="16sp"
-                    android:layout_marginBottom="5dp"
                     android:layout_above="@id/ll_desc"
-                    android:text="这里是标题这里师表提这里是标题"/>
+                    android:layout_marginBottom="5dp"
+                    android:text="这里是标题这里师表提这里是标题"
+                    android:textColor="@color/white"
+                    android:textSize="16sp" />
 
             </RelativeLayout>
 

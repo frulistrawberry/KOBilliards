@@ -35,7 +35,7 @@ public class RecommendLiveFragment extends BaseListFragment<RecommendLivePresent
 
     @Override
     protected void onRefresh() {
-        mCurrentPage = 1;
+        mCurrentPage = 0;
         getPresenter().getRecommendLiveList(mCurrentPage);
 
 
@@ -87,7 +87,7 @@ public class RecommendLiveFragment extends BaseListFragment<RecommendLivePresent
 
     @Override
     public void showRecommendLiveList(List<LivePojo> dataList) {
-        if (mCurrentPage == 1){
+        if (mCurrentPage == 0){
             mAdapter.setNewData(dataList);
         }else {
             mAdapter.addData(dataList);

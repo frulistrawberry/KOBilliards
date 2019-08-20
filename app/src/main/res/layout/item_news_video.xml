@@ -8,6 +8,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp">
         <ImageView
+            android:id="@+id/iv_cover"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="centerCrop"
@@ -25,6 +26,7 @@
                 android:layout_centerInParent="true"
                 android:src="@mipmap/ic_news_video_play"/>
             <TextView
+                android:id="@+id/tv_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
@@ -40,6 +42,7 @@
                 android:text="12万次播放"/>
 
             <TextView
+                android:id="@+id/tv_video_length"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
@@ -48,7 +51,7 @@
                 android:layout_alignParentBottom="true"
                 android:layout_alignParentRight="true"
                 android:background="@drawable/bg_billiards_room_photo_count"
-                android:text="12万次播放"/>
+                android:text="33"/>
 
 
         </RelativeLayout>
@@ -68,6 +71,7 @@
             android:layout_height="40dp"
             android:src="@mipmap/ic_launcher"/>
         <TextView
+            android:id="@+id/tv_user"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"

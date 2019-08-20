@@ -95,7 +95,7 @@ public class MailActivity extends BaseListActivity<GoodsListPresenter> implement
 
     @Override
     protected void onRefresh() {
-        mCurrentPage = 1;
+        mCurrentPage = 0;
         getPresenter().getGoodsList(mCurrentPage);
     }
 
@@ -123,7 +123,7 @@ public class MailActivity extends BaseListActivity<GoodsListPresenter> implement
 
     @Override
     public void showGoodsList(List<GoodsPojo> dataList) {
-        if (mCurrentPage == 1){
+        if (mCurrentPage == 0){
             mAdapter.setNewData(dataList);
         }else {
             mAdapter.addData(dataList);

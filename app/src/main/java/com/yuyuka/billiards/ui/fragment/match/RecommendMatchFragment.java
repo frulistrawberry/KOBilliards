@@ -51,7 +51,7 @@ public class RecommendMatchFragment extends BaseListFragment<RecommendMatchPrese
 
     @Override
     protected void onRefresh() {
-        mCurrentPage=1;
+        mCurrentPage=0;
         mPresenter.getRecommendMatchList(lat,lng,1,mCurrentPage);
     }
 
@@ -81,7 +81,7 @@ public class RecommendMatchFragment extends BaseListFragment<RecommendMatchPrese
 
     @Override
     public void showRecommendMatchList(List<BilliardsMatchPojo> matchList) {
-        if (mCurrentPage == 1){
+        if (mCurrentPage == 0){
             mAdapter.setNewData(matchList);
         }else {
             mAdapter.addData(matchList);

@@ -12,6 +12,7 @@ import com.yuyuka.billiards.ui.adapter.common.NavigatorAdapter;
 import com.yuyuka.billiards.ui.adapter.common.PagerAdapter;
 import com.yuyuka.billiards.ui.fragment.live.NearbyLiveFragment;
 import com.yuyuka.billiards.ui.fragment.live.RecommendLiveFragment;
+import com.yuyuka.billiards.ui.fragment.news.NewsListFragment;
 import com.yuyuka.billiards.ui.fragment.video.VideoListFragment;
 import com.yuyuka.billiards.widget.tabindicator.MagicIndicator;
 import com.yuyuka.billiards.widget.tabindicator.ViewPagerHelper;
@@ -39,11 +40,11 @@ public class NewsFragment extends BaseFragment {
     @Override
     protected void initData() {
         mFragmentList = new ArrayList<>();
-        mFragmentList.add(new RecommendLiveFragment());
-        mFragmentList.add(new NearbyLiveFragment());
-        mFragmentList.add(new VideoListFragment());
-        mFragmentList.add(new VideoListFragment());
-        mFragmentList.add(new VideoListFragment());
+        mFragmentList.add(NewsListFragment.newFragment(4));
+        mFragmentList.add(NewsListFragment.newFragment(3));
+        mFragmentList.add(NewsListFragment.newFragment(0));
+        mFragmentList.add(NewsListFragment.newFragment(2));
+        mFragmentList.add(NewsListFragment.newFragment(1));
         mAdapter = new PagerAdapter(getChildFragmentManager(),mFragmentList,mTitles);
     }
 

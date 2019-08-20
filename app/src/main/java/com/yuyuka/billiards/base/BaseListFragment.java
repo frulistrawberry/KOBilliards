@@ -26,7 +26,7 @@ public abstract class BaseListFragment<P extends BasePresenter> extends BaseRefr
     protected String mEmptyMsg = "空空如也";
     protected String mEmptySubMsg;
     protected int mEmptyIcon = R.mipmap.ic_empty;
-    protected int mCurrentPage = 1;
+    protected int mCurrentPage = 0;
 
     @BindView(R.id.recycler_view)
     protected RecyclerView mRecyclerView;
@@ -63,7 +63,7 @@ public abstract class BaseListFragment<P extends BasePresenter> extends BaseRefr
     public void showEmpty() {
         if (mAdapter == null)
             return;
-        if (mCurrentPage == 1){
+        if (mCurrentPage == 0){
             mAdapter.setEmptyView(ViewUtils.genEmptyView(getContext(),mEmptyIcon,mEmptyMsg,mEmptySubMsg));
             mAdapter.setNewData(null);
         }
@@ -78,7 +78,7 @@ public abstract class BaseListFragment<P extends BasePresenter> extends BaseRefr
         super.showError(errMsg);
         if (mAdapter == null)
             return;
-        if (mCurrentPage == 1){
+        if (mCurrentPage == 0){
             if (!NetworkUtils.isNetWorkAvailable(getContext())){
                 //网络不可用
                 View errorView = ViewUtils.genErrorView(getContext(),R.mipmap.ic_error,"网络不可用","点击刷新");

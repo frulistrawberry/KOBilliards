@@ -35,7 +35,7 @@ public class VideoListFragment extends BaseListFragment<VideoListPresenter> impl
 
     @Override
     protected void onRefresh() {
-        mCurrentPage = 1;
+        mCurrentPage = 0;
         getPresenter().getVideoList(mCurrentPage);
 
     }
@@ -86,7 +86,7 @@ public class VideoListFragment extends BaseListFragment<VideoListPresenter> impl
 
     @Override
     public void showVideoList(List<VideoPojo> dataList) {
-        if (mCurrentPage == 1){
+        if (mCurrentPage == 0){
             mAdapter.setNewData(dataList);
         }else {
             mAdapter.addData(dataList);

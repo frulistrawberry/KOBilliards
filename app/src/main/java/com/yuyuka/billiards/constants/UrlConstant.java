@@ -14,4 +14,5 @@ public class UrlConstant {
     public static String GOODS_AND_PROMOTION_LIST = "com.yuyuka.billiards.api.goodsAndPromotion.list";
     public static String CRIPPLE_TYPE_LIST = "com.yuyuka.billiards.api.cripple.type.list";
     public static String CRIPPLE_INFO_LIST = "com.yuyuka.billiards.api.cripple.info.list";
+    public static String CONSULATION_LIST = "com.yuyuka.billiards.api.consultation.list";
 }

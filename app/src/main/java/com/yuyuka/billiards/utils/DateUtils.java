@@ -179,10 +179,11 @@ public class DateUtils {
     /**
      * 转化时间输入时间与当前时间的间隔
      *
-     * @param timestamp
+     * @param createDate
      * @return
      */
-    public static String converTime(long timestamp) {
+    public static String converTime(String createDate) {
+        long timestamp = parseDatetime(createDate).getTime();
         long currentSeconds = System.currentTimeMillis() / 1000;
         long timeGap = currentSeconds - timestamp;// 与现在时间相差秒数
         String timeStr = null;

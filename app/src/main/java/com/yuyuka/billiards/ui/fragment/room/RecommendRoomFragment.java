@@ -96,7 +96,7 @@ public class RecommendRoomFragment extends BaseListFragment<RecommendRoomPresent
 
     @Override
     protected void onRefresh() {
-        mCurrentPage=1;
+        mCurrentPage=0;
         mPresenter.getRecommendRoomList(lat,lng,mCurrentPage);
     }
 
@@ -134,7 +134,7 @@ public class RecommendRoomFragment extends BaseListFragment<RecommendRoomPresent
 
     @Override
     public void showRecommendRoomList(List<BilliardsRoomPojo> roomList) {
-        if (mCurrentPage == 1){
+        if (mCurrentPage == 0){
             mAdapter.setNewData(roomList);
         }else {
             mAdapter.addData(roomList);

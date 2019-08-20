@@ -35,7 +35,7 @@ public class NearbyLiveFragment extends BaseListFragment<NearbyLivePresenter> im
 
     @Override
     protected void onRefresh() {
-        mCurrentPage = 1;
+        mCurrentPage = 0;
         getPresenter().getNearbyLiveList(mCurrentPage);
     }
 
@@ -84,7 +84,7 @@ public class NearbyLiveFragment extends BaseListFragment<NearbyLivePresenter> im
 
     @Override
     public void showNearbyLiveList(List<LivePojo> dataList) {
-        if (mCurrentPage == 1){
+        if (mCurrentPage == 0){
             mAdapter.setNewData(dataList);
         }else {
             mAdapter.addData(dataList);

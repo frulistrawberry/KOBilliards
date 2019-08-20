@@ -30,7 +30,7 @@ public class RoomListActivity extends BaseListActivity<BilliardsRoomListPresente
 
     @Override
     protected void onRefresh() {
-        mCurrentPage = 1;
+        mCurrentPage = 0;
         mPresenter.getBilliardsRoomList(mCurrentPage);
     }
 
@@ -70,7 +70,7 @@ public class RoomListActivity extends BaseListActivity<BilliardsRoomListPresente
 
     @Override
     public void showBilliardsRoomList(List<BilliardsRoomPojo> roomList) {
-        if (mCurrentPage == 1){
+        if (mCurrentPage == 0){
             mAdapter.setNewData(roomList);
         }else {
             mAdapter.addData(roomList);

@@ -22,7 +22,7 @@ public abstract class BaseListActivity<P extends BasePresenter> extends BaseRefr
 
     protected String mEmptyMsg = "空空如也";//空视图提示信息
     protected int mEmptyIcon = R.mipmap.ic_empty;//空视图图标
-    protected int mCurrentPage = 1;//当前页码
+    protected int mCurrentPage = 0;//当前页码
 
     @BindView(R.id.recycler_view)
     protected RecyclerView mRecyclerView;
@@ -60,7 +60,7 @@ public abstract class BaseListActivity<P extends BasePresenter> extends BaseRefr
     public void showEmpty() {
         if (mAdapter == null)
             return;
-        if (mCurrentPage == 1)
+        if (mCurrentPage == 0)
             mAdapter.setEmptyView(ViewUtils.genEmptyView(getContext(),mEmptyIcon,mEmptyMsg));
         else if (isLoadMoreEnable()){
             mAdapter.loadMoreEnd(false);
@@ -74,7 +74,7 @@ public abstract class BaseListActivity<P extends BasePresenter> extends BaseRefr
         super.showError(errMsg);
         if (mAdapter == null)
             return;
-        if (mCurrentPage == 1){
+        if (mCurrentPage == 0){
             super.showError(errMsg);
         }else if (isLoadMoreEnable()){
            mAdapter.loadMoreFail();

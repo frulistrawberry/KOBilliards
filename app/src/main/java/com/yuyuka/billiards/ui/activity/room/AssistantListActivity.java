@@ -27,7 +27,7 @@ public class AssistantListActivity extends BaseListActivity<BilliardsCoachListPr
 
     @Override
     protected void onRefresh() {
-        mCurrentPage = 1;
+        mCurrentPage = 0;
         mPresenter.getBilliardsCoachList(mCurrentPage);
     }
     @Override
@@ -64,7 +64,7 @@ public class AssistantListActivity extends BaseListActivity<BilliardsCoachListPr
 
     @Override
     public void showBilliardsCoachList(List<BilliardsCoachPojo> coachList) {
-        if (mCurrentPage == 1){
+        if (mCurrentPage == 0){
             mAdapter.setNewData(coachList);
         }else {
             mAdapter.addData(coachList);

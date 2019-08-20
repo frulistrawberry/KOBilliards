@@ -14,6 +14,11 @@ public class BizContent {
     private Integer billiardsInfoId;
     private Integer modeType;
     private Integer typeId;
+    private Integer queryType;
+
+    public void setQueryType(Integer queryType) {
+        this.queryType = queryType;
+    }
 
     public void setTypeId(Integer typeId) {
         this.typeId = typeId;

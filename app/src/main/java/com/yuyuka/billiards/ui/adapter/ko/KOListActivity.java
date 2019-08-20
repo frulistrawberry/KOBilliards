@@ -37,7 +37,7 @@ public class KOListActivity extends BaseListActivity<KOListPresenter> implements
 
     @Override
     protected void onRefresh() {
-        mCurrentPage = 1;
+        mCurrentPage = 0;
         getPresenter().getKOList(id,mCurrentPage);
     }
 
@@ -73,7 +73,7 @@ public class KOListActivity extends BaseListActivity<KOListPresenter> implements
 
     @Override
     public void showKOList(List<KOListPojo> data) {
-        if (mCurrentPage == 1){
+        if (mCurrentPage == 0){
             mAdapter.setNewData(data);
         }else {
             mAdapter.addData(data);
