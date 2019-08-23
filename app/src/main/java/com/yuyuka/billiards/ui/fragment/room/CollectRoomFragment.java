@@ -63,7 +63,7 @@ public class CollectRoomFragment extends BaseListFragment<CollectionRoomPresente
     }
 
     @Override
-    protected void onRefresh() {
+    public void onRefresh() {
         mCurrentPage=1;
         mPresenter.getRecommendRoomList(mCurrentPage);
     }

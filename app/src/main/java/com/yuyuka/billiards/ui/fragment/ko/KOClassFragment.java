@@ -34,7 +34,7 @@ public class KOClassFragment extends BaseListFragment<KOClassPresenter> implemen
     }
 
     @Override
-    protected void onRefresh() {
+    public void onRefresh() {
         getPresenter().getCrippleTypeList(type);
     }
 

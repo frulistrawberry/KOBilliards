@@ -7,6 +7,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.pojo.ModularPojo;
+import com.yuyuka.billiards.ui.activity.facetoface.FaceToFaceActivity;
 import com.yuyuka.billiards.ui.activity.ko.KOClassActivity;
 import com.yuyuka.billiards.ui.activity.mail.MailActivity;
 import com.yuyuka.billiards.ui.activity.match.NearbyMatchActivity;
@@ -42,6 +43,9 @@ public class ModularAdapter extends BaseQuickAdapter<ModularPojo, BaseViewHolder
                         break;
                     case "添加商户":
                         mContext.startActivity(new Intent(mContext, AddMerchantActivity.class));
+                        break;
+                    case "面对面对战":
+                        mContext.startActivity(new Intent(mContext, FaceToFaceActivity.class));
                         break;
             }
         });

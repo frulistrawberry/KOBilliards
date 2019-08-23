@@ -96,6 +96,8 @@ dependencies {
     implementation 'com.belerweb:pinyin4j:2.5.0'
     //loadingView
     implementation 'com.wang.avi:library:1.0.0'
+    //二维码
+    implementation 'cn.yipianfengye.android:zxing-library:2.2'
 
 
     //高德地图

@@ -29,7 +29,7 @@ public class RoomListActivity extends BaseListActivity<BilliardsRoomListPresente
     }
 
     @Override
-    protected void onRefresh() {
+    public void onRefresh() {
         mCurrentPage = 0;
         mPresenter.getBilliardsRoomList(mCurrentPage);
     }

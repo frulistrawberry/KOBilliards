@@ -36,7 +36,7 @@ public class NewsListFragment extends BaseListFragment<NewsListPresenter> implem
     }
 
     @Override
-    protected void onRefresh() {
+    public void onRefresh() {
         mCurrentPage = 0;
         getPresenter().getNewsList(mCurrentPage,queryType);
     }

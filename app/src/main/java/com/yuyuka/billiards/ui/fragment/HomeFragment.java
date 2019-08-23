@@ -15,6 +15,7 @@ import android.widget.RelativeLayout;
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseFragment;
+import com.yuyuka.billiards.base.BaseListFragment;
 import com.yuyuka.billiards.event.OffsetChangeEvent;
 import com.yuyuka.billiards.pojo.ImagePojo;
 import com.yuyuka.billiards.pojo.ModularPojo;
@@ -34,12 +35,16 @@ import com.yuyuka.billiards.widget.tabindicator.ViewPagerHelper;
 import com.yuyuka.billiards.widget.tabindicator.buildins.commonnavigator.CommonNavigator;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import in.srain.cube.views.ptr.PtrClassicFrameLayout;
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
 
 public class HomeFragment extends BaseFragment{
     @BindView(R.id.app_bar)
@@ -62,9 +67,12 @@ public class HomeFragment extends BaseFragment{
     ViewPager mViewPager;
     @BindView(R.id.fl_header)
     FrameLayout mHeaderLayout;
+    @BindView(R.id.layout_ptr)
+    PtrClassicFrameLayout mPtrLayout;
 
     List<Fragment> mFragmentList;
     PagerAdapter mAdapter;
+    boolean canRefresh = true;
 
     String[] mTitles = {"推荐","附近","视频"};
     String[] mModularTitles = {"附近比赛","附近球房","残局模式","面对面对战","添加商户","台球课程","台球二手","排行榜"};
@@ -87,6 +95,7 @@ public class HomeFragment extends BaseFragment{
         mFragmentList.add(new NearbyLiveFragment());
         mFragmentList.add(new VideoListFragment());
         mAdapter = new PagerAdapter(getChildFragmentManager(),mFragmentList,mTitles);
+        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -98,26 +107,25 @@ public class HomeFragment extends BaseFragment{
                 if (state == State.COLLAPSED){
                     mToolbarCloseLayout.setVisibility(View.VISIBLE);
                     mToolbarOpenLayout.setVisibility(View.GONE);
-                    new Handler().postDelayed(() -> {
-                        mHeaderLayout.setVisibility(View.GONE);
-                        banAppBarScroll(false);
-                    },500);
-                    EventBus.getDefault().post(new OffsetChangeEvent("HomeFragment",State.COLLAPSED));
                 }else {
-                    if (mHeaderLayout.getVisibility() == View.GONE){
-                        mToolbarCloseLayout.setVisibility(View.VISIBLE);
-                        mToolbarOpenLayout.setVisibility(View.GONE);
-                        EventBus.getDefault().post(new OffsetChangeEvent("HomeFragment",State.COLLAPSED));
-                    }else {
-                        mToolbarOpenLayout.setVisibility(View.VISIBLE);
-                        mToolbarCloseLayout.setVisibility(View.GONE);
-                        EventBus.getDefault().post(new OffsetChangeEvent("HomeFragment",state));
-                    }
-
+                    mToolbarOpenLayout.setVisibility(View.VISIBLE);
+                    mToolbarCloseLayout.setVisibility(View.GONE);
                 }
+                canRefresh = state == State.EXPANDED;
 
 
 
+            }
+        });
+        mPtrLayout.setPtrHandler(new PtrDefaultHandler() {
+            @Override
+            public void onRefreshBegin(PtrFrameLayout frame) {
+                ((BaseListFragment)mFragmentList.get(mViewPager.getCurrentItem())).onRefresh();
+            }
+
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                return canRefresh;
             }
         });
         List<ModularPojo> modularPojos = new ArrayList<>();
@@ -157,6 +165,14 @@ public class HomeFragment extends BaseFragment{
             mAppBarParams.setScrollFlags(0);
         }
 
+    }
+
+    @Subscribe
+    public void onEvent(String event){
+        if (event.equals("refresh_complete")){
+            if (mPtrLayout.isRefreshing())
+                mPtrLayout.refreshComplete();
+        }
     }
 
     @OnClick({R.id.btn_top,R.id.btn_bonus_rewards})

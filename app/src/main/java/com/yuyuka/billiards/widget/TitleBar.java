@@ -101,6 +101,8 @@ public class TitleBar extends LinearLayout {
 
         }else if (style == 2){
             backIcon = R.mipmap.icon_back_white;
+        }else if (style == 3){
+            backIcon = R.mipmap.icon_title_back;
         }
         return setLeftImage(backIcon, v -> {
             if (getContext() instanceof Activity){
@@ -167,6 +169,8 @@ public class TitleBar extends LinearLayout {
             inflater.inflate(R.layout.include_title_bar_white,this,true);
         else if (style == 2)
             inflater.inflate(R.layout.include_title_bar_gold,this,true);
+        else if (style == 3)
+            inflater.inflate(R.layout.include_title_bar_transparent,this,true);
         mLeftTitleIv = findViewById(R.id.iv_title_left);
         mLeftTitleTv = findViewById(R.id.tv_title_left);
         mTitleTv = findViewById(R.id.tv_title);

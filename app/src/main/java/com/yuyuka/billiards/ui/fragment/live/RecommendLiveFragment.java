@@ -34,7 +34,7 @@ public class RecommendLiveFragment extends BaseListFragment<RecommendLivePresent
     }
 
     @Override
-    protected void onRefresh() {
+    public void onRefresh() {
         mCurrentPage = 0;
         getPresenter().getRecommendLiveList(mCurrentPage);
 

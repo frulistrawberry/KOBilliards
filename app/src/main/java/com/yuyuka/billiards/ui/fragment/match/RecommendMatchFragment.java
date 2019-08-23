@@ -50,7 +50,7 @@ public class RecommendMatchFragment extends BaseListFragment<RecommendMatchPrese
     }
 
     @Override
-    protected void onRefresh() {
+    public void onRefresh() {
         mCurrentPage=0;
         mPresenter.getRecommendMatchList(lat,lng,1,mCurrentPage);
     }

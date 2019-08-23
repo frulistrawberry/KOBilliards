@@ -94,7 +94,7 @@ public class MailActivity extends BaseListActivity<GoodsListPresenter> implement
 
 
     @Override
-    protected void onRefresh() {
+    public void onRefresh() {
         mCurrentPage = 0;
         getPresenter().getGoodsList(mCurrentPage);
     }

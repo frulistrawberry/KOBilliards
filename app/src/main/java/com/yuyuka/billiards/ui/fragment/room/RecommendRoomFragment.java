@@ -95,7 +95,7 @@ public class RecommendRoomFragment extends BaseListFragment<RecommendRoomPresent
     }
 
     @Override
-    protected void onRefresh() {
+    public void onRefresh() {
         mCurrentPage=0;
         mPresenter.getRecommendRoomList(lat,lng,mCurrentPage);
     }

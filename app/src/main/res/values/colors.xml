@@ -3,12 +3,13 @@
     <color name="colorPrimary">#008577</color>
     <color name="colorPrimaryDark">#00574B</color>
     <color name="colorAccent">#D81B60</color>
+    <color name="bg_status_bar_trans">#00000000</color>
 
     <color name="bg_window">#ffffff</color>
-    <color name="bg_status_bar">#1DB710</color>
+    <color name="bg_status_bar">#1AA171</color>
     <color name="bg_status_bar_white">#757575</color>
 
-    <color name="bg_title_bar">#1DB710</color>
+    <color name="bg_title_bar">#1AA171</color>
     <color name="bg_title_bar_gold">#F5CF41</color>
     <color name="text_color_title">#ffffff</color>
     <color name="text_color_title_menu">#ffffff</color>

@@ -44,7 +44,7 @@ public class RoomSearchActivity extends BaseListActivity<BilliardsRoomSearchPres
     }
 
     @Override
-    protected void onRefresh() {
+    public void onRefresh() {
 
     }
 

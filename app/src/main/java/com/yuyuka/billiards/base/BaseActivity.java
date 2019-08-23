@@ -139,6 +139,8 @@ public abstract class BaseActivity extends RxAppCompatActivity {
             mStatusBar.setBackgroundColor(getResourceColor(R.color.bg_status_bar_white));
         }else if (titleStyle == 2){
             mStatusBar.setBackgroundColor(getResourceColor(R.color.bg_title_bar_gold));
+        }else if (titleStyle == 3){
+            mStatusBar.setVisibility(View.GONE);
         }
         mTitleBar = new TitleBar(this,titleStyle);
         mTitleBar.hide();

@@ -253,7 +253,7 @@ public class RoomDetailActivity extends BaseRefreshActivity<RoomDetailPresenter>
     }
 
     @Override
-    protected void onRefresh() {
+    public void onRefresh() {
         getPresenter().getGoodsInfo(billiardsId,weekNum,false);
     }
 

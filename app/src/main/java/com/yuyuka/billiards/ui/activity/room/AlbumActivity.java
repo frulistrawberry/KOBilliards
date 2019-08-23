@@ -41,7 +41,7 @@ public class AlbumActivity extends BaseListActivity {
     }
 
     @Override
-    protected void onRefresh() {
+    public void onRefresh() {
 
     }
 

@@ -34,7 +34,7 @@ public class NearbyLiveFragment extends BaseListFragment<NearbyLivePresenter> im
     }
 
     @Override
-    protected void onRefresh() {
+    public void onRefresh() {
         mCurrentPage = 0;
         getPresenter().getNearbyLiveList(mCurrentPage);
     }
@@ -74,12 +74,18 @@ public class NearbyLiveFragment extends BaseListFragment<NearbyLivePresenter> im
 
             @Override
             public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
-                return canRefresh && super.checkCanDoRefresh(frame, content, header);
+                return false;
             }
         });
         mRecyclerView.setLayoutManager(new GridLayoutManager(getContext(),2));
         mRecyclerView.setAdapter(mAdapter);
         onRefresh();
+    }
+
+    @Override
+    public void hideLoading() {
+        super.hideLoading();
+        EventBus.getDefault().post("refresh_complete");
     }
 
     @Override

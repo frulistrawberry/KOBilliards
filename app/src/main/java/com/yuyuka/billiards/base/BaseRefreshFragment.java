@@ -48,7 +48,7 @@ public abstract class BaseRefreshFragment<P extends BasePresenter> extends BaseM
     /**
      * 子类必须实现此方法添加刷新逻辑
      */
-    protected abstract void onRefresh();
+    public abstract void onRefresh();
 
     @Override
     public void showEmpty() {

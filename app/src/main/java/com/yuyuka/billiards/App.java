@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 import com.yuyuka.billiards.base.ActivityManager;
 import com.yuyuka.billiards.constants.PreferenceConstant;
 import com.yuyuka.billiards.utils.AppUtils;
@@ -25,6 +26,7 @@ public class App extends MultiDexApplication implements Application.ActivityLife
         SPUtils.init(PreferenceConstant.PREFERENCE_NAME,this);
         LogUtil.init(BuildConfig.DEBUG);
         registerActivityLifecycleCallbacks(this);
+        ZXingLibrary.initDisplayOpinion(this);
 //        SDKOptions options = new SDKOptions();
 //        MixPushConfig config = new MixPushConfig();
 //        config.xmAppId = Config.XM_APP_ID;

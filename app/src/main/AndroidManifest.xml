@@ -103,6 +103,8 @@
         <activity android:name=".ui.activity.merchant.AddMerchantActivity" />
         <activity android:name=".ui.activity.merchant.AddBusinessDateActivity" />
         <activity android:name=".ui.activity.merchant.AddSuccessActivity" />
+        <activity android:name=".ui.activity.facetoface.FaceToFaceActivity" />
+        <activity android:name=".ui.activity.facetoface.FaceToFaceQualifyingActivity" />
         <!-- 网易云信 -->
         <meta-data
             android:name="com.netease.nim.appKey"
