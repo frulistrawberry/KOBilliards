@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class RequestParam implements Serializable {
     private String channelCode = Config.CHANNEL_CODE;
     private String timestamp = String.valueOf(System.currentTimeMillis()/1000);
-    private String authToken = SPUtils.getString(PreferenceConstant.TOKEN);
+    private String authToken = "947624f199397eb555c59a2bf14951e2";
     private String deviceInfo = PhoneUtils.getDeviceId(AppUtils.getAppContext());
     private String bizContent;
     private String method;

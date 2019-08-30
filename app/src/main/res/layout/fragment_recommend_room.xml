@@ -22,15 +22,22 @@
                 android:layout_height="22dp"
                 android:src="@mipmap/ic_nearby_room_back_to_top"/>
             <TextView
+                android:id="@+id/tv_sort_distance"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
-                android:textColor="#808080"
+                android:textColor="@color/text_color_1"
                 android:layout_marginLeft="5dp"
                 android:text="我附近"
                 android:gravity="center"
                 android:drawablePadding="2dp"
-                android:drawableRight="@mipmap/sort_arrow_down"/>
+                />
+            <ImageView
+                android:id="@+id/iv_sort_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:src="@mipmap/ic_arrow_down"/>
         </LinearLayout>
         <View
             android:layout_width="1dp"
@@ -44,15 +51,20 @@
             android:gravity="center"
             android:layout_weight="1">
             <TextView
+                android:id="@+id/tv_sort_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
-                android:textColor="#808080"
+                android:textColor="@color/text_color_3"
                 android:layout_marginLeft="5dp"
                 android:text="星级/价格"
-                android:gravity="center"
-                android:drawablePadding="2dp"
-                android:drawableRight="@mipmap/sort_arrow_down"/>
+                android:gravity="center" />
+            <ImageView
+                android:id="@+id/iv_sort_level"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="2dp"
+                android:src="@mipmap/ic_arrow_down"/>
         </LinearLayout>
         <View
             android:layout_width="1dp"
@@ -69,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
-                android:textColor="#808080"
+                android:textColor="@color/text_color_3"
                 android:layout_marginLeft="5dp"
                 android:text="筛选"
                 android:gravity="center"

@@ -10,9 +10,11 @@ public class UrlConstant {
     public static String MATCH_NEARBY_LIST_BEGINNING = "com.yuyuka.billiards.api.match.nearby.list.beginning";
 
     public static String LIST = "com.yuyuka.billiards.api.list";
+    public static String SEARCH_BIZ = "com.yuyuka.billiards.api.search.biz";
 
     public static String GOODS_AND_PROMOTION_LIST = "com.yuyuka.billiards.api.goodsAndPromotion.list";
     public static String CRIPPLE_TYPE_LIST = "com.yuyuka.billiards.api.cripple.type.list";
     public static String CRIPPLE_INFO_LIST = "com.yuyuka.billiards.api.cripple.info.list";
     public static String CONSULATION_LIST = "com.yuyuka.billiards.api.consultation.list";
+    public static String SEARCH_INDEX = "com.yuyuka.billiards.api.search.index";
 }

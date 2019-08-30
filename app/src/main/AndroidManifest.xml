@@ -74,29 +74,29 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".ui.activity.room.NearbyRoomActivity"
+        <activity android:name=".ui.activity.merchant.NearbyMerchantActivity"
             android:screenOrientation="portrait">
 
         </activity>
-        <activity android:name=".ui.activity.room.RoomDetailActivity"
+        <activity android:name=".ui.activity.merchant.MerchantDetailActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".ui.activity.room.RoomListActivity" />
-        <activity android:name=".ui.activity.room.AssistantListActivity" />
-        <activity android:name=".ui.activity.room.RoomCommentActivity"/>
+        <activity android:name=".ui.activity.merchant.MerchantListActivity" />
+        <activity android:name=".ui.activity.merchant.AssistantListActivity" />
+        <activity android:name=".ui.activity.merchant.MerchantCommentActivity"/>
         <activity android:name=".ui.activity.common.MapActivity" />
-        <activity android:name=".ui.activity.room.AlbumActivity"/>
-        <activity android:name=".ui.activity.room.RoomSearchActivity" />
+        <activity android:name=".ui.activity.merchant.AlbumActivity"/>
+        <activity android:name=".ui.activity.search.RoomSearchActivity" />
         <activity android:name=".ui.activity.common.CityListActivity" />
-        <activity android:name=".ui.activity.room.RoomFaclitiesActivity" />
-        <activity android:name=".ui.activity.room.AssistantPreviewActivity"
+        <activity android:name=".ui.activity.merchant.MerchantFacilitiesActivity" />
+        <activity android:name=".ui.activity.merchant.AssistantPreviewActivity"
             android:screenOrientation="landscape"/>
-        <activity android:name=".ui.activity.room.RoomReserveActivity" />
+        <activity android:name=".ui.activity.merchant.OrderConfirmActivity" />
         <activity android:name=".ui.activity.common.PayActivity" />
         <activity android:name=".ui.activity.match.NearbyMatchActivity" />
-        <activity android:name=".ui.activity.mail.MailActivity" />
-        <activity android:name=".ui.activity.mail.GoodsDetailActivity" />
-        <activity android:name=".ui.activity.mail.ReleaseGoodsActivity" />
-        <activity android:name=".ui.activity.ko.KOClassActivity" />
+        <activity android:name=".ui.activity.market.MailActivity" />
+        <activity android:name=".ui.activity.market.GoodsDetailActivity" />
+        <activity android:name=".ui.activity.market.ReleaseGoodsActivity" />
+        <activity android:name=".ui.activity.course.KOClassActivity" />
         <activity android:name=".ui.adapter.ko.KOListActivity" />
         <activity android:name=".ui.activity.bonus.BonusPoolActivity" />
         <activity android:name=".ui.activity.bonus.RewardBonusActivity" />
@@ -105,6 +105,9 @@
         <activity android:name=".ui.activity.merchant.AddSuccessActivity" />
         <activity android:name=".ui.activity.facetoface.FaceToFaceActivity" />
         <activity android:name=".ui.activity.facetoface.FaceToFaceQualifyingActivity" />
+        <activity android:name=".ui.activity.news.ArticleDetailActivity" />
+        <activity android:name=".ui.activity.news.VideoDetailActivity" />
+        <activity android:name=".ui.activity.news.SmallVideoDetailActivity" />
         <!-- 网易云信 -->
         <meta-data
             android:name="com.netease.nim.appKey"

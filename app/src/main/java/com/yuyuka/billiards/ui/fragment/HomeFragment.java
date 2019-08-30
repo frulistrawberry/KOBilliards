@@ -16,15 +16,12 @@ import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseFragment;
 import com.yuyuka.billiards.base.BaseListFragment;
-import com.yuyuka.billiards.event.OffsetChangeEvent;
 import com.yuyuka.billiards.pojo.ImagePojo;
 import com.yuyuka.billiards.pojo.ModularPojo;
 import com.yuyuka.billiards.ui.activity.bonus.BonusPoolActivity;
 import com.yuyuka.billiards.ui.adapter.common.NavigatorAdapter;
 import com.yuyuka.billiards.ui.adapter.common.PagerAdapter;
-import com.yuyuka.billiards.ui.fragment.live.NearbyLiveFragment;
-import com.yuyuka.billiards.ui.fragment.live.RecommendLiveFragment;
-import com.yuyuka.billiards.ui.fragment.video.VideoListFragment;
+import com.yuyuka.billiards.ui.fragment.news.HomeNewsListFragment;
 import com.yuyuka.billiards.utils.ViewUtils;
 import com.yuyuka.billiards.utils.log.LogUtil;
 import com.yuyuka.billiards.widget.AppBarStateChangeListener;
@@ -75,7 +72,7 @@ public class HomeFragment extends BaseFragment{
     boolean canRefresh = true;
 
     String[] mTitles = {"推荐","附近","视频"};
-    String[] mModularTitles = {"附近比赛","附近球房","残局模式","面对面对战","添加商户","台球课程","台球二手","排行榜"};
+    String[] mModularTitles = {"附近比赛","附近球房","个人模式","面对面对战","添加商户","KO学堂","台球二手","排行榜"};
     int[] mModularIcons = {R.mipmap.ic_modular_nearby_match,R.mipmap.ic_modular_nearby_room,
             R.mipmap.ic_modular_bet, R.mipmap.ic_modular_face_to_face,R.mipmap.ic_modular_add_merchant,
             R.mipmap.ic_modular_cause,R.mipmap.ic_modular_mail,R.mipmap.ic_modular_rank};
@@ -91,9 +88,9 @@ public class HomeFragment extends BaseFragment{
     @Override
     protected void initData() {
         mFragmentList = new ArrayList<>();
-        mFragmentList.add(new RecommendLiveFragment());
-        mFragmentList.add(new NearbyLiveFragment());
-        mFragmentList.add(new VideoListFragment());
+        mFragmentList.add(HomeNewsListFragment.newFragment(1));
+        mFragmentList.add(HomeNewsListFragment.newFragment(1));
+        mFragmentList.add(HomeNewsListFragment.newFragment(1));
         mAdapter = new PagerAdapter(getChildFragmentManager(),mFragmentList,mTitles);
         EventBus.getDefault().register(this);
     }
@@ -152,21 +149,6 @@ public class HomeFragment extends BaseFragment{
     }
 
 
-
-
-
-    private void banAppBarScroll(boolean isScroll){
-        View mAppBarChildAt = mAppbarLayout.getChildAt(0);
-        AppBarLayout.LayoutParams  mAppBarParams = (AppBarLayout.LayoutParams)mAppBarChildAt.getLayoutParams();
-        if (isScroll) {
-            mAppBarParams.setScrollFlags(AppBarLayout.LayoutParams.SCROLL_FLAG_SCROLL | AppBarLayout.LayoutParams.SCROLL_FLAG_EXIT_UNTIL_COLLAPSED);
-            mAppBarChildAt.setLayoutParams(mAppBarParams);
-        } else {
-            mAppBarParams.setScrollFlags(0);
-        }
-
-    }
-
     @Subscribe
     public void onEvent(String event){
         if (event.equals("refresh_complete")){
@@ -181,7 +163,7 @@ public class HomeFragment extends BaseFragment{
             case R.id.btn_top:
                 mToolbarOpenLayout.setVisibility(View.VISIBLE);
                 mHeaderLayout.setVisibility(View.VISIBLE);
-                banAppBarScroll(true);
+                mAppbarLayout.setExpanded(true);
                 break;
             case R.id.btn_bonus_rewards:
                 startActivity(new Intent(getContext(),BonusPoolActivity.class));

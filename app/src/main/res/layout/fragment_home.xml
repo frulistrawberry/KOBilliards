@@ -324,7 +324,7 @@
                                         android:text="K1奖池(乔氏主赞助)"
                                         android:paddingLeft="5dp"
                                         android:paddingRight="5dp"
-                                        android:textColor="@color/text_color_10"
+                                        android:textColor="@color/bg_status_bar"
                                         android:textSize="14sp" />
                                 </LinearLayout>
 

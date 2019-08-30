@@ -9,7 +9,7 @@ import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.pojo.GoodsPojo;
-import com.yuyuka.billiards.ui.activity.mail.GoodsDetailActivity;
+import com.yuyuka.billiards.ui.activity.market.GoodsDetailActivity;
 import com.yuyuka.billiards.utils.SizeUtils;
 
 public class GoodsAdapter extends BaseQuickAdapter<GoodsPojo, BaseViewHolder> {

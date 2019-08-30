@@ -2,16 +2,12 @@ package com.yuyuka.billiards.ui.adapter.ko;
 
 
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.image.ImageManager;
-import com.yuyuka.billiards.pojo.BilliardsRoomPojo;
 import com.yuyuka.billiards.pojo.KOListPojo;
-import com.yuyuka.billiards.ui.activity.room.RoomDetailActivity;
-import com.yuyuka.billiards.utils.DataOptionUtils;
 
 public class KOListAdapter extends BaseQuickAdapter<KOListPojo, BaseViewHolder> {
 

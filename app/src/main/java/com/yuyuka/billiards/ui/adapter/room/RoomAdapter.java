@@ -9,7 +9,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.image.ImageManager;
 import com.yuyuka.billiards.pojo.BilliardsRoomPojo;
-import com.yuyuka.billiards.ui.activity.room.RoomDetailActivity;
+import com.yuyuka.billiards.ui.activity.merchant.MerchantDetailActivity;
 import com.yuyuka.billiards.utils.DataOptionUtils;
 
 public class RoomAdapter extends BaseQuickAdapter<BilliardsRoomPojo, BaseViewHolder> {
@@ -64,6 +64,6 @@ public class RoomAdapter extends BaseQuickAdapter<BilliardsRoomPojo, BaseViewHol
 
 
 
-        helper.getConvertView().setOnClickListener(v -> RoomDetailActivity.launcher(mContext,item.getBilliardsId()));
+        helper.getConvertView().setOnClickListener(v -> MerchantDetailActivity.launcher(mContext,item.getBilliardsId()));
     }
 }

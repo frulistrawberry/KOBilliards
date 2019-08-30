@@ -1,5 +1,7 @@
 package com.yuyuka.billiards.net;
 
+import java.util.Map;
+
 public class BizContent {
 
     private String mobile;
@@ -15,6 +17,25 @@ public class BizContent {
     private Integer modeType;
     private Integer typeId;
     private Integer queryType;
+    private String keyword;
+    private Map<String,Object> parms;
+    private Map<String,Object> order;
+
+    public void setParms(Map<String, Object> parms) {
+        this.parms = parms;
+    }
+
+    public void setOrder(Map<String, Object> order) {
+        this.order = order;
+    }
+
+    public void setKeyword(String keyword) {
+        this.keyword = keyword;
+    }
+
+    public void setParams(Map<String, Object> params) {
+        this.parms = params;
+    }
 
     public void setQueryType(Integer queryType) {
         this.queryType = queryType;

@@ -13,8 +13,6 @@ import com.yuyuka.billiards.mvp.contract.news.NewsListContract;
 import com.yuyuka.billiards.mvp.presenter.news.NewsListPresenter;
 import com.yuyuka.billiards.pojo.NewsItem;
 import com.yuyuka.billiards.ui.adapter.news.NewsAdapter;
-import com.yuyuka.billiards.ui.fragment.NewsFragment;
-import com.yuyuka.billiards.utils.log.LogUtil;
 
 import java.util.List;
 

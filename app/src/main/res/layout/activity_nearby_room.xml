@@ -80,6 +80,8 @@
                                     android:background="@drawable/bg_search"
                                     android:gravity="center_vertical"
                                     android:orientation="horizontal"
+                                    android:focusable="true"
+                                    android:focusableInTouchMode="true"
                                     android:paddingLeft="15dp"
                                     android:paddingTop="6dp"
                                     android:paddingRight="15dp"
@@ -107,13 +109,16 @@
                                         android:layout_marginLeft="8dp"
                                         android:src="@mipmap/ic_search" />
 
-                                    <TextView
-                                        android:id="@+id/btn_search"
+                                    <EditText
+                                        android:id="@+id/et_search"
                                         android:layout_width="0dp"
                                         android:layout_height="wrap_content"
                                         android:layout_marginLeft="5dp"
                                         android:layout_weight="1"
-                                        android:text="商圈/店铺名/地址"
+                                        android:singleLine="true"
+                                        android:imeOptions="actionSearch"
+                                        android:hint="商圈/店铺名/地址"
+                                        android:background="@color/white"
                                         android:textColor="#bcbcbc"
                                         android:textSize="14sp" />
 

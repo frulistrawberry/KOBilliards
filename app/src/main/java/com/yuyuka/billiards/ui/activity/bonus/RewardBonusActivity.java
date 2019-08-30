@@ -32,11 +32,8 @@ public class RewardBonusActivity extends BaseActivity {
         numberKeyboard = new NumberKeyboard(this, NumberKeyboard.DEFAULT_NUMBER_XML_LAYOUT);
         numberKeyboard.setEnableDotInput(true);
         numberKeyboard.setKeyStyle(new BaseKeyboard.DefaultKeyStyle(this));
-        numberKeyboard.setActionDoneClickListener(new NumberKeyboard.ActionDoneClickListener() {
-            @Override
-            public void onActionDone(CharSequence charSequence) {
+        numberKeyboard.setActionDoneClickListener(charSequence -> {
 
-            }
         });
         keyboardManager.bindToEditor(mRewardEt, numberKeyboard);
     }

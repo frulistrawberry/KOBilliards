@@ -12,12 +12,11 @@ import android.view.WindowManager;
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.pojo.SelectTimePojo;
-import com.yuyuka.billiards.ui.activity.room.RoomReserveActivity;
+import com.yuyuka.billiards.ui.activity.merchant.OrderConfirmActivity;
 import com.yuyuka.billiards.ui.adapter.room.SelectTimeAdapter;
 import com.yuyuka.billiards.utils.SizeUtils;
 import com.yuyuka.billiards.widget.StateButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class SelectTimeDialog extends Dialog implements BaseQuickAdapter.OnItemClickListener, View.OnClickListener {
@@ -94,7 +93,7 @@ public class SelectTimeDialog extends Dialog implements BaseQuickAdapter.OnItemC
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_reserve:
-                RoomReserveActivity.launcher(getContext());
+                OrderConfirmActivity.launcher(getContext());
                 break;
         }
     }
