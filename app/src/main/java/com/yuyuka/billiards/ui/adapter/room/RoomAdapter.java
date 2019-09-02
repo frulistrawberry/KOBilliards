@@ -64,6 +64,6 @@ public class RoomAdapter extends BaseQuickAdapter<BilliardsRoomPojo, BaseViewHol
 
 
 
-        helper.getConvertView().setOnClickListener(v -> MerchantDetailActivity.launcher(mContext,item.getBilliardsId()));
+        helper.getConvertView().setOnClickListener(v -> MerchantDetailActivity.launcher(mContext,item.getId()));
     }
 }

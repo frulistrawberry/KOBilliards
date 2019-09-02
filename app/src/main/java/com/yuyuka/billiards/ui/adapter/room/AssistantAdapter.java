@@ -16,6 +16,6 @@ public class AssistantAdapter extends BaseQuickAdapter<BilliardsCoachPojo, BaseV
     @Override
     protected void convert(BaseViewHolder helper, BilliardsCoachPojo item) {
 
-        helper.getConvertView().setOnClickListener(v -> MerchantDetailActivity.launcher(mContext,0));
+        helper.getConvertView().setOnClickListener(v -> MerchantDetailActivity.launcher(mContext,""));
     }
 }

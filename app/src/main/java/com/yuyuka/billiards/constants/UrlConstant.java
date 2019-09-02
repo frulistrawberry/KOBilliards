@@ -17,4 +17,5 @@ public class UrlConstant {
     public static String CRIPPLE_INFO_LIST = "com.yuyuka.billiards.api.cripple.info.list";
     public static String CONSULATION_LIST = "com.yuyuka.billiards.api.consultation.list";
     public static String SEARCH_INDEX = "com.yuyuka.billiards.api.search.index";
+    public static String GOODS_SETMEAL_LIST = "com.yuyuka.billiards.api.goods.setmeal.list";
 }

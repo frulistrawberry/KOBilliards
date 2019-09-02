@@ -13,7 +13,11 @@ import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.ui.activity.common.PayActivity;
 import com.yuyuka.billiards.utils.ScreenUtils;
 
+import org.w3c.dom.Text;
+
 public class ReserveConfirmDialog extends Dialog {
+    TextView dateTv;
+    TextView durationTv;
     public ReserveConfirmDialog( Context context) {
         this(context, R.style.DialogTheme);
     }
@@ -25,6 +29,8 @@ public class ReserveConfirmDialog extends Dialog {
         TextView cancelBtn = contentView.findViewById(R.id.btn_cancel);
         TextView confirmBtn = contentView.findViewById(R.id.btn_pay);
         cancelBtn.setOnClickListener(v -> dismiss());
+        dateTv = contentView.findViewById(R.id.tv_date);
+        durationTv = contentView.findViewById(R.id.tv_duration);
 
         confirmBtn.setOnClickListener(v -> {
             PayActivity.launcher(context);
@@ -36,6 +42,11 @@ public class ReserveConfirmDialog extends Dialog {
         WindowManager.LayoutParams layoutParams = dialogWindow.getAttributes();
         layoutParams.width = (int) (ScreenUtils.getScreenWidth(getContext()) * 0.75);
         layoutParams.gravity = Gravity.CENTER;
+    }
+
+    public void setData(String duration,String date){
+        durationTv.setText(duration);
+        dateTv.setText(date);
     }
 
 

@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 public class BilliardsRoomPojo implements Serializable {
+    private String id;
     private int billiardsId;
     private double positionLongitude;
     private double positionLatitude;
@@ -27,6 +28,10 @@ public class BilliardsRoomPojo implements Serializable {
     private List<BilliardsImage> billiardsImages;
     private BilliardsUser billiardsUsers;
     private int minimumPayment;
+
+    public String getId() {
+        return id;
+    }
 
     public int getMinimumPayment() {
         return minimumPayment;

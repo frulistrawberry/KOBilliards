@@ -13,7 +13,7 @@ public class BizContent {
     private Integer status;
     private Integer cityId;
     private Integer weekNum;
-    private Integer billiardsInfoId;
+    private String billiardsInfoId;
     private Integer modeType;
     private Integer typeId;
     private Integer queryType;
@@ -77,7 +77,7 @@ public class BizContent {
         this.weekNum = weekNum;
     }
 
-    public void setBilliardsInfoId(Integer billiardsInfoId) {
+    public void setBilliardsInfoId(String billiardsInfoId) {
         this.billiardsInfoId = billiardsInfoId;
     }
 

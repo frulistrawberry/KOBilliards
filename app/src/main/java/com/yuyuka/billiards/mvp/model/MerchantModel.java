@@ -9,6 +9,7 @@ import com.yuyuka.billiards.mvp.contract.merchant.BilliardsCoachListContract;
 import com.yuyuka.billiards.mvp.contract.merchant.BilliardsRoomListContract;
 import com.yuyuka.billiards.mvp.contract.merchant.BilliardsRoomSearchContract;
 import com.yuyuka.billiards.mvp.contract.merchant.CollectionRoomContract;
+import com.yuyuka.billiards.mvp.contract.merchant.OrderConfirmContract;
 import com.yuyuka.billiards.mvp.contract.merchant.RecommendRoomContract;
 import com.yuyuka.billiards.mvp.contract.merchant.RoomDetailContract;
 import com.yuyuka.billiards.net.BizContent;
@@ -27,7 +28,7 @@ import io.reactivex.Observable;
 public class MerchantModel extends BaseModel implements BilliardsCoachListContract.IBilliardsCoachListModel,
         CollectionRoomContract.ICollectionRoomModel, BilliardsRoomSearchContract.IBilliardsRoomSearchModel,
         BilliardsRoomListContract.IBilliardsRoomListModel, RecommendRoomContract.IRecommendRoomModel,
-        RoomDetailContract.IRoomDetailModel {
+        RoomDetailContract.IRoomDetailModel, OrderConfirmContract.IOrderConfirmModel {
     @Override
     public Observable<HttpResult> getBilliardsCoachList(int page) {
         return Observable.create(emitter -> {
@@ -88,8 +89,15 @@ public class MerchantModel extends BaseModel implements BilliardsCoachListContra
         return null;
     }
 
+
+    /**
+     * 获取球厅产品
+     * @param billiardsInfoId 球厅id
+     * @param weekNum 星期几
+     * @return
+     */
     @Override
-    public Observable<HttpResult> getGoodsInfo(int billiardsInfoId, int weekNum) {
+    public Observable<HttpResult> getGoodsInfo(String billiardsInfoId, int weekNum) {
         BizContent content = new BizContent();
         content.setBilliardsInfoId(billiardsInfoId);
         content.setWeekNum(weekNum);
@@ -137,6 +145,14 @@ public class MerchantModel extends BaseModel implements BilliardsCoachListContra
         content.setParams(params);
         content.buildPageQueryDto(page);
         RequestParam requestParam = new RequestParam(UrlConstant.SEARCH_BIZ,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
+    }
+
+    @Override
+    public Observable<HttpResult> getPackages(String billiardsInfoId) {
+        BizContent content = new BizContent();
+        content.setBilliardsInfoId(billiardsInfoId);
+        RequestParam requestParam = new RequestParam(UrlConstant.GOODS_SETMEAL_LIST,convertBizContent(content));
         return mService.simpleRequest(requestParam);
     }
 }

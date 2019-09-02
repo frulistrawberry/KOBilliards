@@ -28,6 +28,7 @@
                         android:paddingRight="15dp"
                         android:paddingLeft="15dp">
                         <TextView
+                            android:id="@+id/tv_goods_name"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="14sp"
@@ -35,6 +36,7 @@
                             android:text="星牌比赛球台"
                             />
                         <TextView
+                            android:id="@+id/tv_goods_info"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:textSize="13sp"
@@ -47,124 +49,6 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical"
                             android:layout_marginTop="15dp">
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:paddingRight="10dp"
-                                android:orientation="horizontal">
-                                <TextView
-                                    android:layout_width="28dp"
-                                    android:layout_height="28dp"
-                                    android:textColor="@color/white"
-                                    android:textSize="16sp"
-                                    android:gravity="center"
-                                    android:background="@drawable/shape_or_circle"
-                                    android:text="√"/>
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_height="wrap_content"
-                                    android:layout_weight="1">
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textSize="14sp"
-                                        android:textColor="@color/text_color_1"
-                                        android:text="预定时段，无任何套餐"/>
-                                </LinearLayout>
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="14sp"
-                                    android:textColor="@color/text_color_6"
-                                    android:text="￥88"/>
-
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:paddingRight="10dp"
-                                android:layout_marginTop="10dp"
-                                android:orientation="horizontal">
-                                <TextView
-                                    android:layout_width="28dp"
-                                    android:layout_height="28dp"
-                                    android:textColor="@color/white"
-                                    android:textSize="16sp"
-                                    android:gravity="center"
-                                    android:background="@drawable/shape_gr_circle"
-                                    android:text="√"/>
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-                                    android:layout_weight="1">
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textSize="14sp"
-                                        android:textColor="@color/text_color_1"
-                                        android:text="预定时段，无任何套餐"/>
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textSize="12sp"
-                                        android:textColor="@color/text_color_3"
-                                        android:text="小吃2份+茶水1壶"/>
-                                </LinearLayout>
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="14sp"
-                                    android:textColor="@color/text_color_6"
-                                    android:text="￥128"/>
-
-                            </LinearLayout>
-                            <LinearLayout
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:gravity="center_vertical"
-                                android:paddingRight="10dp"
-                                android:layout_marginTop="10dp"
-                                android:orientation="horizontal">
-                                <TextView
-                                    android:layout_width="28dp"
-                                    android:layout_height="28dp"
-                                    android:textColor="@color/white"
-                                    android:textSize="16sp"
-                                    android:gravity="center"
-                                    android:background="@drawable/shape_gr_circle"
-                                    android:text="√"/>
-                                <LinearLayout
-                                    android:layout_width="0dp"
-                                    android:layout_marginLeft="10dp"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-                                    android:layout_weight="1">
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textSize="14sp"
-                                        android:textColor="@color/text_color_1"
-                                        android:text="预定时段，无任何套餐"/>
-                                    <TextView
-                                        android:layout_width="wrap_content"
-                                        android:layout_height="wrap_content"
-                                        android:textSize="12sp"
-                                        android:textColor="@color/text_color_3"
-                                        android:text="百威啤酒5瓶+精美干果1份+4份小吃+纸巾1盒"/>
-                                </LinearLayout>
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:textSize="14sp"
-                                    android:textColor="@color/text_color_6"
-                                    android:text="￥208"/>
-
-                            </LinearLayout>
                         </LinearLayout>
 
                     </LinearLayout>
@@ -212,6 +96,7 @@
                                 android:textColor="@color/text_color_1"
                                 android:text="预定时段"/>
                             <TextView
+                                android:id="@+id/tv_duration"
                                 android:layout_width="0dp"
                                 android:layout_weight="2"
                                 android:layout_height="wrap_content"
@@ -232,6 +117,7 @@
                                 android:textColor="@color/text_color_1"
                                 android:text="预定人"/>
                             <EditText
+                                android:id="@+id/et_name"
                                 android:layout_width="0dp"
                                 android:layout_weight="2"
                                 android:layout_height="wrap_content"
@@ -254,6 +140,7 @@
                                 android:textColor="@color/text_color_1"
                                 android:text="联系手机"/>
                             <EditText
+                                android:id="@+id/et_phone"
                                 android:layout_width="0dp"
                                 android:layout_weight="2"
                                 android:layout_height="wrap_content"
@@ -276,6 +163,7 @@
                                 android:textColor="@color/text_color_1"
                                 android:text="打球偏好"/>
                             <EditText
+                                android:id="@+id/et_habit"
                                 android:layout_width="0dp"
                                 android:layout_weight="2"
                                 android:layout_height="wrap_content"
@@ -306,36 +194,39 @@
                                 android:textColor="@color/text_color_3"
                                 android:text="无可用优惠券"/>
                         </LinearLayout>
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="4dp"
-                            android:background="@color/color_spline"/>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:paddingBottom="20dp"
-                            android:paddingTop="20dp"
-                            android:orientation="vertical">
-                            <com.yuyuka.billiards.widget.StateButton
-                                android:layout_width="63dp"
-                                android:layout_height="18dp"
-                                android:textColor="@color/white"
-                                app:pressColor="@color/text_color_6"
-                                app:normalColor="@color/text_color_6"
-                                app:unClickableColor="@color/text_color_6"
-                                android:gravity="center"
-                                android:textSize="8sp"
-                                android:text="退订规则"
-                                app:RoundedConnerRadius="4dp"/>
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:textSize="10sp"
-                                android:layout_marginTop="5dp"
-                                android:textColor="@color/text_color_1"
-                                android:text="提前一天课随时退，到预定当天不可退。"/>
 
-                        </LinearLayout>
+
+                    </LinearLayout>
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="4dp"
+                        android:background="@color/color_spline"/>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingBottom="20dp"
+                        android:paddingTop="20dp"
+                        android:paddingRight="15dp"
+                        android:paddingLeft="15dp"
+                        android:orientation="vertical">
+                        <com.yuyuka.billiards.widget.StateButton
+                            android:layout_width="63dp"
+                            android:layout_height="18dp"
+                            android:textColor="@color/white"
+                            app:pressColor="@color/text_color_6"
+                            app:normalColor="@color/text_color_6"
+                            app:unClickableColor="@color/text_color_6"
+                            android:gravity="center"
+                            android:textSize="8sp"
+                            android:text="退订规则"
+                            app:RoundedConnerRadius="4dp"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textSize="10sp"
+                            android:layout_marginTop="5dp"
+                            android:textColor="@color/text_color_1"
+                            android:text="提前一天课随时退，到预定当天不可退。"/>
 
                     </LinearLayout>
 
@@ -441,6 +332,7 @@
                         android:textSize="14sp"
                         android:text="球台费用"/>
                     <TextView
+                        android:id="@+id/tv_single_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/text_color_1"
@@ -452,6 +344,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
                     <TextView
+                        android:id="@+id/tv_detail"
                         android:layout_width="0dp"
                         android:layout_weight="1"
                         android:layout_height="wrap_content"
@@ -459,6 +352,7 @@
                         android:textSize="14sp"
                         android:text="预定时间11 ：00~14 ：00（4小时）"/>
                     <TextView
+                        android:id="@+id/tv_price_detail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/text_color_3"
@@ -490,6 +384,7 @@
                         android:layout_marginLeft="20dp"
                         android:text="在线支付"/>
                     <TextView
+                        android:id="@+id/tv_pay_price1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textColor="@color/text_color_1"
@@ -523,6 +418,10 @@
 
         </LinearLayout>
     </FrameLayout>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/color_spline"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
@@ -534,6 +433,7 @@
             android:layout_height="match_parent"
             android:orientation="horizontal">
             <TextView
+                android:id="@+id/tv_pay_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="18sp"

@@ -31,7 +31,7 @@ public class RoomDetailPresenter extends BasePresenter<RoomDetailContract.IRoomD
 
     }
 
-    public void getGoodsInfo(int billiardsId,int weekNum,boolean alone){
+    public void getGoodsInfo(String billiardsId,int weekNum,boolean alone){
         getView().showLoading();
         if (alone)
             requestCount = 0;

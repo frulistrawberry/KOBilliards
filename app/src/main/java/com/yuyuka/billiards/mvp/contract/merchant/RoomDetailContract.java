@@ -19,7 +19,7 @@ public interface RoomDetailContract {
 
     interface IRoomDetailModel extends IBaseModel {
         Observable<HttpResult> getRoomInfo(int billiardsInfoId);
-        Observable<HttpResult> getGoodsInfo(int billiardsInfoId,int weekNum);
+        Observable<HttpResult> getGoodsInfo(String billiardsInfoId,int weekNum);
 
     }
 }

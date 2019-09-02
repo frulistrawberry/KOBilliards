@@ -55,6 +55,7 @@ public class MerchantDetailActivity extends BaseRefreshActivity<RoomDetailPresen
 
     private String[] mTitle = {"球台预定","球房活动","球友点评","设施亮点"};
     private String[] mDateTitle;
+    private long[] mTimeLongs;
     @BindView(R.id.tab_layout)
     MagicIndicator mTabLayout;
     @BindView(R.id.view_pager)
@@ -80,10 +81,11 @@ public class MerchantDetailActivity extends BaseRefreshActivity<RoomDetailPresen
     @BindView(R.id.container_reserve)
     LinearLayout mReserveContainer;
     boolean canRefresh = true;
-    int billiardsId;
+    String billiardsId;
     int weekNum;
+    private int curIndex;
 
-    public static void launcher(Context context,int billiardsId){
+    public static void launcher(Context context,String billiardsId){
         Intent intent = new Intent(context, MerchantDetailActivity.class);
         intent.putExtra("billiardsId",billiardsId);
         context.startActivity(intent);
@@ -174,6 +176,7 @@ public class MerchantDetailActivity extends BaseRefreshActivity<RoomDetailPresen
                     String date = DateUtils.date2Str(new Date(temp),DateUtils.YYYY_MM_DD);
                     weekNum = DateUtils.dateToWeek(date);
                     getPresenter().getGoodsInfo(billiardsId,weekNum,true);
+                    curIndex = index;
 
                 });
                 return simplePagerTitleView;
@@ -258,7 +261,7 @@ public class MerchantDetailActivity extends BaseRefreshActivity<RoomDetailPresen
     protected void initData() {
         mDateTitle = getDateTitles();
         weekNum = DateUtils.dateToWeek(DateUtils.currentDate());
-        billiardsId = getIntent().getIntExtra("billiardsId",0);
+        billiardsId = getIntent().getStringExtra("billiardsId");
 
     }
 
@@ -280,9 +283,11 @@ public class MerchantDetailActivity extends BaseRefreshActivity<RoomDetailPresen
 
     private String[] getDateTitles(){
         String[] result = new String[5];
+        mTimeLongs = new long[5];
         long today = System.currentTimeMillis();
         for (int i = 0; i < result.length; i++) {
             long temp = 60*60*24*1000*i+today;
+            mTimeLongs[i] = temp;
             String date = DateUtils.date2Str(new Date(temp),DateUtils.MM_DD);
             String week = DateUtils.date2Str(new Date(temp),DateUtils.EEEE);
             if (i==0)
@@ -362,8 +367,9 @@ public class MerchantDetailActivity extends BaseRefreshActivity<RoomDetailPresen
                             }
                         }
                         selectTimePojo.setActive(hasActive);
+                        data.add(selectTimePojo);
                     }
-                    dialog.setData(data);
+                    dialog.setData(data,good.getGoodsName(),mTimeLongs[curIndex],good.getGoodsAmount()+"",good.getGoodsInfo(),billiardsId);
                     dialog.show();
 
                 });

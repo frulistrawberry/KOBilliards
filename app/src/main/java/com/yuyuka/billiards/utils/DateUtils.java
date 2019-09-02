@@ -225,6 +225,10 @@ public class DateUtils {
         return dateFormat.format(now());
     }
 
+    public static String formatDate(long time){
+        return dateFormat.format(new Date(time));
+    }
+
 
     /**
      * 格式化日期时间 日期时间格式yyyy-MM-dd HH:mm:ss
