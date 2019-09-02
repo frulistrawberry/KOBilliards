@@ -269,7 +269,7 @@ public class MerchantDetailActivity extends BaseRefreshActivity<RoomDetailPresen
     public void onClick(View v){
         switch (v.getId()){
             case R.id.rl_comment:
-                MerchantCommentActivity.launcher(this);
+                MerchantCommentActivity.launcher(this,billiardsId,"球房名称");
                 break;
             case R.id.images:
                 AlbumActivity.launcher(this);

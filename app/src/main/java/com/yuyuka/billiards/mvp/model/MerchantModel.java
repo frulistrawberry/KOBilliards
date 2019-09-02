@@ -9,6 +9,7 @@ import com.yuyuka.billiards.mvp.contract.merchant.BilliardsCoachListContract;
 import com.yuyuka.billiards.mvp.contract.merchant.BilliardsRoomListContract;
 import com.yuyuka.billiards.mvp.contract.merchant.BilliardsRoomSearchContract;
 import com.yuyuka.billiards.mvp.contract.merchant.CollectionRoomContract;
+import com.yuyuka.billiards.mvp.contract.merchant.MerchantCommentContract;
 import com.yuyuka.billiards.mvp.contract.merchant.OrderConfirmContract;
 import com.yuyuka.billiards.mvp.contract.merchant.RecommendRoomContract;
 import com.yuyuka.billiards.mvp.contract.merchant.RoomDetailContract;
@@ -28,7 +29,7 @@ import io.reactivex.Observable;
 public class MerchantModel extends BaseModel implements BilliardsCoachListContract.IBilliardsCoachListModel,
         CollectionRoomContract.ICollectionRoomModel, BilliardsRoomSearchContract.IBilliardsRoomSearchModel,
         BilliardsRoomListContract.IBilliardsRoomListModel, RecommendRoomContract.IRecommendRoomModel,
-        RoomDetailContract.IRoomDetailModel, OrderConfirmContract.IOrderConfirmModel {
+        RoomDetailContract.IRoomDetailModel, OrderConfirmContract.IOrderConfirmModel, MerchantCommentContract.IMerchantCommentModel {
     @Override
     public Observable<HttpResult> getBilliardsCoachList(int page) {
         return Observable.create(emitter -> {
@@ -89,22 +90,6 @@ public class MerchantModel extends BaseModel implements BilliardsCoachListContra
         return null;
     }
 
-
-    /**
-     * 获取球厅产品
-     * @param billiardsInfoId 球厅id
-     * @param weekNum 星期几
-     * @return
-     */
-    @Override
-    public Observable<HttpResult> getGoodsInfo(String billiardsInfoId, int weekNum) {
-        BizContent content = new BizContent();
-        content.setBilliardsInfoId(billiardsInfoId);
-        content.setWeekNum(weekNum);
-        RequestParam requestParam = new RequestParam(UrlConstant.GOODS_AND_PROMOTION_LIST,convertBizContent(content));
-        return mService.simpleRequest(requestParam);
-    }
-
     /**
      *
      * @param lat 纬度
@@ -148,11 +133,62 @@ public class MerchantModel extends BaseModel implements BilliardsCoachListContra
         return mService.simpleRequest(requestParam);
     }
 
+
+    /**
+     * 获取球厅产品
+     * @param billiardsInfoId 球厅id
+     * @param weekNum 星期几
+     * @return
+     */
+    @Override
+    public Observable<HttpResult> getGoodsInfo(String billiardsInfoId, int weekNum) {
+        BizContent content = new BizContent();
+        content.setBilliardsInfoId(billiardsInfoId);
+        content.setWeekNum(weekNum);
+        RequestParam requestParam = new RequestParam(UrlConstant.GOODS_AND_PROMOTION_LIST,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
+    }
+
+
+    /**
+     * 获取商户套餐
+     * @param billiardsInfoId 商户id
+     * @return
+     */
     @Override
     public Observable<HttpResult> getPackages(String billiardsInfoId) {
         BizContent content = new BizContent();
         content.setBilliardsInfoId(billiardsInfoId);
         RequestParam requestParam = new RequestParam(UrlConstant.GOODS_SETMEAL_LIST,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
+    }
+
+    /**
+     * 商户评论接口
+     * @param billiardsId 商户id
+     * @param messageInfo 留言信息
+     * @param gameTypeList 玩法类型
+     * @param population 总体
+     * @param local 位置
+     * @param service 服务
+     * @param hygiene 卫生
+     * @param facilities 设施
+     */
+    @Override
+    public Observable<HttpResult> comment(String billiardsId, String messageInfo, List<String> gameTypeList, int population, int local, int service, int hygiene, int facilities) {
+        BizContent content = new BizContent();
+        content.setBilliardsId(billiardsId);
+        BizContent.StarClass starClass = new BizContent.StarClass();
+        starClass.setPopulation(population);
+        starClass.setLocal(local);
+        starClass.setService(service);
+        starClass.setHygiene(hygiene);
+        starClass.setFacilities(facilities);
+        content.setStarClass(starClass);
+        content.setGameTypeList(gameTypeList);
+        content.setMessageInfo(messageInfo);
+        content.setUserId(12);
+        RequestParam requestParam = new RequestParam(UrlConstant.APPRASIE_PUT,convertBizContent(content));
         return mService.simpleRequest(requestParam);
     }
 }

@@ -1,5 +1,6 @@
 package com.yuyuka.billiards.net;
 
+import java.util.List;
 import java.util.Map;
 
 public class BizContent {
@@ -18,8 +19,33 @@ public class BizContent {
     private Integer typeId;
     private Integer queryType;
     private String keyword;
+    private String billiardsId;
     private Map<String,Object> parms;
     private Map<String,Object> order;
+    private StarClass starClass;
+    private List<String> gameTypeList;
+    private String messageInfo;
+    private int userId;
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public void setMessageInfo(String messageInfo) {
+        this.messageInfo = messageInfo;
+    }
+
+    public void setGameTypeList(List<String> gameTypeList) {
+        this.gameTypeList = gameTypeList;
+    }
+
+    public void setStarClass(StarClass starClass) {
+        this.starClass = starClass;
+    }
+
+    public void setBilliardsId(String billiardsId) {
+        this.billiardsId = billiardsId;
+    }
 
     public void setParms(Map<String, Object> parms) {
         this.parms = parms;
@@ -104,6 +130,34 @@ public class BizContent {
         public PageQueryDto(Integer start, Integer limit) {
             this.start = start;
             this.limit = limit;
+        }
+    }
+
+    public static class StarClass{
+        private int population;
+        private int local;
+        private int service;
+        private int hygiene;
+        private int facilities;
+
+        public void setPopulation(int population) {
+            this.population = population;
+        }
+
+        public void setLocal(int local) {
+            this.local = local;
+        }
+
+        public void setService(int service) {
+            this.service = service;
+        }
+
+        public void setHygiene(int hygiene) {
+            this.hygiene = hygiene;
+        }
+
+        public void setFacilities(int facilities) {
+            this.facilities = facilities;
         }
     }
 

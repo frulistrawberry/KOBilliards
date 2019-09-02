@@ -82,7 +82,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".ui.activity.merchant.MerchantListActivity" />
         <activity android:name=".ui.activity.merchant.AssistantListActivity" />
-        <activity android:name=".ui.activity.merchant.MerchantCommentActivity"/>
+        <activity android:name=".ui.activity.merchant.MerchantCommentActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".ui.activity.common.MapActivity" />
         <activity android:name=".ui.activity.merchant.AlbumActivity"/>
         <activity android:name=".ui.activity.search.RoomSearchActivity" />
