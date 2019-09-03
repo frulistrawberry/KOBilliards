@@ -16,6 +16,6 @@ public interface RecommendMatchContract {
     }
 
     interface  IRecommendMatchModel extends IBaseModel {
-        Observable<HttpResult> getRecommendMatchList(double lat,double lng,int status,int page);
+        Observable<HttpResult> getRecommendMatchList(String keywords,double lat, double lng, int sortCondition,int page);
     }
 }

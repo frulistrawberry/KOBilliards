@@ -109,6 +109,8 @@
         <activity android:name=".ui.activity.news.ArticleDetailActivity" />
         <activity android:name=".ui.activity.news.VideoDetailActivity" />
         <activity android:name=".ui.activity.news.SmallVideoDetailActivity" />
+        <activity android:name=".ui.activity.match.MatchDetailActivity" />
+        <activity android:name=".mvp.presenter.match.MatchOrderConfirmActivity" />
         <!-- 网易云信 -->
         <meta-data
             android:name="com.netease.nim.appKey"

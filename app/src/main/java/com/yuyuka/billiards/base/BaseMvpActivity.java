@@ -3,6 +3,8 @@ package com.yuyuka.billiards.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.yuyuka.billiards.utils.ToastUtils;
+
 
 public abstract class BaseMvpActivity<P extends BasePresenter> extends BaseActivity implements IBaseView {
 
@@ -25,7 +27,7 @@ public abstract class BaseMvpActivity<P extends BasePresenter> extends BaseActiv
 
     @Override
     public void showError(String errMsg) {
-
+        ToastUtils.showToast(this,errMsg);
     }
 
     @Override

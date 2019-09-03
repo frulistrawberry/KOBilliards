@@ -25,6 +25,8 @@ public class RecommendMatchFragment extends BaseListFragment<RecommendMatchPrese
     public AMapLocationClientOption mLocationOption = null;
     private double lat;
     private double lng;
+    private String keywords;
+    private int sortCondition = 1;
     @Override
     protected View createView(LayoutInflater inflater, ViewGroup parent) {
         return inflater.inflate(R.layout.include_ptr_recycler,parent,false);
@@ -52,14 +54,14 @@ public class RecommendMatchFragment extends BaseListFragment<RecommendMatchPrese
     @Override
     public void onRefresh() {
         mCurrentPage=0;
-        mPresenter.getRecommendMatchList(lat,lng,1,mCurrentPage);
+        mPresenter.getRecommendMatchList(keywords,lat,lng,sortCondition,mCurrentPage);
     }
 
     @Override
     protected void onLoadMore() {
         super.onLoadMore();
         mCurrentPage++;
-        mPresenter.getRecommendMatchList(lat,lng,1,mCurrentPage);
+        mPresenter.getRecommendMatchList(keywords,lat,lng,sortCondition,mCurrentPage);
 
     }
 

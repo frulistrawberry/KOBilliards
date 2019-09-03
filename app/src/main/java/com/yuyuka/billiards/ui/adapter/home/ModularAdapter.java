@@ -37,7 +37,10 @@ public class ModularAdapter extends BaseQuickAdapter<ModularPojo, BaseViewHolder
                     case "台球二手":
                         MailActivity.launcher(mContext);
                         break;
-                    case "残局模式":
+                    case "KO学堂":
+                        mContext.startActivity(new Intent(mContext, KOClassActivity.class));
+                        break;
+                    case "个人模式":
                         mContext.startActivity(new Intent(mContext, KOClassActivity.class));
                         break;
                     case "添加商户":

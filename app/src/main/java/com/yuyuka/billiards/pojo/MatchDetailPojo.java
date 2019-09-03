@@ -3,7 +3,7 @@ package com.yuyuka.billiards.pojo;
 import java.io.Serializable;
 import java.util.List;
 
-public class BilliardsMatchPojo implements Serializable {
+public class MatchDetailPojo implements Serializable {
     private int id;
     private int totalBonus;
     private String headImageAdd;

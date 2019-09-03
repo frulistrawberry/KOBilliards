@@ -23,7 +23,7 @@ import butterknife.BindView;
 
 public class NearbyMatchActivity extends BaseActivity {
     PagerAdapter mAdapter;
-    String[] mTitles = {"推荐球馆","我的收藏"};
+    String[] mTitles = {"推荐比赛","我的收藏"};
     List<Fragment> mFragmentList;
     @BindView(R.id.view_pager)
     ViewPager mViewPager;

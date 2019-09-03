@@ -1,5 +1,6 @@
 package com.yuyuka.billiards.ui.adapter.match;
 
+import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 
@@ -8,6 +9,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.image.ImageManager;
 import com.yuyuka.billiards.pojo.BilliardsMatchPojo;
+import com.yuyuka.billiards.ui.activity.match.MatchDetailActivity;
 import com.yuyuka.billiards.utils.DataOptionUtils;
 import com.yuyuka.billiards.utils.DateUtils;
 
@@ -25,8 +27,10 @@ public class MatchAdapter extends BaseQuickAdapter<BilliardsMatchPojo, BaseViewH
         ImageView headImageAddIv = helper.getView(R.id.iv_head_image_add);
         ImageManager.getInstance().loadNet(item.getHeadImageAdd(),headImageAddIv);
         helper.setText(R.id.tv_match_name,item.getMatchName());
-        helper.setText(R.id.tv_position,"比赛地点:"+billiardsInfo.getPosition());
-        helper.setText(R.id.tv_distance, DataOptionUtils.calculateLineDistance(billiardsInfo.getPositionLatitude(),billiardsInfo.getPositionLongitude()));
+        if (billiardsInfo!=null) {
+            helper.setText(R.id.tv_position, "比赛地点:" + billiardsInfo.getPosition());
+            helper.setText(R.id.tv_distance, DataOptionUtils.calculateLineDistance(billiardsInfo.getPositionLatitude(), billiardsInfo.getPositionLongitude()));
+        }
         helper.setText(R.id.tv_begin_date,"比赛时间:"+item.getBeginDate());
         helper.setText(R.id.tv_total_bonus, "比赛奖金:"+item.getTotalBonus()+"元");
         String dayDiff = DateUtils.getDayDiff(new Date(),DateUtils.parseDatetime(item.getEndDate()));
@@ -41,6 +45,8 @@ public class MatchAdapter extends BaseQuickAdapter<BilliardsMatchPojo, BaseViewH
             long progressTotal = DateUtils.parseDatetime(item.getEndDate()).getTime() -DateUtils.parseDatetime(item.getBeginDate()).getTime();
             progressBar.setProgress((int) (progress/progressTotal));
         }
+
+        helper.getConvertView().setOnClickListener(v -> MatchDetailActivity.launch(mContext,item.getId()+""));
 
 
 

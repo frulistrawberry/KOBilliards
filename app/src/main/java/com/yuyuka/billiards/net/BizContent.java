@@ -25,7 +25,12 @@ public class BizContent {
     private StarClass starClass;
     private List<String> gameTypeList;
     private String messageInfo;
-    private int userId;
+    private Integer userId;
+    private Integer matchInfoId;
+
+    public void setMatchInfoId(Integer matchInfoId) {
+        this.matchInfoId = matchInfoId;
+    }
 
     public void setUserId(int userId) {
         this.userId = userId;

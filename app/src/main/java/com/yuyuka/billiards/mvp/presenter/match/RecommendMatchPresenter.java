@@ -23,9 +23,9 @@ public class RecommendMatchPresenter extends BasePresenter<RecommendMatchContrac
         super(view,new MatchModel());
     }
 
-    public void getRecommendMatchList(double lat,double lng,int status,int page){
+    public void getRecommendMatchList(String keywords,double lat, double lng, int sortCondition,int page){
         getView().showLoading();
-        mModel.getRecommendMatchList(lat,lng,status,page)
+        mModel.getRecommendMatchList(keywords,lat,lng,sortCondition,page)
                 .compose(RxUtils.transform(getView()))
                 .subscribe(new RespObserver() {
 
