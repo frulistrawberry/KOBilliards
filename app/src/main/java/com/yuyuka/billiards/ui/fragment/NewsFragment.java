@@ -37,7 +37,7 @@ public class NewsFragment extends BaseFragment {
     @Override
     protected void initData() {
         mFragmentList = new ArrayList<>();
-        mFragmentList.add(NewsListFragment.newFragment(4));
+        mFragmentList.add(NewsListFragment.newFragment(5));
         mFragmentList.add(NewsListFragment.newFragment(3));
         mFragmentList.add(NewsListFragment.newFragment(0));
         mFragmentList.add(NewsListFragment.newFragment(2));

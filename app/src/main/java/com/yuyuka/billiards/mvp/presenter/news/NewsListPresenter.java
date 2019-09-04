@@ -20,9 +20,9 @@ public class NewsListPresenter extends BasePresenter<NewsListContract.INewsListV
         super(view, new NewsModel());
     }
 
-    public void getNewsList(int page,int queryType){
+    public void getNewsList(String keywords, int queryType,int page){
         getView().showLoading();
-        mModel.getNewsList(page,queryType)
+        mModel.getNewsList(keywords,queryType,page)
                 .compose(RxUtils.transform(getView()))
                 .subscribe(new RespObserver() {
                     @Override
@@ -34,6 +34,10 @@ public class NewsListPresenter extends BasePresenter<NewsListContract.INewsListV
                         }
                         Type type = new TypeToken<ListData<NewsItem>>(){}.getType();
                         ListData<NewsItem> data = new Gson().fromJson(bizContent,type);
+                        if (data == null){
+                            getView().showEmpty();
+                            return;
+                        }
                         if (CollectionUtils.isEmpty(data.getDataList()))
                             getView().showEmpty();
                         else

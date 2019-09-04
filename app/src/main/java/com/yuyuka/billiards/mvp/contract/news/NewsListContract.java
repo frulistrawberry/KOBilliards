@@ -15,6 +15,6 @@ public interface NewsListContract {
     }
 
     interface INewsListModel extends IBaseModel {
-        Observable<HttpResult> getNewsList(int page, int queryType);
+        Observable<HttpResult> getNewsList(String keywords,int queryType,int page);
     }
 }

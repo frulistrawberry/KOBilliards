@@ -1,4 +1,6 @@
 package com.yuyuka.billiards.pojo;
 
-public class GoodsPojo {
+import java.io.Serializable;
+
+public class GoodsPojo implements Serializable {
 }

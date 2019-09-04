@@ -8,7 +8,7 @@ import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.pojo.ModularPojo;
 import com.yuyuka.billiards.ui.activity.facetoface.FaceToFaceActivity;
 import com.yuyuka.billiards.ui.activity.course.KOClassActivity;
-import com.yuyuka.billiards.ui.activity.market.MailActivity;
+import com.yuyuka.billiards.ui.activity.market.MarketActivity;
 import com.yuyuka.billiards.ui.activity.match.NearbyMatchActivity;
 import com.yuyuka.billiards.ui.activity.merchant.AddMerchantActivity;
 import com.yuyuka.billiards.ui.activity.merchant.NearbyMerchantActivity;
@@ -35,7 +35,7 @@ public class ModularAdapter extends BaseQuickAdapter<ModularPojo, BaseViewHolder
                         NearbyMatchActivity.launcher(mContext);
                         break;
                     case "台球二手":
-                        MailActivity.launcher(mContext);
+                        MarketActivity.launcher(mContext);
                         break;
                     case "KO学堂":
                         mContext.startActivity(new Intent(mContext, KOClassActivity.class));

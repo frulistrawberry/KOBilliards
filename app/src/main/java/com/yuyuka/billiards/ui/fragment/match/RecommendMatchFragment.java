@@ -57,6 +57,18 @@ public class RecommendMatchFragment extends BaseListFragment<RecommendMatchPrese
         mPresenter.getRecommendMatchList(keywords,lat,lng,sortCondition,mCurrentPage);
     }
 
+    public void search(String keywords){
+        this.keywords = keywords;
+        mAdapter.setNewData(null);
+        onRefresh();
+    }
+
+    public void order(int sortCondition){
+        this.sortCondition = sortCondition;
+        mAdapter.setNewData(null);
+        onRefresh();
+    }
+
     @Override
     protected void onLoadMore() {
         super.onLoadMore();

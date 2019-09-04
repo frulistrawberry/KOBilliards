@@ -15,6 +15,7 @@ import com.yuyuka.billiards.R;
 public class FilterDialog extends Dialog {
 
 
+
     public FilterDialog(@NonNull Context context) {
         super(context, R.style.DialogTheme);
         View contentView = LayoutInflater.from(context).inflate(R.layout.pop_goods_filter,null);
@@ -28,6 +29,12 @@ public class FilterDialog extends Dialog {
         setCancelable(true);
         setCanceledOnTouchOutside(true);
     }
+
+    public interface OnFilterListenter{
+        void onFilter(int quickCondition,int lowPrice,int hightPrice,int releaseTimeCondition,int otherCondition);
+    }
+
+
 
 
 

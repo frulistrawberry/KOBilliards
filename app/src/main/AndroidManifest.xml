@@ -94,7 +94,7 @@
         <activity android:name=".ui.activity.merchant.OrderConfirmActivity" />
         <activity android:name=".ui.activity.common.PayActivity" />
         <activity android:name=".ui.activity.match.NearbyMatchActivity" />
-        <activity android:name=".ui.activity.market.MailActivity" />
+        <activity android:name=".ui.activity.market.MarketActivity" />
         <activity android:name=".ui.activity.market.GoodsDetailActivity" />
         <activity android:name=".ui.activity.market.ReleaseGoodsActivity" />
         <activity android:name=".ui.activity.course.KOClassActivity" />

@@ -32,6 +32,7 @@ public class NewsAdapter extends BaseMultiItemQuickAdapter<NewsItem, BaseViewHol
             case 0:
                 //文章
                 helper.setText(R.id.tv_time, DateUtils.converTime(item.getCreated()));
+                if (user!=null)
                 helper.setText(R.id.tv_user,user.getUserName());
                 break;
             case 1:
@@ -48,6 +49,7 @@ public class NewsAdapter extends BaseMultiItemQuickAdapter<NewsItem, BaseViewHol
             case 2:
                 //视频
                 helper.setText(R.id.tv_video_length,item.getViewLongtime()+"");
+                if (user!=null)
                 helper.setText(R.id.tv_user,user.getUserName());
                 break;
         }

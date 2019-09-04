@@ -20,9 +20,11 @@ public class GoodsListPresenter extends BasePresenter<GoodsListContract.IGoodsLi
     }
 
 
-    public void getGoodsList(int page){
+    public void getGoodsList(String keywords,int sortCondition, int typeCondition,
+                             int quickCondition, int lowPrice,int highPrice,
+                             int releaseTimeCondition,int otherCondition , int page){
         getView().showLoading();
-        mModel.getGoodsList(page)
+        mModel.getGoodsList(keywords, sortCondition, typeCondition, quickCondition, lowPrice, highPrice, releaseTimeCondition, otherCondition, page)
                 .compose(getView().bindToLifecycle())
                 .subscribe(new RespObserver() {
                     @Override

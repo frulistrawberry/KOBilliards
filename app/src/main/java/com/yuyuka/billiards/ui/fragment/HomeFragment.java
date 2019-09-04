@@ -21,7 +21,7 @@ import com.yuyuka.billiards.pojo.ModularPojo;
 import com.yuyuka.billiards.ui.activity.bonus.BonusPoolActivity;
 import com.yuyuka.billiards.ui.adapter.common.NavigatorAdapter;
 import com.yuyuka.billiards.ui.adapter.common.PagerAdapter;
-import com.yuyuka.billiards.ui.fragment.news.HomeNewsListFragment;
+import com.yuyuka.billiards.ui.fragment.news.NewsListFragment;
 import com.yuyuka.billiards.utils.ViewUtils;
 import com.yuyuka.billiards.utils.log.LogUtil;
 import com.yuyuka.billiards.widget.AppBarStateChangeListener;
@@ -88,9 +88,9 @@ public class HomeFragment extends BaseFragment{
     @Override
     protected void initData() {
         mFragmentList = new ArrayList<>();
-        mFragmentList.add(HomeNewsListFragment.newFragment(1));
-        mFragmentList.add(HomeNewsListFragment.newFragment(1));
-        mFragmentList.add(HomeNewsListFragment.newFragment(1));
+        mFragmentList.add(NewsListFragment.newFragment(4,true));
+        mFragmentList.add(NewsListFragment.newFragment(3,true));
+        mFragmentList.add(NewsListFragment.newFragment(2,true));
         mAdapter = new PagerAdapter(getChildFragmentManager(),mFragmentList,mTitles);
         EventBus.getDefault().register(this);
     }

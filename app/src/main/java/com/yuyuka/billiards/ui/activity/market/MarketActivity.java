@@ -29,7 +29,7 @@ import butterknife.OnClick;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
-public class MailActivity extends BaseListActivity<GoodsListPresenter> implements GoodsListContract.IGoodsListView {
+public class MarketActivity extends BaseListActivity<GoodsListPresenter> implements GoodsListContract.IGoodsListView {
 
 
     @BindView(R.id.app_bar_layout)
@@ -46,13 +46,18 @@ public class MailActivity extends BaseListActivity<GoodsListPresenter> implement
     ImageView mLocationIv;
     boolean isAppbarOpen;
     private int sort;
-    private int location;
-    private EasyPopup mSortPop;
-    private EasyPopup mLocationPop;
     private FilterDialog mFilterPop;
+    String keywords;
+    int sortCondition;
+    int typeCondition;
+    int quickCondition;
+    int lowPrice;
+    int highPrice;
+    int releaseTimeCondition;
+    int otherCondition;
 
     public static void launcher(Context context){
-        Intent intent = new Intent(context,MailActivity.class);
+        Intent intent = new Intent(context, MarketActivity.class);
         context.startActivity(intent);
     }
 
@@ -86,8 +91,6 @@ public class MailActivity extends BaseListActivity<GoodsListPresenter> implement
         });
         mRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
         mRecyclerView.setAdapter(mAdapter);
-        initSortPop();
-        initLocationPop();
         initFilterPop();
         onRefresh();
     }
@@ -135,11 +138,9 @@ public class MailActivity extends BaseListActivity<GoodsListPresenter> implement
         switch (v.getId()){
             case R.id.ll_sort:
                 mSortIv.setImageResource(R.mipmap.ic_arrow_up);
-                mSortPop.showAsDropDown(v);
                 break;
             case R.id.ll_location:
                 mLocationIv.setImageResource(R.mipmap.ic_arrow_up);
-                mLocationPop.showAsDropDown(v);
                 break;
             case R.id.ll_filter:
                 mFilterPop.show();
@@ -151,67 +152,6 @@ public class MailActivity extends BaseListActivity<GoodsListPresenter> implement
                 startActivity(new Intent(this,ReleaseGoodsActivity.class));
                 break;
         }
-    }
-
-    private void initSortPop() {
-        mSortPop = new EasyPopup(this)
-                .setContentView(R.layout.pop_goods_sort)
-                .setWidth(ViewGroup.LayoutParams.MATCH_PARENT)
-                .setHeight(ViewGroup.LayoutParams.MATCH_PARENT)
-                .setFocusAndOutsideEnable(true).createPopup();
-        LinearLayout parent = (LinearLayout) mSortPop.getContentView();
-        parent.setOnClickListener(v -> {
-            mSortPop.dismiss();
-        });
-        for (int i = 0; i < parent.getChildCount(); i++) {
-            LinearLayout item = (LinearLayout) parent.getChildAt(i);
-            resetSortItem(item);
-            item.setOnClickListener(v -> {
-                for (int i1 = 0; i1 < parent.getChildCount(); i1++) {
-                    resetSortItem((LinearLayout) parent.getChildAt(i1));
-                }
-                selectSortItem(item);
-            });
-
-        }
-
-        mSortPop.setOnDismissListener(() -> {
-            mSortIv.setImageResource(R.mipmap.ic_arrow_down);
-        });
-
-    }
-
-    private void resetSortItem(LinearLayout item){
-        TextView textView = (TextView) item.getChildAt(0);
-        ImageView imageView = (ImageView) item.getChildAt(1);
-        textView.setTextColor(getResourceColor(R.color.text_color_3));
-        imageView.setVisibility(View.GONE);
-    }
-
-    private void selectSortItem(LinearLayout item){
-        TextView textView = (TextView) item.getChildAt(0);
-        ImageView imageView = (ImageView) item.getChildAt(1);
-        textView.setTextColor(getResourceColor(R.color.text_color_1));
-        imageView.setVisibility(View.VISIBLE);
-        sort = DataOptionUtils.getGoodsSortParam(textView.getText().toString());
-        mSortTv.setText(textView.getText());
-        mSortPop.dismiss();
-        onRefresh();
-    }
-
-    private void initLocationPop() {
-        mLocationPop = new EasyPopup(this)
-                .setContentView(R.layout.pop_goods_location)
-                .setWidth(ViewGroup.LayoutParams.MATCH_PARENT)
-                .setHeight(ViewGroup.LayoutParams.MATCH_PARENT)
-                .setFocusAndOutsideEnable(true).createPopup();
-        mLocationPop.getContentView().setOnClickListener(v -> {
-            mLocationPop.dismiss();
-        });
-
-        mLocationPop.setOnDismissListener(() -> {
-            mLocationIv.setImageResource(R.mipmap.ic_arrow_down);
-        });
     }
 
     private void initFilterPop() {

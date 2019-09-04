@@ -14,19 +14,32 @@ import com.yuyuka.billiards.mvp.presenter.news.NewsListPresenter;
 import com.yuyuka.billiards.pojo.NewsItem;
 import com.yuyuka.billiards.ui.adapter.news.NewsAdapter;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.List;
+
+import in.srain.cube.views.ptr.PtrDefaultHandler;
+import in.srain.cube.views.ptr.PtrFrameLayout;
 
 public class NewsListFragment extends BaseListFragment<NewsListPresenter> implements NewsListContract.INewsListView {
     int queryType;
+    boolean isFromHome;
+    String keywords;
 
 
-    public static Fragment newFragment(int queryType){
+    public static Fragment newFragment(int queryType,boolean isFromHome){
         Fragment fragment = new NewsListFragment();
         Bundle bundle = new Bundle();
         bundle.putInt("queryType",queryType);
+        bundle.putBoolean("isFromHome",isFromHome);
         fragment.setArguments(bundle);
         return fragment;
     }
+
+    public static Fragment newFragment(int queryType){
+        return newFragment(queryType,false);
+    }
+
 
     @Override
     protected boolean isLoadMoreEnable() {
@@ -36,14 +49,14 @@ public class NewsListFragment extends BaseListFragment<NewsListPresenter> implem
     @Override
     public void onRefresh() {
         mCurrentPage = 0;
-        getPresenter().getNewsList(mCurrentPage,queryType);
+        getPresenter().getNewsList(keywords,queryType,mCurrentPage);
     }
 
     @Override
     protected void onLoadMore() {
         super.onLoadMore();
         mCurrentPage ++;
-        getPresenter().getNewsList(mCurrentPage,queryType);
+        getPresenter().getNewsList(keywords,queryType,mCurrentPage);
     }
 
     @Override
@@ -59,6 +72,19 @@ public class NewsListFragment extends BaseListFragment<NewsListPresenter> implem
     @Override
     protected void initView() {
         super.initView();
+        if (isFromHome){
+            mPtrLayout.setPtrHandler(new PtrDefaultHandler() {
+                @Override
+                public void onRefreshBegin(PtrFrameLayout frame) {
+
+                }
+
+                @Override
+                public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                    return false;
+                }
+            });
+        }
         GridLayoutManager gridLayoutManager = new GridLayoutManager(getContext(),2);
         mRecyclerView.setAdapter(mAdapter);
         gridLayoutManager.setSpanSizeLookup(new GridLayoutManager.SpanSizeLookup() {
@@ -80,6 +106,7 @@ public class NewsListFragment extends BaseListFragment<NewsListPresenter> implem
         mAdapter = new NewsAdapter();
         assert getArguments() != null;
         queryType = getArguments().getInt("queryType",0);
+        isFromHome = getArguments().getBoolean("isFromHome",false);
     }
 
     @Override
@@ -89,5 +116,11 @@ public class NewsListFragment extends BaseListFragment<NewsListPresenter> implem
         }else {
             mAdapter.addData(newsList);
         }
+    }
+
+    @Override
+    public void hideLoading() {
+        super.hideLoading();
+        EventBus.getDefault().post("refresh_complete");
     }
 }
