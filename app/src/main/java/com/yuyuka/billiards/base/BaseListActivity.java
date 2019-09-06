@@ -1,9 +1,11 @@
 package com.yuyuka.billiards.base;
 
 import android.support.v7.widget.RecyclerView;
+import android.view.View;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yuyuka.billiards.R;
+import com.yuyuka.billiards.utils.NetworkUtils;
 import com.yuyuka.billiards.utils.ToastUtils;
 import com.yuyuka.billiards.utils.ViewUtils;
 
@@ -75,10 +77,20 @@ public abstract class BaseListActivity<P extends BasePresenter> extends BaseRefr
         if (mAdapter == null)
             return;
         if (mCurrentPage == 0){
-            super.showError(errMsg);
+            if (!NetworkUtils.isNetWorkAvailable(getContext())){
+                //网络不可用
+                View errorView = ViewUtils.genErrorView(getContext(),R.mipmap.ic_error,"网络不可用","点击刷新");
+                errorView.setOnClickListener(view -> onRefresh());
+                mAdapter.setEmptyView(errorView);
+            }else {
+                //加载失败
+                View errorView = ViewUtils.genErrorView(getContext(),R.mipmap.ic_error,"加载失败","试试点击屏幕重新获取数据");
+                errorView.setOnClickListener(view -> onRefresh());
+                mAdapter.setEmptyView(errorView);
+            }
         }else if (isLoadMoreEnable()){
-           mAdapter.loadMoreFail();
-           mCurrentPage --;
+            mAdapter.loadMoreFail();
+            mCurrentPage --;
         }
     }
 

@@ -13,7 +13,11 @@ import com.yuyuka.billiards.R;
 
 
 public class FilterDialog extends Dialog {
-
+    int quickCondition = -1;
+    int lowPrice = -1;
+    int highPrice = -1;
+    int releaseTimeCondition = -1;
+    int otherCondition = -1;
 
 
     public FilterDialog(@NonNull Context context) {

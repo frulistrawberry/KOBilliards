@@ -11,6 +11,7 @@ import com.yuyuka.billiards.net.RespObserver;
 import com.yuyuka.billiards.pojo.GoodsPojo;
 import com.yuyuka.billiards.pojo.ListData;
 import com.yuyuka.billiards.utils.CollectionUtils;
+import com.yuyuka.billiards.utils.RxUtils;
 
 import java.lang.reflect.Type;
 
@@ -20,12 +21,12 @@ public class GoodsListPresenter extends BasePresenter<GoodsListContract.IGoodsLi
     }
 
 
-    public void getGoodsList(String keywords,int sortCondition, int typeCondition,
+    public void getGoodsList(String keywords,double lat,double lng, int sortCondition, int typeCondition,
                              int quickCondition, int lowPrice,int highPrice,
                              int releaseTimeCondition,int otherCondition , int page){
         getView().showLoading();
-        mModel.getGoodsList(keywords, sortCondition, typeCondition, quickCondition, lowPrice, highPrice, releaseTimeCondition, otherCondition, page)
-                .compose(getView().bindToLifecycle())
+        mModel.getGoodsList(keywords,lat,lng,sortCondition, typeCondition, quickCondition, lowPrice, highPrice, releaseTimeCondition, otherCondition, page)
+                .compose(RxUtils.transform(getView()))
                 .subscribe(new RespObserver() {
                     @Override
                     public void onResult(String msg, String bizEntity) {

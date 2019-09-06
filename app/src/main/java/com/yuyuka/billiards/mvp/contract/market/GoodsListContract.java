@@ -15,7 +15,7 @@ public interface GoodsListContract {
     }
 
     interface IGoodsListModel extends IBaseModel {
-        Observable<HttpResult> getGoodsList(String keywords,int sortCondition, int typeCondition,
+        Observable<HttpResult> getGoodsList(String keywords,double lat,double lng,int sortCondition, int typeCondition,
                                             int quickCondition, int lowPrice,int highPrice,
                                             int releaseTimeCondition,int otherCondition , int page);
     }

@@ -2,6 +2,7 @@
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#efefef"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <android.support.design.widget.AppBarLayout
         android:id="@+id/app_bar_layout"
@@ -46,6 +47,7 @@
                     android:layout_marginTop="23dp"
                     android:orientation="horizontal">
                     <TextView
+                        android:id="@+id/tv_gan"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -56,6 +58,7 @@
                         android:drawablePadding="5dp"
                         android:text="球杆"/>
                     <TextView
+                        android:id="@+id/tv_he"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -64,8 +67,9 @@
                         android:gravity="center"
                         android:drawableTop="@mipmap/ic_box"
                         android:drawablePadding="5dp"
-                        android:text="杆合"/>
+                        android:text="杆盒"/>
                     <TextView
+                        android:id="@+id/tv_zhuo"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -76,6 +80,7 @@
                         android:drawablePadding="5dp"
                         android:text="球桌"/>
                     <TextView
+                        android:id="@+id/tv_other"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -106,27 +111,27 @@
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
                 <LinearLayout
-                    android:id="@+id/ll_sort"
+                    android:id="@+id/ll_sort_nearby"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
                     android:gravity="center"
                     android:layout_weight="1">
                     <TextView
-                        android:id="@+id/tv_sort"
+                        android:id="@+id/tv_sort_distance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
-                        android:textColor="#808080"
+                        android:textColor="@color/text_color_1"
                         android:layout_marginLeft="5dp"
-                        android:text="综合排序"
+                        android:text="附近"
                         android:gravity="center"
                         />
                     <ImageView
-                        android:id="@+id/iv_sort"
+                        android:id="@+id/iv_sort_distance"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="2dp"
+                        android:layout_marginLeft="5dp"
                         android:src="@mipmap/sort_arrow_down"
                         />
                 </LinearLayout>
@@ -135,27 +140,27 @@
                     android:layout_height="14dp"
                     android:background="@color/color_spline"/>
                 <LinearLayout
-                    android:id="@+id/ll_location"
+                    android:id="@+id/ll_sort_price"
                     android:layout_width="0dp"
                     android:layout_height="match_parent"
                     android:orientation="horizontal"
                     android:gravity="center"
                     android:layout_weight="1">
                     <TextView
-                        android:id="@+id/tv_location"
+                        android:id="@+id/tv_sort_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
-                        android:textColor="#808080"
+                        android:textColor="@color/text_color_3"
                         android:layout_marginLeft="5dp"
-                        android:text="区域"
+                        android:text="价格"
                         android:gravity="center"
                         />
                     <ImageView
-                        android:id="@+id/iv_location"
+                        android:id="@+id/iv_sort_price"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="2dp"
+                        android:layout_marginLeft="5dp"
                         android:src="@mipmap/sort_arrow_down"/>
                 </LinearLayout>
                 <View
@@ -173,7 +178,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="13sp"
-                        android:textColor="#808080"
+                        android:textColor="@color/text_color_3"
                         android:layout_marginLeft="5dp"
                         android:text="筛选"
                         android:gravity="center"

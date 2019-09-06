@@ -10,6 +10,10 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.amap.api.location.AMapLocation;
+import com.amap.api.location.AMapLocationClient;
+import com.amap.api.location.AMapLocationClientOption;
+import com.amap.api.location.AMapLocationListener;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseListActivity;
 import com.yuyuka.billiards.mvp.contract.market.GoodsListContract;
@@ -17,6 +21,7 @@ import com.yuyuka.billiards.mvp.presenter.market.GoodsListPresenter;
 import com.yuyuka.billiards.pojo.GoodsPojo;
 import com.yuyuka.billiards.ui.activity.search.RoomSearchActivity;
 import com.yuyuka.billiards.ui.adapter.goods.GoodsAdapter;
+import com.yuyuka.billiards.utils.CommonUtils;
 import com.yuyuka.billiards.utils.DataOptionUtils;
 import com.yuyuka.billiards.widget.AppBarStateChangeListener;
 import com.yuyuka.billiards.widget.EasyPopup;
@@ -24,37 +29,41 @@ import com.yuyuka.billiards.widget.dialog.FilterDialog;
 
 import java.util.List;
 
+import butterknife.BindInt;
 import butterknife.BindView;
 import butterknife.OnClick;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
-public class MarketActivity extends BaseListActivity<GoodsListPresenter> implements GoodsListContract.IGoodsListView {
+public class MarketActivity extends BaseListActivity<GoodsListPresenter> implements GoodsListContract.IGoodsListView, AMapLocationListener {
 
 
     @BindView(R.id.app_bar_layout)
     AppBarLayout mAppbarLayout;
     @BindView(R.id.ll_sort_parent)
     LinearLayout mSortParentLayout;
-    @BindView(R.id.tv_sort)
-    TextView mSortTv;
-    @BindView(R.id.iv_sort)
-    ImageView mSortIv;
-    @BindView(R.id.tv_location)
-    TextView mLocationTv;
-    @BindView(R.id.iv_location)
-    ImageView mLocationIv;
     boolean isAppbarOpen;
-    private int sort;
     private FilterDialog mFilterPop;
     String keywords;
-    int sortCondition;
-    int typeCondition;
-    int quickCondition;
-    int lowPrice;
-    int highPrice;
-    int releaseTimeCondition;
-    int otherCondition;
+    int sortCondition = 1;
+    int typeCondition =-1;
+    int quickCondition = -1;
+    int lowPrice = -1;
+    int highPrice = -1;
+    int releaseTimeCondition = -1;
+    int otherCondition = -1;
+    double lat;
+    double lng;
+    public AMapLocationClient mLocationClient = null;
+    public AMapLocationClientOption mLocationOption = null;
+    @BindView(R.id.tv_sort_distance)
+    TextView mDistanceSortTv;
+    @BindView(R.id.tv_sort_price)
+    TextView mPriceSortTv;
+    @BindView(R.id.iv_sort_distance)
+    ImageView mDistanceSortIv;
+    @BindView(R.id.iv_sort_price)
+    ImageView mPriceSortIv;
 
     public static void launcher(Context context){
         Intent intent = new Intent(context, MarketActivity.class);
@@ -92,15 +101,15 @@ public class MarketActivity extends BaseListActivity<GoodsListPresenter> impleme
         mRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
         mRecyclerView.setAdapter(mAdapter);
         initFilterPop();
-        onRefresh();
     }
 
 
     @Override
     public void onRefresh() {
         mCurrentPage = 0;
-        getPresenter().getGoodsList(mCurrentPage);
+        mPresenter.getGoodsList(keywords,lat,lng,sortCondition,typeCondition,quickCondition,lowPrice,highPrice,releaseTimeCondition,otherCondition,mCurrentPage);
     }
+
 
     @Override
     protected boolean isLoadMoreEnable() {
@@ -111,12 +120,18 @@ public class MarketActivity extends BaseListActivity<GoodsListPresenter> impleme
     protected void onLoadMore() {
         super.onLoadMore();
         mCurrentPage ++;
-        mPresenter.getGoodsList(mCurrentPage);
+        mPresenter.getGoodsList(keywords,lat,lng,sortCondition,typeCondition,quickCondition,lowPrice,highPrice,releaseTimeCondition,otherCondition,mCurrentPage);
     }
 
     @Override
     protected void initData() {
         mAdapter = new GoodsAdapter();
+        mLocationClient = new AMapLocationClient(getContext());
+        mLocationClient.setLocationListener(this);
+        mLocationOption = new AMapLocationClientOption();
+        mLocationOption.setOnceLocation(true);
+        mLocationClient.setLocationOption(mLocationOption);
+        mLocationClient.startLocation();
     }
 
     @Override
@@ -133,20 +148,61 @@ public class MarketActivity extends BaseListActivity<GoodsListPresenter> impleme
         }
     }
 
-    @OnClick({R.id.ll_sort,R.id.ll_location,R.id.ll_filter,R.id.btn_search,R.id.btn_release})
+    @OnClick({R.id.ll_sort_nearby,R.id.ll_sort_price,R.id.ll_filter,R.id.tv_gan,R.id.tv_he,R.id.tv_zhuo,R.id.tv_other,R.id.btn_release})
     public void onClick(View v){
         switch (v.getId()){
-            case R.id.ll_sort:
-                mSortIv.setImageResource(R.mipmap.ic_arrow_up);
+            case R.id.ll_sort_nearby:
+                mDistanceSortTv.setTextColor(getResourceColor(R.color.text_color_1));
+                mPriceSortTv.setTextColor(getResourceColor(R.color.text_color_3));
+                mPriceSortIv.setImageResource(R.mipmap.ic_arrow_down);
+                if (sortCondition == 1){
+                    sortCondition = 2;
+                    mDistanceSortIv.setImageResource(R.mipmap.ic_arrow_up);
+                }else {
+                    sortCondition = 1;
+                    mDistanceSortIv.setImageResource(R.mipmap.ic_arrow_down);
+                }
+                mAdapter.setNewData(null);
+                onRefresh();
                 break;
-            case R.id.ll_location:
-                mLocationIv.setImageResource(R.mipmap.ic_arrow_up);
+            case R.id.ll_sort_price:
+                mDistanceSortTv.setTextColor(getResourceColor(R.color.text_color_3));
+                mPriceSortTv.setTextColor(getResourceColor(R.color.text_color_1));
+                mDistanceSortIv.setImageResource(R.mipmap.ic_arrow_down);
+                if (sortCondition == 3){
+                    sortCondition = 4;
+                    mPriceSortIv.setImageResource(R.mipmap.ic_arrow_up);
+                }else {
+                    sortCondition = 3;
+                    mPriceSortIv.setImageResource(R.mipmap.ic_arrow_down);
+                }
+                mAdapter.setNewData(null);
+                onRefresh();
                 break;
             case R.id.ll_filter:
                 mFilterPop.show();
                 break;
+            case R.id.tv_gan:
+                typeCondition = 1;
+                mAdapter.setNewData(null);
+                onRefresh();
+                break;
+            case R.id.tv_he:
+                typeCondition = 2;
+                mAdapter.setNewData(null);
+                onRefresh();
+                break;
+            case R.id.tv_zhuo:
+                typeCondition = 3;
+                mAdapter.setNewData(null);
+                onRefresh();
+                break;
+            case R.id.tv_other:
+                typeCondition = 4;
+                mAdapter.setNewData(null);
+                onRefresh();
+                break;
             case R.id.btn_search:
-                RoomSearchActivity.launcher(this,1);
                 break;
             case R.id.btn_release:
                 startActivity(new Intent(this,ReleaseGoodsActivity.class));
@@ -160,5 +216,11 @@ public class MarketActivity extends BaseListActivity<GoodsListPresenter> impleme
     }
 
 
-
+    @Override
+    public void onLocationChanged(AMapLocation aMapLocation) {
+        lat = aMapLocation.getLatitude();
+        lng = aMapLocation.getLongitude();
+        CommonUtils.saveLocationInfo(lat,lng);
+        onRefresh();
+    }
 }

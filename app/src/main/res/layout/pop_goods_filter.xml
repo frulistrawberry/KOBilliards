@@ -5,186 +5,211 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@color/white">
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingLeft="20dp"
-            android:paddingRight="20dp"
             android:paddingTop="30dp"
+            android:paddingRight="20dp"
             android:paddingBottom="30dp">
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/text_color_1"
-                android:textSize="12sp"
-                android:text="快捷筛选"/>
 
-            <com.yuyuka.billiards.widget.TagLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp">
-                <TextView
-                    android:layout_width="70dp"
-                    android:layout_height="22dp"
-                    android:textSize="12sp"
-                    android:background="@drawable/selector_tag"
-                    android:textColor="@color/white"
-                    android:gravity="center"
-                    android:text="全新"/>
-                <TextView
-                    android:layout_width="70dp"
-                    android:layout_height="22dp"
-                    android:textSize="12sp"
-                    android:background="@drawable/selector_tag"
-                    android:textColor="@color/white"
-                    android:gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:text="实拍"/>
-                <TextView
-                    android:layout_width="70dp"
-                    android:layout_height="22dp"
-                    android:textSize="12sp"
-                    android:background="@drawable/selector_tag"
-                    android:textColor="@color/white"
-                    android:gravity="center"
-                    android:layout_marginLeft="20dp"
-                    android:text="支持验货"/>
-            </com.yuyuka.billiards.widget.TagLayout>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/text_color_1"
-                android:textSize="12sp"
-                android:layout_marginTop="20dp"
-                android:text="价格"/>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
+
                 <EditText
                     android:layout_width="110dp"
                     android:layout_height="30dp"
                     android:background="@drawable/bg_search"
-                    android:textSize="12sp"
-                    android:textColor="@color/text_color_1"
-                    android:hint="最低价"
+                    android:digits="1234567890"
                     android:gravity="center"
+                    android:hint="最低价"
                     android:inputType="number"
-                    android:digits="1234567890"/>
+                    android:textColor="@color/text_color_1"
+                    android:textSize="12sp" />
+
+                <EditText
+                    android:layout_width="110dp"
+                    android:layout_height="30dp"
+                    android:background="@drawable/bg_search"
+                    android:digits="1234567890"
+                    android:gravity="center"
+                    android:hint="最高价"
+                    android:inputType="number"
+                    android:textColor="@color/text_color_1"
+                    android:textSize="12sp" />
+
                 <View
                     android:layout_width="18dp"
                     android:layout_height="2dp"
                     android:layout_marginLeft="6dp"
                     android:layout_marginRight="6dp"
-                    android:background="@color/text_color_1"/>
-                <EditText
-                    android:layout_width="110dp"
-                    android:layout_height="30dp"
-                    android:background="@drawable/bg_search"
-                    android:textSize="12sp"
-                    android:textColor="@color/text_color_1"
-                    android:hint="最高价"
-                    android:gravity="center"
-                    android:inputType="number"
-                    android:digits="1234567890"/>
+                    android:background="@color/text_color_1" />
             </LinearLayout>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/text_color_1"
-                android:textSize="12sp"
                 android:layout_marginTop="20dp"
-                android:text="发布时间"/>
+                android:text="价格"
+                android:textColor="@color/text_color_1"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="快捷筛选"
+                android:textColor="@color/text_color_1"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="发布时间"
+                android:textColor="@color/text_color_1"
+                android:textSize="12sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="其他"
+                android:textColor="@color/text_color_1"
+                android:textSize="12sp" />
+
             <com.yuyuka.billiards.widget.TagLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="34dp"
-                android:layout_marginTop="20dp">
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="34dp">
+
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="22dp"
-                    android:textSize="12sp"
                     android:background="@drawable/selector_tag"
-                    android:textColor="@color/white"
                     android:gravity="center"
-                    android:text="1天内"/>
+                    android:text="1天内"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="22dp"
-                    android:textSize="12sp"
-                    android:background="@drawable/selector_tag"
-                    android:textColor="@color/white"
-                    android:gravity="center"
                     android:layout_marginLeft="20dp"
-                    android:text="7天内"/>
+                    android:background="@drawable/selector_tag"
+                    android:gravity="center"
+                    android:text="7天内"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="22dp"
-                    android:textSize="12sp"
-                    android:background="@drawable/selector_tag"
-                    android:textColor="@color/white"
-                    android:gravity="center"
                     android:layout_marginLeft="20dp"
-                    android:text="14天内"/>
+                    android:background="@drawable/selector_tag"
+                    android:gravity="center"
+                    android:text="14天内"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="22dp"
-                    android:textSize="12sp"
-                    android:background="@drawable/selector_tag"
-                    android:textColor="@color/white"
-                    android:gravity="center"
                     android:layout_marginTop="20dp"
-                    android:text="30天内"/>
+                    android:background="@drawable/selector_tag"
+                    android:gravity="center"
+                    android:text="30天内"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
             </com.yuyuka.billiards.widget.TagLayout>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/text_color_1"
-                android:textSize="12sp"
-                android:layout_marginTop="20dp"
-                android:text="其他"/>
+
             <com.yuyuka.billiards.widget.TagLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp">
+
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="22dp"
-                    android:textSize="12sp"
                     android:background="@drawable/selector_tag"
-                    android:textColor="@color/white"
                     android:gravity="center"
-                    android:text="免费送"/>
+                    android:text="全新"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="22dp"
-                    android:textSize="12sp"
-                    android:background="@drawable/selector_tag"
-                    android:textColor="@color/white"
-                    android:gravity="center"
                     android:layout_marginLeft="20dp"
-                    android:text="包路费"/>
+                    android:background="@drawable/selector_tag"
+                    android:gravity="center"
+                    android:text="实拍"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
                 <TextView
                     android:layout_width="70dp"
                     android:layout_height="22dp"
-                    android:textSize="12sp"
-                    android:background="@drawable/selector_tag"
-                    android:textColor="@color/white"
-                    android:gravity="center"
                     android:layout_marginLeft="20dp"
-                    android:text="自提"/>
+                    android:background="@drawable/selector_tag"
+                    android:gravity="center"
+                    android:text="支持验货"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+            </com.yuyuka.billiards.widget.TagLayout>
+
+            <com.yuyuka.billiards.widget.TagLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp">
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="22dp"
+                    android:background="@drawable/selector_tag"
+                    android:gravity="center"
+                    android:text="免费送"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="22dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/selector_tag"
+                    android:gravity="center"
+                    android:text="包路费"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:layout_width="70dp"
+                    android:layout_height="22dp"
+                    android:layout_marginLeft="20dp"
+                    android:background="@drawable/selector_tag"
+                    android:gravity="center"
+                    android:text="自提"
+                    android:textColor="@color/white"
+                    android:textSize="12sp" />
             </com.yuyuka.billiards.widget.TagLayout>
 
         </LinearLayout>
 
     </ScrollView>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="50dp"
