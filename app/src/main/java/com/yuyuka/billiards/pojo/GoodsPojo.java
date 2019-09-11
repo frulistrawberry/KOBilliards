@@ -1,6 +1,7 @@
 package com.yuyuka.billiards.pojo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class GoodsPojo implements Serializable {
     private String created;
@@ -19,6 +20,21 @@ public class GoodsPojo implements Serializable {
     private String userId;
     private String userName;
     private int praiseCount;
+    private List<ImagePojo> billiardsSecondMallImagesList;
+    private BilliardsUsers billiardsUsers;
+    private int wantCount;
+
+    public int getWantCount() {
+        return wantCount;
+    }
+
+    public BilliardsUsers getBilliardsUsers() {
+        return billiardsUsers;
+    }
+
+    public List<ImagePojo> getBilliardsSecondMallImagesList() {
+        return billiardsSecondMallImagesList;
+    }
 
     public String getCreated() {
         return created;
@@ -83,4 +99,5 @@ public class GoodsPojo implements Serializable {
     public int getPraiseCount() {
         return praiseCount;
     }
+
 }

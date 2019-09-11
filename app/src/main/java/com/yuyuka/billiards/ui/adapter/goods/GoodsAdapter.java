@@ -31,8 +31,7 @@ public class GoodsAdapter extends BaseQuickAdapter<GoodsPojo, BaseViewHolder> {
             parent.setGravity(Gravity.RIGHT);
         }
         helper.getConvertView().setOnClickListener(v -> {
-            Intent intent = new Intent(mContext, GoodsDetailActivity.class);
-            mContext.startActivity(intent);
+            GoodsDetailActivity.launch(mContext,Integer.valueOf(item.getId()));
         });
         helper.setText(R.id.tv_goods_name,item.getGoodsName());
         helper.setText(R.id.tv_user_name,item.getUserName());

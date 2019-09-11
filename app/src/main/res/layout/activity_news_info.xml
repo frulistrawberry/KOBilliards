@@ -215,11 +215,8 @@
             </android.support.v7.widget.Toolbar>
             </android.support.design.widget.CollapsingToolbarLayout>
         </android.support.design.widget.AppBarLayout>
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view"
-            android:layout_width="match_parent"
-            app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            android:layout_height="match_parent" />
+        <include
+            layout="@layout/include_ptr_recycler"/>
 
 
     </android.support.design.widget.CoordinatorLayout>
@@ -256,6 +253,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="17dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal">
             <LinearLayout
                 android:layout_width="0dp"

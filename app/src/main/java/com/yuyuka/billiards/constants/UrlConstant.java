@@ -26,4 +26,13 @@ public class UrlConstant {
     public static String MATCH_LIST_BONUS = "com.yuyuka.billiards.api.match.list.bonus";
     //用户关注资讯列表
     public static String AUTHORIZED_CONSULATION_LIST_FOLLOW = "com.yuyuka.billiards.api.authorized.consultation.list.follow";
+
+    public static String SECOND_INFO_MESSAGE_LIST = "com.yuyuka.billiards.api.second.info.message.list";
+
+    public static String SECOND_INFO_GET = "com.yuyuka.billiards.api.second.info.get";
+    public static String SECOND_INFO_MESSAGE_PUT = "com.yuyuka.billiards.api.second.message.put";
+    public static String SECOND_INFO_MEWANT = "com.yuyuka.billiards.api.second.info.mewant";
+    public static String CONSULTATION_MESSAGE_LIST = "com.yuyuka.billiards.api.consultation.message.list";
+    public static String AUTHORIZED_USER_PUT_FOLLOW = "com.yuyuka.billiards.api.authorized.user.put.follow";
+
 }

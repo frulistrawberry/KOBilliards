@@ -2,6 +2,8 @@ package com.yuyuka.billiards.utils;
 
 import android.annotation.SuppressLint;
 
+import com.yuyuka.billiards.utils.log.LogUtil;
+
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -183,7 +185,7 @@ public class DateUtils {
      * @return
      */
     public static String converTime(String createDate) {
-        long timestamp = parseDatetime(createDate).getTime();
+        long timestamp = parseDatetime(createDate).getTime()/1000;
         long currentSeconds = System.currentTimeMillis() / 1000;
         long timeGap = currentSeconds - timestamp;// 与现在时间相差秒数
         String timeStr = null;
@@ -196,6 +198,7 @@ public class DateUtils {
         } else {// 1秒钟-59秒钟
             timeStr = "刚刚";
         }
+        LogUtil.e("bizContent",timeGap);
         return timeStr;
     }
 

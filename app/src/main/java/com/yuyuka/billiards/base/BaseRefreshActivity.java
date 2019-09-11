@@ -52,6 +52,20 @@ public abstract class BaseRefreshActivity<P extends BasePresenter> extends BaseM
 
     }
 
+    @Override
+    public void showProgressDialog() {
+        if (mPtrLayout.isRefreshing())
+            return;
+        super.showProgressDialog();
+    }
+
+    @Override
+    public void dismissProgressDialog() {
+        if (mPtrLayout.isRefreshing())
+            return;
+        super.dismissProgressDialog();
+    }
+
     /**
      * 子类必须实现此方法添加刷新逻辑
      */

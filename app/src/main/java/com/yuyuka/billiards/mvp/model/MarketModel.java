@@ -5,6 +5,7 @@ import android.text.TextUtils;
 import com.google.gson.Gson;
 import com.yuyuka.billiards.base.BaseModel;
 import com.yuyuka.billiards.constants.UrlConstant;
+import com.yuyuka.billiards.mvp.contract.market.GoodsDetailContract;
 import com.yuyuka.billiards.mvp.contract.market.GoodsListContract;
 import com.yuyuka.billiards.net.BizContent;
 import com.yuyuka.billiards.net.HttpResult;
@@ -13,6 +14,7 @@ import com.yuyuka.billiards.pojo.GoodsPojo;
 import com.yuyuka.billiards.pojo.ListData;
 import com.yuyuka.billiards.utils.DateUtils;
 
+import java.text.BreakIterator;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -22,7 +24,7 @@ import java.util.Map;
 
 import io.reactivex.Observable;
 
-public class MarketModel extends BaseModel implements GoodsListContract.IGoodsListModel {
+public class MarketModel extends BaseModel implements GoodsListContract.IGoodsListModel , GoodsDetailContract.IGoodsDetailModel {
 
 
     /**
@@ -107,4 +109,59 @@ public class MarketModel extends BaseModel implements GoodsListContract.IGoodsLi
         RequestParam requestParam = new RequestParam(UrlConstant.SEARCH_BIZ,convertBizContent(content));
         return mService.simpleRequest(requestParam);
     }
+
+    /**
+     * 获取商品详情
+     * @param id 商品ID
+     * @return
+     */
+    @Override
+    public Observable<HttpResult> getGoodsInfo(int id) {
+        BizContent content = new BizContent();
+        content.setId(id);
+        RequestParam requestParam = new RequestParam(UrlConstant.SECOND_INFO_GET,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
+    }
+
+    /**
+     * 获取商品评论列表
+     * @param billiardsSecondMallId 商品id
+     * @param page 页码
+     * @return
+     */
+    @Override
+    public Observable<HttpResult> getCommentList(int billiardsSecondMallId,int page) {
+        BizContent content = new BizContent();
+        content.setBilliardsSecondMallId(billiardsSecondMallId);
+        content.buildPageQueryDto(page);
+        RequestParam requestParam = new RequestParam(UrlConstant.SECOND_INFO_MESSAGE_LIST,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
+    }
+
+    /**
+     * 商品留言
+     * @param billiardsSecondMallId 商品id
+     * @param content 评论内容
+     * @return
+     */
+    @Override
+    public Observable<HttpResult> comment(int billiardsSecondMallId, String content) {
+        BizContent bizContent = new BizContent();
+        bizContent.setBilliardsSecondMallId(billiardsSecondMallId);
+        bizContent.setContent(content);
+        bizContent.setUserId(12);
+        RequestParam requestParam = new RequestParam(UrlConstant.SECOND_INFO_MESSAGE_PUT,convertBizContent(bizContent));
+        return mService.simpleRequest(requestParam);
+    }
+
+    @Override
+    public Observable<HttpResult> want(int billiardsSecondMallId) {
+        BizContent content = new BizContent();
+        content.setBilliardsSecondMallId(billiardsSecondMallId);
+        content.setUserId(12);
+        RequestParam requestParam = new RequestParam(UrlConstant.SECOND_INFO_MEWANT,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
+    }
+
+
 }

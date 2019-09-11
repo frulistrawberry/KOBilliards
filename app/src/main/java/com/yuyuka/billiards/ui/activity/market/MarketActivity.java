@@ -6,6 +6,8 @@ import android.support.design.widget.AppBarLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,8 +23,10 @@ import com.yuyuka.billiards.mvp.presenter.market.GoodsListPresenter;
 import com.yuyuka.billiards.pojo.GoodsPojo;
 import com.yuyuka.billiards.ui.activity.search.RoomSearchActivity;
 import com.yuyuka.billiards.ui.adapter.goods.GoodsAdapter;
+import com.yuyuka.billiards.ui.fragment.merchant.RecommendMerchantFragment;
 import com.yuyuka.billiards.utils.CommonUtils;
 import com.yuyuka.billiards.utils.DataOptionUtils;
+import com.yuyuka.billiards.utils.KeyboardUtils;
 import com.yuyuka.billiards.widget.AppBarStateChangeListener;
 import com.yuyuka.billiards.widget.EasyPopup;
 import com.yuyuka.billiards.widget.dialog.FilterDialog;
@@ -35,7 +39,7 @@ import butterknife.OnClick;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
-public class MarketActivity extends BaseListActivity<GoodsListPresenter> implements GoodsListContract.IGoodsListView, AMapLocationListener {
+public class MarketActivity extends BaseListActivity<GoodsListPresenter> implements GoodsListContract.IGoodsListView, AMapLocationListener, FilterDialog.OnFilterListenter {
 
 
     @BindView(R.id.app_bar_layout)
@@ -64,6 +68,8 @@ public class MarketActivity extends BaseListActivity<GoodsListPresenter> impleme
     ImageView mDistanceSortIv;
     @BindView(R.id.iv_sort_price)
     ImageView mPriceSortIv;
+    @BindView(R.id.et_search)
+    EditText mSearchEt;
 
     public static void launcher(Context context){
         Intent intent = new Intent(context, MarketActivity.class);
@@ -101,6 +107,18 @@ public class MarketActivity extends BaseListActivity<GoodsListPresenter> impleme
         mRecyclerView.setLayoutManager(new GridLayoutManager(this,2));
         mRecyclerView.setAdapter(mAdapter);
         initFilterPop();
+        mSearchEt.setOnEditorActionListener((v, actionId, event) -> {
+            if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                //关闭软键盘
+                KeyboardUtils.hide(getContext(),mSearchEt);
+                keywords = mSearchEt.getText().toString();
+                mAdapter.setNewData(null);
+                onRefresh();
+                return true;
+            }
+            return false;
+        });
+        mSearchEt.clearFocus();
     }
 
 
@@ -212,6 +230,16 @@ public class MarketActivity extends BaseListActivity<GoodsListPresenter> impleme
 
     private void initFilterPop() {
         mFilterPop = new FilterDialog(this);
+        mFilterPop.setOnFilterListenter(this);
+        KeyboardUtils.setKeyboardListener(this, new KeyboardUtils.OnKeyboardVisibilityListener() {
+            @Override
+            public void onVisibilityChanged(boolean visible) {
+                if (!visible){
+                    mFilterPop.clearFocus();
+                    mSearchEt.clearFocus();
+                }
+            }
+        });
 
     }
 
@@ -222,5 +250,17 @@ public class MarketActivity extends BaseListActivity<GoodsListPresenter> impleme
         lng = aMapLocation.getLongitude();
         CommonUtils.saveLocationInfo(lat,lng);
         onRefresh();
+    }
+
+    @Override
+    public void onFilter(int quickCondition, int lowPrice, int hightPrice, int releaseTimeCondition, int otherCondition) {
+        this.quickCondition = quickCondition;
+        this.lowPrice = lowPrice;
+        this.highPrice = hightPrice;
+        this.releaseTimeCondition = releaseTimeCondition;
+        this.otherCondition = otherCondition;
+        mAdapter.setNewData(null);
+        onRefresh();
+        mFilterPop.dismiss();
     }
 }
