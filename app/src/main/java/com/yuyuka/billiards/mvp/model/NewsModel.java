@@ -104,6 +104,9 @@ public class NewsModel extends BaseModel implements NewsListContract.INewsListMo
 
     @Override
     public Observable<HttpResult> getNewsInfo(int consultationId) {
-        return null;
+        BizContent bizContent = new BizContent();
+        bizContent.setId(consultationId);
+        RequestParam requestParam = new RequestParam(UrlConstant.CONSULATION_LIST,convertBizContent(bizContent));
+        return mService.simpleRequest(requestParam);
     }
 }

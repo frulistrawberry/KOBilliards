@@ -10,6 +10,7 @@ import com.yuyuka.billiards.mvp.model.NewsModel;
 import com.yuyuka.billiards.net.RespObserver;
 import com.yuyuka.billiards.pojo.ListData;
 import com.yuyuka.billiards.pojo.NewsCommentItem;
+import com.yuyuka.billiards.pojo.NewsItem;
 import com.yuyuka.billiards.utils.CollectionUtils;
 import com.yuyuka.billiards.utils.RxUtils;
 
@@ -46,6 +47,26 @@ public class NewsContentPresenter extends BasePresenter<NewsContract.INewsView, 
                     @Override
                     public void onError(int errCode, String errMsg) {
                         getView().hideLoading();
+                        getView().showError(errMsg);
+                    }
+                });
+    }
+
+    public void getNewsInfo(int consultationId){
+        getView().showProgressDialog();
+        mModel.getNewsInfo(consultationId)
+                .compose(RxUtils.transform(getView()))
+                .subscribe(new RespObserver() {
+                    @Override
+                    public void onResult(String msg, String bizContent) {
+                        getView().dismissProgressDialog();
+                        NewsItem newsInfo = new Gson().fromJson(bizContent,NewsItem.class);
+                        getView().showNewsInfo(newsInfo);
+
+                    }
+                    @Override
+                    public void onError(int errCode, String errMsg) {
+                        getView().dismissProgressDialog();
                         getView().showError(errMsg);
                     }
                 });

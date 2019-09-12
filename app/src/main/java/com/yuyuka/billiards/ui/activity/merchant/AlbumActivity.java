@@ -27,7 +27,7 @@ public class AlbumActivity extends BaseListActivity {
     RecyclerView recyclerView;
     @BindView(R.id.layout_ptr)
     PtrClassicFrameLayout layoutPtr;
-    List<AlbumBean> data ;
+    List<AlbumBean> data;
     AlbumBean albumBean;
     public static void launcher(Context context) {
         Intent intent = new Intent(context, AlbumActivity.class);
