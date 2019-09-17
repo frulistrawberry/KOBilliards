@@ -12,6 +12,7 @@ import com.yuyuka.billiards.ui.activity.market.MarketActivity;
 import com.yuyuka.billiards.ui.activity.match.NearbyMatchActivity;
 import com.yuyuka.billiards.ui.activity.merchant.AddMerchantActivity;
 import com.yuyuka.billiards.ui.activity.merchant.NearbyMerchantActivity;
+import com.yuyuka.billiards.ui.activity.ranking.RunkingActivity;
 
 ;
 
@@ -49,6 +50,10 @@ public class ModularAdapter extends BaseQuickAdapter<ModularPojo, BaseViewHolder
                     case "面对面对战":
                         mContext.startActivity(new Intent(mContext, FaceToFaceActivity.class));
                         break;
+                    case "排行榜":
+                        RunkingActivity.launcher(mContext);
+                         break;
+
             }
         });
     }
