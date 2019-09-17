@@ -4,6 +4,7 @@ import android.text.TextUtils;
 
 import com.yuyuka.billiards.base.BaseModel;
 import com.yuyuka.billiards.constants.UrlConstant;
+import com.yuyuka.billiards.mvp.contract.news.NewsContract;
 import com.yuyuka.billiards.mvp.contract.news.NewsListContract;
 import com.yuyuka.billiards.net.BizContent;
 import com.yuyuka.billiards.net.HttpResult;
@@ -14,7 +15,7 @@ import java.util.Map;
 
 import io.reactivex.Observable;
 
-public class NewsModel extends BaseModel implements NewsListContract.INewsListModel {
+public class NewsModel extends BaseModel implements NewsListContract.INewsListModel, NewsContract.INewsModel {
 
 
     /**
@@ -50,5 +51,62 @@ public class NewsModel extends BaseModel implements NewsListContract.INewsListMo
             return mService.simpleRequest(requestParam);
         }
 
+    }
+
+    /**
+     * 获取资讯评论列表
+     * @param consultationId
+     * @param page
+     * @return
+     */
+    @Override
+    public Observable<HttpResult> getNewsComment(int consultationId, int page) {
+        BizContent content = new BizContent();
+        content.buildPageQueryDto(page);
+        content.setConsultationId(consultationId);
+        RequestParam requestParam = new RequestParam(UrlConstant.CONSULTATION_MESSAGE_LIST,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
+    }
+
+    /**
+     * 用户关注
+     * @param followId
+     * @return
+     */
+    @Override
+    public Observable<HttpResult> attention(int followId) {
+        BizContent content = new BizContent();
+        content.setFollowId(followId);
+        content.setUserId(12);
+        RequestParam requestParam = new RequestParam(UrlConstant.AUTHORIZED_USER_PUT_FOLLOW,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
+    }
+
+    @Override
+    public Observable<HttpResult> comment(int consultationId, String content) {
+        BizContent bizContent = new BizContent();
+        bizContent.setContent(content);
+        bizContent.setConsultationId(consultationId);
+        bizContent.setUserId(12);
+        RequestParam requestParam = new RequestParam(UrlConstant.AUTHORIZED_USER_PUT_FOLLOW,convertBizContent(bizContent));
+        return mService.simpleRequest(requestParam);
+    }
+
+    @Override
+    public Observable<HttpResult> praise(int bizId) {
+        BizContent bizContent = new BizContent();
+        bizContent.setBizId(bizId);
+        bizContent.setBizType(0);
+        bizContent.setUserId(12);
+        RequestParam requestParam = new RequestParam(UrlConstant.AUTHORIZED_USER_PUT_FOLLOW,convertBizContent(bizContent));
+        return mService.simpleRequest(requestParam);
+    }
+
+    @Override
+    public Observable<HttpResult> getNewsInfo(int consultationId) {
+        BizContent bizContent = new BizContent();
+        bizContent.setId(consultationId);
+        RequestParam requestParam = new RequestParam(UrlConstant.CONSULATION_LIST,convertBizContent(bizContent));
+        return mService.simpleRequest(requestParam);
     }
 }

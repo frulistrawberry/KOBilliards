@@ -27,13 +27,48 @@ public class BizContent {
     private String messageInfo;
     private Integer userId;
     private Integer matchInfoId;
+    private Integer id;
+    private Integer billiardsSecondMallId;
+    private String content;
+    private Integer consultationId;
+    private Integer followId;
+    private Integer bizId;
+    private Integer bizType;
+
+    public void setBizId(Integer bizId) {
+        this.bizId = bizId;
+    }
+
+    public void setBizType(Integer bizType) {
+        this.bizType = bizType;
+    }
+
+    public void setFollowId(Integer followId) {
+        this.followId = followId;
+    }
+
+    public void setConsultationId(Integer consultationId) {
+        this.consultationId = consultationId;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setBilliardsSecondMallId(Integer billiardsSecondMallId) {
+        this.billiardsSecondMallId = billiardsSecondMallId;
+    }
+
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
     public void setMatchInfoId(Integer matchInfoId) {
         this.matchInfoId = matchInfoId;
-    }
-
-    public void setUserId(int userId) {
-        this.userId = userId;
     }
 
     public void setMessageInfo(String messageInfo) {

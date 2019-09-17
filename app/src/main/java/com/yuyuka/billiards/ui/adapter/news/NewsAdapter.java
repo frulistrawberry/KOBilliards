@@ -1,6 +1,7 @@
 package com.yuyuka.billiards.ui.adapter.news;
 
 import android.view.Gravity;
+import android.view.View;
 import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
@@ -8,6 +9,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.image.ImageManager;
 import com.yuyuka.billiards.pojo.NewsItem;
+import com.yuyuka.billiards.ui.activity.news.ArticleDetailActivity;
 import com.yuyuka.billiards.utils.DateUtils;
 import com.yuyuka.billiards.utils.SizeUtils;
 
@@ -34,6 +36,7 @@ public class NewsAdapter extends BaseMultiItemQuickAdapter<NewsItem, BaseViewHol
                 helper.setText(R.id.tv_time, DateUtils.converTime(item.getCreated()));
                 if (user!=null)
                 helper.setText(R.id.tv_user,user.getUserName());
+                helper.getConvertView().setOnClickListener(v -> ArticleDetailActivity.launch(mContext,item.getId(),item.getContentInfo()));
                 break;
             case 1:
                 //小视频
