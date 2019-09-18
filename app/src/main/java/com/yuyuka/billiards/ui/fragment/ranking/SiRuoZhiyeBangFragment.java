@@ -1,30 +1,28 @@
 package com.yuyuka.billiards.ui.fragment.ranking;
 
-import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseListFragment;
 import com.yuyuka.billiards.base.BasePresenter;
-import com.yuyuka.billiards.net.CanJuBean;
 import com.yuyuka.billiards.pojo.SiRuoZhiyeBangBean;
+import com.yuyuka.billiards.utils.dialog.AlertDialog;
 import com.yuyuka.billiards.ui.adapter.ranking.SiRuoZhiyeBangAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
-import butterknife.ButterKnife;
-import butterknife.Unbinder;
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
-public class SiRuoZhiyeBangFragment extends BaseListFragment {
+public class SiRuoZhiyeBangFragment extends BaseListFragment implements BaseQuickAdapter.OnItemClickListener{
 
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -55,6 +53,7 @@ public class SiRuoZhiyeBangFragment extends BaseListFragment {
     protected void initData() {
         zhiyeBangBeans=new ArrayList<>();
         mAdapter=new SiRuoZhiyeBangAdapter();
+        mAdapter.setOnItemClickListener(this);
     }
 
     @Override
@@ -78,5 +77,10 @@ public class SiRuoZhiyeBangFragment extends BaseListFragment {
         mAdapter.setNewData(zhiyeBangBeans);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        new AlertDialog(getContext()).show();
     }
 }

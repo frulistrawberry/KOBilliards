@@ -6,11 +6,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseListFragment;
 import com.yuyuka.billiards.base.BasePresenter;
 import com.yuyuka.billiards.net.CanJuBean;
 import com.yuyuka.billiards.ui.adapter.ranking.CanJuAdapter;
+import com.yuyuka.billiards.utils.dialog.ZhiweiDialog;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +22,7 @@ import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
-public class ZhiyeBangFragment extends BaseListFragment {
+public class ZhiyeBangFragment extends BaseListFragment implements BaseQuickAdapter.OnItemClickListener{
     List<CanJuBean> canJuBeanList;
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
@@ -50,6 +52,7 @@ public class ZhiyeBangFragment extends BaseListFragment {
     protected void initData() {
         mAdapter =new CanJuAdapter();
         canJuBeanList=new ArrayList<>();
+        mAdapter.setOnItemClickListener(this);
     }
 
     @Override
@@ -73,5 +76,10 @@ public class ZhiyeBangFragment extends BaseListFragment {
         mAdapter.setNewData(canJuBeanList);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(mAdapter);
+    }
+
+    @Override
+    public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
+        new ZhiweiDialog(getContext()).show();
     }
 }

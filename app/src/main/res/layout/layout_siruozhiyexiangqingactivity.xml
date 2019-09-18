@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+<LinearLayout
+    android:layout_width="327dp"
+    android:layout_height="498dp"
+    android:orientation="vertical"
+    android:background="@drawable/bg_white_corners"
+    android:layout_marginLeft="24dp"
+    android:layout_marginRight="24dp"
+    android:layout_marginTop="10dp"
+    >
+   <ImageView
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:src="@mipmap/ic_launcher"
+       android:layout_gravity="center"
+       android:layout_marginTop="40dp"
+       />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="罗尼·奥沙利文"
+        android:textColor="#656565"
+        android:textSize="12dp"
+        android:layout_marginTop="20dp"
+        android:layout_gravity="center"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="最近比赛状态"
+        android:textColor="#656565"
+        android:textSize="14dp"
+        android:layout_marginLeft="27dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
+        />
+    <include layout="@layout/include_ptr_recycler"/>
+</LinearLayout>
+    <ImageView
+        android:id="@+id/ic_clean"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:src="@mipmap/ic_launcher"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="50dp"
+        />
+</LinearLayout>

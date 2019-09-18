@@ -120,6 +120,7 @@
         <activity android:name=".ui.activity.ranking.RenqiActivity"/>
         <activity android:name=".ui.activity.ranking.ZhonshiBaqiuActivity"/>
         <activity android:name=".ui.activity.ranking.SiRuoActivity"/>
+        <activity android:name=".ui.activity.message.MessageActivity"/>
         <!-- 网易云信 -->
         <meta-data
             android:name="com.netease.nim.appKey"
