@@ -19,7 +19,7 @@ public class BizContent {
     private Integer typeId;
     private Integer queryType;
     private String keyword;
-    private String billiardsId;
+    private Integer billiardsId;
     private Map<String,Object> parms;
     private Map<String,Object> order;
     private StarClass starClass;
@@ -84,7 +84,7 @@ public class BizContent {
     }
 
     public void setBilliardsId(String billiardsId) {
-        this.billiardsId = billiardsId;
+        this.billiardsId = Integer.valueOf(billiardsId);
     }
 
     public void setParms(Map<String, Object> parms) {

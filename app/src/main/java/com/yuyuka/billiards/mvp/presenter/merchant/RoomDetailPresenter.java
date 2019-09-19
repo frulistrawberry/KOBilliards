@@ -10,7 +10,9 @@ import com.yuyuka.billiards.mvp.contract.merchant.RoomDetailContract;
 import com.yuyuka.billiards.mvp.model.MerchantModel;
 import com.yuyuka.billiards.net.RespObserver;
 import com.yuyuka.billiards.pojo.BilliardsGoods;
+import com.yuyuka.billiards.pojo.BilliardsRoomPojo;
 import com.yuyuka.billiards.utils.RxUtils;
+import com.yuyuka.billiards.utils.log.LogUtil;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -23,18 +25,42 @@ public class RoomDetailPresenter extends BasePresenter<RoomDetailContract.IRoomD
         super(view, new MerchantModel());
         mHandler = new Handler(msg -> {
             requestCount++;
-            if (requestCount == 1){
+            if (requestCount == 2){
                 getView().hideLoading();
             }
+            LogUtil.e("count:"+requestCount);
             return false;
         });
 
     }
 
-    public void getGoodsInfo(String billiardsId,int weekNum,boolean alone){
+    public void getMerchantInfo(String billiardsId){
         getView().showLoading();
-        if (alone)
-            requestCount = 0;
+        mModel.getRoomInfo(billiardsId)
+                .compose(RxUtils.transform(getView()))
+                .subscribe(new RespObserver() {
+
+                    @Override
+                    public void onResult(String msg, String bizContent) {
+                        if (TextUtils.isEmpty(bizContent)){
+                            getView().showEmpty();
+                            return;
+                        }
+                        BilliardsRoomPojo data = new Gson().fromJson(bizContent,BilliardsRoomPojo.class);
+                        getView().showRoomInfo(data);
+                            getView().hideLoading();
+                    }
+
+                    @Override
+                    public void onError(int errCode, String errMsg) {
+                        getView().hideLoading();
+                        getView().showError(errMsg);
+                    }
+                });
+    }
+
+    public void getGoodsInfo(String billiardsId,int weekNum){
+        getView().showLoading();
         mModel.getGoodsInfo(billiardsId,weekNum)
                 .compose(RxUtils.transform(getView()))
                 .subscribe(new RespObserver() {
@@ -48,19 +74,12 @@ public class RoomDetailPresenter extends BasePresenter<RoomDetailContract.IRoomD
                         Type type = new TypeToken<List<BilliardsGoods>>(){}.getType();
                         List<BilliardsGoods> data = new Gson().fromJson(bizContent,type);
                         getView().showGoodsInfo(data);
-                        if (alone)
-                            getView().hideLoading();
-                        else {
-                            mHandler.sendEmptyMessage(0);
-                        }
+                        getView().hideLoading();
                     }
 
                     @Override
                     public void onError(int errCode, String errMsg) {
-                        if (alone)
-                            getView().hideLoading();
-                        else
-                            mHandler.sendEmptyMessage(0);
+                        getView().hideLoading();
                         getView().showError(errMsg);
                     }
                 });

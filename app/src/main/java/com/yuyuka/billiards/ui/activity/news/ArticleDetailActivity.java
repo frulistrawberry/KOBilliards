@@ -129,15 +129,15 @@ public class ArticleDetailActivity extends BaseListActivity<NewsContentPresenter
     @Override
     protected void onRefresh() {
         mCurrentPage = 0;
-//        getPresenter().getNewsComment(consultationId,mCurrentPage);
+        getPresenter().getNewsComment(consultationId,mCurrentPage);
         getPresenter().getNewsInfo(consultationId);
     }
 
     @Override
     protected void onLoadMore() {
         super.onLoadMore();
-//        mCurrentPage ++;
-//        getPresenter().getNewsComment(consultationId,mCurrentPage);
+        mCurrentPage ++;
+        getPresenter().getNewsComment(consultationId,mCurrentPage);
     }
 
     @Override

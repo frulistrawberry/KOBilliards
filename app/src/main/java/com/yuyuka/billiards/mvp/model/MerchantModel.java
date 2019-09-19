@@ -86,8 +86,11 @@ public class MerchantModel extends BaseModel implements BilliardsCoachListContra
 
 
     @Override
-    public Observable<HttpResult> getRoomInfo(int roomId) {
-        return null;
+    public Observable<HttpResult> getRoomInfo(String billiardsInfoId) {
+        BizContent content = new BizContent();
+        content.setBilliardsId(billiardsInfoId);
+        RequestParam requestParam = new RequestParam(UrlConstant.GET,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
     }
 
     /**
