@@ -136,7 +136,7 @@ public class HomeFragment extends BaseFragment{
         mModularIndicator.setViewPager(mModularPager);
         List<ImagePojo> bannerData = new ArrayList<>();
         for (int i = 0; i < 5; i++) {
-            bannerData.add(new ImagePojo());
+            bannerData.add(new ImagePojo(""));
         }
         ViewUtils.loadBanner(bannerData,mBanner,true,true,false);
         CommonNavigator commonNavigator = new CommonNavigator(getContext());

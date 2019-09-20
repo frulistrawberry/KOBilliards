@@ -25,7 +25,7 @@ public class BilliardsRoomPojo implements Serializable {
     private int start;
     private int limit;
     private Map<String,String> tag;
-    private List<BilliardsImage> billiardsImages;
+    private List<ImagePojo> billiardsImages;
     private BilliardsUser billiardsUsers;
     private int minimumPayment;
 
@@ -113,7 +113,7 @@ public class BilliardsRoomPojo implements Serializable {
         return tag;
     }
 
-    public List<BilliardsImage> getBilliardsImages() {
+    public List<ImagePojo> getBilliardsImages() {
         return billiardsImages;
     }
 

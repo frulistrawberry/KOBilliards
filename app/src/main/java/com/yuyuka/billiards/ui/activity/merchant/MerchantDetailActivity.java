@@ -2,6 +2,7 @@ package com.yuyuka.billiards.ui.activity.merchant;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -13,17 +14,21 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseRefreshActivity;
 import com.yuyuka.billiards.image.ImageManager;
 import com.yuyuka.billiards.mvp.contract.merchant.RoomDetailContract;
 import com.yuyuka.billiards.mvp.presenter.merchant.RoomDetailPresenter;
 import com.yuyuka.billiards.pojo.BilliardsGoods;
+import com.yuyuka.billiards.pojo.BilliardsRoomPojo;
+import com.yuyuka.billiards.pojo.ImagePojo;
 import com.yuyuka.billiards.pojo.RoomInfoPojo;
 import com.yuyuka.billiards.pojo.SelectTimePojo;
 import com.yuyuka.billiards.ui.adapter.common.PagerAdapter;
 import com.yuyuka.billiards.ui.fragment.merchant.AssistantListFragment;
 import com.yuyuka.billiards.utils.CollectionUtils;
+import com.yuyuka.billiards.utils.DataOptionUtils;
 import com.yuyuka.billiards.utils.DateUtils;
 import com.yuyuka.billiards.utils.ScreenUtils;
 import com.yuyuka.billiards.utils.SizeUtils;
@@ -84,6 +89,26 @@ public class MerchantDetailActivity extends BaseRefreshActivity<RoomDetailPresen
     String billiardsId;
     int weekNum;
     private int curIndex;
+    @BindView(R.id.tv_billiards_name)
+    TextView mBilliardsNameTv;
+    @BindView(R.id.tv_location)
+    TextView mLocationTv;
+    @BindView(R.id.tv_distance)
+    TextView mDistanceTv;
+    @BindView(R.id.tv_business_date)
+    TextView mBusinessTv;
+    @BindView(R.id.tv_business_status)
+    TextView mBusinessStatusTv;
+    @BindView(R.id.iv_business_status)
+    ImageView mBusinessStatusIv;
+    @BindView(R.id.tv_level)
+    TextView mLevelTv;
+    @BindView(R.id.tv_level_text)
+    TextView mLevelTextTv;
+    @BindView(R.id.tv_photo_count)
+    TextView mPhotoCountTv;
+    @BindView(R.id.banner)
+    ConvenientBanner mBanner;
 
     public static void launcher(Context context,String billiardsId){
         Intent intent = new Intent(context, MerchantDetailActivity.class);
@@ -175,7 +200,7 @@ public class MerchantDetailActivity extends BaseRefreshActivity<RoomDetailPresen
                     long temp = 60*60*24*1000*index+today;
                     String date = DateUtils.date2Str(new Date(temp),DateUtils.YYYY_MM_DD);
                     weekNum = DateUtils.dateToWeek(date);
-                    getPresenter().getGoodsInfo(billiardsId,weekNum,true);
+                    getPresenter().getGoodsInfo(billiardsId,weekNum);
                     curIndex = index;
 
                 });
@@ -254,7 +279,8 @@ public class MerchantDetailActivity extends BaseRefreshActivity<RoomDetailPresen
 
     @Override
     public void onRefresh() {
-        getPresenter().getGoodsInfo(billiardsId,weekNum,false);
+        getPresenter().getMerchantInfo(billiardsId);
+        getPresenter().getGoodsInfo(billiardsId,weekNum);
     }
 
     @Override
@@ -303,7 +329,38 @@ public class MerchantDetailActivity extends BaseRefreshActivity<RoomDetailPresen
     }
 
     @Override
-    public void showRoomInfo(RoomInfoPojo info) {
+    public void showRoomInfo(BilliardsRoomPojo info) {
+        mBilliardsNameTv.setText(info.getBilliardsName());
+        mLocationTv.setText(info.getPosition());
+        mDistanceTv.setText(DataOptionUtils.calculateLineDistance(info.getPositionLatitude(),info.getPositionLongitude()));
+        mBusinessTv.setText(info.getBusinessDate());
+        if (info.getDoBusiness() == 1){
+            mBusinessStatusIv.setImageResource(R.drawable.circle_green);
+            mBusinessStatusTv.setText("营业中");
+        }else {
+            mBusinessStatusIv.setImageResource(R.drawable.circle_gray);
+            mBusinessStatusTv.setText("打样了");
+        }
+
+        mLevelTv.setText(info.getBillLevel()+".0");
+        if (info.getBillLevel()>=5)
+            mLevelTextTv.setText("极好");
+        if (info.getBillLevel()>=4){
+            mLevelTextTv.setText("很好");
+        }else {
+            mLevelTextTv.setText("一般");
+        }
+        if (CollectionUtils.isEmpty(info.getBilliardsImages())){
+            ImagePojo imagePojo = new ImagePojo(info.getHeadImage());
+            List<ImagePojo> imagePojos = new ArrayList<>();
+            mPhotoCountTv.setVisibility(View.GONE);
+            ViewUtils.loadBanner(imagePojos,mBanner,true,false,false);
+        }else {
+            mPhotoCountTv.setText("照片"+info.getBilliardsImages().size()+"张");
+            ViewUtils.loadBanner(info.getBilliardsImages(),mBanner,true,false,false);
+
+        }
+
 
     }
 

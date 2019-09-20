@@ -10,6 +10,8 @@ public class UrlConstant {
     public static String SEARCH_BIZ = "com.yuyuka.billiards.api.search.biz";
     //商户活动接口
     public static String GOODS_AND_PROMOTION_LIST = "com.yuyuka.billiards.api.goodsAndPromotion.list";
+    //商户详细信息
+    public static String GET = "com.yuyuka.billiards.api.get";
     //残局类型接口
     public static String CRIPPLE_TYPE_LIST = "com.yuyuka.billiards.api.cripple.type.list";
     //残局列表接口

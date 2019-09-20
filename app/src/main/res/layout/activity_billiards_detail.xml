@@ -28,11 +28,10 @@
                         android:id="@+id/images"
                         android:layout_width="match_parent"
                         android:layout_height="226dp">
-                        <ImageView
+                        <com.bigkoo.convenientbanner.ConvenientBanner
+                            android:id="@+id/banner"
                             android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:scaleType="fitXY"
-                            android:src="@mipmap/img_billiards_detail"/>
+                            android:layout_height="match_parent"/>
                         <LinearLayout
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
@@ -54,12 +53,14 @@
                                 android:paddingTop="7dp"
                                 android:paddingBottom="7dp">
                                 <TextView
+                                    android:id="@+id/tv_level"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#efa92b"
                                     android:textSize="13sp"
                                     android:text="4.0"/>
                                 <TextView
+                                    android:id="@+id/tv_level_text"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:textColor="#efa92b"
@@ -71,6 +72,7 @@
                                 android:layout_height="1dp"
                                 android:layout_weight="1"/>
                             <TextView
+                                android:id="@+id/tv_photo_count"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:background="@drawable/bg_billiards_room_photo_count"
@@ -95,6 +97,7 @@
                             android:layout_height="wrap_content"
                             android:orientation="vertical">
                             <TextView
+                                android:id="@+id/tv_billiards_name"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/text_color_1"
@@ -116,12 +119,14 @@
                             android:layout_marginTop="10dp"
                             android:orientation="vertical">
                             <TextView
+                                android:id="@+id/tv_location"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textColor="@color/text_color_1"
                                 android:textSize="14sp"
                                 android:text="北京市丰台区洋桥"/>
                             <TextView
+                                android:id="@+id/tv_distance"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="12sp"
@@ -143,6 +148,7 @@
                                 android:textSize="14sp"
                                 android:text="营业时间"/>
                             <TextView
+                                android:id="@+id/tv_business_date"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:textSize="12sp"
@@ -163,11 +169,13 @@
                                 android:layout_height="26dp"
                                 android:background="@color/text_color_9"/>
                             <ImageView
+                                android:id="@+id/iv_business_status"
                                 android:layout_width="22dp"
                                 android:layout_height="22dp"
                                 android:layout_marginLeft="5dp"
                                 android:src="@drawable/circle_green"/>
                             <TextView
+                                android:id="@+id/tv_business_status"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_marginLeft="5dp"

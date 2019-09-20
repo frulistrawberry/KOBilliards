@@ -47,7 +47,7 @@ public class NewsContentPresenter extends BasePresenter<NewsContract.INewsView, 
                     @Override
                     public void onError(int errCode, String errMsg) {
                         getView().hideLoading();
-                        getView().showError(errMsg);
+//                        getView().showError(errMsg);
                     }
                 });
     }
