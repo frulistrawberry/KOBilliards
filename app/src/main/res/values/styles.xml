@@ -71,5 +71,13 @@
         <item name="android:backgroundDimEnabled">false</item><!-- 背景高亮 -->
     </style>
 
+    <style name="InputStyle">
+        <item name="android:textColor">#C0C0C0</item>
+        <item name="android:textSize">14dp</item>
 
+    </style>
+
+    <style name="CalculatorDialog" parent="BottomDialog">
+        <item name="android:windowSoftInputMode">stateVisible</item>
+    </style>
 </resources>

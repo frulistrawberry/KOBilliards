@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/white"
+    >
+  <TextView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:textSize="18dp"
+      android:text="这里是标题"
+      android:textColor="#656565"
+      android:layout_marginTop="10dp"
+      android:layout_marginLeft="18dp"
+      />
+     <TextView
+         android:layout_width="wrap_content"
+         android:layout_height="wrap_content"
+         android:text="用户昵称  08-28  20:20"
+         android:textColor="#A7A7A7"
+         android:textSize="14dp"
+         android:layout_marginLeft="18dp"
+         android:layout_marginTop="5dp"
+         />
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="#D9D9D9"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="10dp"
+        />
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="这里是群公告内容"
+        android:textSize="14dp"
+        android:textColor="#656565"
+        android:layout_marginLeft="18dp"
+        android:layout_marginTop="10dp"
+        />
+</LinearLayout>

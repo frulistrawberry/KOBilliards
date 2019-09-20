@@ -8,6 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseActivity;
@@ -26,6 +27,7 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import butterknife.OnClick;
 
 public class MessageActivity extends BaseActivity {
     @BindView(R.id.tab_layout)
@@ -39,7 +41,7 @@ public class MessageActivity extends BaseActivity {
     ImageView ivTitleLeft;
     @BindView(R.id.tv_title)
     TextView tvTitle;
-    @BindView(R.id.iv_title_right)
+    @BindView(R.id.iv_imga)
     ImageView ivTitleRight;
     @BindView(R.id.v_title_divider)
     View vTitleDivider;
@@ -68,11 +70,8 @@ public class MessageActivity extends BaseActivity {
         mFragmentList.add(new RankingListFragment());
         mAdapter = new PagerAdapter(getSupportFragmentManager(), mFragmentList, mTitles);
     }
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        // TODO: add setContentView(...) invocation
-        ButterKnife.bind(this);
+    @OnClick(R.id.iv_imga)
+    public void onViewClicked() {
+        SetActivity.launcher(this);
     }
 }
