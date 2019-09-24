@@ -124,6 +124,18 @@
         <activity android:name=".ui.activity.scan.ScanActivity"
             android:theme="@style/AppTransparentTheme"
             android:screenOrientation="portrait" />
+        <activity android:name=".ui.activity.message.SetActivity"/>
+        <activity android:name=".ui.activity.message.DisturbingActivity"/>
+        <activity android:name=".ui.activity.message.BlacklistActivity"/>
+        <activity android:name=".ui.activity.message.BlackActivity"/>
+        <activity android:name=".ui.activity.message.BeizhuActivity"/>
+        <activity android:name=".ui.activity.message.GroupXiangActivity"/>
+        <activity android:name=".ui.activity.message.QungonggaoActivity"/>
+        <activity android:name=".ui.activity.message.QunGongGaoNewActivity"/>
+        <activity android:name=".ui.activity.message.YanzhengMessageActivity"/>
+        <activity android:name=".ui.adapter.message.YanzhengXiangActivity"/>
+        <activity android:name=".ui.adapter.message.TianjiaActivity"/>
+        <activity android:name=".ui.adapter.message.QunchengyuanActivity"/>
         <!-- 网易云信 -->
         <meta-data
             android:name="com.netease.nim.appKey"

@@ -34,7 +34,7 @@
                 android:textColor="@color/black"
                 />
             <ImageView
-                android:id="@+id/iv_title_right"
+                android:id="@+id/iv_imga"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="visible"

@@ -1,11 +1,44 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-<TextView
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="群聊"
-    android:textSize="18dp"
-    />
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:id="@+id/yanzheng_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/bg_white_corners"
+        android:orientation="horizontal"
+        android:layout_marginTop="10dp"
+        >
+        <ImageView
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:src="@mipmap/ic_launcher"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="18dp"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="创建群组"
+            android:textSize="16dp"
+            android:textColor="#656565"
+            android:layout_marginLeft="20dp"
+            android:layout_gravity="center"
+            />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_weight="1" />
+        <ImageView
+            android:layout_width="7dp"
+            android:layout_height="14dp"
+            android:src="@mipmap/ic_arrow_right"
+            android:layout_gravity="center"
+            android:layout_marginRight="13dp"
+            />
+    </LinearLayout>
+    <include layout="@layout/include_ptr_recycler"/>
 </LinearLayout>

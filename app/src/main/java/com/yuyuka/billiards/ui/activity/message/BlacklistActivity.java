@@ -1,19 +1,17 @@
-package com.yuyuka.billiards.ui.fragment.message;
+package com.yuyuka.billiards.ui.activity.message;
 
+import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.yuyuka.billiards.R;
-import com.yuyuka.billiards.base.BaseListFragment;
+import com.yuyuka.billiards.base.BaseListActivity;
 import com.yuyuka.billiards.base.BasePresenter;
 import com.yuyuka.billiards.pojo.GroupFragmentBean;
-import com.yuyuka.billiards.ui.activity.message.GroupXiangActivity;
 import com.yuyuka.billiards.ui.adapter.message.GroupFragmentAdapter;
 
 import java.util.ArrayList;
@@ -24,28 +22,39 @@ import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
-public class GroupFragment extends BaseListFragment implements BaseQuickAdapter.OnItemClickListener {
-    @BindView(R.id.yanzheng_message)
-    LinearLayout yanzhengMessage;
+public class BlacklistActivity extends BaseListActivity implements BaseQuickAdapter.OnItemClickListener {
     @BindView(R.id.recycler_view)
     RecyclerView recyclerView;
     @BindView(R.id.layout_ptr)
     PtrClassicFrameLayout layoutPtr;
     List<GroupFragmentBean> list;
+    public static void launcher(Context context) {
+        context.startActivity(new Intent(context, BlacklistActivity.class));
+    }
     @Override
-    protected View createView(LayoutInflater inflater, ViewGroup parent) {
-        return inflater.inflate(R.layout.layout_groupfragment, parent, false);
+    protected void initTitle() {
+        super.initTitle();
+        getTitleBar().setTitle("黑名单").showBack().show();
     }
 
     @Override
-    protected void initData() {
-       mAdapter=new GroupFragmentAdapter();
-       list=new ArrayList<>();
-       mAdapter.setOnItemClickListener(this::onItemClick);
+    protected boolean isLoadMoreEnable() {
+        return false;
+    }
+
+    @Override
+    public void onRefresh() {
+
+    }
+
+    @Override
+    protected BasePresenter getPresenter() {
+        return null;
     }
 
     @Override
     protected void initView() {
+        setContentView(R.layout.include_ptr_recycler);
         mPtrLayout.setPtrHandler(new PtrDefaultHandler() {
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
@@ -67,22 +76,14 @@ public class GroupFragment extends BaseListFragment implements BaseQuickAdapter.
     }
 
     @Override
-    public void onRefresh() {
-
-    }
-
-    @Override
-    protected boolean isLoadMoreEnable() {
-        return false;
-    }
-
-    @Override
-    protected BasePresenter getPresenter() {
-        return null;
+    protected void initData() {
+        mAdapter=new GroupFragmentAdapter();
+        list=new ArrayList<>();
+        mAdapter.setOnItemClickListener(this::onItemClick);
     }
 
     @Override
     public void onItemClick(BaseQuickAdapter adapter, View view, int position) {
-        GroupXiangActivity.launcher(getContext());
+        BlackActivity.launcher(this);
     }
 }
