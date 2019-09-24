@@ -56,6 +56,8 @@ public class OrderConfirmActivity extends BaseMvpActivity<OrderConfirmPresenter>
     @BindView(R.id.tv_price_detail)
     TextView mPriceDetailTv;
     long time;
+    @BindView(R.id.iv_arrow)
+    ImageView mArrowIv;
 
     public static void launcher(Context context,String goodsName,String goodsInfo,String duration,String id,double price,int hours,double singlePrice,long time){
         Intent intent = new Intent(context, OrderConfirmActivity.class);
@@ -105,16 +107,22 @@ public class OrderConfirmActivity extends BaseMvpActivity<OrderConfirmPresenter>
 
     }
 
-    @OnClick({R.id.btn_detail,R.id.btn_confirm,R.id.ll_detail})
+    @OnClick({R.id.btn_detail,R.id.btn_confirm,R.id.v_touch})
     public void onClick(View v){
         switch (v.getId()){
             case R.id.btn_detail:
-                if (mDetailLayout.getVisibility() == View.VISIBLE)
+                if (mDetailLayout.getVisibility() == View.VISIBLE){
                     mDetailLayout.setVisibility(View.GONE);
-                else
+                    mArrowIv.setImageResource(R.mipmap.small_arrow_up);
+                }
+                else{
+                    mArrowIv.setImageResource(R.mipmap.small_arrow_down);
                     mDetailLayout.setVisibility(View.VISIBLE);
+
+                }
                 break;
-            case R.id.ll_detail:
+            case R.id.v_touch:
+                mArrowIv.setImageResource(R.mipmap.small_arrow_up);
                 mDetailLayout.setVisibility(View.GONE);
 
                 break;
@@ -145,6 +153,8 @@ public class OrderConfirmActivity extends BaseMvpActivity<OrderConfirmPresenter>
         TextView defName = setMealView.findViewById(R.id.tv_name);
         TextView defPrice = setMealView.findViewById(R.id.tv_price);
         defSelect.setImageResource(R.mipmap.ic_check_select);
+        TextView infoView = setMealView.findViewById(R.id.tv_info);
+        infoView.setVisibility(View.GONE);
         defName.setText("预定时段,无任何套餐");
         defPrice.setText("￥"+DataOptionUtils.getStringWithRound(price+""));
         mPayPriceTv.setText("￥"+DataOptionUtils.getStringWithRound(price+""));
@@ -177,10 +187,11 @@ public class OrderConfirmActivity extends BaseMvpActivity<OrderConfirmPresenter>
                 ImageView selectIv = view.findViewById(R.id.iv_select);
                 selectIv.setImageResource(R.mipmap.ic_check_select);
                 if (finalI !=0){
-                    mPayPriceTv.setText("￥"+DataOptionUtils.getStringWithRound((this.price+data.get(finalI+1).getMealAmount())+""));
-                    mPayPriceTv1.setText("￥"+DataOptionUtils.getStringWithRound((this.price+data.get(finalI+1).getMealAmount())+""));
+                    mPayPriceTv.setText("￥"+DataOptionUtils.getStringWithRound((this.price+data.get(finalI-1).getMealAmount())+""));
+                    mPayPriceTv1.setText("￥"+DataOptionUtils.getStringWithRound((this.price+data.get(finalI-1).getMealAmount())+""));
                 }
                 else {
+
                     mPayPriceTv.setText("￥"+DataOptionUtils.getStringWithRound(price+""));
                     mPayPriceTv1.setText("￥"+DataOptionUtils.getStringWithRound(price+""));
                 }

@@ -12,4 +12,6 @@ public class CollectionUtils {
         return collection==null||collection.isEmpty();
     }
 
+
+
 }

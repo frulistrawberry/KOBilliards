@@ -59,6 +59,7 @@ public class SelectTimeDialog extends Dialog implements BaseQuickAdapter.OnItemC
         mTotalPriceTv = contentView.findViewById(R.id.tv_total_price);
         mPriceTv = contentView.findViewById(R.id.tv_goods_price);
         reserveBtn.setOnClickListener(this);
+        reserveBtn.setCanClick(false);
         recyclerView.setLayoutManager(new GridLayoutManager(context,5));
         recyclerView.setAdapter(mAdapter);
         mAdapter.setOnItemClickListener(this);
@@ -152,6 +153,7 @@ public class SelectTimeDialog extends Dialog implements BaseQuickAdapter.OnItemC
 
         }
         this.price = totalPrice;
+        reserveBtn.setCanClick(totalPrice>0);
         mTotalPriceTv.setText("共￥"+ DataOptionUtils.getStringWithRound(totalPrice+""));
 
     }
@@ -161,6 +163,7 @@ public class SelectTimeDialog extends Dialog implements BaseQuickAdapter.OnItemC
         switch (v.getId()){
             case R.id.btn_reserve:
                 OrderConfirmActivity.launcher(getContext(),goodsName,goodsInfo,duration,id,price,hours,singlePrice,time);
+                dismiss();
                 break;
         }
     }

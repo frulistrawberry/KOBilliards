@@ -62,7 +62,7 @@ public class ArticleDetailActivity extends BaseListActivity<NewsContentPresenter
     TextView userTv1;
     @BindView(R.id.tv_time)
     TextView timeTv;
-    @BindView(R.id.tv_title)
+    @BindView(R.id.tv_title1)
     TextView titleTv;
 
 

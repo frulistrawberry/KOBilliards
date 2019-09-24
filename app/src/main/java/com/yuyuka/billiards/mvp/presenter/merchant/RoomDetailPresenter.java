@@ -19,18 +19,9 @@ import java.util.List;
 
 public class RoomDetailPresenter extends BasePresenter<RoomDetailContract.IRoomDetailView, RoomDetailContract.IRoomDetailModel> {
 
-    private Handler mHandler;
-    private int requestCount = 0;
     public RoomDetailPresenter(RoomDetailContract.IRoomDetailView view) {
         super(view, new MerchantModel());
-        mHandler = new Handler(msg -> {
-            requestCount++;
-            if (requestCount == 2){
-                getView().hideLoading();
-            }
-            LogUtil.e("count:"+requestCount);
-            return false;
-        });
+
 
     }
 

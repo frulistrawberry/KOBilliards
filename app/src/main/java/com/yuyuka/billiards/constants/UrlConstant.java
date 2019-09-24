@@ -36,6 +36,6 @@ public class UrlConstant {
     public static String SECOND_INFO_MEWANT = "com.yuyuka.billiards.api.second.info.mewant";
     public static String CONSULTATION_MESSAGE_LIST = "com.yuyuka.billiards.api.consultation.message.list";
     public static String AUTHORIZED_USER_PUT_FOLLOW = "com.yuyuka.billiards.api.authorized.user.put.follow";
-    public static String CONSULATION_LIST = "com.yuyuka.billiards.api.consultation.list";
+    public static String CONSULATION_GET = "com.yuyuka.billiards.api.consultation.get";
 
 }

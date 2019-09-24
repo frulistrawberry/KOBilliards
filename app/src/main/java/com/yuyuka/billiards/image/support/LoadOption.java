@@ -10,6 +10,8 @@ public class LoadOption {
     private int mRoundRadius;//加载为圆角图片的圆角值
     private int mBlurRadius;//加载为模糊图片的模糊值
     private boolean mIsGray;//是否加载为灰白图片
+    private int height;
+    private int width;
 
     public LoadOption() {
     }
@@ -98,5 +100,23 @@ public class LoadOption {
     public LoadOption setBorderColor(int borderColor) {
         this.mBorderColor = borderColor;
         return this;
+    }
+
+    public LoadOption setHeight(int height) {
+        this.height = height;
+        return this;
+    }
+
+    public LoadOption setWidth(int width) {
+        this.width = width;
+        return this;
+    }
+
+    public int getHeight() {
+        return height;
+    }
+
+    public int getWidth() {
+        return width;
     }
 }

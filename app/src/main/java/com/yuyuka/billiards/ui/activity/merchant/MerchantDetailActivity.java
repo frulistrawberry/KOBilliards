@@ -1,11 +1,13 @@
 package com.yuyuka.billiards.ui.activity.merchant;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,6 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseRefreshActivity;
 import com.yuyuka.billiards.image.ImageManager;
@@ -23,6 +27,8 @@ import com.yuyuka.billiards.mvp.presenter.merchant.RoomDetailPresenter;
 import com.yuyuka.billiards.pojo.BilliardsGoods;
 import com.yuyuka.billiards.pojo.BilliardsRoomPojo;
 import com.yuyuka.billiards.pojo.ImagePojo;
+import com.yuyuka.billiards.pojo.ListData;
+import com.yuyuka.billiards.pojo.NewsCommentItem;
 import com.yuyuka.billiards.pojo.RoomInfoPojo;
 import com.yuyuka.billiards.pojo.SelectTimePojo;
 import com.yuyuka.billiards.ui.adapter.common.PagerAdapter;
@@ -46,7 +52,9 @@ import com.yuyuka.billiards.widget.tabindicator.buildins.commonnavigator.titles.
 import com.yuyuka.billiards.widget.tabindicator.buildins.commonnavigator.titles.SimplePagerTitleView;
 
 
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -109,6 +117,7 @@ public class MerchantDetailActivity extends BaseRefreshActivity<RoomDetailPresen
     TextView mPhotoCountTv;
     @BindView(R.id.banner)
     ConvenientBanner mBanner;
+    private List<BilliardsGoods> goodsList;
 
     public static void launcher(Context context,String billiardsId){
         Intent intent = new Intent(context, MerchantDetailActivity.class);
@@ -200,7 +209,7 @@ public class MerchantDetailActivity extends BaseRefreshActivity<RoomDetailPresen
                     long temp = 60*60*24*1000*index+today;
                     String date = DateUtils.date2Str(new Date(temp),DateUtils.YYYY_MM_DD);
                     weekNum = DateUtils.dateToWeek(date);
-                    getPresenter().getGoodsInfo(billiardsId,weekNum);
+                    showGoodsInfo(goodsList);
                     curIndex = index;
 
                 });
@@ -339,7 +348,7 @@ public class MerchantDetailActivity extends BaseRefreshActivity<RoomDetailPresen
             mBusinessStatusTv.setText("营业中");
         }else {
             mBusinessStatusIv.setImageResource(R.drawable.circle_gray);
-            mBusinessStatusTv.setText("打样了");
+            mBusinessStatusTv.setText("打烊了");
         }
 
         mLevelTv.setText(info.getBillLevel()+".0");
@@ -353,6 +362,7 @@ public class MerchantDetailActivity extends BaseRefreshActivity<RoomDetailPresen
         if (CollectionUtils.isEmpty(info.getBilliardsImages())){
             ImagePojo imagePojo = new ImagePojo(info.getHeadImage());
             List<ImagePojo> imagePojos = new ArrayList<>();
+            imagePojos.add(imagePojo);
             mPhotoCountTv.setVisibility(View.GONE);
             ViewUtils.loadBanner(imagePojos,mBanner,true,false,false);
         }else {
@@ -364,8 +374,10 @@ public class MerchantDetailActivity extends BaseRefreshActivity<RoomDetailPresen
 
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void showGoodsInfo(List<BilliardsGoods> goods) {
+        goodsList = goods;
         mReserveContainer.removeAllViews();
         if (CollectionUtils.isEmpty(goods)){
             View emptyView = ViewUtils.genEmptyView(this,R.mipmap.ic_empty,"空空如也");
@@ -382,51 +394,59 @@ public class MerchantDetailActivity extends BaseRefreshActivity<RoomDetailPresen
                 TextView amountTv = itemView.findViewById(R.id.tv_amount);
                 ImageManager.getInstance().loadNet(good.getGoodsImage(),goodsIv);
                 goodsNameTv.setText(good.getGoodsName());
-                goodsInfoTv.setText(good.getGoodsInfo());
-                if (CollectionUtils.isEmpty(good.getBilliardsPromotionList())){
-                    promotionTv.setText("");
-                }else {
-                    List<BilliardsGoods.BilliardsPromotionList> promotionList = good.getBilliardsPromotionList();
-                    StringBuilder protionSb = new StringBuilder();
-                    protionSb.append("优惠时段")
-                            .append(promotionList.get(0).getClock())
-                            .append(":00");
-                    if (promotionList.size()>1){
-                        protionSb.append("-")
-                                .append(promotionList.get(promotionList.size()-1))
-                                .append(":00");
+                if (!TextUtils.isEmpty(good.getGoodsInfo()))
+                    goodsInfoTv.setText(good.getGoodsInfo());
+                List<BilliardsGoods.BilliardsPromotionRulesList> promotionList =  new ArrayList<>();
+                promotionTv.setText("");
+                if (good.getBilliardsPromotionRulesInfo()!=null){
+                    promotionTv.setText("优惠时间"+good.getMinPrice()+"元/小时");
+                    String weekJson = good.getBilliardsPromotionRulesInfo().getWeekJson();
+                    Type type = new TypeToken<List<BilliardsGoods.BilliardsPromotionRulesList>>(){}.getType();
+                    List<BilliardsGoods.BilliardsPromotionRulesList> list = new Gson().fromJson(weekJson,type);
+                    for (BilliardsGoods.BilliardsPromotionRulesList billiardsPromotionRulesList : list) {
+                        if (billiardsPromotionRulesList.getWeek() == weekNum){
+                            promotionList.add(billiardsPromotionRulesList);
+                        }
                     }
-                    protionSb.append("\n")
-                            .append("优惠时段")
-                            .append(promotionList.get(0).getAmount())
-                            .append("元/小时");
-                    promotionTv.setText(protionSb);
                 }
-                amountTv.setText("￥"+good.getGoodsAmount());
+                if (good.getBilliardsCostRules()!=null){
+                    amountTv.setText("￥"+good.getBilliardsCostRules().getHourPrice());
+                }else {
+                    amountTv.setText("_._");
+                }
                 itemView.setOnClickListener(v -> {
                     SelectTimeDialog dialog = new SelectTimeDialog(getContext());
                     List<SelectTimePojo> data = new ArrayList<>();
-                    for (int i = 0; i < good.getBilliardsGoodsScheduledTimeDtoList().size(); i++) {
+                    List<BilliardsGoods.BilliardsReserveRulesList> list = good.getBilliardsReserveRulesInfo().getBilliardsReserveRulesList();
+                    List<BilliardsGoods.BilliardsReserveRulesList> reserveRulesList = new ArrayList<>();
+                    for (BilliardsGoods.BilliardsReserveRulesList billiardsReserveRulesList : list) {
+                        if (billiardsReserveRulesList.getWeekNum() == weekNum){
+                            reserveRulesList.add(billiardsReserveRulesList);
+                        }
+
+                    }
+                    for (int i = 0; i < reserveRulesList.size(); i++) {
                         boolean hasActive = false;
                         SelectTimePojo selectTimePojo = new SelectTimePojo();
                         selectTimePojo.setSelected(false);
                         selectTimePojo.setActive(false);
-                        selectTimePojo.setAmount(good.getGoodsAmount()+"");
-                        selectTimePojo.setClock(good.getBilliardsGoodsScheduledTimeDtoList().get(i).getClock()+":00");
+                        selectTimePojo.setAmount(good.getBilliardsCostRules().getHourPrice()+"");
+                        selectTimePojo.setClock(reserveRulesList.get(i).getClock()+":00");
+                        if (!CollectionUtils.isEmpty(promotionList)){
+                            for (int i1 = 0; i1 < promotionList.size(); i1++) {
 
-                        for (int i1 = 0; i1 < good.getBilliardsPromotionList().size(); i1++) {
-
-                            if (good.getBilliardsPromotionList().get(i1).getClock() == good.getBilliardsGoodsScheduledTimeDtoList().get(i).getClock()){
-                                selectTimePojo.setActive(true);
-                                hasActive = true;
-                                selectTimePojo.setAmount(good.getBilliardsPromotionList().get(i1).getAmount()+"");
-                                break;
+                                if (promotionList.get(i1).getClock() == promotionList.get(i).getClock()){
+                                    selectTimePojo.setActive(true);
+                                    hasActive = true;
+                                    selectTimePojo.setAmount(good.getMinPrice()+"");
+                                    break;
+                                }
                             }
                         }
                         selectTimePojo.setActive(hasActive);
                         data.add(selectTimePojo);
                     }
-                    dialog.setData(data,good.getGoodsName(),mTimeLongs[curIndex],good.getGoodsAmount()+"",good.getGoodsInfo(),billiardsId);
+                    dialog.setData(data,good.getGoodsName(),mTimeLongs[curIndex],good.getBilliardsCostRules().getHourPrice()+"","",billiardsId);
                     dialog.show();
 
                 });

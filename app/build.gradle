@@ -4,7 +4,7 @@ android {
     compileSdkVersion 28
     defaultConfig {
         applicationId "com.yuyuka.billiards"
-        minSdkVersion 15
+        minSdkVersion 19
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
@@ -99,6 +99,14 @@ dependencies {
     implementation 'com.wang.avi:library:1.0.0'
     //二维码
     implementation 'cn.yipianfengye.android:zxing-library:2.2'
+    //视频SDK
+    implementation 'com.shuyu:gsyVideoPlayer-java:6.0.3'
+    implementation 'com.shuyu:GSYVideoPlayer-exo2:6.0.3'
+    implementation 'com.shuyu:gsyVideoPlayer-armv5:6.0.3'
+    implementation 'com.shuyu:gsyVideoPlayer-armv7a:6.0.3'
+    implementation 'com.shuyu:gsyVideoPlayer-arm64:6.0.3'
+    implementation 'com.shuyu:gsyVideoPlayer-x64:6.0.3'
+    implementation 'com.shuyu:gsyVideoPlayer-x86:6.0.3'
 
 
 

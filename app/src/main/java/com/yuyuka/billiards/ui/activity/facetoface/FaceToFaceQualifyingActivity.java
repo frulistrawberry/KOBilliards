@@ -29,7 +29,7 @@ public class FaceToFaceQualifyingActivity extends BaseActivity {
         }else {
             mStatusBar.setVisibility(View.GONE);
         }
-        Bitmap bitmap = CodeUtils.createImage("asdfasdfa", SizeUtils.dp2px(this,165),SizeUtils.dp2px(this,165),null);
+        Bitmap bitmap = CodeUtils.createImage("rank", SizeUtils.dp2px(this,165),SizeUtils.dp2px(this,165),null);
 
         scanIv.setImageBitmap(bitmap);
     }

@@ -26,6 +26,7 @@ import com.yuyuka.billiards.utils.FileUtils;
 
 import java.io.File;
 import java.math.BigDecimal;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
@@ -264,6 +265,10 @@ public class ImageManager {
         }
         //使用临时的配置进行设置
         else {
+            if (loadOption.getHeight()!=0 && loadOption.getWidth()!=0){
+                requestOptions.override(loadOption.getWidth(),loadOption.getHeight());
+            }
+
             if (loadOption.isShowTransition()) {
                 requestBuilder.transition(DrawableTransitionOptions.withCrossFade(600));
             }

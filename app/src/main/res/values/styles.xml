@@ -8,6 +8,14 @@
         <item name="android:windowBackground">@color/bg_window</item>
     </style>
 
+    <style name="AppTransparentTheme" parent="AppTheme">
+
+        <item name="windowNoTitle">true</item>
+        <item name="android:fitsSystemWindows">false</item>
+        <item name="android:windowBackground">@color/transparent</item>
+
+    </style>
+
     <style name="AppBarLayoutStyle" parent="android:Widget">
         <item name="elevation">0dp</item>
         <item name="android:background">@color/bg_window</item>

@@ -13,6 +13,7 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseFragment;
 import com.yuyuka.billiards.base.BaseListFragment;
@@ -20,6 +21,7 @@ import com.yuyuka.billiards.pojo.ImagePojo;
 import com.yuyuka.billiards.pojo.ModularPojo;
 import com.yuyuka.billiards.ui.activity.bonus.BonusPoolActivity;
 import com.yuyuka.billiards.ui.activity.message.MessageActivity;
+import com.yuyuka.billiards.ui.activity.scan.ScanActivity;
 import com.yuyuka.billiards.ui.adapter.common.NavigatorAdapter;
 import com.yuyuka.billiards.ui.adapter.common.PagerAdapter;
 import com.yuyuka.billiards.ui.fragment.news.NewsListFragment;
@@ -158,7 +160,7 @@ public class HomeFragment extends BaseFragment{
         }
     }
 
-    @OnClick({R.id.btn_top,R.id.btn_bonus_rewards,R.id.iv_msg})
+    @OnClick({R.id.btn_top,R.id.btn_bonus_rewards,R.id.iv_msg,R.id.ll_scan})
     public void onClick(View v){
         switch (v.getId()){
             case R.id.btn_top:
@@ -172,6 +174,10 @@ public class HomeFragment extends BaseFragment{
              case R.id.iv_msg:
                  MessageActivity.launcher(getContext());
                  break;
+            case R.id.ll_scan:
+                Intent intent = new Intent(getContext(), ScanActivity.class);
+                startActivity(intent);
+                break;
         }
     }
 

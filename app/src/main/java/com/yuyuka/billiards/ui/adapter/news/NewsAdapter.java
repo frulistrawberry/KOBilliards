@@ -1,5 +1,6 @@
 package com.yuyuka.billiards.ui.adapter.news;
 
+import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -8,6 +9,7 @@ import com.chad.library.adapter.base.BaseMultiItemQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.image.ImageManager;
+import com.yuyuka.billiards.image.support.LoadOption;
 import com.yuyuka.billiards.pojo.NewsItem;
 import com.yuyuka.billiards.ui.activity.news.ArticleDetailActivity;
 import com.yuyuka.billiards.utils.DateUtils;
@@ -29,10 +31,15 @@ public class NewsAdapter extends BaseMultiItemQuickAdapter<NewsItem, BaseViewHol
     protected void convert(BaseViewHolder helper, NewsItem item) {
         NewsItem.BilliardsUsers user = item.getBilliardsUsers();
         helper.setText(R.id.tv_title,item.getTitle());
-        ImageManager.getInstance().loadNet(item.getCoverImageAdd(),helper.getView(R.id.iv_cover));
         switch (item.getItemType()){
             case 0:
                 //文章
+                if (TextUtils.isEmpty(item.getCoverImageAdd())){
+                    helper.setGone(R.id.iv_cover,false);
+                }else {
+                    helper.setGone(R.id.iv_cover,false);
+                    ImageManager.getInstance().loadNet(item.getCoverImageAdd(),helper.getView(R.id.iv_cover));
+                }
                 helper.setText(R.id.tv_time, DateUtils.converTime(item.getCreated()));
                 if (user!=null)
                 helper.setText(R.id.tv_user,user.getUserName());
@@ -40,6 +47,8 @@ public class NewsAdapter extends BaseMultiItemQuickAdapter<NewsItem, BaseViewHol
                 break;
             case 1:
                 //小视频
+
+
                 LinearLayout parent = helper.getView(R.id.ll_parent);
                 if (helper.getAdapterPosition()%2 == 0){
                     parent.setPadding(0,0,SizeUtils.dp2px(mContext,2.5f),0);
@@ -48,12 +57,18 @@ public class NewsAdapter extends BaseMultiItemQuickAdapter<NewsItem, BaseViewHol
                     parent.setPadding(SizeUtils.dp2px(mContext,2.5f),0,0,0);
                     parent.setGravity(Gravity.RIGHT);
                 }
+
+                ImageManager.getInstance().loadNet(item.getCoverImageAdd(),helper.getView(R.id.iv_cover));
+
+
                 break;
             case 2:
                 //视频
                 helper.setText(R.id.tv_video_length,item.getViewLongtime()+"");
+                ImageManager.getInstance().loadNet(item.getCoverImageAdd(),helper.getView(R.id.iv_cover));
                 if (user!=null)
                 helper.setText(R.id.tv_user,user.getUserName());
+
                 break;
         }
     }

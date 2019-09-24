@@ -6,15 +6,25 @@ import java.util.List;
 public class BilliardsGoods implements Serializable {
     private int id;
     private String goodsName;
-    private int goodsAmount;
+    private double goodsAmount;
     private String created;
     private int billiardsId;
-    private String goodsInfo;
     private int isDelete;
     private int examine;
     private String goodsImage;
-    private List<BilliardsPromotionList> billiardsPromotionList;
-    private List<BilliardsGoodsScheduledTimeDtoList> billiardsGoodsScheduledTimeDtoList;
+    private int goodsType;
+    private String reserveRuleUuid;
+    private String promoRuleUuid;
+    private String costRuleUuid;
+    private BilliardsCostRules billiardsCostRules;
+    private BilliardsReserveRulesInfo billiardsReserveRulesInfo;
+    private BilliardsPromotionRulesInfo billiardsPromotionRulesInfo;
+    private int minPrice;
+    private String goodsInfo;
+
+    public String getGoodsInfo() {
+        return goodsInfo;
+    }
 
     public int getId() {
         return id;
@@ -24,7 +34,7 @@ public class BilliardsGoods implements Serializable {
         return goodsName;
     }
 
-    public int getGoodsAmount() {
+    public double getGoodsAmount() {
         return goodsAmount;
     }
 
@@ -34,10 +44,6 @@ public class BilliardsGoods implements Serializable {
 
     public int getBilliardsId() {
         return billiardsId;
-    }
-
-    public String getGoodsInfo() {
-        return goodsInfo;
     }
 
     public int getIsDelete() {
@@ -52,23 +58,103 @@ public class BilliardsGoods implements Serializable {
         return goodsImage;
     }
 
-    public List<BilliardsPromotionList> getBilliardsPromotionList() {
-        return billiardsPromotionList;
+    public int getGoodsType() {
+        return goodsType;
     }
 
-    public List<BilliardsGoodsScheduledTimeDtoList> getBilliardsGoodsScheduledTimeDtoList() {
-        return billiardsGoodsScheduledTimeDtoList;
+    public String getReserveRuleUuid() {
+        return reserveRuleUuid;
     }
 
-    public static class BilliardsPromotionList {
+    public String getPromoRuleUuid() {
+        return promoRuleUuid;
+    }
+
+    public String getCostRuleUuid() {
+        return costRuleUuid;
+    }
+
+    public BilliardsCostRules getBilliardsCostRules() {
+        return billiardsCostRules;
+    }
+
+    public BilliardsReserveRulesInfo getBilliardsReserveRulesInfo() {
+        return billiardsReserveRulesInfo;
+    }
+
+    public BilliardsPromotionRulesInfo getBilliardsPromotionRulesInfo() {
+        return billiardsPromotionRulesInfo;
+    }
+
+    public int getMinPrice() {
+        return minPrice;
+    }
+
+    public static class BilliardsCostRules {
+        private int id;
+        private int hourPrice;
+        private String created;
+        private String uuid;
+        private String rulesName;
+        private int billiardsId;
+
+        public int getId() {
+            return id;
+        }
+
+        public int getHourPrice() {
+            return hourPrice;
+        }
+
+        public String getCreated() {
+            return created;
+        }
+
+        public String getUuid() {
+            return uuid;
+        }
+
+        public String getRulesName() {
+            return rulesName;
+        }
+
+        public int getBilliardsId() {
+            return billiardsId;
+        }
+    }
+
+    public static class BilliardsReserveRulesInfo{
+        private int billiardsId;
+        private String created;
+        private String rulesName;
+        private List<BilliardsReserveRulesList> billiardsReserveRulesList;
+
+        public int getBilliardsId() {
+            return billiardsId;
+        }
+
+        public String getCreated() {
+            return created;
+        }
+
+        public String getRulesName() {
+            return rulesName;
+        }
+
+        public List<BilliardsReserveRulesList> getBilliardsReserveRulesList() {
+            return billiardsReserveRulesList;
+        }
+    }
+
+    public static class BilliardsReserveRulesList implements Comparable<BilliardsReserveRulesList> {
         private int id;
         private int weekNum;
-        private int proType;
-        private int discount;
-        private int price;
-        private int goodsId;
+        private int isDelete;
         private int clock;
-        private long amount;
+        private String reserveName;
+        private int billiardsId;
+        private String created;
+        private String uuid;
 
         public int getId() {
             return id;
@@ -78,40 +164,77 @@ public class BilliardsGoods implements Serializable {
             return weekNum;
         }
 
-        public int getProType() {
-            return proType;
-        }
-
-        public int getDiscount() {
-            return discount;
-        }
-
-        public int getPrice() {
-            return price;
-        }
-
-        public int getGoodsId() {
-            return goodsId;
+        public int getIsDelete() {
+            return isDelete;
         }
 
         public int getClock() {
             return clock;
         }
 
-        public long getAmount() {
-            return amount;
+        public String getReserveName() {
+            return reserveName;
+        }
+
+        public int getBilliardsId() {
+            return billiardsId;
+        }
+
+        public String getCreated() {
+            return created;
+        }
+
+        public String getUuid() {
+            return uuid;
+        }
+
+        @Override
+        public int compareTo(BilliardsReserveRulesList billiardsReserveRulesList) {
+            return billiardsReserveRulesList.clock-this.clock;
         }
     }
 
-    public class BilliardsGoodsScheduledTimeDtoList {
-        private int id;
+    public static class BilliardsPromotionRulesInfo{
+        private String uuid;
+        private int billiardsId;
+        private String created;
+        private String weekJson;
+        private String weekChina;
+        private String rulesName;
+        private double promoPrice;
+
+        public String getUuid() {
+            return uuid;
+        }
+
+        public int getBilliardsId() {
+            return billiardsId;
+        }
+
+        public String getCreated() {
+            return created;
+        }
+
+        public String getWeekJson() {
+            return weekJson;
+        }
+
+        public String getWeekChina() {
+            return weekChina;
+        }
+
+        public String getRulesName() {
+            return rulesName;
+        }
+
+        public double getPromoPrice() {
+            return promoPrice;
+        }
+    }
+
+    public static class  BilliardsPromotionRulesList implements Comparable<BilliardsPromotionRulesList>{
         private int week;
         private int clock;
-        private int goodsId;
-
-        public int getId() {
-            return id;
-        }
 
         public int getWeek() {
             return week;
@@ -121,8 +244,10 @@ public class BilliardsGoods implements Serializable {
             return clock;
         }
 
-        public int getGoodsId() {
-            return goodsId;
+        @Override
+        public int compareTo(BilliardsPromotionRulesList billiardsPromotionRulesList) {
+            return billiardsPromotionRulesList.clock-this.clock;
         }
     }
+
 }

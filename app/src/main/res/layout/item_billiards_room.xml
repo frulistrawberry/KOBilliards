@@ -31,6 +31,7 @@
                     android:id="@+id/iv_img"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
+                    android:scaleType="centerCrop"
                     android:src="@mipmap/ic_room_cover"/>
                 <LinearLayout
                     android:layout_width="match_parent"

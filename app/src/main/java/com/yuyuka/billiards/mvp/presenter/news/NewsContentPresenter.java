@@ -71,4 +71,27 @@ public class NewsContentPresenter extends BasePresenter<NewsContract.INewsView, 
                     }
                 });
     }
+
+    public void comment(int consultationId,String content){
+        getView().showProgressDialog();
+        mModel.comment(consultationId,content)
+                .compose(RxUtils.transform(getView()))
+                .subscribe(new RespObserver() {
+                    @Override
+                    public void onResult(String msg, String bizContent) {
+                        getView().dismissProgressDialog();
+                        getView().showCommentSuccess(msg);
+
+                    }
+                    @Override
+                    public void onError(int errCode, String errMsg) {
+                        getView().dismissProgressDialog();
+                        getView().showCommentFailure(errMsg);
+                    }
+                });
+    }
+
+    public void attention(int followId){
+
+    }
 }
