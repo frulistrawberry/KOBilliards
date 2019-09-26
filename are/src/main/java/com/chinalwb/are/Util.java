@@ -235,7 +235,7 @@ public class Util {
         //draw fg into
         cv.drawBitmap(foreground, fgLeft, fgTop, null);
         //save all clip
-        cv.save(Canvas.ALL_SAVE_FLAG);
+//        cv.save(Canvas.ALL_SAVE_FLAG);
         //store
         cv.restore();
         return newBitmap;

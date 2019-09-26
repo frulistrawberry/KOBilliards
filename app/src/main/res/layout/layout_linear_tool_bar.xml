@@ -1,44 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    xmlns:are="http://schemas.android.com/apk/res-auto"
+    android:layout_height="wrap_content"
     android:orientation="vertical">
-    <EditText
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@color/white"
-        android:layout_marginTop="16dp"
-        android:layout_marginLeft="13dp"
-        android:layout_marginRight="13dp"
-        android:singleLine="true"
-        android:textSize="18sp"
-        android:hint="标题"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <com.chinalwb.are.AREditText
-                android:id="@+id/areditor"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@color/white"
-                are:expandMode="MIN"
-                android:layout_marginLeft="13dp"
-                android:layout_marginRight="13dp"
-                are:hideToolbar="true"
-                are:toolbarAlignment="TOP"
-                android:hint="正文"
-                android:textSize="18sp"
-                />
-        </ScrollView>
-
-    </LinearLayout>
-
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -152,10 +117,16 @@
             android:text="完成"/>
 
     </LinearLayout>
-    <com.yuyuka.billiards.widget.richtext.LinearToolBar
-        android:id="@+id/tool_bar"
+    <LinearLayout
+        android:id="@+id/ll_text_style"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:background="#F5F5F5"
+        android:visibility="gone"
+        android:focusable="false"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
 
+    </LinearLayout>
 
 </LinearLayout>

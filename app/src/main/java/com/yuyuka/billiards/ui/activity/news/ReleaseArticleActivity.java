@@ -1,91 +1,104 @@
 package com.yuyuka.billiards.ui.activity.news;
 
 
-import android.graphics.Color;
-import android.os.Bundle;
-import android.os.PersistableBundle;
+import android.content.Intent;
 import android.support.annotation.ColorRes;
 import android.support.annotation.Nullable;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
+import com.chinalwb.are.AREditText;
+import com.chinalwb.are.styles.toolbar.IARE_Toolbar;
+import com.chinalwb.are.styles.toolitems.ARE_ToolItem_Bold;
+import com.chinalwb.are.styles.toolitems.ARE_ToolItem_Hr;
+import com.chinalwb.are.styles.toolitems.ARE_ToolItem_ListBullet;
+import com.chinalwb.are.styles.toolitems.ARE_ToolItem_ListNumber;
+import com.chinalwb.are.styles.toolitems.ARE_ToolItem_Quote;
+import com.chinalwb.are.styles.toolitems.ARE_ToolItem_Underline;
+import com.chinalwb.are.styles.toolitems.IARE_ToolItem;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseActivity;
 import com.yuyuka.billiards.utils.KeyboardUtils;
 import com.yuyuka.billiards.utils.log.LogUtil;
+import com.yuyuka.billiards.widget.richtext.LinearToolBar;
 import com.yuyuka.billiards.widget.richtext.RichEditor;
 
+import butterknife.BindInt;
 import butterknife.BindView;
-import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class ReleaseArticleActivity extends AppCompatActivity implements KeyboardUtils.OnKeyboardVisibilityListener, RichEditor.OnTextChangeListener {
+public class ReleaseArticleActivity extends BaseActivity implements KeyboardUtils.OnKeyboardVisibilityListener, RichEditor.OnTextChangeListener {
 
-    boolean isTitle;
-    boolean isBold;
-    boolean isUnderLine;
-    boolean isRef;
-    boolean isOl;
-    boolean isUl;
-    boolean isSpline;
+    @BindView(R.id.tool_bar)
+    LinearToolBar mToolbar;
+    @BindView(R.id.areditor)
+    AREditText mRichEditor;
 
-    @BindView(R.id.et_rich)
-    RichEditor mRichEditor;
-    @BindView(R.id.ll_text_style)
-    LinearLayout mTextStyleLayout;
-    @BindView(R.id.btn_img)
-    ImageView mImgBtn;
     @BindView(R.id.btn_text)
-    ImageView mTextBtn;
+    ImageView textBtn;
+    @BindView(R.id.btn_img)
+    ImageView imgBtn;
     @BindView(R.id.btn_complete)
     TextView mCompleteBtn;
-    @BindView(R.id.btn_bold)
-    TextView mBoldBtn;
-    @BindView(R.id.btn_title)
-    TextView mTitleBtn;
-
-//    @Override
-//    protected void initTitle() {
-//        super.initTitle();
-//        getTitleBar().setLeftText("取消", view -> finish()).setRightText("发布", view -> {
-//
-//        }).setTitle("发布文章").hideDivider().show();
-//    }
 
 
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        initView();
+    protected void initTitle() {
+        super.initTitle();
+        getTitleBar().setLeftText("取消", view -> finish()).setRightText("发布", view -> {
+
+        }).setTitle("发布文章").hideDivider().show();
     }
 
-//    @Override
+
+
+    @Override
     protected void initView() {
+        setTitleStyle(1);
         setContentView(R.layout.activity_release_article);
-        ButterKnife.bind(this);
-        mRichEditor.setOnTextChangeListener(this);
-        mRichEditor.setEditorFontSize(18);
-        //输入框显示字体的颜色
-        mRichEditor.setEditorFontColor(getResourceColor(R.color.text_color_1));
-        //输入框背景设置
-        mRichEditor.setEditorBackgroundColor(Color.WHITE);
-        //输入框文本padding
-        mRichEditor.setPadding(10, 10, 10, 10);
-        //输入提示文本
-        mRichEditor.setPlaceholder("请输入编辑内容");
         KeyboardUtils.setKeyboardListener(this,this);
+
+        IARE_ToolItem bold = new ARE_ToolItem_Bold();
+        IARE_ToolItem underline = new ARE_ToolItem_Underline();
+        IARE_ToolItem quote = new ARE_ToolItem_Quote();
+        IARE_ToolItem listNumber = new ARE_ToolItem_ListNumber();
+        IARE_ToolItem listBullet = new ARE_ToolItem_ListBullet();
+        IARE_ToolItem hr = new ARE_ToolItem_Hr();
+        mToolbar.addToolbarItem(bold);
+        mToolbar.addToolbarItem(underline);
+        mToolbar.addToolbarItem(quote);
+        mToolbar.addToolbarItem(listNumber);
+        mToolbar.addToolbarItem(listBullet);
+        mToolbar.addToolbarItem(hr);
+        mRichEditor.setToolbar(mToolbar);
     }
 
-//    @Override
-//    protected void initData() {
-//
-//    }
+    @Override
+    protected void initData() {
+
+    }
+
+    @OnClick({R.id.btn_img,R.id.btn_text,R.id.btn_complete})
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.btn_img:
+                break;
+            case R.id.btn_text:
+                textBtn.setVisibility(View.GONE);
+                imgBtn.setVisibility(View.GONE);
+                mCompleteBtn.setVisibility(View.VISIBLE);
+                mToolbar.setVisibility(View.VISIBLE);
+                break;
+            case R.id.btn_complete:
+                textBtn.setVisibility(View.VISIBLE);
+                imgBtn.setVisibility(View.VISIBLE);
+                mCompleteBtn.setVisibility(View.GONE);
+                mToolbar.setVisibility(View.GONE);
+                break;
+        }
+
+    }
 
 
     @Override
@@ -94,54 +107,16 @@ public class ReleaseArticleActivity extends AppCompatActivity implements Keyboar
 
     }
 
-    @OnClick({R.id.btn_text,R.id.btn_title,R.id.btn_bold,R.id.btn_under_line,R.id.btn_ref,R.id.btn_ol,R.id.btn_ul,R.id.btn_spline,R.id.btn_complete})
-    public void onClick(View v){
-        switch (v.getId()){
-            case R.id.btn_text:
-                KeyboardUtils.hide(this,v);
-                mTextStyleLayout.setVisibility(View.VISIBLE);
-                mCompleteBtn.setVisibility(View.VISIBLE);
-                mTextBtn.setVisibility(View.GONE);
-                mImgBtn.setVisibility(View.GONE);
-                break;
-            case R.id.btn_complete:
-                mTextStyleLayout.setVisibility(View.GONE);
-                break;
-            case R.id.btn_title:
-                if (isTitle){
-                    mTitleBtn.setTextColor(getResourceColor(R.color.text_color_1));
-                }else {
-                    mTitleBtn.setTextColor(getResourceColor(R.color.text_color_6));
-                }
-                isTitle = !isTitle;
-//                mRichEditor.setTitile();
-                break;
-            case R.id.btn_bold:
-                if (isBold){
-                    mBoldBtn.setTextColor(getResourceColor(R.color.text_color_1));
-                }else {
-                    mBoldBtn.setTextColor(getResourceColor(R.color.text_color_6));
-                }
-                isBold = !isBold;
-                mRichEditor.setBold();
-                break;
-        }
-    }
 
     @Override
     public void onVisibilityChanged(boolean visible) {
-        if (visible){
-            mTextStyleLayout.setVisibility(View.GONE);
-            mCompleteBtn.setVisibility(View.GONE);
-            mImgBtn.setVisibility(View.VISIBLE);
-            mTextBtn.setVisibility(View.VISIBLE);
-            mRichEditor.focusEditor();
-        }
+
     }
 
 
-    public int getResourceColor(@ColorRes int colorId) {
-        return ResourcesCompat.getColor(getResources(), colorId, null);
-
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        mToolbar.onActivityResult(requestCode, resultCode, data);
     }
 }
