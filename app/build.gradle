@@ -99,6 +99,10 @@ dependencies {
     implementation 'com.wang.avi:library:1.0.0'
     //二维码
     implementation 'cn.yipianfengye.android:zxing-library:2.2'
+
+    implementation project(':are')
+
+
     //视频SDK
     implementation 'com.shuyu:gsyVideoPlayer-java:6.0.3'
     implementation 'com.shuyu:GSYVideoPlayer-exo2:6.0.3'

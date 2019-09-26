@@ -136,6 +136,9 @@
         <activity android:name=".ui.adapter.message.YanzhengXiangActivity"/>
         <activity android:name=".ui.adapter.message.TianjiaActivity"/>
         <activity android:name=".ui.adapter.message.QunchengyuanActivity"/>
+        <activity android:name=".ui.activity.news.ReleaseArticleActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:screenOrientation="portrait"/>
         <!-- 网易云信 -->
         <meta-data
             android:name="com.netease.nim.appKey"

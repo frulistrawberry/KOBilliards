@@ -1,5 +1,6 @@
 package com.yuyuka.billiards.ui.fragment;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.ViewGroup;
 
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseFragment;
+import com.yuyuka.billiards.ui.activity.news.ReleaseArticleActivity;
 import com.yuyuka.billiards.ui.adapter.common.NavigatorAdapter;
 import com.yuyuka.billiards.ui.adapter.common.PagerAdapter;
 import com.yuyuka.billiards.ui.fragment.news.NewsListFragment;
@@ -19,6 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 public class NewsFragment extends BaseFragment {
 
@@ -53,5 +56,10 @@ public class NewsFragment extends BaseFragment {
         mIndicator.setNavigator(commonNavigator);
         mViewPager.setAdapter(mAdapter);
         ViewPagerHelper.bind(mIndicator, mViewPager);
+    }
+
+    @OnClick(R.id.iv_contact)
+    public void onClick(View v){
+        startActivity(new Intent(getContext(), ReleaseArticleActivity.class));
     }
 }

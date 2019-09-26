@@ -149,7 +149,6 @@ public class ArticleDetailActivity extends BaseListActivity<NewsContentPresenter
     protected void initData() {
         mAdapter = new NewsCommentAdapter();
         consultationId = getIntent().getIntExtra("consultationId",0);
-        newsContent = getIntent().getStringExtra("newsContent");
     }
 
     @Override
@@ -197,7 +196,48 @@ public class ArticleDetailActivity extends BaseListActivity<NewsContentPresenter
 
     @Override
     public void showNewsInfo(NewsItem data) {
-        mWebView.loadData(data.getContentInfo()+js,"text/html; charset=UTF-8", null);
+        String html = "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n" +
+                "<html>\n" +
+                "<head>\n" +
+                "<meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-16\">\n" +
+                "<meta http-equiv=\"Content-Style-Type\" content=\"text/css\">\n" +
+                "<title></title>\n" +
+                "<meta name=\"Generator\" content=\"Cocoa HTML Writer\">\n" +
+                "<style type=\"text/css\">\n" +
+                "p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 18.0px '.PingFang SC'; color: #8e8e93}\n" +
+                "p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px '.PingFang SC'; color: #000000}\n" +
+                "p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px '.PingFang SC'; color: #656565}\n" +
+                "p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px '.PingFang SC'; color: #656565; background-color: #aaaaaa}\n" +
+                "p.p5 {margin: 0.0px 0.0px 8.0px 20.0px; font: 14.0px '.SF UI Text'; color: #656565; min-height: 16.7px}\n" +
+                "p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 13.8px}\n" +
+                "p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}\n" +
+                "p.p8 {margin: 0.0px 0.0px 30.0px 20.0px; font: 14.0px '.SF UI Text'; color: #656565; min-height: 16.7px}\n" +
+                "span.s1 {font-family: '.PingFangSC-Regular'; font-weight: normal; font-style: normal; font-size: 18.00pt}\n" +
+                "span.s2 {font-family: '.PingFangSC-Medium'; font-weight: bold; font-style: normal; font-size: 14.00pt}\n" +
+                "span.s3 {font-family: '.PingFangSC-Regular'; font-weight: normal; font-style: normal; font-size: 14.00pt; text-decoration: underline}\n" +
+                "span.s4 {font-family: '.PingFangSC-Regular'; font-weight: normal; font-style: normal; font-size: 14.00pt}\n" +
+                "span.s5 {font-family: '.SFUIText'; font-weight: normal; font-style: normal; font-size: 14.00pt}\n" +
+                "span.s6 {font-family: 'Helvetica'; font-weight: normal; font-style: normal; font-size: 12.00pt}\n" +
+                "</style>\n" +
+                "</head>\n" +
+                "<body>\n" +
+                "<p class=\"p1\"><span class=\"s1\">这是标题</span></p >\n" +
+                "<p class=\"p2\"><span class=\"s2\">这是加粗</span></p >\n" +
+                "<p class=\"p3\"><span class=\"s3\">这是下划线</span></p >\n" +
+                "<p class=\"p4\"><span class=\"s4\">这是引用</span></p >\n" +
+                "<p class=\"p5\"><span class=\"s5\"></span><br></p >\n" +
+                "<p class=\"p3\"><span class=\"s5\">1</span><span class=\"s4\">、列表</span><span class=\"s5\">1</span></p >\n" +
+                "<p class=\"p3\"><span class=\"s5\">2</span><span class=\"s4\">、列表</span><span class=\"s5\">2</span></p >\n" +
+                "<p class=\"p6\"><span class=\"s6\"></span><br></p >\n" +
+                "<p class=\"p6\"><span class=\"s6\"></span><br></p >\n" +
+                "<p class=\"p7\"><span class=\"s6\"><img src=\"http://img4.imgtn.bdimg.com/it/u=2280945564,1168779340&fm=26&gp=0.jpg\" alt=\"http://cripple.oss-cn-beijing.aliyuncs.com/ce511fc9-b124-41c9-ac7f-109dcc8cc13f201909251247000.png?Expires=1884746820&OSSAccessKeyId=LTAIwIMSrFp3QBrH&Signature=RJMjneTSQdYc%2B48h89H%2Fcg5bQOw%3D\"/></span></p >\n" +
+                "<p class=\"p6\"><span class=\"s6\"></span><br></p >\n" +
+                "<p class=\"p8\"><span class=\"s5\"></span><br></p >\n" +
+                "<p class=\"p3\"><span class=\"s5\">•</span><span class=\"s4\">无序列表</span><span class=\"s5\">1</span></p >\n" +
+                "<p class=\"p3\"><span class=\"s5\">•</span><span class=\"s4\">无序列表</span><span class=\"s5\">2</span></p >\n" +
+                "</body>\n" +
+                "</html>";
+        mWebView.loadData(html+js,"text/html; charset=UTF-8", null);
         ImageManager.getInstance().loadNet(data.getBilliardsUsers().getHeadImage(),headIv,new LoadOption().setIsCircle(true));
         ImageManager.getInstance().loadNet(data.getBilliardsUsers().getHeadImage(),headIv1,new LoadOption().setIsCircle(true));
         userTv.setText(data.getBilliardsUsers().getUserName());
