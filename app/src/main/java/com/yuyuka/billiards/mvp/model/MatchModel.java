@@ -6,16 +6,18 @@ import com.yuyuka.billiards.base.BaseModel;
 import com.yuyuka.billiards.constants.UrlConstant;
 import com.yuyuka.billiards.mvp.contract.match.MatchDetailContract;
 import com.yuyuka.billiards.mvp.contract.match.RecommendMatchContract;
+import com.yuyuka.billiards.mvp.contract.match.TableContract;
 import com.yuyuka.billiards.net.BizContent;
 import com.yuyuka.billiards.net.HttpResult;
 import com.yuyuka.billiards.net.RequestParam;
+import com.yuyuka.billiards.utils.CommonUtils;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import io.reactivex.Observable;
 
-public class MatchModel extends BaseModel implements RecommendMatchContract.IRecommendMatchModel, MatchDetailContract.IMatchDetailModel {
+public class MatchModel extends BaseModel implements RecommendMatchContract.IRecommendMatchModel, MatchDetailContract.IMatchDetailModel, TableContract.ITableModel {
 
 
     /**
@@ -83,6 +85,40 @@ public class MatchModel extends BaseModel implements RecommendMatchContract.IRec
         BizContent content = new BizContent();
         content.setMatchInfoId(Integer.valueOf(matchId));
         RequestParam requestParam = new RequestParam(UrlConstant.MATCH_LIST_BONUS,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
+    }
+
+    @Override
+    public Observable<HttpResult> collect(int billiardsInfoId) {
+        BizContent content = new BizContent();
+        content.setBizId(billiardsInfoId);
+        content.setCollectionsType(2);
+        content.setUserId(CommonUtils.getUserId());
+        RequestParam requestParam = new RequestParam(UrlConstant.AUTHORIZED_USER_PUT_COLLECT,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
+    }
+
+    @Override
+    public Observable<HttpResult> getTableInfo(long tableId) {
+        BizContent content = new BizContent();
+        content.setPoolTableId(tableId);
+        RequestParam requestParam = new RequestParam(UrlConstant.POOL_TABLE_API_GET,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
+    }
+
+    @Override
+    public Observable<HttpResult> getOrder(long tableId) {
+        BizContent content = new BizContent();
+        content.setPoolTableId(tableId);
+        content.setOrderType(0);
+        content.setBilliardsPoolTable(tableId);
+        content.setCompetitionType(1);
+        BizContent.BilliardsMakeAppOrderInfo info = new BizContent.BilliardsMakeAppOrderInfo();
+        info.setPayChannel(0);
+        info.setUserId(CommonUtils.getUserId());
+        info.setPayType(1);
+        content.setBilliardsMakeAppOrderInfo(info);
+        RequestParam requestParam = new RequestParam(UrlConstant.PLACE_ORDER,convertBizContent(content));
         return mService.simpleRequest(requestParam);
     }
 }

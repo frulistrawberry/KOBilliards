@@ -3,6 +3,8 @@ package com.yuyuka.billiards.base;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
+import com.yuyuka.billiards.pojo.UploadResult;
+
 public abstract class BaseMvpFragment<P extends BasePresenter> extends BaseFragment implements IBaseView {
 
     protected P mPresenter;
@@ -44,5 +46,13 @@ public abstract class BaseMvpFragment<P extends BasePresenter> extends BaseFragm
 
     protected abstract P getPresenter();
 
+    @Override
+    public void showUploadSuccess(UploadResult url) {
 
+    }
+
+    @Override
+    public void showUploadFailure(int index) {
+
+    }
 }

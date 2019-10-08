@@ -11,7 +11,7 @@ import com.chinalwb.are.Util;
 
 public class AreLeadingMarginSpan implements LeadingMarginSpan {
 
-	private static final int LEADING_MARGIN = 30;
+	private static final int LEADING_MARGIN = 0;
 	
 	private int mStandardLeading = LEADING_MARGIN;
 	

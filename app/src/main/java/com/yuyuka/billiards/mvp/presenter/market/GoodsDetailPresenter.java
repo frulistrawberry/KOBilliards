@@ -115,5 +115,44 @@ public class GoodsDetailPresenter extends BasePresenter<GoodsDetailContract.IGoo
 
     }
 
+    public void appreciate(int id){
+        getView().showProgressDialog();
+        mModel.praise(id)
+                .compose(RxUtils.transform(getView()))
+                .subscribe(new RespObserver() {
+                    @Override
+                    public void onResult(String msg, String bizContent) {
+                        getView().dismissProgressDialog();
+                        getView().showWantSuccess(msg);
+
+                    }
+                    @Override
+                    public void onError(int errCode, String errMsg) {
+                        getView().dismissProgressDialog();
+                        getView().showError(errMsg);
+                    }
+                });
+    }
+
+    public void collect(int merchantId){
+        getView().showProgressDialog();
+        mModel.collect(merchantId)
+                .compose(RxUtils.transform(getView()))
+                .subscribe(new RespObserver() {
+
+                    @Override
+                    public void onResult(String msg, String bizContent) {
+                        getView().dismissProgressDialog();
+                        getView().showCommentSuccess(msg);
+                    }
+
+                    @Override
+                    public void onError(int errCode, String errMsg) {
+                        getView().dismissProgressDialog();
+                        getView().showCommentSuccess(errMsg);
+                    }
+                });
+    }
+
 
 }

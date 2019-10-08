@@ -88,7 +88,7 @@ public class ApiEngine {
                     } else {
                         LogUtil.json("HttpLog", text);
                     }
-                } catch (UnsupportedEncodingException e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                     LogUtil.e("HttpLog", message);
                 }

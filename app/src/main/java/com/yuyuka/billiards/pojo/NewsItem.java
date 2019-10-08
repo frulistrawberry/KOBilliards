@@ -2,7 +2,9 @@ package com.yuyuka.billiards.pojo;
 
 import com.chad.library.adapter.base.entity.MultiItemEntity;
 
-public class NewsItem implements MultiItemEntity {
+import java.io.Serializable;
+
+public class NewsItem implements MultiItemEntity,Serializable {
 
     private int id;
     private int userId;
@@ -14,16 +16,26 @@ public class NewsItem implements MultiItemEntity {
     private int isDelete;
     private int viewLongtime;
     private String contentInfo;
+    private String converImageAdd;
     private String coverImageAdd;
     private BilliardsUsers billiardsUsers;
+    private int praiseCount;
+    private int hotValue;
 
+    public int getPraiseCount() {
+        return praiseCount;
+    }
+
+    public int getHotValue() {
+        return hotValue;
+    }
 
     @Override
     public int getItemType() {
         return consultationType;
     }
 
-    public static class BilliardsUsers{
+    public static class BilliardsUsers implements Serializable {
         private int id;
         private String userName;
         private String loginName;
@@ -148,6 +160,10 @@ public class NewsItem implements MultiItemEntity {
 
     public String getCoverImageAdd() {
         return coverImageAdd;
+    }
+
+    public String getConverImageAdd() {
+        return converImageAdd;
     }
 
     public BilliardsUsers getBilliardsUsers() {

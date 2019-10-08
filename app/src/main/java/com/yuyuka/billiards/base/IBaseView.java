@@ -1,6 +1,7 @@
 package com.yuyuka.billiards.base;
 
 import com.trello.rxlifecycle2.LifecycleTransformer;
+import com.yuyuka.billiards.pojo.UploadResult;
 
 public interface IBaseView {
 
@@ -39,4 +40,7 @@ public interface IBaseView {
      * 隐藏加载中对话框
      */
     void dismissProgressDialog();
+
+    void showUploadSuccess(UploadResult url);
+    void showUploadFailure(int index);
 }

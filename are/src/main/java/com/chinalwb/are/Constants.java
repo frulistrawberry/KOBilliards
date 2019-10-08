@@ -1,10 +1,12 @@
 package com.chinalwb.are;
 
+import android.graphics.Color;
+
 public class Constants {
 
-	public static final int CHECKED_COLOR = 0XffFF4081; // android.R.color.holo_green_light;
+	public static final int CHECKED_COLOR = Color.parseColor("#F1A82A"); // android.R.color.holo_green_light;
 
-	public static final int UNCHECKED_COLOR = 0X00000000; // android.R.color.transparent;
+	public static final int UNCHECKED_COLOR = Color.parseColor("#656565"); // android.R.color.transparent;
 
 	public static final int COLOR_QUOTE = 0Xffcccccc;
 

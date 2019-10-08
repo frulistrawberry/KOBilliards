@@ -16,10 +16,13 @@ public interface RoomDetailContract {
     interface IRoomDetailView extends IBaseView {
         void showRoomInfo(BilliardsRoomPojo info);
         void showGoodsInfo(List<BilliardsGoods> goods);
+        void showCollectSuccess(String msg);
+        void showCollectFailure(String msg);
     }
 
     interface IRoomDetailModel extends IBaseModel {
         Observable<HttpResult> getRoomInfo(String billiardsInfoId);
+        Observable<HttpResult> collect(int billiardsInfoId);
         Observable<HttpResult> getGoodsInfo(String billiardsInfoId,int weekNum);
 
     }

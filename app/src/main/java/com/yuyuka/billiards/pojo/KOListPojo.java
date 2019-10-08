@@ -8,6 +8,11 @@ public class KOListPojo implements Serializable {
     private String info;
     private String imageAdd;
     private String title;
+    private int id;
+
+    public int getId() {
+        return id;
+    }
 
     public String getInfo() {
         return info;

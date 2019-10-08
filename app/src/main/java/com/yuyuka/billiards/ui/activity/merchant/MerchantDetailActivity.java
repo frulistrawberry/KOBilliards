@@ -38,6 +38,7 @@ import com.yuyuka.billiards.utils.DataOptionUtils;
 import com.yuyuka.billiards.utils.DateUtils;
 import com.yuyuka.billiards.utils.ScreenUtils;
 import com.yuyuka.billiards.utils.SizeUtils;
+import com.yuyuka.billiards.utils.ToastUtils;
 import com.yuyuka.billiards.utils.ViewUtils;
 import com.yuyuka.billiards.widget.AppBarStateChangeListener;
 import com.yuyuka.billiards.widget.ObservableNestedScrollView;
@@ -128,11 +129,19 @@ public class MerchantDetailActivity extends BaseRefreshActivity<RoomDetailPresen
     @Override
     protected void initTitle() {
         super.initTitle();
-        getTitleBar().setTitle("球房详情").showBack().show();
+        getTitleBar().setTitle("球房详情").setRightImage2(R.mipmap.ic_news_info_share, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        }).setRightImage(R.mipmap.ic_news_info_collect, view -> {
+            getPresenter().collect(Integer.valueOf(billiardsId));
+        }).showBack().show();
     }
 
     @Override
     protected void initView() {
+        setTitleStyle(1);
         setContentView(R.layout.activity_billiards_detail);
         CommonNavigator commonNavigator = new CommonNavigator(getContext());
         commonNavigator.setAdjustMode(true);
@@ -453,5 +462,15 @@ public class MerchantDetailActivity extends BaseRefreshActivity<RoomDetailPresen
                 mReserveContainer.addView(itemView);
             }
         }
+    }
+
+    @Override
+    public void showCollectSuccess(String msg) {
+        ToastUtils.showToast(this,msg);
+    }
+
+    @Override
+    public void showCollectFailure(String msg) {
+        ToastUtils.showToast(this,msg);
     }
 }

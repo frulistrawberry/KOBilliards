@@ -6,16 +6,18 @@ import com.yuyuka.billiards.base.BaseModel;
 import com.yuyuka.billiards.constants.UrlConstant;
 import com.yuyuka.billiards.mvp.contract.news.NewsContract;
 import com.yuyuka.billiards.mvp.contract.news.NewsListContract;
+import com.yuyuka.billiards.mvp.contract.news.ReleaseContract;
 import com.yuyuka.billiards.net.BizContent;
 import com.yuyuka.billiards.net.HttpResult;
 import com.yuyuka.billiards.net.RequestParam;
+import com.yuyuka.billiards.utils.CommonUtils;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import io.reactivex.Observable;
 
-public class NewsModel extends BaseModel implements NewsListContract.INewsListModel, NewsContract.INewsModel {
+public class NewsModel extends BaseModel implements NewsListContract.INewsListModel, NewsContract.INewsModel, ReleaseContract.IReleaseModel {
 
 
     /**
@@ -37,8 +39,10 @@ public class NewsModel extends BaseModel implements NewsListContract.INewsListMo
                 params.put("consultationType",queryType);
             else if (queryType == 3)
                 params.put("queryLevel","recommend");
-            else if (queryType == 4)
+            else if (queryType == 4){
                 params.put("queryLevel","main");
+                params.put("-consultationType",0);
+            }
             content.setParams(params);
             content.buildPageQueryDto(page);
             RequestParam requestParam = new RequestParam(UrlConstant.SEARCH_BIZ,convertBizContent(content));
@@ -46,7 +50,7 @@ public class NewsModel extends BaseModel implements NewsListContract.INewsListMo
         }else {
             BizContent content = new BizContent();
             content.buildPageQueryDto(page);
-            content.setUserId(12);
+            content.setUserId(CommonUtils.getUserId());
             RequestParam requestParam = new RequestParam(UrlConstant.AUTHORIZED_CONSULATION_LIST_FOLLOW,convertBizContent(content));
             return mService.simpleRequest(requestParam);
         }
@@ -68,6 +72,15 @@ public class NewsModel extends BaseModel implements NewsListContract.INewsListMo
         return mService.simpleRequest(requestParam);
     }
 
+    @Override
+    public Observable<HttpResult> getReplyList(int messageId, int page) {
+        BizContent content = new BizContent();
+        content.buildPageQueryDto(page);
+        content.setMessageId(messageId);
+        RequestParam requestParam = new RequestParam(UrlConstant.CONSULTATION_MESSAGE_REPLY_LIST,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
+    }
+
     /**
      * 用户关注
      * @param followId
@@ -77,8 +90,17 @@ public class NewsModel extends BaseModel implements NewsListContract.INewsListMo
     public Observable<HttpResult> attention(int followId) {
         BizContent content = new BizContent();
         content.setFollowId(followId);
-        content.setUserId(12);
+        content.setUserId(CommonUtils.getUserId());
         RequestParam requestParam = new RequestParam(UrlConstant.AUTHORIZED_USER_PUT_FOLLOW,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
+    }
+
+    @Override
+    public Observable<HttpResult> disattention(int followId) {
+        BizContent content = new BizContent();
+        content.setFollowId(followId);
+        content.setUserId(CommonUtils.getUserId());
+        RequestParam requestParam = new RequestParam(UrlConstant.AUTHORIZED_USER_DEL_FOLLOW,convertBizContent(content));
         return mService.simpleRequest(requestParam);
     }
 
@@ -87,8 +109,8 @@ public class NewsModel extends BaseModel implements NewsListContract.INewsListMo
         BizContent bizContent = new BizContent();
         bizContent.setContent(content);
         bizContent.setConsultationId(consultationId);
-        bizContent.setUserId(12);
-        RequestParam requestParam = new RequestParam(UrlConstant.AUTHORIZED_USER_PUT_FOLLOW,convertBizContent(bizContent));
+        bizContent.setUserId(CommonUtils.getUserId());
+        RequestParam requestParam = new RequestParam(UrlConstant.AUTHORIZED_CONSULTATION_MESSAGE_PUT,convertBizContent(bizContent));
         return mService.simpleRequest(requestParam);
     }
 
@@ -96,17 +118,48 @@ public class NewsModel extends BaseModel implements NewsListContract.INewsListMo
     public Observable<HttpResult> praise(int bizId) {
         BizContent bizContent = new BizContent();
         bizContent.setBizId(bizId);
-        bizContent.setBizType(0);
-        bizContent.setUserId(12);
-        RequestParam requestParam = new RequestParam(UrlConstant.AUTHORIZED_USER_PUT_FOLLOW,convertBizContent(bizContent));
+        bizContent.setBizType(5);
+        bizContent.setUserId(CommonUtils.getUserId());
+        RequestParam requestParam = new RequestParam(UrlConstant.AUTHORIZED_USER_PUT_APPRECIATE,convertBizContent(bizContent));
         return mService.simpleRequest(requestParam);
     }
 
     @Override
     public Observable<HttpResult> getNewsInfo(int consultationId) {
         BizContent bizContent = new BizContent();
-        bizContent.setId(2);
+        bizContent.setId(consultationId);
         RequestParam requestParam = new RequestParam(UrlConstant.CONSULATION_GET,convertBizContent(bizContent));
+        return mService.simpleRequest(requestParam);
+    }
+
+    @Override
+    public Observable<HttpResult> reply(int consultationId, String content) {
+        BizContent bizContent = new BizContent();
+        bizContent.setReplyContent(content);
+        bizContent.setMessageId(consultationId);
+        bizContent.setUserId(CommonUtils.getUserId());
+        RequestParam requestParam = new RequestParam(UrlConstant.AUTHORIZED_CONSULTATION_MESSAGE_REPLY_PUT,convertBizContent(bizContent));
+        return mService.simpleRequest(requestParam);
+    }
+
+    @Override
+    public Observable<HttpResult> releaseNews(int consultationType, int viewLongtime, String address, String coverImageAdd, String contentInfo, String title, String billiardsConsultationTagDtoIds) {
+        BizContent bizContent = new BizContent();
+        bizContent.setConsultationType(consultationType);
+        bizContent.setViewLongtime(viewLongtime);
+        bizContent.setAddress(address);
+        bizContent.setCoverImageAdd(coverImageAdd);
+        bizContent.setContentInfo(contentInfo);
+        bizContent.setTitle(title);
+        bizContent.setBilliardsConsultationTagDtoIds(billiardsConsultationTagDtoIds);
+        bizContent.setUserId(CommonUtils.getUserId());
+        RequestParam requestParam = new RequestParam(UrlConstant.AUTHORIZED_AUTHORIZED_CONSULTATION_PUT,convertBizContent(bizContent));
+        return mService.simpleRequest(requestParam);
+    }
+
+    @Override
+    public Observable<HttpResult> getTags() {
+        RequestParam requestParam = new RequestParam(UrlConstant.AUTHORIZED_CONSULTATION_LIST_TAG_CONFIG,convertBizContent(null));
         return mService.simpleRequest(requestParam);
     }
 }

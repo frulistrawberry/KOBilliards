@@ -7,6 +7,7 @@ import com.yuyuka.billiards.pojo.GoodsComment;
 import com.yuyuka.billiards.pojo.GoodsPojo;
 
 import java.util.List;
+import java.util.function.DoubleUnaryOperator;
 
 import io.reactivex.Observable;
 
@@ -23,5 +24,9 @@ public interface GoodsDetailContract {
         Observable<HttpResult> getCommentList(int billiardsSecondMallId,int page);
         Observable<HttpResult> comment(int billiardsSecondMallId,String content);
         Observable<HttpResult> want(int billiardsSecondMallId);
+
+        Observable<HttpResult> praise(int id);
+
+        Observable<HttpResult> collect(int merchantId);
     }
 }

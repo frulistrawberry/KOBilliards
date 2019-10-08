@@ -5,7 +5,7 @@ import android.text.Layout;
 import android.text.Spanned;
 
 public class ListNumberSpan implements AreListSpan {
-  protected static final int LEADING_MARGIN = 30;
+  protected static final int LEADING_MARGIN = 0;
 
   private int mNumber;
 

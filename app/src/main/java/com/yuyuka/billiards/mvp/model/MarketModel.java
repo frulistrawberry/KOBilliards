@@ -12,6 +12,7 @@ import com.yuyuka.billiards.net.HttpResult;
 import com.yuyuka.billiards.net.RequestParam;
 import com.yuyuka.billiards.pojo.GoodsPojo;
 import com.yuyuka.billiards.pojo.ListData;
+import com.yuyuka.billiards.utils.CommonUtils;
 import com.yuyuka.billiards.utils.DateUtils;
 
 import java.text.BreakIterator;
@@ -149,7 +150,7 @@ public class MarketModel extends BaseModel implements GoodsListContract.IGoodsLi
         BizContent bizContent = new BizContent();
         bizContent.setBilliardsSecondMallId(billiardsSecondMallId);
         bizContent.setContent(content);
-        bizContent.setUserId(12);
+        bizContent.setUserId(CommonUtils.getUserId());
         RequestParam requestParam = new RequestParam(UrlConstant.SECOND_INFO_MESSAGE_PUT,convertBizContent(bizContent));
         return mService.simpleRequest(requestParam);
     }
@@ -158,8 +159,28 @@ public class MarketModel extends BaseModel implements GoodsListContract.IGoodsLi
     public Observable<HttpResult> want(int billiardsSecondMallId) {
         BizContent content = new BizContent();
         content.setBilliardsSecondMallId(billiardsSecondMallId);
-        content.setUserId(12);
+        content.setUserId(CommonUtils.getUserId());
         RequestParam requestParam = new RequestParam(UrlConstant.SECOND_INFO_MEWANT,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
+    }
+
+    @Override
+    public Observable<HttpResult> praise(int bizId) {
+        BizContent bizContent = new BizContent();
+        bizContent.setBizId(bizId);
+        bizContent.setBizType(4);
+        bizContent.setUserId(CommonUtils.getUserId());
+        RequestParam requestParam = new RequestParam(UrlConstant.AUTHORIZED_USER_PUT_APPRECIATE,convertBizContent(bizContent));
+        return mService.simpleRequest(requestParam);
+    }
+
+    @Override
+    public Observable<HttpResult> collect(int billiardsInfoId) {
+        BizContent content = new BizContent();
+        content.setBizId(billiardsInfoId);
+        content.setCollectionsType(4);
+        content.setUserId(CommonUtils.getUserId());
+        RequestParam requestParam = new RequestParam(UrlConstant.AUTHORIZED_USER_PUT_COLLECT,convertBizContent(content));
         return mService.simpleRequest(requestParam);
     }
 

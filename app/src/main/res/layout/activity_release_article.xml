@@ -5,6 +5,7 @@
     xmlns:are="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <EditText
+        android:id="@+id/et_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/white"
@@ -17,6 +18,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="5dp"
         android:layout_weight="1">
         <ScrollView
             android:layout_width="match_parent"
@@ -26,11 +28,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/white"
-                are:expandMode="MIN"
+                are:expandMode="FULL"
                 android:layout_marginLeft="13dp"
                 android:layout_marginRight="13dp"
                 are:hideToolbar="true"
-                are:toolbarAlignment="TOP"
                 android:hint="正文"
                 android:textSize="18sp"
                 />
@@ -45,113 +46,23 @@
         android:layout_marginLeft="13dp"
         android:background="@drawable/bg_location"
         android:padding="2dp"
+        android:gravity="center"
         android:layout_marginTop="5dp"
         android:text="所在位置"
+        android:drawablePadding="2dp"
+        android:drawableLeft="@mipmap/ic_location_yellow"
         android:textColor="@color/text_color_15"
         />
 
     <com.yuyuka.billiards.widget.TagLayout
+        android:id="@+id/tag_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="5dp"
         android:layout_marginRight="8dp">
-        <TextView
-            android:layout_width="60dp"
-            android:layout_height="22dp"
-            android:textColor="@color/white"
-            android:text="杆法"
-            android:gravity="center"
-            android:layout_margin="5dp"
-            android:background="@drawable/bg_tag_comment_negative"/>
-        <TextView
-            android:layout_width="60dp"
-            android:layout_height="22dp"
-            android:textColor="@color/white"
-            android:text="杆法"
-            android:gravity="center"
-            android:layout_margin="5dp"
-            android:background="@drawable/bg_tag_comment_negative"/>
-        <TextView
-            android:layout_width="60dp"
-            android:layout_height="22dp"
-            android:textColor="@color/white"
-            android:text="杆法"
-            android:gravity="center"
-            android:layout_margin="5dp"
-            android:background="@drawable/bg_tag_comment_negative"/>
-        <TextView
-            android:layout_width="60dp"
-            android:layout_height="22dp"
-            android:textColor="@color/white"
-            android:text="杆法"
-            android:gravity="center"
-            android:layout_margin="5dp"
-            android:background="@drawable/bg_tag_comment_negative"/>
-        <TextView
-            android:layout_width="60dp"
-            android:layout_height="22dp"
-            android:textColor="@color/white"
-            android:text="杆法"
-            android:gravity="center"
-            android:layout_margin="5dp"
-            android:background="@drawable/bg_tag_comment_negative"/>
-        <TextView
-            android:layout_width="60dp"
-            android:layout_height="22dp"
-            android:textColor="@color/white"
-            android:text="杆法"
-            android:gravity="center"
-            android:layout_margin="5dp"
-            android:background="@drawable/bg_tag_comment_negative"/>
-        <TextView
-            android:layout_width="60dp"
-            android:layout_height="22dp"
-            android:textColor="@color/white"
-            android:text="杆法"
-            android:gravity="center"
-            android:layout_margin="5dp"
-            android:background="@drawable/bg_tag_comment_negative"/>
-        <TextView
-            android:layout_width="60dp"
-            android:layout_height="22dp"
-            android:textColor="@color/white"
-            android:text="杆法"
-            android:gravity="center"
-            android:layout_margin="5dp"
-            android:background="@drawable/bg_tag_comment_negative"/>
+
     </com.yuyuka.billiards.widget.TagLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:layout_marginTop="18dp"
-        android:orientation="horizontal"
-        android:paddingRight="24dp"
-        android:gravity="center_vertical|right"
-        android:background="#F5F5F5">
-        <ImageView
-            android:id="@+id/btn_img"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:src="@mipmap/ic_launcher"/>
-        <ImageView
-            android:id="@+id/btn_text"
-            android:layout_width="26dp"
-            android:layout_height="26dp"
-            android:focusable="false"
-            android:src="@mipmap/ic_launcher"
-            android:layout_marginLeft="10dp"/>
-
-        <TextView
-            android:id="@+id/btn_complete"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_color_1"
-            android:textSize="14sp"
-            android:visibility="gone"
-            android:text="完成"/>
-
-    </LinearLayout>
     <com.yuyuka.billiards.widget.richtext.LinearToolBar
         android:id="@+id/tool_bar"
         android:layout_width="match_parent"

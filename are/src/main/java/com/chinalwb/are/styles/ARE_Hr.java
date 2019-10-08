@@ -1,6 +1,5 @@
 package com.chinalwb.are.styles;
 
-import android.test.mock.MockContext;
 import android.text.Editable;
 import android.text.Layout;
 import android.text.Spannable;

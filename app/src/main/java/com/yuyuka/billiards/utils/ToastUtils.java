@@ -37,4 +37,9 @@ public class ToastUtils {
         showToast(context, text, Toast.LENGTH_SHORT);
     }
 
+    public static void showToast( CharSequence text) {
+        showToast(AppUtils.getAppContext(), text, Toast.LENGTH_SHORT);
+    }
+
+
 }

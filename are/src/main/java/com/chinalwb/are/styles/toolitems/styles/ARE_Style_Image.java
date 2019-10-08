@@ -43,7 +43,13 @@ public class ARE_Style_Image implements IARE_Style, IARE_Image {
 
     private static int sWidth = 0;
 
-    /**
+    private OnClickListener onImageClick;
+
+	public void setOnImageClick(OnClickListener onImageClick) {
+		this.onImageClick = onImageClick;
+	}
+
+	/**
 	 *
 	 * @param emojiImageView the emoji image view
 	 */
@@ -61,7 +67,8 @@ public class ARE_Style_Image implements IARE_Style, IARE_Image {
 		imageView.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				openImageChooser();
+				if (onImageClick!=null)
+					onImageClick.onClick(v);
 			}
 		});
 	} // #End of setListenerForImageView(..)

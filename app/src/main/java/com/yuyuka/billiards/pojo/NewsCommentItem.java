@@ -1,13 +1,25 @@
 package com.yuyuka.billiards.pojo;
 
-public class NewsCommentItem {
+import com.chad.library.adapter.base.entity.MultiItemEntity;
+
+import java.io.Serializable;
+
+public class NewsCommentItem implements Serializable, MultiItemEntity {
     private int id;
     private int userId;
     private int consultationId;
     private String created;
     private String content;
     private BilliardsUsers billiardsUsers;
+    private boolean isAttention;
 
+    public boolean isAttention() {
+        return isAttention;
+    }
+
+    public void setAttention(boolean attention) {
+        isAttention = attention;
+    }
 
     public int getId() {
         return id;
@@ -31,5 +43,10 @@ public class NewsCommentItem {
 
     public BilliardsUsers getBilliardsUsers() {
         return billiardsUsers;
+    }
+
+    @Override
+    public int getItemType() {
+        return 0;
     }
 }

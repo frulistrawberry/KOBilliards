@@ -34,15 +34,17 @@
                     android:layout_height="20dp"
                     android:src="@mipmap/ic_search" />
 
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
+                <EditText
+                    android:id="@+id/et_search"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="4dp"
+                    android:hint="搜索感兴趣的内容"
+                    android:singleLine="true"
+                    android:textSize="13sp"
                     android:background="@null"
-                    android:gravity="center_vertical"
-                    android:paddingLeft="10dp"
-                    android:text="搜索感兴趣的内容"
-                    android:textColor="@color/text_color_3"
-                    android:textSize="14sp" />
+                    android:imeOptions="actionSearch"
+                    android:textColor="@color/text_color_1"/>
             </LinearLayout>
 
 

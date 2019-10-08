@@ -38,6 +38,10 @@ public class ARE_ToolItem_Image extends ARE_ToolItem_Abstract {
         return null;
     }
 
+    public void setImageView(ImageView imageView){
+        mToolItemView = imageView;
+    }
+
     @Override
     public IARE_Style getStyle() {
         if (mStyle == null) {

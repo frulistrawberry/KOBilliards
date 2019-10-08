@@ -58,7 +58,11 @@ public class GoodsDetailActivity extends BaseListActivity<GoodsDetailPresenter> 
     @Override
     protected void initTitle() {
         super.initTitle();
-        getTitleBar().setTitle("详情").showBack().show();
+        getTitleBar().setTitle("详情").showBack().setRightImage(R.mipmap.ic_news_info_collect, view -> {
+            getPresenter().collect(id);
+        }).setRightImage2(R.mipmap.ic_news_info_share, view -> {
+
+        }).show();
     }
 
     @Override
@@ -166,6 +170,7 @@ public class GoodsDetailActivity extends BaseListActivity<GoodsDetailPresenter> 
         switch (v.getId()){
             case R.id.btn_comment:
                 dialog = new CommentDialog(this);
+                dialog.setHint("看对眼就留言，问问更多细节~");
                 dialog.setOnCommentListener(content -> {
                     getPresenter().comment(id,content);
                 });
@@ -173,6 +178,9 @@ public class GoodsDetailActivity extends BaseListActivity<GoodsDetailPresenter> 
                 break;
             case R.id.btn_want:
                 getPresenter().want(id);
+                break;
+            case R.id.btn_zan:
+                getPresenter().appreciate(id);
                 break;
         }
     }

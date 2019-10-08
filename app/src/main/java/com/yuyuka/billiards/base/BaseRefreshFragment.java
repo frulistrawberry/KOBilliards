@@ -1,6 +1,8 @@
 package com.yuyuka.billiards.base;
 
 
+import android.view.View;
+
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.utils.ToastUtils;
 
@@ -26,6 +28,11 @@ public abstract class BaseRefreshFragment<P extends BasePresenter> extends BaseM
             @Override
             public void onRefreshBegin(PtrFrameLayout frame) {
                 onRefresh();
+            }
+
+            @Override
+            public boolean checkCanDoRefresh(PtrFrameLayout frame, View content, View header) {
+                return super.checkCanDoRefresh(frame, content, header);
             }
         });
 

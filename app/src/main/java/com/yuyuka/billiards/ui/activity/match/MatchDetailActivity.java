@@ -21,8 +21,6 @@ import com.yuyuka.billiards.image.ImageManager;
 import com.yuyuka.billiards.image.support.LoadOption;
 import com.yuyuka.billiards.mvp.contract.match.MatchDetailContract;
 import com.yuyuka.billiards.mvp.presenter.match.MatchDetailPresenter;
-import com.yuyuka.billiards.mvp.presenter.match.MatchOrderConfirmActivity;
-import com.yuyuka.billiards.pojo.ImagePojo;
 import com.yuyuka.billiards.pojo.MatchBonusPojo;
 import com.yuyuka.billiards.pojo.MatchDetailPojo;
 import com.yuyuka.billiards.utils.AppUtils;
@@ -30,7 +28,7 @@ import com.yuyuka.billiards.utils.CollectionUtils;
 import com.yuyuka.billiards.utils.DataOptionUtils;
 import com.yuyuka.billiards.utils.DateUtils;
 import com.yuyuka.billiards.utils.SizeUtils;
-import com.yuyuka.billiards.utils.ViewUtils;
+import com.yuyuka.billiards.utils.ToastUtils;
 import com.yuyuka.billiards.widget.AppBarStateChangeListener;
 import com.yuyuka.billiards.widget.ObservableNestedScrollView;
 import com.yuyuka.billiards.widget.tabindicator.MagicIndicator;
@@ -101,12 +99,23 @@ public class MatchDetailActivity extends BaseRefreshActivity<MatchDetailPresente
     @Override
     protected void initTitle() {
         super.initTitle();
-        getTitleBar().setTitle("比赛详情").showBack().show();
+        getTitleBar().setTitle("比赛详情").showBack().setRightImage2(R.mipmap.ic_news_info_share, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                getPresenter().collect(Integer.valueOf(matchId));
+            }
+        }).setRightImage(R.mipmap.ic_news_info_collect, new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+            }
+        }).show();
     }
 
 
     @Override
     protected void initView() {
+        setTitleStyle(1);
         setContentView(R.layout.activity_match_detail);
         CommonNavigator commonNavigator = new CommonNavigator(getContext());
         commonNavigator.setAdjustMode(true);
@@ -322,6 +331,11 @@ public class MatchDetailActivity extends BaseRefreshActivity<MatchDetailPresente
         }
 
 
+    }
+
+    @Override
+    public void showCollectSuccess(String msg) {
+        ToastUtils.showToast(this,msg);
     }
 
     public static class BannerHolder implements Holder<MatchDetailPojo.BilliardsMatchImagesList> {

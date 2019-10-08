@@ -98,6 +98,7 @@ public class ARE_ToolItem_Bold extends ARE_ToolItem_Abstract {
 			}
 		}
 
+        if (mToolItemUpdater!=null)
         mToolItemUpdater.onCheckStatusUpdate(boldExists);
     }
 }

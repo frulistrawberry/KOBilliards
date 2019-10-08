@@ -36,12 +36,16 @@ public class FaceToFaceActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.iv_paiwei})
+    @OnClick({R.id.iv_paiwei,R.id.iv_yule})
     public void onClick(View v){
         switch (v.getId()){
             case R.id.iv_paiwei:
                 startActivity(new Intent(this,FaceToFaceQualifyingActivity.class));
                 break;
+            case R.id.iv_yule:
+                startActivity(new Intent(this,FaceToFaceFunActivity.class));
+                break;
+
         }
     }
 

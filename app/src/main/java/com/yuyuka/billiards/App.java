@@ -6,10 +6,25 @@ import android.os.Bundle;
 import android.support.multidex.MultiDex;
 import android.support.multidex.MultiDexApplication;
 
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.Observer;
+import com.netease.nimlib.sdk.RequestCallback;
+import com.netease.nimlib.sdk.SDKOptions;
+import com.netease.nimlib.sdk.StatusCode;
+import com.netease.nimlib.sdk.auth.AuthService;
+import com.netease.nimlib.sdk.mixpush.MixPushConfig;
+import com.netease.nimlib.sdk.msg.MsgServiceObserve;
+import com.netease.nimlib.sdk.msg.model.CustomNotification;
+import com.netease.nimlib.sdk.util.NIMUtil;
+import com.umeng.commonsdk.UMConfigure;
+import com.umeng.socialize.PlatformConfig;
+import com.umeng.socialize.UMShareAPI;
 import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 import com.yuyuka.billiards.base.ActivityManager;
+import com.yuyuka.billiards.constants.Config;
 import com.yuyuka.billiards.constants.PreferenceConstant;
 import com.yuyuka.billiards.utils.AppUtils;
+import com.yuyuka.billiards.utils.CommonUtils;
 import com.yuyuka.billiards.utils.SPUtils;
 import com.yuyuka.billiards.utils.log.LogUtil;
 
@@ -27,14 +42,19 @@ public class App extends MultiDexApplication implements Application.ActivityLife
         LogUtil.init(BuildConfig.DEBUG);
         registerActivityLifecycleCallbacks(this);
         ZXingLibrary.initDisplayOpinion(this);
-//        SDKOptions options = new SDKOptions();
+        SDKOptions options = new SDKOptions();
 //        MixPushConfig config = new MixPushConfig();
 //        config.xmAppId = Config.XM_APP_ID;
 //        config.xmAppKey = Config.XM_APP_KEY;
 //        config.xmCertificateName = Config.XM_CERTIFICATE_NAME;
-//
+
 //        options.mixPushConfig = config;
-//        NIMClient.init(this, CommonUtils.getLoginInfo(), options);
+        UMConfigure.init(this,UMConfigure.DEVICE_TYPE_PHONE,null);
+        UMConfigure.setLogEnabled(BuildConfig.DEBUG);
+        UMConfigure.init(this,"5d9759853fc195be0f001102","",UMConfigure.DEVICE_TYPE_PHONE,"");
+        PlatformConfig.setWeixin(Config.WX_APP_ID, Config.WX_APP_SECRET);
+        UMShareAPI.get(this);
+        NIMClient.init(this, CommonUtils.getLoginInfo(), options);
 
     }
 

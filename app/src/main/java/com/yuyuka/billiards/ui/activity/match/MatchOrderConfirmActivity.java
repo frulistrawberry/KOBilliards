@@ -1,4 +1,4 @@
-package com.yuyuka.billiards.mvp.presenter.match;
+package com.yuyuka.billiards.ui.activity.match;
 
 import android.content.Context;
 import android.content.Intent;

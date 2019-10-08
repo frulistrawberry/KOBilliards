@@ -34,6 +34,90 @@ public class BizContent {
     private Integer followId;
     private Integer bizId;
     private Integer bizType;
+    private Integer messageId;
+    private String replyContent;
+    private Integer consultationType;
+    private Integer viewLongtime;
+    private String address;
+    private String title;
+    private String coverImageAdd;
+    private String contentInfo;
+    private String billiardsConsultationTagDtoIds;
+    private Integer collectionsType;
+    private Long poolTableId;
+    private Integer orderType;
+    private Long billiardsPoolTable;
+    private Integer competitionType;
+    private String smsCode;
+    private BilliardsMakeAppOrderInfo billiardsMakeAppOrderInfo;
+
+    public void setSmsCode(String smsCode) {
+        this.smsCode = smsCode;
+    }
+
+    public void setOrderType(Integer orderType) {
+        this.orderType = orderType;
+    }
+
+    public void setBilliardsPoolTable(Long billiardsPoolTable) {
+        this.billiardsPoolTable = billiardsPoolTable;
+    }
+
+    public void setCompetitionType(Integer competitionType) {
+        this.competitionType = competitionType;
+    }
+
+    public void setBilliardsMakeAppOrderInfo(BilliardsMakeAppOrderInfo billiardsMakeAppOrderInfo) {
+        this.billiardsMakeAppOrderInfo = billiardsMakeAppOrderInfo;
+    }
+
+    public void setPoolTableId(Long poolTableId) {
+        this.poolTableId = poolTableId;
+    }
+
+    public void setCollectionsType(Integer collectionsType) {
+        this.collectionsType = collectionsType;
+    }
+
+    public void setConsultationType(Integer consultationType) {
+        this.consultationType = consultationType;
+    }
+
+    public void setViewLongtime(Integer viewLongtime) {
+        this.viewLongtime = viewLongtime;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setCoverImageAdd(String coverImageAdd) {
+        this.coverImageAdd = coverImageAdd;
+    }
+
+    public void setContentInfo(String contentInfo) {
+        this.contentInfo = contentInfo;
+    }
+
+    public void setBilliardsConsultationTagDtoIds(String billiardsConsultationTagDtoIds) {
+        this.billiardsConsultationTagDtoIds = billiardsConsultationTagDtoIds;
+    }
+
+    public void setReplyContent(String replyContent) {
+        this.replyContent = replyContent;
+    }
+
+    public void setBilliardsId(Integer billiardsId) {
+        this.billiardsId = billiardsId;
+    }
+
+    public void setMessageId(Integer messageId) {
+        this.messageId = messageId;
+    }
 
     public void setBizId(Integer bizId) {
         this.bizId = bizId;
@@ -198,6 +282,24 @@ public class BizContent {
 
         public void setFacilities(int facilities) {
             this.facilities = facilities;
+        }
+    }
+
+    public static class BilliardsMakeAppOrderInfo{
+        Integer userId;
+        Integer payType;
+        Integer payChannel;
+
+        public void setUserId(Integer userId) {
+            this.userId = userId;
+        }
+
+        public void setPayType(Integer payType) {
+            this.payType = payType;
+        }
+
+        public void setPayChannel(Integer payChannel) {
+            this.payChannel = payChannel;
         }
     }
 

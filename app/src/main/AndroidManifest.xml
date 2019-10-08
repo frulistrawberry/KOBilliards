@@ -57,6 +57,7 @@
         android:theme="@style/AppTheme"
         android:networkSecurityConfig="@xml/network_security_config"
         tools:ignore="GoogleAppIndexingWarning"
+        android:hardwareAccelerated="true"
         tools:targetApi="n">
 
         <meta-data
@@ -69,10 +70,7 @@
         <activity
             android:name=".ui.activity.MainActivity"
             android:screenOrientation="portrait">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
-                <category android:name="android.intent.category.LAUNCHER"/>
-            </intent-filter>
+
         </activity>
         <activity android:name=".ui.activity.merchant.NearbyMerchantActivity"
             android:screenOrientation="portrait">
@@ -108,10 +106,15 @@
         <activity android:name=".ui.activity.facetoface.FaceToFaceActivity" />
         <activity android:name=".ui.activity.facetoface.FaceToFaceQualifyingActivity" />
         <activity android:name=".ui.activity.news.ArticleDetailActivity" />
-        <activity android:name=".ui.activity.news.VideoDetailActivity" />
-        <activity android:name=".ui.activity.news.SmallVideoDetailActivity" />
+        <activity android:name=".ui.activity.news.VideoDetailActivity"
+            android:configChanges="keyboard|orientation|keyboardHidden|screenSize"/>
+        <activity android:name=".ui.activity.news.SmallVideoDetailActivity"
+            android:theme="@style/AppTransparentTheme"
+            android:screenOrientation="portrait"
+
+            />
         <activity android:name=".ui.activity.match.MatchDetailActivity" />
-        <activity android:name=".mvp.presenter.match.MatchOrderConfirmActivity" />
+        <activity android:name=".ui.activity.match.MatchOrderConfirmActivity" />
         <activity android:name=".ui.activity.ranking.RunkingActivity"/>
         <activity android:name=".ui.activity.ranking.CanJuActivity"/>
         <activity android:name=".ui.activity.ranking.DengJiActivity"/>
@@ -139,6 +142,49 @@
         <activity android:name=".ui.activity.news.ReleaseArticleActivity"
             android:windowSoftInputMode="adjustResize"
             android:screenOrientation="portrait"/>
+        <activity android:name=".ui.activity.facetoface.FaceToFaceFunActivity" />
+        <activity android:name=".ui.activity.news.ArtivleReplyActivity" />
+        <activity android:name=".ui.activity.common.PhotoPickerActivity" />
+        <activity android:name=".ui.activity.course.CourseDetailActivity" />
+        <activity android:name=".ui.activity.news.VideoPickerActivity" />
+        <activity android:name=".ui.activity.match.TableActivity" />
+
+        <activity
+            android:name=".wxapi.WXPayEntryActivity"
+            android:exported="true"
+            android:launchMode="singleTop"/>
+
+        <activity
+            android:name=".wxapi.WXEntryActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity
+            android:name="com.tencent.tauth.AuthActivity"
+            android:launchMode="singleTask"
+            android:noHistory="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="tencent1106049570"/>
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.tencent.connect.common.AssistActivity"
+            android:configChanges="orientation|keyboardHidden|screenSize"
+            android:screenOrientation="portrait"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+        <activity android:name=".ui.activity.login.LoginActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
+                <category android:name="android.intent.category.LAUNCHER"/>
+            </intent-filter>
+        </activity>
         <!-- 网易云信 -->
         <meta-data
             android:name="com.netease.nim.appKey"

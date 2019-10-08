@@ -11,6 +11,7 @@ import com.yuyuka.billiards.net.RespObserver;
 import com.yuyuka.billiards.pojo.ListData;
 import com.yuyuka.billiards.pojo.NewsCommentItem;
 import com.yuyuka.billiards.pojo.NewsItem;
+import com.yuyuka.billiards.pojo.NewsReplyItem;
 import com.yuyuka.billiards.utils.CollectionUtils;
 import com.yuyuka.billiards.utils.RxUtils;
 
@@ -47,10 +48,42 @@ public class NewsContentPresenter extends BasePresenter<NewsContract.INewsView, 
                     @Override
                     public void onError(int errCode, String errMsg) {
                         getView().hideLoading();
-//                        getView().showError(errMsg);
+                        getView().showError(errMsg);
                     }
                 });
     }
+
+    public void getReplyList(int messageId,int page){
+        getView().showLoading();
+        mModel.getReplyList(messageId,page)
+                .compose(RxUtils.transform(getView()))
+                .subscribe(new RespObserver() {
+                    @Override
+                    public void onResult(String msg, String bizContent) {
+                        getView().hideLoading();
+                        if (TextUtils.isEmpty(bizContent)){
+                            getView().showEmpty();
+                            return;
+                        }
+                        Type type = new TypeToken<ListData<NewsReplyItem>>(){}.getType();
+                        ListData<NewsReplyItem> data = new Gson().fromJson(bizContent,type);
+                        if (data == null){
+                            getView().showEmpty();
+                            return;
+                        }
+                        if (CollectionUtils.isEmpty(data.getDataList()))
+                            getView().showEmpty();
+                        else
+                            getView().showReplyList(data.getDataList());
+                    }
+                    @Override
+                    public void onError(int errCode, String errMsg) {
+                        getView().hideLoading();
+                        getView().showError(errMsg);
+                    }
+                });
+    }
+
 
     public void getNewsInfo(int consultationId){
         getView().showProgressDialog();
@@ -92,6 +125,81 @@ public class NewsContentPresenter extends BasePresenter<NewsContract.INewsView, 
     }
 
     public void attention(int followId){
+        getView().showProgressDialog();
+        mModel.attention(followId)
+                .compose(RxUtils.transform(getView()))
+                .subscribe(new RespObserver() {
+                    @Override
+                    public void onResult(String msg, String bizContent) {
+                        getView().dismissProgressDialog();
+                        getView().showAttentionSuccess(msg);
 
+                    }
+                    @Override
+                    public void onError(int errCode, String errMsg) {
+                        getView().dismissProgressDialog();
+                        getView().showAttentionFailure(errMsg);
+                    }
+                });
     }
+
+    public void disattention(int followId){
+        getView().showProgressDialog();
+        mModel.disattention(followId)
+                .compose(RxUtils.transform(getView()))
+                .subscribe(new RespObserver() {
+                    @Override
+                    public void onResult(String msg, String bizContent) {
+                        getView().dismissProgressDialog();
+                        getView().showDisAttenttionSuccess(msg);
+
+                    }
+                    @Override
+                    public void onError(int errCode, String errMsg) {
+                        getView().dismissProgressDialog();
+                        getView().showDisAttenttionSuccess(errMsg);
+                    }
+                });
+    }
+
+
+    public void appreciate(int id){
+        getView().showProgressDialog();
+        mModel.praise(id)
+                .compose(RxUtils.transform(getView()))
+                .subscribe(new RespObserver() {
+                    @Override
+                    public void onResult(String msg, String bizContent) {
+                        getView().dismissProgressDialog();
+                        getView().showAttentionSuccess(msg);
+
+                    }
+                    @Override
+                    public void onError(int errCode, String errMsg) {
+                        getView().dismissProgressDialog();
+                        getView().showAttentionFailure(errMsg);
+                    }
+                });
+    }
+
+    public void reply(int consultationId,String content){
+        getView().showProgressDialog();
+        mModel.reply(consultationId,content)
+                .compose(RxUtils.transform(getView()))
+                .subscribe(new RespObserver() {
+                    @Override
+                    public void onResult(String msg, String bizContent) {
+                        getView().dismissProgressDialog();
+                        getView().showCommentSuccess(msg);
+
+                    }
+                    @Override
+                    public void onError(int errCode, String errMsg) {
+                        getView().dismissProgressDialog();
+                        getView().showCommentFailure(errMsg);
+                    }
+                });
+    }
+
+
 }

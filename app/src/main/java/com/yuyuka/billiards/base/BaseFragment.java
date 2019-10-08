@@ -126,4 +126,6 @@ public abstract class BaseFragment extends RxFragment {
             EventBus.getDefault().unregister(this);
         }
     }
+
+
 }

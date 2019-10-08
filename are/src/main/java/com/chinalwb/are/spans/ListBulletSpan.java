@@ -13,7 +13,7 @@ public class ListBulletSpan implements AreListSpan {
 		// Do nothing
 	}
 
-	protected static final int LEADING_MARGIN = 30;
+	protected static final int LEADING_MARGIN = 0;
 
 	// Gap should be about 1em
 	public static final int STANDARD_GAP_WIDTH = 30;

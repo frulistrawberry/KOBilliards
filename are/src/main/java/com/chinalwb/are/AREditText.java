@@ -54,6 +54,32 @@ public class AREditText extends AppCompatEditText {
 
 	private IARE_Toolbar mToolbar;
 
+	private String header = "<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n" +
+			"<html>\n" +
+			" <head> \n" +
+			"  <meta http-equiv=\"Content-Type\" content=\"text/html; charset=utf-16\" /> \n" +
+			"  <meta http-equiv=\"Content-Style-Type\" content=\"text/css\" /> \n" +
+			"  <title></title> \n" +
+			"  <meta name=\"Generator\" content=\"Cocoa HTML Writer\" /> \n" +
+			"  <style type=\"text/css\">\n" +
+			"p.p1 {margin: 0.0px 0.0px 0.0px 0.0px; font: 18.0px '.PingFang SC'; color: #8e8e93}\n" +
+			"p.p2 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px '.PingFang SC'; color: #000000}\n" +
+			"p.p3 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px '.PingFang SC'; color: #656565}\n" +
+			"p.p4 {margin: 0.0px 0.0px 0.0px 0.0px; font: 14.0px '.PingFang SC'; color: #656565; background-color: #aaaaaa}\n" +
+			"p.p5 {margin: 0.0px 0.0px 8.0px 20.0px; font: 14.0px '.SF UI Text'; color: #656565; min-height: 16.7px}\n" +
+			"p.p6 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica; min-height: 13.8px}\n" +
+			"p.p7 {margin: 0.0px 0.0px 0.0px 0.0px; font: 12.0px Helvetica}\n" +
+			"p.p8 {margin: 0.0px 0.0px 30.0px 20.0px; font: 14.0px '.SF UI Text'; color: #656565; min-height: 16.7px}\n" +
+			"span.s1 {font-family: '.PingFangSC-Regular'; font-weight: normal; font-style: normal; font-size: 18.00pt}\n" +
+			"span.s2 {font-family: '.PingFangSC-Medium'; font-weight: bold; font-style: normal; font-size: 14.00pt}\n" +
+			"span.s3 {font-family: '.PingFangSC-Regular'; font-weight: normal; font-style: normal; font-size: 14.00pt; text-decoration: underline}\n" +
+			"span.s4 {font-family: '.PingFangSC-Regular'; font-weight: normal; font-style: normal; font-size: 14.00pt}\n" +
+			"span.s5 {font-family: '.SFUIText'; font-weight: normal; font-style: normal; font-size: 14.00pt}\n" +
+			"span.s6 {font-family: 'Helvetica'; font-weight: normal; font-style: normal; font-size: 12.00pt}\n" +
+			"</style> \n" +
+			" </head> \n" +
+			" <body> \n";
+
 	private static boolean LOG = false;
 
 	private static boolean MONITORING = true;
@@ -95,7 +121,7 @@ public class AREditText extends AppCompatEditText {
 		this.setBackgroundColor(Color.WHITE);
 		this.setInputType(EditorInfo.TYPE_CLASS_TEXT | EditorInfo.TYPE_TEXT_FLAG_MULTI_LINE
 				| EditorInfo.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
-		int padding = 8;
+		int padding = 0;
 		padding = Util.getPixelByDp(mContext, padding);
 		this.setPadding(padding, padding, padding, padding);
 		this.setTextSize(TypedValue.COMPLEX_UNIT_SP, Constants.DEFAULT_FONT_SIZE);
@@ -404,12 +430,18 @@ public class AREditText extends AppCompatEditText {
 
 	public String getHtml() {
 		StringBuffer html = new StringBuffer();
-		html.append("<html><body>");
+		html.append(header);
 		String editTextHtml = Html.toHtml(getEditableText(), Html.TO_HTML_PARAGRAPH_LINES_INDIVIDUAL);
 		html.append(editTextHtml);
 		html.append("</body></html>");
 		String htmlContent = html.toString().replaceAll(Constants.ZERO_WIDTH_SPACE_STR_ESCAPE, "");
 		System.out.println(htmlContent);
+		htmlContent.replaceAll("<br>","<p class=\"p5\"><span class=\"s5\"></span><br /></p>")
+				.replaceAll("<b>","<p class=\"p2\"><span class=\"s2\">")
+				.replaceAll("</b>","</span></p>")
+				.replaceAll("<u>","<p class=\"p3\"><span class=\"s3\">")
+				.replaceAll("</u>","</span></p>")
+				.replaceAll("<hr />","</span></p>");
 		return htmlContent;
 	}
 

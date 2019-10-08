@@ -99,6 +99,7 @@ dependencies {
     implementation 'com.wang.avi:library:1.0.0'
     //二维码
     implementation 'cn.yipianfengye.android:zxing-library:2.2'
+    implementation 'com.github.zyyoona7:EasyPopup:1.0.1'
 
     implementation project(':are')
 
@@ -136,5 +137,7 @@ dependencies {
     implementation 'com.netease.nimlib:lucene:6.1.1'
     // 小米、华为、魅族、fcm 推送
     implementation 'com.netease.nimlib:push:6.1.1'
+
+
 
 }

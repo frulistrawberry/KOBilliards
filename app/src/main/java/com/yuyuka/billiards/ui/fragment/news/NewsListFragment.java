@@ -6,11 +6,17 @@ import android.support.v7.widget.GridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseListFragment;
+import com.yuyuka.billiards.image.ImageManager;
+import com.yuyuka.billiards.image.support.LoadOption;
 import com.yuyuka.billiards.mvp.contract.news.NewsListContract;
 import com.yuyuka.billiards.mvp.presenter.news.NewsListPresenter;
+import com.yuyuka.billiards.pojo.BilliardsUsers;
 import com.yuyuka.billiards.pojo.NewsItem;
 import com.yuyuka.billiards.ui.adapter.news.NewsAdapter;
 
@@ -25,6 +31,10 @@ public class NewsListFragment extends BaseListFragment<NewsListPresenter> implem
     int queryType;
     boolean isFromHome;
     String keywords;
+
+    View headerView;
+    LinearLayout usersLayout;
+
 
 
     public static Fragment newFragment(int queryType,boolean isFromHome){
@@ -50,6 +60,12 @@ public class NewsListFragment extends BaseListFragment<NewsListPresenter> implem
     public void onRefresh() {
         mCurrentPage = 0;
         getPresenter().getNewsList(keywords,queryType,mCurrentPage);
+    }
+
+    public void onRefresh(String keywords) {
+        this.keywords = keywords;
+        mAdapter.setNewData(null);
+        onRefresh();
     }
 
     @Override
@@ -98,15 +114,34 @@ public class NewsListFragment extends BaseListFragment<NewsListPresenter> implem
             }
         });
         mRecyclerView.setLayoutManager(gridLayoutManager);
+        if (queryType == 5){
+            headerView = LayoutInflater.from(getContext()).inflate(R.layout.view_attention_users,mRecyclerView,false);
+            usersLayout = headerView.findViewById(R.id.ll_users);
+            headerView.setVisibility(View.GONE);
+            mAdapter.addHeaderView(headerView);
+            mAdapter.setHeaderAndEmpty(true);
+        }
+
         onRefresh();
     }
 
     @Override
     protected void initData() {
-        mAdapter = new NewsAdapter();
         assert getArguments() != null;
         queryType = getArguments().getInt("queryType",0);
         isFromHome = getArguments().getBoolean("isFromHome",false);
+
+        if (queryType == 4){
+            mAdapter = new NewsAdapter("home");
+        }else if (queryType == 3){
+            mAdapter = new NewsAdapter("recommend");
+
+        }else if (queryType == 5){
+            mAdapter = new NewsAdapter("attention");
+
+        }else
+            mAdapter = new NewsAdapter("news");
+
     }
 
     @Override
@@ -115,6 +150,20 @@ public class NewsListFragment extends BaseListFragment<NewsListPresenter> implem
             mAdapter.setNewData(newsList);
         }else {
             mAdapter.addData(newsList);
+        }
+    }
+
+    @Override
+    public void showUserList(List<BilliardsUsers> userList) {
+        headerView.setVisibility(View.VISIBLE);
+        usersLayout.removeAllViews();
+        for (int i = 0; i < userList.size(); i++) {
+            View userView = LayoutInflater.from(getContext()).inflate(R.layout.item_attention_users,null);
+            ImageView headIv = userView.findViewById(R.id.iv_head);
+            ImageManager.getInstance().loadNet(userList.get(i).getHeadImage(),headIv,new LoadOption().setIsCircle(true));
+            TextView userTv = userView.findViewById(R.id.tv_user);
+            userTv.setText(userList.get(i).getUserName());
+            usersLayout.addView(userView);
         }
     }
 

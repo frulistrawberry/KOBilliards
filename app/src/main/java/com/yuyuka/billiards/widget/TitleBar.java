@@ -127,6 +127,8 @@ public class TitleBar extends LinearLayout {
         return this;
     }
 
+
+
     public View getDivider() {
         return mDivider;
     }

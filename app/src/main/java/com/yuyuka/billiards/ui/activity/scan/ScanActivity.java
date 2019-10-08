@@ -11,7 +11,12 @@ import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseActivity;
+import com.yuyuka.billiards.ui.activity.match.TableActivity;
 import com.yuyuka.billiards.utils.ToastUtils;
+import com.yuyuka.billiards.utils.log.LogUtil;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class ScanActivity extends BaseActivity {
 
@@ -38,14 +43,17 @@ public class ScanActivity extends BaseActivity {
         captureFragment.setAnalyzeCallback(new CodeUtils.AnalyzeCallback() {
             @Override
             public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
-                if (result.startsWith("rank")){
-                    ToastUtils.showToast(getContext(),"排位赛扫码");
-                }
+                ToastUtils.showToast(getContext(),result);
+                Map<String,String> params = URLRequest(result);
+                long tableId = Long.valueOf(params.get("tablenum"));
+                TableActivity.launcher(getContext(),tableId);
+                finish();
             }
 
             @Override
             public void onAnalyzeFailed() {
-
+                ToastUtils.showToast(getContext(),"扫描错误，请重试");
+                finish();
             }
         });
         getSupportFragmentManager().beginTransaction().replace(R.id.fl_my_container, captureFragment).commit();
@@ -55,4 +63,64 @@ public class ScanActivity extends BaseActivity {
     protected void initData() {
 
     }
+
+    public static Map<String, String> URLRequest(String URL)
+    {
+        Map<String, String> mapRequest = new HashMap<String, String>();
+
+        String[] arrSplit=null;
+
+        String strUrlParam=TruncateUrlPage(URL);
+        if(strUrlParam==null)
+        {
+            return mapRequest;
+        }
+        //每个键值为一组 www.2cto.com
+        arrSplit=strUrlParam.split("[&]");
+        for(String strSplit:arrSplit)
+        {
+            String[] arrSplitEqual=null;
+            arrSplitEqual= strSplit.split("[=]");
+
+            //解析出键值
+            if(arrSplitEqual.length>1)
+            {
+                //正确解析
+                mapRequest.put(arrSplitEqual[0], arrSplitEqual[1]);
+
+            }
+            else
+            {
+                if(arrSplitEqual[0]!="")
+                {
+                    //只有参数没有值，不加入
+                    mapRequest.put(arrSplitEqual[0], "");
+                }
+            }
+        }
+        return mapRequest;
+    }
+
+    private static String TruncateUrlPage(String strURL)
+    {
+        String strAllParam=null;
+        String[] arrSplit=null;
+
+        strURL=strURL.trim().toLowerCase();
+
+        arrSplit=strURL.split("[?]");
+        if(strURL.length()>1)
+        {
+            if(arrSplit.length>1)
+            {
+                if(arrSplit[1]!=null)
+                {
+                    strAllParam=arrSplit[1];
+                }
+            }
+        }
+
+        return strAllParam;
+    }
+
 }

@@ -13,6 +13,10 @@ import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.msg.MsgService;
+import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
+import com.netease.nimlib.sdk.msg.model.CustomNotification;
 import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseFragment;
@@ -22,6 +26,7 @@ import com.yuyuka.billiards.pojo.ModularPojo;
 import com.yuyuka.billiards.ui.activity.bonus.BonusPoolActivity;
 import com.yuyuka.billiards.ui.activity.message.MessageActivity;
 import com.yuyuka.billiards.ui.activity.scan.ScanActivity;
+import com.yuyuka.billiards.ui.activity.search.RoomSearchActivity;
 import com.yuyuka.billiards.ui.adapter.common.NavigatorAdapter;
 import com.yuyuka.billiards.ui.adapter.common.PagerAdapter;
 import com.yuyuka.billiards.ui.fragment.news.NewsListFragment;
@@ -36,9 +41,12 @@ import com.yuyuka.billiards.widget.tabindicator.buildins.commonnavigator.CommonN
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -74,7 +82,7 @@ public class HomeFragment extends BaseFragment{
     PagerAdapter mAdapter;
     boolean canRefresh = true;
 
-    String[] mTitles = {"推荐","附近","视频"};
+    String[] mTitles = {"推荐"};
     String[] mModularTitles = {"附近比赛","附近球房","个人模式","面对面对战","添加商户","KO学堂","台球二手","排行榜"};
     int[] mModularIcons = {R.mipmap.ic_modular_nearby_match,R.mipmap.ic_modular_nearby_room,
             R.mipmap.ic_modular_bet, R.mipmap.ic_modular_face_to_face,R.mipmap.ic_modular_add_merchant,
@@ -92,8 +100,6 @@ public class HomeFragment extends BaseFragment{
     protected void initData() {
         mFragmentList = new ArrayList<>();
         mFragmentList.add(NewsListFragment.newFragment(4,true));
-        mFragmentList.add(NewsListFragment.newFragment(3,true));
-        mFragmentList.add(NewsListFragment.newFragment(2,true));
         mAdapter = new PagerAdapter(getChildFragmentManager(),mFragmentList,mTitles);
         EventBus.getDefault().register(this);
     }
@@ -145,7 +151,6 @@ public class HomeFragment extends BaseFragment{
         commonNavigator.setAdjustMode(false);
         commonNavigator.setAdapter(new NavigatorAdapter(mFragmentList,mViewPager,mAdapter));
         mIndicator.setNavigator(commonNavigator);
-        mViewPager.setOffscreenPageLimit(3);
         mViewPager.setAdapter(mAdapter);
         ViewPagerHelper.bind(mIndicator, mViewPager);
 
@@ -160,7 +165,7 @@ public class HomeFragment extends BaseFragment{
         }
     }
 
-    @OnClick({R.id.btn_top,R.id.btn_bonus_rewards,R.id.iv_msg,R.id.ll_scan})
+    @OnClick({R.id.btn_top,R.id.btn_bonus_rewards,R.id.iv_msg,R.id.ll_scan,R.id.btn_search,R.id.btn_search1})
     public void onClick(View v){
         switch (v.getId()){
             case R.id.btn_top:
@@ -172,11 +177,40 @@ public class HomeFragment extends BaseFragment{
                 startActivity(new Intent(getContext(),BonusPoolActivity.class));
                 break;
              case R.id.iv_msg:
-                 MessageActivity.launcher(getContext());
+//                 MessageActivity.launcher(getContext());
+                 // 构造自定义通知，指定接收者
+                 CustomNotification notification = new CustomNotification();
+                 notification.setSessionId("41");
+                 notification.setSessionType(SessionTypeEnum.P2P);
+
+// 构建通知的具体内容。为了可扩展性，这里采用 json 格式，以 "id" 作为类型区分。
+
+                 notification.setContent("asdfasdfasdfafsdaf");
+
+// 设置该消息需要保证送达
+                 notification.setSendToOnlineUserOnly(false);
+
+// 设置 APNS 的推送文本
+                 notification.setApnsText("the_content_for_apns");
+
+// 自定义推送属性
+                 Map<String,Object> pushPayload = new HashMap<>();
+                 pushPayload.put("key1", "payload 1");
+                 pushPayload.put("key2", 2015);
+                 notification.setPushPayload(pushPayload);
+
+// 发送自定义通知
+                 NIMClient.getService(MsgService.class).sendCustomNotification(notification);
                  break;
             case R.id.ll_scan:
                 Intent intent = new Intent(getContext(), ScanActivity.class);
                 startActivity(intent);
+                break;
+            case R.id.btn_search:
+                RoomSearchActivity.launcher(getContext());
+                break;
+            case R.id.btn_search1:
+                RoomSearchActivity.launcher(getContext());
                 break;
         }
     }

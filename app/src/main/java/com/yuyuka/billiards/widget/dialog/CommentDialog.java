@@ -9,11 +9,15 @@ import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.TextView;
 
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.utils.SizeUtils;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class CommentDialog extends Dialog {
 
@@ -54,10 +58,10 @@ public class CommentDialog extends Dialog {
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.length()>0){
-                    textView.setTextColor(getContext().getResources().getColor(R.color.text_color_6));
+                    textView.setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.bg_news_attention_orange));
                     textView.setClickable(true);
                 }else {
-                    textView.setTextColor(getContext().getResources().getColor(R.color.text_color_12));
+                    textView.setBackgroundDrawable(getContext().getResources().getDrawable(R.drawable.bg_news_attention_gray));
                     textView.setClickable(false);
                 }
             }
@@ -76,5 +80,31 @@ public class CommentDialog extends Dialog {
         getWindow().setWindowAnimations(R.style.BottomDialog_Animation);
         setCancelable(true);
         setCanceledOnTouchOutside(true);
+    }
+
+    private void showSoftInput(EditText etIpAddress) {
+        //自动获取焦点
+        etIpAddress.setFocusable(true);
+        etIpAddress.setFocusableInTouchMode(true);
+        etIpAddress.requestFocus();
+        //200毫秒后弹出软键盘
+        Timer timer = new Timer();
+        timer.schedule(new TimerTask() {
+            public void run() {
+                InputMethodManager inputManager = (InputMethodManager) etIpAddress.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                inputManager.showSoftInput(etIpAddress, 0);
+            }
+        }, 200);
+    }
+
+    public void setHint(String hint){
+        editText.setHint(hint);
+    }
+
+    @Override
+    public void show() {
+        super.show();
+        showSoftInput(editText);
+
     }
 }

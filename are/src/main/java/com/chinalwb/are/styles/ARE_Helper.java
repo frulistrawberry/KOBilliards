@@ -17,7 +17,8 @@ public class ARE_Helper {
 	areStyle.setChecked(checked);
 	View imageView = areStyle.getImageView();
     int color = checked ? Constants.CHECKED_COLOR : Constants.UNCHECKED_COLOR;
-    imageView.setBackgroundColor(color);
+      if (imageView!=null)
+          imageView.setBackgroundColor(color);
   }
   
   

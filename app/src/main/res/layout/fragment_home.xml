@@ -17,9 +17,10 @@
             android:layout_height="44dp"
             android:background="@color/bg_status_bar"
             android:orientation="horizontal"
-            android:visibility="visible">
+            android:visibility="gone">
 
             <RelativeLayout
+                android:id="@+id/btn_search1"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="13dp"
@@ -76,7 +77,7 @@
             android:layout_width="match_parent"
             android:layout_height="44dp"
             android:background="@color/bg_status_bar"
-            android:visibility="gone">
+            android:visibility="visible">
 
             <ImageView
                 android:id="@+id/iv_scan"
@@ -92,7 +93,7 @@
                 android:layout_width="27dp"
                 android:layout_height="27dp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@+id/iv_scan"
                 android:src="@mipmap/ic_payment" />
 
@@ -102,26 +103,35 @@
                 android:layout_width="27dp"
                 android:layout_height="27dp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="20dp"
                 android:layout_toRightOf="@id/iv_pay"
                 android:src="@mipmap/ic_home_search" />
+
+            <ImageView
+                android:id="@+id/iv_merchant"
+                android:layout_width="33dp"
+                android:layout_height="33dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/btn_search"
+                android:src="@mipmap/ic_modular_nearby_room" />
 
             <ImageView
                 android:id="@+id/iv_rank"
                 android:layout_width="33dp"
                 android:layout_height="33dp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="30dp"
-                android:layout_toRightOf="@id/btn_search"
-                android:src="@mipmap/ic_rank" />
+                android:layout_marginLeft="10dp"
+                android:layout_toRightOf="@id/iv_merchant"
+                android:src="@mipmap/ic_modular_nearby_match" />
 
             <ImageView
                 android:layout_width="33dp"
                 android:layout_height="33dp"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="30dp"
+                android:layout_marginLeft="10dp"
                 android:layout_toRightOf="@id/iv_rank"
-                android:src="@mipmap/ic_face_to_face" />
+                android:src="@mipmap/ic_modular_bet" />
 
             <ImageView
                 android:id="@+id/btn_top"

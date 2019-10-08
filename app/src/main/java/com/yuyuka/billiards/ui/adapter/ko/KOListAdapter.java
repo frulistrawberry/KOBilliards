@@ -1,6 +1,7 @@
 package com.yuyuka.billiards.ui.adapter.ko;
 
 
+import android.view.View;
 import android.widget.ImageView;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
@@ -8,6 +9,7 @@ import com.chad.library.adapter.base.BaseViewHolder;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.image.ImageManager;
 import com.yuyuka.billiards.pojo.KOListPojo;
+import com.yuyuka.billiards.ui.activity.course.CourseDetailActivity;
 
 public class KOListAdapter extends BaseQuickAdapter<KOListPojo, BaseViewHolder> {
 
@@ -29,6 +31,12 @@ public class KOListAdapter extends BaseQuickAdapter<KOListPojo, BaseViewHolder> 
 
         helper.setText(R.id.tv_title,item.getTitle());
         helper.setText(R.id.tv_info,item.getInfo());
+        helper.getConvertView().setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                CourseDetailActivity.launcher(mContext,item.getId(),0);
+            }
+        });
 
     }
 }

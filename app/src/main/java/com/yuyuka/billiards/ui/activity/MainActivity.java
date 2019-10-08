@@ -12,6 +12,14 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 
+import com.netease.nimlib.sdk.NIMClient;
+import com.netease.nimlib.sdk.Observer;
+import com.netease.nimlib.sdk.RequestCallback;
+import com.netease.nimlib.sdk.StatusCode;
+import com.netease.nimlib.sdk.auth.AuthService;
+import com.netease.nimlib.sdk.auth.LoginInfo;
+import com.netease.nimlib.sdk.msg.MsgServiceObserve;
+import com.netease.nimlib.sdk.msg.model.CustomNotification;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseActivity;
@@ -20,6 +28,8 @@ import com.yuyuka.billiards.ui.fragment.BetFragment;
 import com.yuyuka.billiards.ui.fragment.HomeFragment;
 import com.yuyuka.billiards.ui.fragment.MineFragment;
 import com.yuyuka.billiards.ui.fragment.NewsFragment;
+import com.yuyuka.billiards.utils.CommonUtils;
+import com.yuyuka.billiards.utils.log.LogUtil;
 import com.yuyuka.billiards.widget.TabBar;
 
 import java.util.ArrayList;
@@ -68,6 +78,18 @@ public class MainActivity extends BaseActivity implements TabBar.OnTabCheckListe
                         .setText("我的"))
                 .setOnTabCheckListener(this);
         requestPermissions();
+        initIM();
+
+    }
+
+    private void initIM(){
+        NIMClient.getService(MsgServiceObserve.class).observeCustomNotification(new Observer<CustomNotification>() {
+            @Override
+            public void onEvent(CustomNotification message) {
+                // 在这里处理自定义通知。
+                LogUtil.e("IM",message.getContent());
+            }
+        }, true);
     }
 
     @Override

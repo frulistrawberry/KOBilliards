@@ -25,6 +25,7 @@ public abstract class RespObserver implements Observer<HttpResult> {
 
     @Override
     public void onError(Throwable e) {
+        e.printStackTrace();
         LogUtil.e("HttpError",e.getMessage());
          if (e instanceof Exception) {
             HttpThrowable httpThrowable = ThrowableHandler.handleThrowable(e);

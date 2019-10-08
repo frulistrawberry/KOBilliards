@@ -18,6 +18,7 @@ import com.yuyuka.billiards.net.HttpResult;
 import com.yuyuka.billiards.net.RequestParam;
 import com.yuyuka.billiards.pojo.BilliardsCoachPojo;
 import com.yuyuka.billiards.pojo.BilliardsRoomPojo;
+import com.yuyuka.billiards.utils.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -90,6 +91,16 @@ public class MerchantModel extends BaseModel implements BilliardsCoachListContra
         BizContent content = new BizContent();
         content.setBilliardsId(billiardsInfoId);
         RequestParam requestParam = new RequestParam(UrlConstant.GET,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
+    }
+
+    @Override
+    public Observable<HttpResult> collect(int billiardsInfoId) {
+        BizContent content = new BizContent();
+        content.setBizId(billiardsInfoId);
+        content.setCollectionsType(1);
+        content.setUserId(CommonUtils.getUserId());
+        RequestParam requestParam = new RequestParam(UrlConstant.AUTHORIZED_USER_PUT_COLLECT,convertBizContent(content));
         return mService.simpleRequest(requestParam);
     }
 
@@ -190,7 +201,7 @@ public class MerchantModel extends BaseModel implements BilliardsCoachListContra
         content.setStarClass(starClass);
         content.setGameTypeList(gameTypeList);
         content.setMessageInfo(messageInfo);
-        content.setUserId(12);
+        content.setUserId(CommonUtils.getUserId());
         RequestParam requestParam = new RequestParam(UrlConstant.APPRASIE_PUT,convertBizContent(content));
         return mService.simpleRequest(requestParam);
     }

@@ -75,4 +75,28 @@ public class RoomDetailPresenter extends BasePresenter<RoomDetailContract.IRoomD
                     }
                 });
     }
+
+    public void pairse(int merchantId){
+
+    }
+
+    public void collect(int merchantId){
+        getView().showProgressDialog();
+        mModel.collect(merchantId)
+                .compose(RxUtils.transform(getView()))
+                .subscribe(new RespObserver() {
+
+                    @Override
+                    public void onResult(String msg, String bizContent) {
+                       getView().dismissProgressDialog();
+                       getView().showCollectSuccess(msg);
+                    }
+
+                    @Override
+                    public void onError(int errCode, String errMsg) {
+                        getView().dismissProgressDialog();
+                        getView().showError(errMsg);
+                    }
+                });
+    }
 }

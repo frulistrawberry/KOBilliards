@@ -119,4 +119,6 @@ public abstract class BaseListFragment<P extends BasePresenter> extends BaseRefr
      * @return 是否支持加载更多
      */
     protected abstract boolean isLoadMoreEnable();
+
+
 }

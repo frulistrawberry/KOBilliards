@@ -2,7 +2,11 @@ package com.yuyuka.billiards.base;
 
 
 
+import com.google.gson.Gson;
 import com.trello.rxlifecycle2.internal.Preconditions;
+import com.yuyuka.billiards.net.RespObserver;
+import com.yuyuka.billiards.pojo.UploadResult;
+import com.yuyuka.billiards.utils.RxUtils;
 
 import java.lang.ref.Reference;
 import java.lang.ref.WeakReference;
@@ -32,6 +36,26 @@ public class BasePresenter<V extends IBaseView,M extends IBaseModel> implements 
             mView = null;
         }
 
+    }
+
+    public void upload(String imagePath,int index){
+        getView().showProgressDialog();
+        mModel.upload(imagePath)
+                .compose(RxUtils.transform(getView()))
+                .subscribe(new RespObserver() {
+
+                    @Override
+                    public void onResult(String msg, String bizContent) {
+                        UploadResult result = new Gson().fromJson(bizContent,UploadResult.class);
+                        result.setIndex(index);
+                        getView().showUploadSuccess(result);
+                    }
+
+                    @Override
+                    public void onError(int errCode, String errMsg) {
+                        getView().showUploadFailure(index);
+                    }
+                });
     }
 
 
