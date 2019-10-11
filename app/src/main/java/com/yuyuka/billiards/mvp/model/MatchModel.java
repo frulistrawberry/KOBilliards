@@ -6,7 +6,7 @@ import com.yuyuka.billiards.base.BaseModel;
 import com.yuyuka.billiards.constants.UrlConstant;
 import com.yuyuka.billiards.mvp.contract.match.MatchDetailContract;
 import com.yuyuka.billiards.mvp.contract.match.RecommendMatchContract;
-import com.yuyuka.billiards.mvp.contract.match.TableContract;
+import com.yuyuka.billiards.mvp.contract.table.TableContract;
 import com.yuyuka.billiards.net.BizContent;
 import com.yuyuka.billiards.net.HttpResult;
 import com.yuyuka.billiards.net.RequestParam;
@@ -17,7 +17,7 @@ import java.util.Map;
 
 import io.reactivex.Observable;
 
-public class MatchModel extends BaseModel implements RecommendMatchContract.IRecommendMatchModel, MatchDetailContract.IMatchDetailModel, TableContract.ITableModel {
+public class MatchModel extends BaseModel implements RecommendMatchContract.IRecommendMatchModel, MatchDetailContract.IMatchDetailModel {
 
 
     /**
@@ -98,27 +98,5 @@ public class MatchModel extends BaseModel implements RecommendMatchContract.IRec
         return mService.simpleRequest(requestParam);
     }
 
-    @Override
-    public Observable<HttpResult> getTableInfo(long tableId) {
-        BizContent content = new BizContent();
-        content.setPoolTableId(tableId);
-        RequestParam requestParam = new RequestParam(UrlConstant.POOL_TABLE_API_GET,convertBizContent(content));
-        return mService.simpleRequest(requestParam);
-    }
 
-    @Override
-    public Observable<HttpResult> getOrder(long tableId) {
-        BizContent content = new BizContent();
-        content.setPoolTableId(tableId);
-        content.setOrderType(0);
-        content.setBilliardsPoolTable(tableId);
-        content.setCompetitionType(1);
-        BizContent.BilliardsMakeAppOrderInfo info = new BizContent.BilliardsMakeAppOrderInfo();
-        info.setPayChannel(0);
-        info.setUserId(CommonUtils.getUserId());
-        info.setPayType(1);
-        content.setBilliardsMakeAppOrderInfo(info);
-        RequestParam requestParam = new RequestParam(UrlConstant.PLACE_ORDER,convertBizContent(content));
-        return mService.simpleRequest(requestParam);
-    }
 }

@@ -1,5 +1,6 @@
 package com.yuyuka.billiards.ui.activity.scan;
 
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
@@ -11,15 +12,28 @@ import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseActivity;
-import com.yuyuka.billiards.ui.activity.match.TableActivity;
+import com.yuyuka.billiards.base.BaseMvpActivity;
+import com.yuyuka.billiards.constants.UrlConstant;
+import com.yuyuka.billiards.mvp.contract.table.TableContract;
+import com.yuyuka.billiards.mvp.presenter.table.TablePresenter;
+import com.yuyuka.billiards.pojo.OrderPojo;
+import com.yuyuka.billiards.pojo.TablePojo;
+import com.yuyuka.billiards.ui.activity.pay.TablePayActivity;
+import com.yuyuka.billiards.ui.activity.table.TableActivity;
+import com.yuyuka.billiards.utils.NetworkUtils;
 import com.yuyuka.billiards.utils.ToastUtils;
 import com.yuyuka.billiards.utils.log.LogUtil;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
-public class ScanActivity extends BaseActivity {
 
+public class ScanActivity extends BaseMvpActivity<TablePresenter> implements TableContract.ITableView {
+
+    int refOrderId;
+    int battleId;
+    long tableId;
+    String backUrl;
 
     @Override
     protected void initView() {
@@ -43,11 +57,18 @@ public class ScanActivity extends BaseActivity {
         captureFragment.setAnalyzeCallback(new CodeUtils.AnalyzeCallback() {
             @Override
             public void onAnalyzeSuccess(Bitmap mBitmap, String result) {
-                ToastUtils.showToast(getContext(),result);
-                Map<String,String> params = URLRequest(result);
-                long tableId = Long.valueOf(params.get("tablenum"));
-                TableActivity.launcher(getContext(),tableId);
-                finish();
+                LogUtil.e("scan",result);
+                Map<String,String> params = NetworkUtils.URLRequest(result);
+                tableId = Long.valueOf(Objects.requireNonNull(params.get("tableNum")));
+                backUrl = params.get("backUrl");
+                if (backUrl.equals(UrlConstant.BACK_URL_OPEN_TABLE)){
+                    TableActivity.launcher(getContext(),tableId);
+                    finish();
+                }else {
+                    refOrderId = Integer.valueOf(Objects.requireNonNull(params.get("refOrderId")));
+                    battleId = Integer.valueOf(Objects.requireNonNull(params.get("battleId")));
+                    getPresenter().getTableInfo(tableId);
+                }
             }
 
             @Override
@@ -64,63 +85,38 @@ public class ScanActivity extends BaseActivity {
 
     }
 
-    public static Map<String, String> URLRequest(String URL)
-    {
-        Map<String, String> mapRequest = new HashMap<String, String>();
 
-        String[] arrSplit=null;
-
-        String strUrlParam=TruncateUrlPage(URL);
-        if(strUrlParam==null)
-        {
-            return mapRequest;
-        }
-        //每个键值为一组 www.2cto.com
-        arrSplit=strUrlParam.split("[&]");
-        for(String strSplit:arrSplit)
-        {
-            String[] arrSplitEqual=null;
-            arrSplitEqual= strSplit.split("[=]");
-
-            //解析出键值
-            if(arrSplitEqual.length>1)
-            {
-                //正确解析
-                mapRequest.put(arrSplitEqual[0], arrSplitEqual[1]);
-
-            }
-            else
-            {
-                if(arrSplitEqual[0]!="")
-                {
-                    //只有参数没有值，不加入
-                    mapRequest.put(arrSplitEqual[0], "");
-                }
-            }
-        }
-        return mapRequest;
+    @Override
+    protected TablePresenter getPresenter() {
+        return new TablePresenter(this);
     }
 
-    private static String TruncateUrlPage(String strURL)
-    {
-        String strAllParam=null;
-        String[] arrSplit=null;
-
-        strURL=strURL.trim().toLowerCase();
-
-        arrSplit=strURL.split("[?]");
-        if(strURL.length()>1)
-        {
-            if(arrSplit.length>1)
-            {
-                if(arrSplit[1]!=null)
-                {
-                    strAllParam=arrSplit[1];
-                }
-            }
+    @Override
+    public void showTableInfo(TablePojo data) {
+        if (data.getDeoisitPrice()>0){
+            TablePayActivity.launcher(this,battleId,refOrderId);
+        }else {
+            getPresenter().enterMatch(battleId,refOrderId,2);
         }
-
-        return strAllParam;
     }
 
+    @Override
+    public void showOrderSuccess(OrderPojo data) {
+
+    }
+
+    @Override
+    public void showOrderFailure(String msg) {
+
+    }
+
+    @Override
+    public void showEnterSuccess() {
+        // TODO: 2019-10-11 进入对战页面
+    }
+
+    @Override
+    public void showEnterFailure() {
+
+    }
 }

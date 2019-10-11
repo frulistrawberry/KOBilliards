@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:paddingTop="20dp"
+    android:paddingBottom="10dp"
+    android:paddingLeft="28dp"
+    android:paddingRight="28dp"
+    android:orientation="vertical">
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="50dp"
+        android:src="@mipmap/ic_table_pay_success"/>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:textSize="18sp"
+        android:textColor="@color/text_color_1"
+        android:text="支付成功"
+        android:layout_marginTop="20dp"
+        android:gravity="center_horizontal"
+        android:layout_weight="1"/>
+
+    <com.yuyuka.billiards.widget.StateButton
+        android:id="@+id/btn_back"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:normalColor="#1DB710"
+        app:unClickableColor="#1DB710"
+        app:pressColor="#1DB710"
+        app:RoundedConnerRadius="6dp"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:text="返回"
+        android:gravity="center"
+        />
+
+</LinearLayout>

@@ -49,7 +49,17 @@ public class BizContent {
     private Long billiardsPoolTable;
     private Integer competitionType;
     private String smsCode;
+    private Integer refOrderId;
+    private Integer payChannel;
     private BilliardsMakeAppOrderInfo billiardsMakeAppOrderInfo;
+
+    public void setRefOrderId(Integer refOrderId) {
+        this.refOrderId = refOrderId;
+    }
+
+    public void setPayChannel(Integer payChannel) {
+        this.payChannel = payChannel;
+    }
 
     public void setSmsCode(String smsCode) {
         this.smsCode = smsCode;

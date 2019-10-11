@@ -7,6 +7,11 @@ public class UrlConstant {
 
     public static final String UP_LOAD_PATH = "/api/uploadFile";
 
+    public static final String SCAN_PATCH = "weixin/goOauth?";
+
+    public static final String BACK_URL_ENTER_MATCH = API_HOST+"front/enterMatch";
+    public static final String BACK_URL_OPEN_TABLE = API_HOST+"front/";
+
     public static String VERIFICATION_CODE = "com.yuyuka.api.verification.code";
     public static String LOGIN = "com.yuyuka.billiards.api.login";
     //业务搜索接口
@@ -51,5 +56,6 @@ public class UrlConstant {
     public static String CONSULATION_GET = "com.yuyuka.billiards.api.consultation.get";
     public static String POOL_TABLE_API_GET = "com.yuyuka.billiards.pool.table.api.get";
     public static String PLACE_ORDER = "com.yuyuka.billiards.api.place.order";
+    public static String PLACE_JOIN = "com.yuyuka.billiards.api.place.join";
 
 }

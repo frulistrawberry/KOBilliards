@@ -28,6 +28,8 @@ import com.yuyuka.billiards.utils.CommonUtils;
 import com.yuyuka.billiards.utils.SPUtils;
 import com.yuyuka.billiards.utils.log.LogUtil;
 
+import org.greenrobot.eventbus.EventBus;
+
 public class App extends MultiDexApplication implements Application.ActivityLifecycleCallbacks {
 
 
@@ -55,6 +57,15 @@ public class App extends MultiDexApplication implements Application.ActivityLife
         PlatformConfig.setWeixin(Config.WX_APP_ID, Config.WX_APP_SECRET);
         UMShareAPI.get(this);
         NIMClient.init(this, CommonUtils.getLoginInfo(), options);
+        if (NIMUtil.isMainProcess(this)){
+            NIMClient.getService(MsgServiceObserve.class).observeCustomNotification(new Observer<CustomNotification>() {
+                @Override
+                public void onEvent(CustomNotification message) {
+                    // 在这里处理自定义通知。
+                    EventBus.getDefault().post(message);
+                }
+            }, true);
+        }
 
     }
 

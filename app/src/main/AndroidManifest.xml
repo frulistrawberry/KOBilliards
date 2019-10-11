@@ -147,7 +147,8 @@
         <activity android:name=".ui.activity.common.PhotoPickerActivity" />
         <activity android:name=".ui.activity.course.CourseDetailActivity" />
         <activity android:name=".ui.activity.news.VideoPickerActivity" />
-        <activity android:name=".ui.activity.match.TableActivity" />
+        <activity android:name=".ui.activity.table.TableActivity"
+            android:screenOrientation="portrait"/>
 
         <activity
             android:name=".wxapi.WXPayEntryActivity"
@@ -180,11 +181,18 @@
             android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
         <activity android:name=".ui.activity.login.LoginActivity"
             android:screenOrientation="portrait">
+
+        </activity>
+        <activity android:name=".ui.activity.table.OpenModeActivity" />
+        <activity android:name=".ui.activity.pay.TablePayActivity" />
+        <activity android:name=".ui.SplashActivity"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
+        <activity android:name=".ui.activity.pay.TablePaySuccessActivity" />
         <!-- 网易云信 -->
         <meta-data
             android:name="com.netease.nim.appKey"

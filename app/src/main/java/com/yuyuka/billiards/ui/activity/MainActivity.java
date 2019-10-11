@@ -83,13 +83,7 @@ public class MainActivity extends BaseActivity implements TabBar.OnTabCheckListe
     }
 
     private void initIM(){
-        NIMClient.getService(MsgServiceObserve.class).observeCustomNotification(new Observer<CustomNotification>() {
-            @Override
-            public void onEvent(CustomNotification message) {
-                // 在这里处理自定义通知。
-                LogUtil.e("IM",message.getContent());
-            }
-        }, true);
+
     }
 
     @Override

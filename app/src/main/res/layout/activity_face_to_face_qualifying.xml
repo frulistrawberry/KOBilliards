@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="@mipmap/bg_battle">
     <View
@@ -64,8 +64,10 @@
 
     <ImageView
         android:id="@+id/iv_scan"
-        android:layout_width="165dp"
-        android:layout_height="165dp"
+        android:padding="5dp"
+        android:background="@color/white"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="50dp"/>
     <TextView
@@ -86,6 +88,21 @@
         android:textSize="18sp"
         android:gravity="center"
         android:text="排位赛抢5\n中式八球（赛规）"/>
+
+    <com.yuyuka.billiards.widget.StateButton
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        app:RoundedConnerRadius="4dp"
+        app:pressColor="@color/text_color_6"
+        app:normalColor="@color/text_color_6"
+        app:unClickableColor="@color/text_color_6"
+        android:textColor="@color/white"
+        android:textSize="18sp"
+        android:layout_marginLeft="25dp"
+        android:layout_marginRight="25dp"
+        android:layout_marginTop="10dp"
+        android:gravity="center"
+        android:text="取消等待"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="0dp"

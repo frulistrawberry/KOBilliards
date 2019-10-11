@@ -8,7 +8,7 @@ import com.yuyuka.billiards.pojo.UserInfo;
 public class CommonUtils {
 
     public static LoginInfo getLoginInfo() {
-        return isLogin()?new LoginInfo(String.valueOf(getUserId()),CommonUtils.getToken()):null;
+        return isLogin()?new LoginInfo(String.valueOf(getUserId()),"123456"):null;
     }
 
     public static boolean isLogin(){
@@ -29,7 +29,7 @@ public class CommonUtils {
     }
 
     public static void saveUserInfo(UserInfo userInfo){
-        SPUtils.putInt(PreferenceConstant.USER_ID,userInfo.getId());
+        SPUtils.putInt(PreferenceConstant.USER_ID,21);
         SPUtils.putBoolean(PreferenceConstant.IS_LOGIN,true);
     }
 
