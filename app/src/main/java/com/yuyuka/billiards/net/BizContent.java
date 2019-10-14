@@ -51,7 +51,17 @@ public class BizContent {
     private String smsCode;
     private Integer refOrderId;
     private Integer payChannel;
+    private Integer battleId;
+    private Integer point;
     private BilliardsMakeAppOrderInfo billiardsMakeAppOrderInfo;
+
+    public void setPoint(Integer point) {
+        this.point = point;
+    }
+
+    public void setBattleId(Integer battleId) {
+        this.battleId = battleId;
+    }
 
     public void setRefOrderId(Integer refOrderId) {
         this.refOrderId = refOrderId;

@@ -2,6 +2,7 @@ package com.yuyuka.billiards.mvp.model;
 
 import com.yuyuka.billiards.base.BaseModel;
 import com.yuyuka.billiards.constants.UrlConstant;
+import com.yuyuka.billiards.mvp.contract.table.PointContract;
 import com.yuyuka.billiards.mvp.contract.table.TableContract;
 import com.yuyuka.billiards.net.BizContent;
 import com.yuyuka.billiards.net.HttpResult;
@@ -10,7 +11,7 @@ import com.yuyuka.billiards.utils.CommonUtils;
 
 import io.reactivex.Observable;
 
-public class TableModel extends BaseModel implements TableContract.ITableModel {
+public class TableModel extends BaseModel implements TableContract.ITableModel, PointContract.IPointModel {
     @Override
     public Observable<HttpResult> getTableInfo(long tableId) {
         BizContent content = new BizContent();
@@ -40,7 +41,27 @@ public class TableModel extends BaseModel implements TableContract.ITableModel {
         content.setId(id);
         content.setRefOrderId(refOrderId);
         content.setPayChannel(payChannel);
+        content.setUserId(CommonUtils.getUserId());
         RequestParam requestParam = new RequestParam(UrlConstant.PLACE_JOIN,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
+    }
+
+    @Override
+    public Observable<HttpResult> sendPoint(int id, int userId, int point) {
+        BizContent content = new BizContent();
+        content.setId(id);
+        content.setUserId(userId);
+        content.setPoint(point);
+        RequestParam requestParam = new RequestParam(UrlConstant.SEND_POINT,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
+    }
+
+    @Override
+    public Observable<HttpResult> confirm(int id) {
+        BizContent content = new BizContent();
+        content.setId(id);
+        content.setUserId(CommonUtils.getUserId());
+        RequestParam requestParam = new RequestParam(UrlConstant.CONFIRM_POINT,convertBizContent(content));
         return mService.simpleRequest(requestParam);
     }
 }

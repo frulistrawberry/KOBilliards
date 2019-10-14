@@ -9,6 +9,7 @@ import com.yuyuka.billiards.constants.CompetitionType;
 import com.yuyuka.billiards.pojo.CustomNoticePojo;
 import com.yuyuka.billiards.ui.activity.facetoface.FaceToFaceFunActivity;
 import com.yuyuka.billiards.ui.activity.facetoface.FaceToFaceQualifyingActivity;
+import com.yuyuka.billiards.ui.activity.table.BattleActivity;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -61,6 +62,7 @@ public class TablePaySuccessActivity extends BaseActivity {
                 case CompetitionType.SCAN_BATTLE:
                     break;
                 case CompetitionType.SCAN_RANK:
+                    BattleActivity.launcher(this,data);
                     break;
             }
         }

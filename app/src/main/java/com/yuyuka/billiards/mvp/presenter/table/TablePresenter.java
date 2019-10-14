@@ -69,7 +69,28 @@ public class TablePresenter extends BasePresenter<TableContract.ITableView, Tabl
     }
 
     public void enterMatch(int id,int refOrderId,int payChannel){
+        getView().showProgressDialog();
+        mModel.enterMatch(id,refOrderId,payChannel)
+                .compose(RxUtils.transform(getView()))
+                .subscribe(new RespObserver() {
 
+                    @Override
+                    public void onResult(String msg, String bizContent) {
+                        getView().dismissProgressDialog();
+                        if (TextUtils.isEmpty(bizContent)){
+                            return;
+                        }
+                        OrderPojo data = new Gson().fromJson(bizContent,OrderPojo.class);
+                        getView().showOrderSuccess(data);
+
+                    }
+
+                    @Override
+                    public void onError(int errCode, String errMsg) {
+                        getView().dismissProgressDialog();
+                        getView().showError(errMsg);
+                    }
+                });
     }
 
 }

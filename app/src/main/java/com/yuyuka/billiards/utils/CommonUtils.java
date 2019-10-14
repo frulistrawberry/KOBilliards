@@ -29,7 +29,7 @@ public class CommonUtils {
     }
 
     public static void saveUserInfo(UserInfo userInfo){
-        SPUtils.putInt(PreferenceConstant.USER_ID,21);
+        SPUtils.putInt(PreferenceConstant.USER_ID,22);
         SPUtils.putBoolean(PreferenceConstant.IS_LOGIN,true);
     }
 

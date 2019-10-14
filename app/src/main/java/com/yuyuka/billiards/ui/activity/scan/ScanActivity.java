@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -13,6 +14,7 @@ import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseActivity;
 import com.yuyuka.billiards.base.BaseMvpActivity;
+import com.yuyuka.billiards.constants.CompetitionType;
 import com.yuyuka.billiards.constants.UrlConstant;
 import com.yuyuka.billiards.mvp.contract.table.TableContract;
 import com.yuyuka.billiards.mvp.presenter.table.TablePresenter;
@@ -94,7 +96,7 @@ public class ScanActivity extends BaseMvpActivity<TablePresenter> implements Tab
     @Override
     public void showTableInfo(TablePojo data) {
         if (data.getDeoisitPrice()>0){
-            TablePayActivity.launcher(this,battleId,refOrderId);
+            TablePayActivity.launcher(this,tableId,battleId,refOrderId);
         }else {
             getPresenter().enterMatch(battleId,refOrderId,2);
         }
@@ -113,10 +115,18 @@ public class ScanActivity extends BaseMvpActivity<TablePresenter> implements Tab
     @Override
     public void showEnterSuccess() {
         // TODO: 2019-10-11 进入对战页面
+
     }
 
     @Override
     public void showEnterFailure() {
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK)
+            finish();
     }
 }

@@ -12,6 +12,7 @@ import com.google.gson.Gson;
 import com.netease.nimlib.sdk.msg.model.CustomNotification;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseMvpActivity;
+import com.yuyuka.billiards.constants.CompetitionType;
 import com.yuyuka.billiards.mvp.contract.table.TableContract;
 import com.yuyuka.billiards.mvp.presenter.table.TablePresenter;
 import com.yuyuka.billiards.pojo.CustomNoticePojo;
@@ -149,19 +150,20 @@ public class TableActivity extends BaseMvpActivity<TablePresenter> implements Ta
             //等待比赛(调到二维码页面)
             CustomNoticePojo.Battle battle = data.getBizContent().getBattle();
             switch (battle.getBattleType()){
-                case 6:
-                    FaceToFaceQualifyingActivity.launcher(this,tableId,battle.getId(),battle.getRefOrderId());
+                case CompetitionType.SCAN_RANK:
+                    FaceToFaceQualifyingActivity.launcher(this,tableId,battle.getId(),battle.getRefOrderId(),battle.getBattleType());
                     break;
-                case 7:
+                case CompetitionType.SCAN_BATTLE:
                     break;
             }
         }else if (data.getNoticeType() == 1){
             //比赛开始进入对战页面
             CustomNoticePojo.Battle battle = data.getBizContent().getBattle();
             switch (battle.getBattleType()){
-                case 6:
+                case CompetitionType.SCAN_RANK:
+                    BattleActivity.launcher(this,data);
                     break;
-                case 7:
+                case CompetitionType.SCAN_BATTLE:
                     break;
             }
         }

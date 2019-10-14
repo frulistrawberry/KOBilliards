@@ -59,10 +59,11 @@ public class TablePayActivity extends BaseMvpActivity<TablePresenter> implements
         context.startActivityForResult(intent,0);
     }
 
-    public static void launcher(Activity context,int id,int refOrderId){
+    public static void launcher(Activity context,long tableId,int id,int refOrderId){
         Intent intent = new Intent(context,TablePayActivity.class);
         intent.putExtra("id",id);
         intent.putExtra("refOrderId",refOrderId);
+        intent.putExtra("tableId",tableId);
         intent.putExtra("payFor",2);
         context.startActivityForResult(intent,0);
     }
@@ -85,6 +86,9 @@ public class TablePayActivity extends BaseMvpActivity<TablePresenter> implements
     protected void initData() {
         tableId = getIntent().getLongExtra("tableId",0);
         competitionType = getIntent().getIntExtra("competitionType",0);
+        payFor = getIntent().getIntExtra("payFor",1);
+        id = getIntent().getIntExtra("id",0);
+        refOrderId = getIntent().getIntExtra("refOrderId",0);
         EventBus.getDefault().register(this);
     }
 
@@ -151,7 +155,7 @@ public class TablePayActivity extends BaseMvpActivity<TablePresenter> implements
 
     @Subscribe
     public void onEvent(CustomNotification message){
-        LogUtil.e("IM",message.getContent());
+
         String json = message.getContent();
         CustomNoticePojo data = new Gson().fromJson(json,CustomNoticePojo.class);
         TablePaySuccessActivity.launcher(this,data,tableId);

@@ -9,12 +9,15 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
+import com.google.gson.Gson;
 import com.netease.nimlib.sdk.msg.model.CustomNotification;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseActivity;
+import com.yuyuka.billiards.constants.CompetitionType;
 import com.yuyuka.billiards.constants.UrlConstant;
 import com.yuyuka.billiards.pojo.CustomNoticePojo;
+import com.yuyuka.billiards.ui.activity.table.BattleActivity;
 import com.yuyuka.billiards.utils.BarUtils;
 import com.yuyuka.billiards.utils.SizeUtils;
 
@@ -81,6 +84,10 @@ public class FaceToFaceQualifyingActivity extends BaseActivity {
 
     @Subscribe
     public void onEvent(CustomNotification notification){
-
+        CustomNoticePojo data = new Gson().fromJson(notification.getContent(),CustomNoticePojo.class);
+        if (data.getNoticeType() == 1 && data.getBizContent().getBattle().getBattleType() == CompetitionType.SCAN_RANK){
+            BattleActivity.launcher(getContext(),data);
+            finish();
+        }
     }
 }

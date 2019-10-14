@@ -62,6 +62,7 @@ public class App extends MultiDexApplication implements Application.ActivityLife
                 @Override
                 public void onEvent(CustomNotification message) {
                     // 在这里处理自定义通知。
+                    LogUtil.e("IM",message.getContent());
                     EventBus.getDefault().post(message);
                 }
             }, true);

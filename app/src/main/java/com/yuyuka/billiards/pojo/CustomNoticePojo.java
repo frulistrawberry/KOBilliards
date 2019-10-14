@@ -1,6 +1,7 @@
 package com.yuyuka.billiards.pojo;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class CustomNoticePojo implements Serializable {
     private int noticeType;
@@ -25,6 +26,16 @@ public class CustomNoticePojo implements Serializable {
 
         private User user1;
         private User user2;
+
+        private UserRank userRank;
+
+        public UserRank getUserRank() {
+            return userRank;
+        }
+
+        public void setUserRank(UserRank userRank) {
+            this.userRank = userRank;
+        }
 
         public User getUser2() {
             return user2;
@@ -67,6 +78,32 @@ public class CustomNoticePojo implements Serializable {
         private long beforeOne;
 
         private long beginTime;
+        private int user1Point;
+        private int user2Point;
+
+        public void setBeforeOne(long beforeOne) {
+            this.beforeOne = beforeOne;
+        }
+
+        public void setBeginTime(long beginTime) {
+            this.beginTime = beginTime;
+        }
+
+        public int getUser1Point() {
+            return user1Point;
+        }
+
+        public void setUser1Point(int user1Point) {
+            this.user1Point = user1Point;
+        }
+
+        public int getUser2Point() {
+            return user2Point;
+        }
+
+        public void setUser2Point(int user2Point) {
+            this.user2Point = user2Point;
+        }
 
         public void setId(int id){
             this.id = id;
@@ -200,4 +237,229 @@ public class CustomNoticePojo implements Serializable {
         }
 
     }
+
+    public class UserRank {
+        private int userId;
+
+        private int currentDuanPoint;
+
+        private int hisDuanPoint;
+
+        private Duan currentDuan;
+
+        private Duan hisDuan;
+
+        private int combatValue;
+
+        private int addCombatValue;
+
+        private User billiardsUsers;
+
+        public void setUserId(int userId){
+            this.userId = userId;
+        }
+        public int getUserId(){
+            return this.userId;
+        }
+        public void setCurrentDuanPoint(int currentDuanPoint){
+            this.currentDuanPoint = currentDuanPoint;
+        }
+        public int getCurrentDuanPoint(){
+            return this.currentDuanPoint;
+        }
+        public void setHisDuanPoint(int hisDuanPoint){
+            this.hisDuanPoint = hisDuanPoint;
+        }
+        public int getHisDuanPoint(){
+            return this.hisDuanPoint;
+        }
+        public void setCurrentDuan(Duan currentDuan){
+            this.currentDuan = currentDuan;
+        }
+        public Duan getCurrentDuan(){
+            return this.currentDuan;
+        }
+        public void setHisDuan(Duan hisDuan){
+            this.hisDuan = hisDuan;
+        }
+        public Duan getHisDuan(){
+            return this.hisDuan;
+        }
+        public void setCombatValue(int combatValue){
+            this.combatValue = combatValue;
+        }
+        public int getCombatValue(){
+            return this.combatValue;
+        }
+        public void setAddCombatValue(int addCombatValue){
+            this.addCombatValue = addCombatValue;
+        }
+        public int getAddCombatValue(){
+            return this.addCombatValue;
+        }
+        public void setBilliardsUsers(User billiardsUsers){
+            this.billiardsUsers = billiardsUsers;
+        }
+        public User getBilliardsUsers(){
+            return this.billiardsUsers;
+        }
+
+    }
+
+    public static class Duan implements Serializable{
+        private String name;
+
+        private int facingWinPoint;
+
+        private int facingFailPoint;
+
+        private int facingContinuity;
+
+        private int rankWinPoint;
+
+        private int rankFailPoint;
+
+        private int rankContinuity;
+
+        private int matchWinPoint;
+
+        private int matchFailPoint;
+
+        private int matchContinuity;
+
+        private int no;
+
+        private int firstNum;
+
+        private List<RankingObjList> rankingObjList ;
+
+        private UserAt userAt;
+
+        public void setName(String name){
+            this.name = name;
+        }
+        public String getName(){
+            return this.name;
+        }
+        public void setFacingWinPoint(int facingWinPoint){
+            this.facingWinPoint = facingWinPoint;
+        }
+        public int getFacingWinPoint(){
+            return this.facingWinPoint;
+        }
+        public void setFacingFailPoint(int facingFailPoint){
+            this.facingFailPoint = facingFailPoint;
+        }
+        public int getFacingFailPoint(){
+            return this.facingFailPoint;
+        }
+        public void setFacingContinuity(int facingContinuity){
+            this.facingContinuity = facingContinuity;
+        }
+        public int getFacingContinuity(){
+            return this.facingContinuity;
+        }
+        public void setRankWinPoint(int rankWinPoint){
+            this.rankWinPoint = rankWinPoint;
+        }
+        public int getRankWinPoint(){
+            return this.rankWinPoint;
+        }
+        public void setRankFailPoint(int rankFailPoint){
+            this.rankFailPoint = rankFailPoint;
+        }
+        public int getRankFailPoint(){
+            return this.rankFailPoint;
+        }
+        public void setRankContinuity(int rankContinuity){
+            this.rankContinuity = rankContinuity;
+        }
+        public int getRankContinuity(){
+            return this.rankContinuity;
+        }
+        public void setMatchWinPoint(int matchWinPoint){
+            this.matchWinPoint = matchWinPoint;
+        }
+        public int getMatchWinPoint(){
+            return this.matchWinPoint;
+        }
+        public void setMatchFailPoint(int matchFailPoint){
+            this.matchFailPoint = matchFailPoint;
+        }
+        public int getMatchFailPoint(){
+            return this.matchFailPoint;
+        }
+        public void setMatchContinuity(int matchContinuity){
+            this.matchContinuity = matchContinuity;
+        }
+        public int getMatchContinuity(){
+            return this.matchContinuity;
+        }
+        public void setNo(int no){
+            this.no = no;
+        }
+        public int getNo(){
+            return this.no;
+        }
+        public void setFirstNum(int firstNum){
+            this.firstNum = firstNum;
+        }
+        public int getFirstNum(){
+            return this.firstNum;
+        }
+        public void setRankingObjList(List<RankingObjList> rankingObjList){
+            this.rankingObjList = rankingObjList;
+        }
+        public List<RankingObjList> getRankingObjList(){
+            return this.rankingObjList;
+        }
+        public void setUserAt(UserAt userAt){
+            this.userAt = userAt;
+        }
+        public UserAt getUserAt(){
+            return this.userAt;
+        }
+
+    }
+
+    public static class UserAt implements Serializable{
+        private int point;
+
+        private int rank;
+
+        public void setPoint(int point){
+            this.point = point;
+        }
+        public int getPoint(){
+            return this.point;
+        }
+        public void setRank(int rank){
+            this.rank = rank;
+        }
+        public int getRank(){
+            return this.rank;
+        }
+
+    }
+
+    public static class RankingObjList implements Serializable{
+        private int point;
+
+        private int rank;
+
+        public void setPoint(int point){
+            this.point = point;
+        }
+        public int getPoint(){
+            return this.point;
+        }
+        public void setRank(int rank){
+            this.rank = rank;
+        }
+        public int getRank(){
+            return this.rank;
+        }
+
+    }
+
 }
