@@ -238,7 +238,7 @@ public class CustomNoticePojo implements Serializable {
 
     }
 
-    public class UserRank {
+    public class UserRank implements Serializable{
         private int userId;
 
         private int currentDuanPoint;

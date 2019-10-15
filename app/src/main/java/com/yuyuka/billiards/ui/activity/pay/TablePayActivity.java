@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.netease.nimlib.sdk.msg.model.CustomNotification;
+import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseMvpActivity;
 import com.yuyuka.billiards.mvp.contract.table.TableContract;
@@ -29,6 +30,7 @@ public class TablePayActivity extends BaseMvpActivity<TablePresenter> implements
 
     public static final int PAY_FOR_ORDER = 1;
     public static final int PAY_FOR_ENTER_MATCH = 2;
+    public static final int PAY_FOR_TABLE = 3;
 
 
     @BindView(R.id.tv_name)
@@ -39,6 +41,10 @@ public class TablePayActivity extends BaseMvpActivity<TablePresenter> implements
     ImageView wxCheck;
     @BindView(R.id.iv_ali_check)
     ImageView aliCheck;
+    @BindView(R.id.tv_desc)
+            TextView descTv;
+    @BindView(R.id.tv_info)
+            TextView infoTv;
 
 
     int payChannel = 0;
@@ -68,6 +74,13 @@ public class TablePayActivity extends BaseMvpActivity<TablePresenter> implements
         context.startActivityForResult(intent,0);
     }
 
+    public static void launcher(Activity context,int id){
+        Intent intent = new Intent(context,TablePayActivity.class);
+        intent.putExtra("id",id);
+        intent.putExtra("payFor",3);
+        context.startActivityForResult(intent,0);
+    }
+
 
     @Override
     protected void initTitle() {
@@ -79,7 +92,14 @@ public class TablePayActivity extends BaseMvpActivity<TablePresenter> implements
     protected void initView() {
         setTitleStyle(1);
         setContentView(R.layout.activity_table_pay);
-        getPresenter().getTableInfo(tableId);
+        if (payFor == 3){
+            nameTv.setVisibility(View.GONE);
+            moneyTv.setVisibility(View.GONE);
+            descTv.setVisibility(View.GONE);
+            infoTv.setVisibility(View.GONE);
+        }else {
+            getPresenter().getTableInfo(tableId);
+        }
     }
 
     @Override
@@ -110,6 +130,9 @@ public class TablePayActivity extends BaseMvpActivity<TablePresenter> implements
                     getPresenter().openTable(tableId,payChannel,competitionType);
                 else if (payFor == PAY_FOR_ENTER_MATCH)
                     getPresenter().enterMatch(id,refOrderId,payChannel);
+                else if (payFor == PAY_FOR_TABLE){
+                    getPresenter().settle(id,payChannel);
+                }
                 break;
 
         }
@@ -161,6 +184,17 @@ public class TablePayActivity extends BaseMvpActivity<TablePresenter> implements
         TablePaySuccessActivity.launcher(this,data,tableId);
         setResult(RESULT_OK);
         finish();
+
+    }
+
+    @Subscribe
+    public void onEvent(BaseResp message){
+
+        if (payFor == 3 && message.errCode == 0){
+            setResult(RESULT_OK);
+            finish();
+        }
+
 
     }
 

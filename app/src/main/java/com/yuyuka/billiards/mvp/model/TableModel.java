@@ -64,4 +64,13 @@ public class TableModel extends BaseModel implements TableContract.ITableModel, 
         RequestParam requestParam = new RequestParam(UrlConstant.CONFIRM_POINT,convertBizContent(content));
         return mService.simpleRequest(requestParam);
     }
+
+    public Observable<HttpResult> settle(int id,int payChannel) {
+        BizContent content = new BizContent();
+        content.setId(id);
+        content.setUserId(CommonUtils.getUserId());
+        content.setPayChannel(payChannel);
+        RequestParam requestParam = new RequestParam(UrlConstant.PLACE_SETTLE,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
+    }
 }

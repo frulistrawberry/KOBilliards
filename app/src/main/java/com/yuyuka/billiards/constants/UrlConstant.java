@@ -59,5 +59,6 @@ public class UrlConstant {
     public static String PLACE_JOIN = "com.yuyuka.billiards.api.place.join";
     public static String SEND_POINT = "com.yuyuka.billiards.api.send.point";
     public static String CONFIRM_POINT = "com.yuyuka.billiards.api.confirm.point";
+    public static String PLACE_SETTLE = "com.yuyuka.billiards.api.place.settle";
 
 }

@@ -23,5 +23,6 @@ public interface TableContract {
         Observable<HttpResult> getTableInfo(long tableId);
         Observable<HttpResult> tackOrder(int orderType,long billiardsPoolTable,int competitionType,int payType,int payChannel);
         Observable<HttpResult> enterMatch(int id,int refOrderId,int payChannel);
+        Observable<HttpResult> settle(int id,int payChannel);
     }
 }

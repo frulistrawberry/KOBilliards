@@ -1,8 +1,10 @@
 package com.yuyuka.billiards.ui.activity.table;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -24,11 +26,11 @@ public class BattleEndActivity extends BaseActivity {
     int id;
     int otherUserId;
 
-    public static void launcher(Context context,int userId,int id){
+    public static void launcher(Activity context, int userId, int id){
         Intent intent = new Intent(context,BattleEndActivity.class);
         intent.putExtra("id",id);
         intent.putExtra("userId",userId);
-        context.startActivity(intent);
+        context.startActivityForResult(intent,0);
     }
 
     @Override
@@ -58,16 +60,22 @@ public class BattleEndActivity extends BaseActivity {
                 BattleWinnerActivity.launcher(this,id,otherUserId);
                 break;
             case R.id.btn_lose:
-                startActivity(new Intent(this,BattleLoserWaitActivity.class));
+                startActivityForResult(new Intent(this,BattleLoserWaitActivity.class),0);
                 break;
         }
     }
 
     @Subscribe
     public void onEvent(CustomNotification notification){
-        CustomNoticePojo noticePojo = new Gson().fromJson(notification.getContent(),CustomNoticePojo.class);
-        if (noticePojo.getNoticeType() == 4){
-            // TODO: 2019-10-14 败者结算页
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK){
+            setResult(RESULT_OK);
+            finish();
         }
     }
 }

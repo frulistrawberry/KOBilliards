@@ -31,6 +31,7 @@ public class WXPayEntryActivity  extends WXCallbackActivity {
 
     public void onResp(BaseResp resp) {
         if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
+            EventBus.getDefault().post(resp);
             if (resp.errCode == 0){
                 ToastUtils.showToast(WXPayEntryActivity.this,"支付成功");
             }else {

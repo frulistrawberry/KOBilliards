@@ -60,6 +60,7 @@ public class TablePaySuccessActivity extends BaseActivity {
             CustomNoticePojo.Battle battle = data.getBizContent().getBattle();
             switch (battle.getBattleType()){
                 case CompetitionType.SCAN_BATTLE:
+                    BattleActivity.launcher(this,data);
                     break;
                 case CompetitionType.SCAN_RANK:
                     BattleActivity.launcher(this,data);

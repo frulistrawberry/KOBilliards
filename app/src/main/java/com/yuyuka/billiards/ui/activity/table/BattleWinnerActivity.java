@@ -1,5 +1,6 @@
 package com.yuyuka.billiards.ui.activity.table;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.view.View;
@@ -32,11 +33,11 @@ public class BattleWinnerActivity extends BaseMvpActivity<PointPresenter> implem
     int id;
     int userId;
 
-    public static void launcher(Context context,int id,int userId){
+    public static void launcher(Activity context, int id, int userId){
         Intent intent = new Intent(context,BattleWinnerActivity.class);
         intent.putExtra("id",id);
         intent.putExtra("userId",userId);
-        context.startActivity(intent);
+        context.startActivityForResult(intent,0);
     }
 
     @Override
@@ -61,13 +62,13 @@ public class BattleWinnerActivity extends BaseMvpActivity<PointPresenter> implem
                 }
             });
         }
-        EventBus.getDefault().register(this);
     }
 
     @Override
     protected void initData() {
         id = getIntent().getIntExtra("id",0);
         userId = getIntent().getIntExtra("userId",0);
+        EventBus.getDefault().register(this);
     }
 
     @OnClick({R.id.btn_send})
@@ -89,6 +90,9 @@ public class BattleWinnerActivity extends BaseMvpActivity<PointPresenter> implem
         CustomNoticePojo noticePojo = new Gson().fromJson(notification.getContent(),CustomNoticePojo.class);
         if (noticePojo.getNoticeType() == 4){
             // TODO: 2019-10-14 结算页
+            BattleResultActivity.launcher(this,noticePojo,true);
+            setResult(RESULT_OK);
+            finish();
         }
     }
 

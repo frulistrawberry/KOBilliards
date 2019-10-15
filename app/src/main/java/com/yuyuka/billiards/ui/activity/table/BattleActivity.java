@@ -1,8 +1,10 @@
 package com.yuyuka.billiards.ui.activity.table;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -33,10 +35,10 @@ public class BattleActivity extends BaseActivity {
 
 
 
-    public static void launcher(Context context, CustomNoticePojo data){
+    public static void launcher(Activity context, CustomNoticePojo data){
         Intent intent = new Intent(context,BattleActivity.class);
         intent.putExtra("data",data);
-        context.startActivity(intent);
+        context.startActivityForResult(intent,0);
     }
 
     @Override
@@ -64,7 +66,6 @@ public class BattleActivity extends BaseActivity {
                 int user1Id = content.getUser1().getId();
                 int user2Id = content.getUser2().getId();
                 BattleEndActivity.launcher(this,userId == user1Id?user2Id:user1Id,content.getBattle().getId());
-
                 break;
         }
     }
@@ -72,5 +73,13 @@ public class BattleActivity extends BaseActivity {
     @Override
     protected void initData() {
         data = (CustomNoticePojo) getIntent().getSerializableExtra("data");
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK){
+            finish();
+        }
     }
 }

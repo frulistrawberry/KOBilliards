@@ -86,7 +86,7 @@ public class FaceToFaceQualifyingActivity extends BaseActivity {
     public void onEvent(CustomNotification notification){
         CustomNoticePojo data = new Gson().fromJson(notification.getContent(),CustomNoticePojo.class);
         if (data.getNoticeType() == 1 && data.getBizContent().getBattle().getBattleType() == CompetitionType.SCAN_RANK){
-            BattleActivity.launcher(getContext(),data);
+            BattleActivity.launcher(this,data);
             finish();
         }
     }

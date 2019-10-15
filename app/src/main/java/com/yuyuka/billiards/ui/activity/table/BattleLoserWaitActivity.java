@@ -1,6 +1,8 @@
 package com.yuyuka.billiards.ui.activity.table;
 
+import android.content.Intent;
 import android.os.Build;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -39,6 +41,15 @@ public class BattleLoserWaitActivity extends BaseActivity {
         CustomNoticePojo noticePojo = new Gson().fromJson(notification.getContent(),CustomNoticePojo.class);
         if (noticePojo.getNoticeType() == 3){
             ConfirmPointActivity.launch(this,noticePojo);
+        }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK){
+            setResult(RESULT_OK);
+            finish();
         }
     }
 }

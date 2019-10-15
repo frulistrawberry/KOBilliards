@@ -14,36 +14,7 @@
         android:layout_weight="1"
         android:gravity="center_horizontal"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_color_1"
-            android:textSize="18sp"
-            android:text="百胜桌球馆"/>
-        <TextView
-            android:id="@+id/tv_money"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_color_6"
-            android:textSize="40sp"
-            android:layout_marginTop="10dp"
-            android:text="-.-"/>
-        <TextView
-            android:id="@+id/tv_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_color_1"
-            android:textSize="14sp"
-            android:layout_marginTop="10dp"
-            android:text="临时押金卡"/>
-        <TextView
-            android:id="@+id/tv_desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#F46113"
-            android:textSize="14sp"
-            android:text="结账后押金找零将"/>
+
         <LinearLayout
             android:id="@+id/btn_wx_pay"
             android:layout_width="128dp"

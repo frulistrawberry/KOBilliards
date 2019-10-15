@@ -1,7 +1,9 @@
 package com.yuyuka.billiards.ui.activity.table;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -17,6 +19,7 @@ import com.yuyuka.billiards.mvp.presenter.table.PointPresenter;
 import com.yuyuka.billiards.pojo.CustomNoticePojo;
 import com.yuyuka.billiards.utils.CommonUtils;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
@@ -36,10 +39,10 @@ public class ConfirmPointActivity extends BaseMvpActivity<PointPresenter> implem
     @BindView(R.id.tv_user_name2)
     TextView userName2;
 
-    public static void launch(Context context,CustomNoticePojo data){
+    public static void launch(Activity context, CustomNoticePojo data){
         Intent intent = new Intent(context,ConfirmPointActivity.class);
         intent.putExtra("data",data);
-        context.startActivity(intent);
+        context.startActivityForResult(intent,0);
     }
 
     @Override
@@ -61,6 +64,7 @@ public class ConfirmPointActivity extends BaseMvpActivity<PointPresenter> implem
     @Override
     protected void initData() {
         data = (CustomNoticePojo) getIntent().getSerializableExtra("data");
+        EventBus.getDefault().register(this);
     }
 
     @OnClick({R.id.btn_send})
@@ -77,8 +81,18 @@ public class ConfirmPointActivity extends BaseMvpActivity<PointPresenter> implem
         CustomNoticePojo noticePojo = new Gson().fromJson(notification.getContent(),CustomNoticePojo.class);
         if (noticePojo.getNoticeType() == 4){
             // TODO: 2019-10-14 结算页
+            BattleResultActivity.launcher(this,noticePojo,false);
         }
     }
 
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK){
+            setResult(RESULT_OK);
+            finish();
+        }
+
+    }
 }

@@ -93,4 +93,29 @@ public class TablePresenter extends BasePresenter<TableContract.ITableView, Tabl
                 });
     }
 
+    public void settle(int id,int payChannel){
+        getView().showProgressDialog();
+        mModel.settle(id,payChannel)
+                .compose(RxUtils.transform(getView()))
+                .subscribe(new RespObserver() {
+
+                    @Override
+                    public void onResult(String msg, String bizContent) {
+                        getView().dismissProgressDialog();
+                        if (TextUtils.isEmpty(bizContent)){
+                            return;
+                        }
+                        OrderPojo data = new Gson().fromJson(bizContent,OrderPojo.class);
+                        getView().showOrderSuccess(data);
+
+                    }
+
+                    @Override
+                    public void onError(int errCode, String errMsg) {
+                        getView().dismissProgressDialog();
+                        getView().showError(errMsg);
+                    }
+                });
+    }
+
 }
