@@ -199,6 +199,18 @@
         <activity android:name=".ui.activity.table.BattleWinnerActivity" />
         <activity android:name=".ui.activity.table.ConfirmPointActivity" />
         <activity android:name=".ui.activity.table.BattleResultActivity" />
+        <activity android:name=".ui.activity.room.BallRoomActivity"/>
+        <activity android:name=".ui.activity.room.UniversalTableActivity"/>
+        <activity android:name=".ui.activity.room.ContestantActivity"/>
+        <activity android:name=".ui.activity.room.BallRoomShopActivity"/>
+        <activity android:name=".ui.activity.room.YuejuRoomActivity"/>
+        <activity android:name=".ui.activity.room.RoomStoreActivity"/>
+        <activity android:name=".ui.activity.room.PayActivity"/>
+        <activity android:name=".ui.activity.room.PaySuesscesActivity"/>
+        <activity android:name=".ui.activity.room.RoomSelf"/>
+        <activity android:name=".ui.activity.room.ZizhuActivity"/>
+        <activity android:name=".ui.activity.room.PayForActivity" />
+        <activity android:name=".ui.activity.room.PayForActivity"/>
         <!-- 网易云信 -->
         <meta-data
             android:name="com.netease.nim.appKey"

@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
 import com.netease.nimlib.sdk.NIMClient;
@@ -25,6 +26,10 @@ import com.yuyuka.billiards.pojo.ImagePojo;
 import com.yuyuka.billiards.pojo.ModularPojo;
 import com.yuyuka.billiards.ui.activity.bonus.BonusPoolActivity;
 import com.yuyuka.billiards.ui.activity.message.MessageActivity;
+import com.yuyuka.billiards.ui.activity.room.BallRoomActivity;
+import com.yuyuka.billiards.ui.activity.room.BallRoomShopActivity;
+import com.yuyuka.billiards.ui.activity.room.RoomSelf;
+import com.yuyuka.billiards.ui.activity.room.UniversalTableActivity;
 import com.yuyuka.billiards.ui.activity.scan.ScanActivity;
 import com.yuyuka.billiards.ui.activity.search.RoomSearchActivity;
 import com.yuyuka.billiards.ui.adapter.common.NavigatorAdapter;
@@ -77,6 +82,8 @@ public class HomeFragment extends BaseFragment{
     FrameLayout mHeaderLayout;
     @BindView(R.id.layout_ptr)
     PtrClassicFrameLayout mPtrLayout;
+    @BindView(R.id.dibu)
+    TextView  dibu;
 
     List<Fragment> mFragmentList;
     PagerAdapter mAdapter;
@@ -166,6 +173,7 @@ public class HomeFragment extends BaseFragment{
     }
 
     @OnClick({R.id.btn_top,R.id.btn_bonus_rewards,R.id.iv_msg,R.id.ll_scan,R.id.btn_search,R.id.btn_search1})
+    @OnClick({R.id.btn_top,R.id.btn_bonus_rewards,R.id.iv_msg,R.id.dibu,R.id.guandeng,R.id.sao,R.id.iv_contact})
     public void onClick(View v){
         switch (v.getId()){
             case R.id.btn_top:
@@ -202,6 +210,18 @@ public class HomeFragment extends BaseFragment{
 // 发送自定义通知
                  NIMClient.getService(MsgService.class).sendCustomNotification(notification);
                  break;
+            case R.id.dibu:
+                BallRoomActivity.launcher(getContext());
+                 break;
+            case R.id.guandeng:
+                UniversalTableActivity.launcher(getContext());
+                break;
+            case R.id.sao:
+                BallRoomShopActivity.launcher(getContext());
+                break;
+            case R.id.iv_contact:
+                RoomSelf.launcher(getContext());
+                break;
             case R.id.ll_scan:
                 Intent intent = new Intent(getContext(), ScanActivity.class);
                 startActivity(intent);

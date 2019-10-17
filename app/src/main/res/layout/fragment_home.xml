@@ -208,6 +208,7 @@
                                         android:src="@mipmap/ic_scan" />
 
                                     <TextView
+                                        android:id="@+id/sao"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_horizontal"
@@ -231,6 +232,7 @@
                                         android:src="@mipmap/ic_payment" />
 
                                     <TextView
+                                        android:id="@+id/guandeng"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
                                         android:layout_gravity="center_horizontal"
@@ -333,6 +335,7 @@
                                     </LinearLayout>
 
                                     <TextView
+                                        android:id="@+id/dibu"
                                         android:background="@color/white"
                                         android:layout_width="wrap_content"
                                         android:layout_height="wrap_content"
@@ -342,6 +345,7 @@
                                         android:paddingRight="5dp"
                                         android:textColor="@color/bg_status_bar"
                                         android:textSize="14sp" />
+
                                 </LinearLayout>
 
 
