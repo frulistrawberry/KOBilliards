@@ -1,10 +1,17 @@
 package com.yuyuka.billiards.utils.bean;
 
+import android.graphics.Bitmap;
+import android.media.MediaMetadataRetriever;
+
+import java.io.Serializable;
+
+import static com.yuyuka.billiards.utils.VideoUtils.getVideoThumb;
+
 /**
  * @创建人 chaychan
  * @创建时间 2016/7/23  17:20
  */
-public class Video {
+public class Video   {
     private int id = 0;
     private String path = null;
     private String name = null;
@@ -12,6 +19,24 @@ public class Video {
     private long size = 0;
     private long date = 0;
     private long duration = 0;
+    private boolean isCheck;
+    private Bitmap bitmap;
+
+    public boolean isCheck() {
+        return isCheck;
+    }
+
+    public void setCheck(boolean check) {
+        isCheck = check;
+    }
+
+    public Bitmap getBitmap() {
+        return bitmap;
+    }
+
+    public void setBitmap(Bitmap bitmap) {
+        this.bitmap = bitmap;
+    }
 
     public Video(int id, String path, String name, String resolution, long size, long date, long duration) {
         this.id = id;
@@ -21,6 +46,7 @@ public class Video {
         this.size = size;
         this.date = date;
         this.duration = duration;
+        this.bitmap = getVideoThumb(path);
     }
 
     public Video() {
@@ -87,5 +113,7 @@ public class Video {
         return "Video [id=" + id + ", path=" + path + ", name=" + name + ", resolution=" + resolution + ", size=" + size + ", date=" + date
                 + ", duration=" + duration + "]";
     }
+
+
 
 }

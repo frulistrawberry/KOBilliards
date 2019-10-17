@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <EditText
+        android:id="@+id/et_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:singleLine="true"
+        android:textSize="18sp"
+        android:hint="标题"/>
+
+    <EditText
+        android:id="@+id/et_desc"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:textSize="18sp"
+        android:hint="简介"/>
+    <com.yuyuka.billiards.widget.video.MyVideoView
+        android:id="@+id/detail_player"
+        android:layout_width="match_parent"
+        android:layout_marginTop="36dp"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_height="192dp"/>
+
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="13dp"
+        android:background="@drawable/bg_location"
+        android:padding="2dp"
+        android:gravity="center"
+        android:layout_marginTop="30dp"
+        android:text="所在位置"
+        android:drawablePadding="2dp"
+        android:drawableLeft="@mipmap/ic_location_yellow"
+        android:textColor="@color/text_color_15"
+        />
+
+    <com.yuyuka.billiards.widget.TagLayout
+        android:id="@+id/tag_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginRight="8dp">
+
+    </com.yuyuka.billiards.widget.TagLayout>
+
+
+</LinearLayout>

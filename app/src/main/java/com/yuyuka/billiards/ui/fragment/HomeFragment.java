@@ -1,5 +1,7 @@
 package com.yuyuka.billiards.ui.fragment;
 
+import android.animation.Animator;
+import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
@@ -7,12 +9,15 @@ import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.bigkoo.convenientbanner.ConvenientBanner;
+import com.google.gson.Gson;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
@@ -21,15 +26,26 @@ import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseFragment;
 import com.yuyuka.billiards.base.BaseListFragment;
+import com.yuyuka.billiards.base.BaseMvpActivity;
+import com.yuyuka.billiards.base.BaseMvpFragment;
+import com.yuyuka.billiards.constants.CompetitionType;
+import com.yuyuka.billiards.mvp.contract.HomeContract;
+import com.yuyuka.billiards.mvp.presenter.HomePresenter;
+import com.yuyuka.billiards.pojo.CustomNoticePojo;
 import com.yuyuka.billiards.pojo.ImagePojo;
 import com.yuyuka.billiards.pojo.ModularPojo;
 import com.yuyuka.billiards.ui.activity.bonus.BonusPoolActivity;
+import com.yuyuka.billiards.ui.activity.facetoface.FaceToFaceQualifyingActivity;
 import com.yuyuka.billiards.ui.activity.message.MessageActivity;
 import com.yuyuka.billiards.ui.activity.scan.ScanActivity;
 import com.yuyuka.billiards.ui.activity.search.RoomSearchActivity;
+import com.yuyuka.billiards.ui.activity.table.BattleActivity;
+import com.yuyuka.billiards.ui.activity.table.SingleBattleActivity;
 import com.yuyuka.billiards.ui.adapter.common.NavigatorAdapter;
 import com.yuyuka.billiards.ui.adapter.common.PagerAdapter;
 import com.yuyuka.billiards.ui.fragment.news.NewsListFragment;
+import com.yuyuka.billiards.utils.CollectionUtils;
+import com.yuyuka.billiards.utils.SizeUtils;
 import com.yuyuka.billiards.utils.ViewUtils;
 import com.yuyuka.billiards.utils.log.LogUtil;
 import com.yuyuka.billiards.widget.AppBarStateChangeListener;
@@ -54,7 +70,7 @@ import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
 
-public class HomeFragment extends BaseFragment{
+public class HomeFragment extends BaseMvpFragment<HomePresenter> implements HomeContract.IHomeView {
     @BindView(R.id.app_bar)
     AppBarLayout mAppbarLayout;
     @BindView(R.id.bg_content)
@@ -81,6 +97,11 @@ public class HomeFragment extends BaseFragment{
     List<Fragment> mFragmentList;
     PagerAdapter mAdapter;
     boolean canRefresh = true;
+    @BindView(R.id.iv_table)
+    ImageView tableIv;
+    boolean isFabAnimg;
+
+    int state = 0;
 
     String[] mTitles = {"推荐"};
     String[] mModularTitles = {"附近比赛","附近球房","个人模式","面对面对战","添加商户","KO学堂","台球二手","排行榜"};
@@ -88,6 +109,86 @@ public class HomeFragment extends BaseFragment{
             R.mipmap.ic_modular_bet, R.mipmap.ic_modular_face_to_face,R.mipmap.ic_modular_add_merchant,
             R.mipmap.ic_modular_cause,R.mipmap.ic_modular_mail,R.mipmap.ic_modular_rank};
 
+    private Animator hideAnimator;
+    private Animator showAnimator;
+
+    boolean isFabShow;
+
+    // 动画隐藏浮动按钮
+    private void hideFabAnim() {
+        state = 0;
+        float x = tableIv.getWidth()/2;
+        if (showAnimator != null && showAnimator.isRunning()) {
+            showAnimator.cancel();
+            isFabAnimg = false;
+        }
+        if (isFabAnimg) {
+            return;
+        }
+        hideAnimator = ObjectAnimator.ofFloat(tableIv, "translationX", 0f, -x);
+        hideAnimator.setDuration(500);
+        hideAnimator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                isFabAnimg = true;
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+                isFabAnimg = false;
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                isFabAnimg = false;
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        hideAnimator.start();
+    }
+
+    // 动画显示浮动按钮
+    private void showFabAnim() {
+        state = 1;
+        if (hideAnimator != null && hideAnimator.isRunning()) {
+            hideAnimator.cancel();
+            isFabAnimg = false;
+        }
+        if (isFabAnimg) {
+            return;
+        }
+
+        float x = tableIv.getWidth()/2;
+        showAnimator = ObjectAnimator.ofFloat(tableIv, "translationX", -x, 0f);
+        showAnimator.setDuration(500);
+        showAnimator.addListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animation) {
+                isFabAnimg = true;
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animation) {
+
+                isFabAnimg = false;
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animation) {
+                isFabAnimg = false;
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animation) {
+
+            }
+        });
+        showAnimator.start();
+    }
 
 
 
@@ -106,6 +207,16 @@ public class HomeFragment extends BaseFragment{
 
     @Override
     protected void initView() {
+
+        mRoot.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (tableIv.getVisibility() == View.VISIBLE){
+                    hideFabAnim();
+                }
+                return false;
+            }
+        });
         mAppbarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
             @Override
             public void onStateChanged(AppBarLayout appBarLayout, State state) {
@@ -119,7 +230,9 @@ public class HomeFragment extends BaseFragment{
                 }
                 canRefresh = state == State.EXPANDED;
 
-
+                if (tableIv.getVisibility() == View.VISIBLE && (HomeFragment.this.state == 1 || HomeFragment.this.state == 2)){
+                    hideFabAnim();
+                }
 
             }
         });
@@ -153,7 +266,6 @@ public class HomeFragment extends BaseFragment{
         mIndicator.setNavigator(commonNavigator);
         mViewPager.setAdapter(mAdapter);
         ViewPagerHelper.bind(mIndicator, mViewPager);
-
     }
 
 
@@ -165,7 +277,29 @@ public class HomeFragment extends BaseFragment{
         }
     }
 
-    @OnClick({R.id.btn_top,R.id.btn_bonus_rewards,R.id.iv_msg,R.id.ll_scan,R.id.btn_search,R.id.btn_search1})
+    @Subscribe
+    public void onEvent(CustomNotification message){
+        if (!isOnResume)
+            return;
+        String json = message.getContent();
+        CustomNoticePojo data = new Gson().fromJson(json,CustomNoticePojo.class);
+        if (data.getNoticeType() == 1){
+            //比赛开始进入对战页面
+            CustomNoticePojo.Battle battle = data.getBizContent().getBattle();
+            switch (battle.getBattleType()){
+                case CompetitionType.SCAN_BATTLE:
+                    break;
+                case CompetitionType.SCAN_RANK:
+                    BattleActivity.launcher(getActivity(),data);
+                    break;
+                case CompetitionType.OPEN_TABLE:
+                    SingleBattleActivity.launcher(getActivity(),data);
+                    break;
+            }
+        }
+    }
+
+    @OnClick({R.id.btn_top,R.id.btn_bonus_rewards,R.id.iv_msg,R.id.ll_scan,R.id.btn_search,R.id.btn_search1,R.id.iv_table})
     public void onClick(View v){
         switch (v.getId()){
             case R.id.btn_top:
@@ -212,12 +346,48 @@ public class HomeFragment extends BaseFragment{
             case R.id.btn_search1:
                 RoomSearchActivity.launcher(getContext());
                 break;
+            case R.id.iv_table:
+                if (state == 0){
+                    state =1;
+                    showFabAnim();
+                }else if (state == 1){
+                    state = 2;
+                    getPresenter().myTable();
+                }else {
+                    state = 0;
+                    hideFabAnim();
+                }
+                break;
         }
     }
 
+    boolean isOnResume = true;
 
+    @Override
+    public void onResume() {
+        super.onResume();
+        isOnResume = true;
+        getPresenter().getBattle();
+    }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        isOnResume = false;
+    }
 
+    @Override
+    protected HomePresenter getPresenter() {
+        return new HomePresenter(this);
+    }
 
-
+    @Override
+    public void showTable(List<CustomNoticePojo.Battle> data) {
+        if (CollectionUtils.isEmpty(data)){
+            tableIv.setVisibility(View.GONE);
+        }else {
+            tableIv.setVisibility(View.VISIBLE);
+            hideFabAnim();
+        }
+    }
 }

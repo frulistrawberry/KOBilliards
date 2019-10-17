@@ -3,7 +3,9 @@ package com.yuyuka.billiards.ui.activity.table;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -16,6 +18,7 @@ import com.yuyuka.billiards.base.BaseMvpActivity;
 import com.yuyuka.billiards.mvp.contract.table.PointContract;
 import com.yuyuka.billiards.mvp.presenter.table.PointPresenter;
 import com.yuyuka.billiards.pojo.CustomNoticePojo;
+import com.yuyuka.billiards.utils.BarUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -43,6 +46,12 @@ public class BattleWinnerActivity extends BaseMvpActivity<PointPresenter> implem
     @Override
     protected void initView() {
         setContentView(R.layout.activity_winner);
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
+            mStatusBar.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, BarUtils.getStatusBarHeight(this)));
+        }else {
+            mStatusBar.setVisibility(View.GONE);
+        }
+
         for (int i = 0; i < pointLayout.getChildCount(); i++) {
             RelativeLayout rl = (RelativeLayout) pointLayout.getChildAt(i);
             TextView textView = (TextView) rl.getChildAt(0);

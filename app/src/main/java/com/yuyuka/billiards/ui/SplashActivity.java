@@ -17,6 +17,7 @@ public class SplashActivity extends BaseActivity {
         }else {
             startActivity(new Intent(this, LoginActivity.class));
         }
+        finish();
     }
 
     @Override

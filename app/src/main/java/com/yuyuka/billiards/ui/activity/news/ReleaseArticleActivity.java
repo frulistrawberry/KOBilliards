@@ -34,6 +34,7 @@ import com.yuyuka.billiards.base.BaseActivity;
 import com.yuyuka.billiards.base.BaseMvpActivity;
 import com.yuyuka.billiards.mvp.contract.news.ReleaseContract;
 import com.yuyuka.billiards.mvp.presenter.news.ReleasePresenter;
+import com.yuyuka.billiards.net.ProgressListener;
 import com.yuyuka.billiards.pojo.Tag;
 import com.yuyuka.billiards.pojo.UploadResult;
 import com.yuyuka.billiards.ui.activity.common.PhotoPickerActivity;
@@ -207,7 +208,12 @@ public class ReleaseArticleActivity extends BaseMvpActivity<ReleasePresenter> im
                 uploadResults = new ArrayList<>();
                 uploadCount = 0;
                 for (int i = 0; i < result.size(); i++) {
-                    getPresenter().upload(result.get(i),i);
+                    getPresenter().upload(result.get(i), i, new ProgressListener() {
+                        @Override
+                        public void onProgress(long hasWrittenLen, long totalLen, boolean hasFinish) {
+
+                        }
+                    });
                 }
             }
         }catch (Exception e){

@@ -12,8 +12,10 @@ import android.widget.EditText;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseFragment;
 import com.yuyuka.billiards.ui.activity.news.ReleaseArticleActivity;
+import com.yuyuka.billiards.ui.activity.news.VideoPickerActivity;
 import com.yuyuka.billiards.ui.adapter.common.NavigatorAdapter;
 import com.yuyuka.billiards.ui.adapter.common.PagerAdapter;
+import com.yuyuka.billiards.ui.adapter.news.VideoPickAdapter;
 import com.yuyuka.billiards.ui.fragment.news.NewsListFragment;
 import com.yuyuka.billiards.utils.KeyboardUtils;
 import com.yuyuka.billiards.utils.SizeUtils;
@@ -79,6 +81,9 @@ public class NewsFragment extends BaseFragment {
             switch (position){
                 case 1:
                     startActivity(new Intent(getContext(),ReleaseArticleActivity.class));
+                    break;
+                case 2:
+                    startActivity(new Intent(getContext(), VideoPickerActivity.class));
                     break;
             }
         });

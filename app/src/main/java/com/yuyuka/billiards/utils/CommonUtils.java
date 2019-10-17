@@ -5,6 +5,8 @@ import com.yuyuka.billiards.constants.PreferenceConstant;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.yuyuka.billiards.pojo.UserInfo;
 
+import java.util.Random;
+
 public class CommonUtils {
 
     public static LoginInfo getLoginInfo() {
@@ -29,7 +31,7 @@ public class CommonUtils {
     }
 
     public static void saveUserInfo(UserInfo userInfo){
-        SPUtils.putInt(PreferenceConstant.USER_ID,22);
+        SPUtils.putInt(PreferenceConstant.USER_ID,new Random(14).nextInt()+11);
         SPUtils.putBoolean(PreferenceConstant.IS_LOGIN,true);
     }
 

@@ -131,7 +131,7 @@
         android:scaleType="fitXY"
         android:layout_centerHorizontal="true"
         android:layout_centerVertical="true"
-        android:src="@mipmap/ic_news_video_play"
+        android:src="@drawable/video_click_play_selector"
         android:layout_gravity="center_vertical" />
 
 

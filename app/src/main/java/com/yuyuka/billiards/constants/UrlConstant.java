@@ -60,5 +60,7 @@ public class UrlConstant {
     public static String SEND_POINT = "com.yuyuka.billiards.api.send.point";
     public static String CONFIRM_POINT = "com.yuyuka.billiards.api.confirm.point";
     public static String PLACE_SETTLE = "com.yuyuka.billiards.api.place.settle";
+    public static String AUTHORIZED_USER_MY_TABLE = "com.yuyuka.billiards.api.authorized.user.my.table";
+    public static String AUTHORIZED_USER_PUSH_MY_TABLE = "com.yuyuka.billiards.api.authorized.user.push.my.sysmessage";
 
 }

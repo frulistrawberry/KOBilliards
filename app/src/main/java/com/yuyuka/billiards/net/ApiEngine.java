@@ -82,6 +82,8 @@ public class ApiEngine {
             public void log(String message) {
                 try {
                     String text = URLDecoder.decode(message, "utf-8");
+                    if (text.contains("�"))
+                        return;
                     JsonUtils jsonUtils = new JsonUtils();
                     if (!jsonUtils.validate(text)) {
                         LogUtil.d("HttpLog", text);

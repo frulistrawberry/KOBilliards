@@ -4,6 +4,7 @@ package com.yuyuka.billiards.base;
 
 import com.google.gson.Gson;
 import com.trello.rxlifecycle2.internal.Preconditions;
+import com.yuyuka.billiards.net.ProgressListener;
 import com.yuyuka.billiards.net.RespObserver;
 import com.yuyuka.billiards.pojo.UploadResult;
 import com.yuyuka.billiards.utils.RxUtils;
@@ -38,9 +39,9 @@ public class BasePresenter<V extends IBaseView,M extends IBaseModel> implements 
 
     }
 
-    public void upload(String imagePath,int index){
+    public void upload(String imagePath, int index, ProgressListener listener){
         getView().showProgressDialog();
-        mModel.upload(imagePath)
+        mModel.upload(imagePath,listener)
                 .compose(RxUtils.transform(getView()))
                 .subscribe(new RespObserver() {
 
@@ -54,6 +55,7 @@ public class BasePresenter<V extends IBaseView,M extends IBaseModel> implements 
                     @Override
                     public void onError(int errCode, String errMsg) {
                         getView().showUploadFailure(index);
+                        getView().showError(errMsg);
                     }
                 });
     }
