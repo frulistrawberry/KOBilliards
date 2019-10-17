@@ -5,6 +5,7 @@ import com.yuyuka.billiards.base.IBaseView;
 import com.yuyuka.billiards.net.HttpResult;
 import com.yuyuka.billiards.pojo.BilliardsGoods;
 import com.yuyuka.billiards.pojo.BilliardsRoomPojo;
+import com.yuyuka.billiards.pojo.OrderPojo;
 import com.yuyuka.billiards.pojo.RoomInfoPojo;
 
 import java.util.List;
@@ -18,12 +19,14 @@ public interface RoomDetailContract {
         void showGoodsInfo(List<BilliardsGoods> goods);
         void showCollectSuccess(String msg);
         void showCollectFailure(String msg);
+        void showOrderSuccess(OrderPojo data);
     }
 
     interface IRoomDetailModel extends IBaseModel {
         Observable<HttpResult> getRoomInfo(String billiardsInfoId);
         Observable<HttpResult> collect(int billiardsInfoId);
         Observable<HttpResult> getGoodsInfo(String billiardsInfoId,int weekNum);
+        Observable<HttpResult> tackOrder(long tableId,int goodsId);
 
     }
 }

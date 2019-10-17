@@ -54,6 +54,21 @@ public class BizContent {
     private Integer battleId;
     private Integer point;
     private BilliardsMakeAppOrderInfo billiardsMakeAppOrderInfo;
+    private String beginDate;
+    private String endDate;
+    private int billiardsGood;
+
+    public void setBeginDate(String beginDate) {
+        this.beginDate = beginDate;
+    }
+
+    public void setEndDate(String endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setBilliardsGood(int billiardsGood) {
+        this.billiardsGood = billiardsGood;
+    }
 
     public void setPoint(Integer point) {
         this.point = point;

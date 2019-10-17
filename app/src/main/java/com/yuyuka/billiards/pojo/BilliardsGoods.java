@@ -21,6 +21,11 @@ public class BilliardsGoods implements Serializable {
     private BilliardsPromotionRulesInfo billiardsPromotionRulesInfo;
     private int minPrice;
     private String goodsInfo;
+    private BilliardsPoolTable billiardsPoolTable;
+
+    public BilliardsPoolTable getBilliardsPoolTable() {
+        return billiardsPoolTable;
+    }
 
     public String getGoodsInfo() {
         return goodsInfo;
@@ -247,6 +252,14 @@ public class BilliardsGoods implements Serializable {
         @Override
         public int compareTo(BilliardsPromotionRulesList billiardsPromotionRulesList) {
             return billiardsPromotionRulesList.clock-this.clock;
+        }
+    }
+
+    public static class BilliardsPoolTable {
+        long id;
+
+        public long getId() {
+            return id;
         }
     }
 

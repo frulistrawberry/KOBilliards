@@ -163,6 +163,24 @@ public class MerchantModel extends BaseModel implements BilliardsCoachListContra
         return mService.simpleRequest(requestParam);
     }
 
+    @Override
+    public Observable<HttpResult> tackOrder(long billiardsPoolTable, int goodsId) {
+        BizContent content = new BizContent();
+        content.setBilliardsPoolTable(billiardsPoolTable);
+        content.setOrderType(3);
+        content.setCompetitionType(5);
+        BizContent.BilliardsMakeAppOrderInfo info = new BizContent.BilliardsMakeAppOrderInfo();
+        info.setUserId(CommonUtils.getUserId());
+        info.setPayType(0);
+        info.setPayChannel(0);
+        content.setBilliardsMakeAppOrderInfo(info);
+        content.setBeginDate("2019-10-22 12:00:00");
+        content.setEndDate("2019-10-22 14:00:00");
+        content.setBilliardsGood(goodsId);
+        RequestParam requestParam = new RequestParam(UrlConstant.PLACE_ORDER,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
+    }
+
 
     /**
      * 获取商户套餐

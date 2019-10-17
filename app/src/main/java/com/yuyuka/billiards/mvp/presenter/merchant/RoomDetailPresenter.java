@@ -11,6 +11,7 @@ import com.yuyuka.billiards.mvp.model.MerchantModel;
 import com.yuyuka.billiards.net.RespObserver;
 import com.yuyuka.billiards.pojo.BilliardsGoods;
 import com.yuyuka.billiards.pojo.BilliardsRoomPojo;
+import com.yuyuka.billiards.pojo.OrderPojo;
 import com.yuyuka.billiards.utils.RxUtils;
 import com.yuyuka.billiards.utils.log.LogUtil;
 
@@ -90,6 +91,31 @@ public class RoomDetailPresenter extends BasePresenter<RoomDetailContract.IRoomD
                     public void onResult(String msg, String bizContent) {
                        getView().dismissProgressDialog();
                        getView().showCollectSuccess(msg);
+                    }
+
+                    @Override
+                    public void onError(int errCode, String errMsg) {
+                        getView().dismissProgressDialog();
+                        getView().showError(errMsg);
+                    }
+                });
+    }
+
+    public void testRevert(long tableId,int goodsId){
+        getView().showProgressDialog();
+        mModel.tackOrder(tableId,goodsId)
+                .compose(RxUtils.transform(getView()))
+                .subscribe(new RespObserver() {
+
+                    @Override
+                    public void onResult(String msg, String bizContent) {
+                        getView().dismissProgressDialog();
+                        if (TextUtils.isEmpty(bizContent)){
+                            return;
+                        }
+                        OrderPojo data = new Gson().fromJson(bizContent,OrderPojo.class);
+                        getView().showOrderSuccess(data);
+
                     }
 
                     @Override
