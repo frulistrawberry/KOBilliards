@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 
+import com.netease.nimlib.sdk.msg.model.RecentContact;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseListFragment;
 import com.yuyuka.billiards.base.BasePresenter;
@@ -29,7 +30,7 @@ public class MessageFragment extends BaseListFragment {
     RecyclerView recyclerView;
     @BindView(R.id.layout_ptr)
     PtrClassicFrameLayout layoutPtr;
-    private List<MessageBean> messageBeans;
+    private List<RecentContact> data;
     private MessageFragmentAdapter adapter;
     @Override
     protected View createView(LayoutInflater inflater, ViewGroup parent) {
@@ -39,7 +40,6 @@ public class MessageFragment extends BaseListFragment {
     @Override
     protected void initData() {
          adapter=new MessageFragmentAdapter(getContext());
-         messageBeans=new ArrayList<>();
     }
 
     @Override
@@ -55,32 +55,19 @@ public class MessageFragment extends BaseListFragment {
                 return false;
             }
         });
-        for (int i=0;i<10;i++){
-            MessageBean messageBean = new MessageBean();
-            messageBeans.add(messageBean);
-        }
-        adapter.setNewData(messageBeans);
+
+        adapter.setNewData(data);
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);
         adapter.setBtnOnClickListen(new MessageFragmentAdapter.BtnOnClickListen() {
             @Override
             public void onTopListen(int position, SwipeListLayout swipeListLayout) {
-                swipeListLayout.setStatus(SwipeListLayout.Status.Close, true);
-                MessageBean bean = messageBeans.get(position);
-                messageBeans.remove(bean);
-                adapter.notifyItemRemoved(position);
-                adapter.notifyItemRangeChanged(0,messageBeans.size()-position);
-                messageBeans.add(0,bean);
-                adapter.notifyItemInserted(0);
-                adapter.notifyItemRangeChanged(0,messageBeans.size()-0);
+
             }
 
             @Override
             public void onDeleteListen(int position, SwipeListLayout swipeListLayout) {
-                swipeListLayout.setStatus(SwipeListLayout.Status.Close, true);
-                messageBeans.remove(position);
-                adapter.notifyItemRemoved(position);
-                adapter.notifyItemRangeChanged(0,messageBeans.size()-position);
+
 
             }
         });

@@ -8,46 +8,35 @@ import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
+import com.netease.nimlib.sdk.msg.model.RecentContact;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.pojo.MessageBean;
 import com.yuyuka.billiards.utils.SwipeListLayout;
 
 import java.util.List;
 
-public class MessageFragmentAdapter  extends BaseQuickAdapter<MessageBean, BaseViewHolder> {
+public class MessageFragmentAdapter  extends BaseQuickAdapter<RecentContact, BaseViewHolder> {
     private Context mContext;
     private int position;
     private SwipeListLayout swipeListLayout;
     public MessageFragmentAdapter(Context context) {
         super(R.layout.layout_messagefragmentitem);
-        this.mContext=context;
     }
 
     @Override
-    protected void convert(BaseViewHolder helper, MessageBean item) {
+    protected void convert(BaseViewHolder helper, RecentContact item) {
         swipeListLayout = helper.getView(R.id.sll_msg);
-        helper.setText(R.id.tv_name,item.getTvName())
-                .setOnClickListener(R.id.tv_top, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        btnOnClickListen.onTopListen(helper.getLayoutPosition(),swipeListLayout);
-                        Log.e("position==",helper.getLayoutPosition()+"");
-                    }
-                })
-                .setOnClickListener(R.id.tv_delete, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        btnOnClickListen.onDeleteListen(helper.getLayoutPosition(),swipeListLayout);
-                        Log.e("position==",helper.getLayoutPosition()+"");
+        helper.setText(R.id.tv_name,item.getFromNick())
+                .setOnClickListener(R.id.tv_top, view -> {
+                    btnOnClickListen.onTopListen(helper.getLayoutPosition(),swipeListLayout);
 
-                    }
                 })
-                .setOnClickListener(R.id.ll_msg, new View.OnClickListener() {
-                    @Override
-                    public void onClick(View view) {
-                        Toast.makeText(mContext,"正常区域",Toast.LENGTH_SHORT).show();
-                        Log.e("position==",helper.getLayoutPosition()+"");
-                    }
+                .setOnClickListener(R.id.tv_delete, view -> {
+                    btnOnClickListen.onDeleteListen(helper.getLayoutPosition(),swipeListLayout);
+
+                })
+                .setOnClickListener(R.id.ll_msg, view -> {
+
                 });
     }
 

@@ -323,7 +323,12 @@ public class ViewUtils {
         public void UpdateUI(final Context context, int position, ImagePojo data) {
             String url = data.getImageUrl();
             final String toAction = data.getToAction();
-            ImageManager.getInstance().loadNet(url,mImageView,mOption);
+            if (!url.startsWith("http"))
+                ImageManager.getInstance().loadAsset(url,mImageView,mOption);
+            else{
+                mImageView.setScaleType(ImageView.ScaleType.FIT_XY);
+                ImageManager.getInstance().loadNet(url,mImageView,mOption);
+            }
             mImageView.setOnClickListener(v -> {
 
             });

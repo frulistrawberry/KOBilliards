@@ -256,9 +256,9 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
         mModularPager.setData(modularPojos);
         mModularIndicator.setViewPager(mModularPager);
         List<ImagePojo> bannerData = new ArrayList<>();
-        for (int i = 0; i < 5; i++) {
-            bannerData.add(new ImagePojo(""));
-        }
+        bannerData.add(new ImagePojo("homebanner1.png"));
+        bannerData.add(new ImagePojo("homebanner2.png"));
+        bannerData.add(new ImagePojo("homebanner3.png"));
         ViewUtils.loadBanner(bannerData,mBanner,true,true,false);
         CommonNavigator commonNavigator = new CommonNavigator(getContext());
         commonNavigator.setAdjustMode(false);

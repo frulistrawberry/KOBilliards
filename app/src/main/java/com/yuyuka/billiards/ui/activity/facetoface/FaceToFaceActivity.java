@@ -11,12 +11,17 @@ import android.widget.LinearLayout;
 
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseActivity;
+import com.yuyuka.billiards.base.BaseMvpActivity;
+import com.yuyuka.billiards.mvp.contract.table.TableContract;
+import com.yuyuka.billiards.mvp.presenter.table.TablePresenter;
+import com.yuyuka.billiards.pojo.OrderPojo;
+import com.yuyuka.billiards.pojo.TablePojo;
 import com.yuyuka.billiards.utils.BarUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class FaceToFaceActivity extends BaseActivity {
+public class FaceToFaceActivity extends BaseMvpActivity<TablePresenter> implements TableContract.ITableView {
     @BindView(R.id.v_status)
     View mStatusBar;
     @Override
@@ -40,14 +45,41 @@ public class FaceToFaceActivity extends BaseActivity {
     public void onClick(View v){
         switch (v.getId()){
             case R.id.iv_paiwei:
-                startActivity(new Intent(this,FaceToFaceQualifyingActivity.class));
                 break;
             case R.id.iv_yule:
-                startActivity(new Intent(this,FaceToFaceFunActivity.class));
                 break;
 
         }
     }
 
 
+    @Override
+    protected TablePresenter getPresenter() {
+        return new TablePresenter(this);
+    }
+
+    @Override
+    public void showTableInfo(TablePojo data) {
+
+    }
+
+    @Override
+    public void showOrderSuccess(OrderPojo data) {
+
+    }
+
+    @Override
+    public void showOrderFailure(String msg) {
+
+    }
+
+    @Override
+    public void showEnterSuccess() {
+
+    }
+
+    @Override
+    public void showEnterFailure() {
+
+    }
 }
