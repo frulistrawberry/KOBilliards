@@ -1,5 +1,6 @@
 package com.yuyuka.billiards.ui.activity.table;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -17,6 +18,7 @@ import com.yuyuka.billiards.image.ImageManager;
 import com.yuyuka.billiards.pojo.CustomNoticePojo;
 import com.yuyuka.billiards.utils.BarUtils;
 import com.yuyuka.billiards.utils.CommonUtils;
+import com.yuyuka.billiards.utils.DataOptionUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -32,6 +34,10 @@ public class BattleActivity extends BaseActivity {
     TextView userName1;
     @BindView(R.id.tv_user_name2)
     TextView userName2;
+    @BindView(R.id.duanwei1)
+    TextView duanwei1;
+    @BindView(R.id.duanwei2)
+    TextView duanwei2;
 
 
 
@@ -41,6 +47,7 @@ public class BattleActivity extends BaseActivity {
         context.startActivityForResult(intent,0);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void initView() {
         setContentView(R.layout.activity_battle);
@@ -55,6 +62,10 @@ public class BattleActivity extends BaseActivity {
         ImageManager.getInstance().loadNet(data.getBizContent().getUser2().getHeadImage(),userHead2);
         userName1.setText(data.getBizContent().getUser1().getUserName());
         userName2.setText(data.getBizContent().getUser2().getUserName());
+        int rank1 = data.getBizContent().getUser1().getRankingConfigurtion().getUserAt().getRank();
+        duanwei1.setText(data.getBizContent().getUser1().getRankingConfigurtion().getName()+rank1+"段");
+        int rank2 = data.getBizContent().getUser2().getRankingConfigurtion().getUserAt().getRank();
+        duanwei2.setText(data.getBizContent().getUser2().getRankingConfigurtion().getName()+rank2+"段");
     }
 
     @OnClick(R.id.end_battle)

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingTop="17dp"
+    android:paddingTop="20dp"
     android:paddingBottom="10dp"
     android:paddingLeft="28dp"
     android:paddingRight="28dp"
@@ -15,29 +15,34 @@
         android:gravity="center_horizontal"
         android:orientation="vertical">
         <TextView
+            android:id="@+id/tv_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textColor="@color/text_color_3"
-            android:textSize="14sp"
-            android:text="支付剩余时间  29 ：00"/>
+            android:textColor="@color/text_color_1"
+            android:textSize="18sp"
+            android:layout_marginTop="20dp"
+            android:text="百胜桌球馆"/>
         <TextView
+            android:id="@+id/tv_info"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_color_1"
+            android:textSize="14sp"
+            android:layout_marginTop="10dp"
+            android:text="球桌预订"/>
+        <TextView
+            android:id="@+id/tv_money"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/text_color_6"
             android:textSize="40sp"
             android:layout_marginTop="10dp"
-            android:text="￥88"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_color_3"
-            android:textSize="14sp"
-            android:layout_marginTop="10dp"
-            android:text="2019百胜桌球馆“明超杯"/>
+            android:text="-.-"/>
         <LinearLayout
+            android:id="@+id/btn_wx_pay"
             android:layout_width="128dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="48dp"
+            android:layout_marginTop="35dp"
             android:gravity="center_vertical"
             android:orientation="horizontal">
             <TextView
@@ -52,13 +57,15 @@
                 android:layout_height="1dp"
                 android:layout_weight="1"/>
             <ImageView
+                android:id="@+id/iv_wx_check"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:src="@mipmap/ic_check_select"
+                android:src="@mipmap/ic_tablepay_check"
                 />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/btn_ali_pay"
             android:layout_width="128dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="14dp"
@@ -76,20 +83,22 @@
                 android:layout_height="1dp"
                 android:layout_weight="1"/>
             <ImageView
+                android:id="@+id/iv_ali_check"
                 android:layout_width="28dp"
                 android:layout_height="28dp"
-                android:src="@mipmap/ic_check_unslected"/>
+                android:src="@mipmap/ic_tablepay_un_check"/>
         </LinearLayout>
 
 
     </LinearLayout>
 
     <com.yuyuka.billiards.widget.StateButton
+        android:id="@+id/btn_pay"
         android:layout_width="match_parent"
         android:layout_height="40dp"
-        app:normalColor="@color/text_color_6"
-        app:unClickableColor="@color/text_color_6"
-        app:pressColor="@color/text_color_6"
+        app:normalColor="#1DB710"
+        app:unClickableColor="#1DB710"
+        app:pressColor="#1DB710"
         app:RoundedConnerRadius="6dp"
         android:textColor="@color/white"
         android:textSize="18sp"

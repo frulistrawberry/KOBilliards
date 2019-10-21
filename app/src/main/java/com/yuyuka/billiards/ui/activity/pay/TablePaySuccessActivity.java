@@ -2,6 +2,7 @@ package com.yuyuka.billiards.ui.activity.pay;
 
 import android.content.Context;
 import android.content.Intent;
+import android.view.View;
 
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseActivity;
@@ -13,6 +14,8 @@ import com.yuyuka.billiards.ui.activity.table.BattleActivity;
 import com.yuyuka.billiards.ui.activity.table.SingleBattleActivity;
 
 import org.greenrobot.eventbus.EventBus;
+
+import butterknife.OnClick;
 
 public class TablePaySuccessActivity extends BaseActivity {
 
@@ -44,8 +47,22 @@ public class TablePaySuccessActivity extends BaseActivity {
         tableId = getIntent().getLongExtra("tableId",0);
     }
 
+    @OnClick({R.id.btn_back})
+    public void onClick(View v){
+        switch (v.getId()){
+            case R.id.btn_back:
+                finish();
+                break;
+        }
+    }
+
     @Override
     public void finish() {
+        if (data == null){
+            super.finish();
+            return;
+        }
+
         if (data.getNoticeType() == 0){
             //等待比赛(调到二维码页面)
             CustomNoticePojo.Battle battle = data.getBizContent().getBattle();

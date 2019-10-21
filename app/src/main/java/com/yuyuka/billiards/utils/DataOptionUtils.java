@@ -102,4 +102,28 @@ public class DataOptionUtils {
         }
     }
 
+    public static String getDuan(int rank,int point){
+        String duan = "";
+        if (rank>5)
+            duan = "大师";
+        switch (rank){
+            case 1:
+                duan = "入门";
+                break;
+            case 2:
+                duan = "新手";
+                break;
+            case 3:
+                duan = "业余";
+                break;
+            case 4:
+                duan = "导师";
+                break;
+            case 5:
+                duan = "大师";
+                break;
+        }
+        return duan+point+"级";
+    }
+
 }

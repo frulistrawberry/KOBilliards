@@ -41,6 +41,8 @@ public class SelectTimeDialog extends Dialog implements BaseQuickAdapter.OnItemC
     private String id;
     private double singlePrice;
     private long time;
+    private int goodsId;
+    private String billiardsName;
 
 
     public SelectTimeDialog( Context context) {
@@ -74,7 +76,7 @@ public class SelectTimeDialog extends Dialog implements BaseQuickAdapter.OnItemC
     }
 
     @SuppressLint("SetTextI18n")
-    public  void  setData(List<SelectTimePojo> data, String goodsName, long time, String price,String goodsInfo,String id){
+    public  void  setData(List<SelectTimePojo> data, String goodsName, long time, String price,String goodsInfo,String id,int goodsId,String billiardsName){
         this.mData = data;
         mAdapter.setNewData(mData);
         this.goodsName = goodsName;
@@ -89,6 +91,8 @@ public class SelectTimeDialog extends Dialog implements BaseQuickAdapter.OnItemC
         mPriceTv.setText("￥"+price);
         this.id = id;
         this.singlePrice =Double.valueOf( data.get(0).getAmount());
+        this.goodsId = goodsId;
+        this.billiardsName = billiardsName;
     }
 
     @Override
@@ -162,7 +166,22 @@ public class SelectTimeDialog extends Dialog implements BaseQuickAdapter.OnItemC
     public void onClick(View v) {
         switch (v.getId()){
             case R.id.btn_reserve:
-                OrderConfirmActivity.launcher(getContext(),goodsName,goodsInfo,duration,id,price,hours,singlePrice,time);
+                String firstSelct = "";
+                String lastSelct = "";
+                for (int i = 0; i < mData.size(); i++) {
+                    if (mData.get(i).isSelected()){
+                        firstSelct = mData.get(i).getClock()+":00";
+                        break;
+                    }
+
+                }
+                for (int i = 0; i < mData.size(); i++) {
+                    if (mData.get(i).isSelected()){
+                        lastSelct = mData.get(i).getClock()+":00";
+                    }
+                }
+                String selctDate = DateUtils.formatDate(time);
+                OrderConfirmActivity.launcher(getContext(),goodsName,goodsInfo,duration,id,price,hours,singlePrice,time,goodsId,selctDate+" "+firstSelct,selctDate+" "+lastSelct,billiardsName);
                 dismiss();
                 break;
         }

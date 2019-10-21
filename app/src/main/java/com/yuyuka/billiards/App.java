@@ -35,6 +35,10 @@ public class App extends MultiDexApplication implements Application.ActivityLife
 
 
 
+    {
+        PlatformConfig.setWeixin(Config.WX_APP_ID, Config.WX_APP_SECRET);
+    }
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -52,34 +56,12 @@ public class App extends MultiDexApplication implements Application.ActivityLife
 //        config.xmCertificateName = Config.XM_CERTIFICATE_NAME;
 
 //        options.mixPushConfig = config;
-        UMConfigure.init(this,UMConfigure.DEVICE_TYPE_PHONE,null);
         UMConfigure.setLogEnabled(BuildConfig.DEBUG);
-        UMConfigure.init(this,"5d9759853fc195be0f001102","",UMConfigure.DEVICE_TYPE_PHONE,"");
-        PlatformConfig.setWeixin(Config.WX_APP_ID, Config.WX_APP_SECRET);
+        UMConfigure.init(this,"5dabc0cc0cafb22976000d1b","",UMConfigure.DEVICE_TYPE_PHONE,"");
+
         UMShareAPI.get(this);
-        CommonUtils.saveUserInfo(null);
         NIMClient.init(this, CommonUtils.getLoginInfo(), options);
         if (NIMUtil.isMainProcess(this)){
-            NIMClient.getService(AuthService.class).login(CommonUtils.getLoginInfo()).setCallback(new RequestCallback<LoginInfo>() {
-                @Override
-                public void onSuccess(LoginInfo param) {
-//                    getView().showLoginSuccess();
-//                    getView().dismissProgressDialog();
-                }
-
-                @Override
-                public void onFailed(int code) {
-//                    getView().showLoginFailure("IM登录失败,错误码"+code);
-//                    getView().dismissProgressDialog();
-                }
-
-                @Override
-                public void onException(Throwable exception) {
-
-                }
-            });
-
-
             NIMClient.getService(MsgServiceObserve.class).observeCustomNotification(new Observer<CustomNotification>() {
                 @Override
                 public void onEvent(CustomNotification message) {

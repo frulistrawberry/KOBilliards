@@ -426,41 +426,47 @@ public class MerchantDetailActivity extends BaseRefreshActivity<RoomDetailPresen
                     amountTv.setText("_._");
                 }
                 itemView.setOnClickListener(v -> {
-//                    SelectTimeDialog dialog = new SelectTimeDialog(getContext());
-//                    List<SelectTimePojo> data = new ArrayList<>();
-//                    List<BilliardsGoods.BilliardsReserveRulesList> list = good.getBilliardsReserveRulesInfo().getBilliardsReserveRulesList();
-//                    List<BilliardsGoods.BilliardsReserveRulesList> reserveRulesList = new ArrayList<>();
-//                    for (BilliardsGoods.BilliardsReserveRulesList billiardsReserveRulesList : list) {
-//                        if (billiardsReserveRulesList.getWeekNum() == weekNum){
-//                            reserveRulesList.add(billiardsReserveRulesList);
-//                        }
-//
-//                    }
-//                    for (int i = 0; i < reserveRulesList.size(); i++) {
-//                        boolean hasActive = false;
-//                        SelectTimePojo selectTimePojo = new SelectTimePojo();
-//                        selectTimePojo.setSelected(false);
-//                        selectTimePojo.setActive(false);
-//                        selectTimePojo.setAmount(good.getBilliardsCostRules().getHourPrice()+"");
-//                        selectTimePojo.setClock(reserveRulesList.get(i).getClock()+":00");
-//                        if (!CollectionUtils.isEmpty(promotionList)){
-//                            for (int i1 = 0; i1 < promotionList.size(); i1++) {
-//
-//                                if (promotionList.get(i1).getClock() == promotionList.get(i).getClock()){
-//                                    selectTimePojo.setActive(true);
-//                                    hasActive = true;
-//                                    selectTimePojo.setAmount(good.getMinPrice()+"");
-//                                    break;
-//                                }
-//                            }
-//                        }
-//                        selectTimePojo.setActive(hasActive);
-//                        data.add(selectTimePojo);
-//                    }
-//                    dialog.setData(data,good.getGoodsName(),mTimeLongs[curIndex],good.getBilliardsCostRules().getHourPrice()+"","",billiardsId);
-//                    dialog.show();
 
-                    getPresenter().testRevert(good.getBilliardsPoolTable().getId(),good.getId());
+                    if (good.getBilliardsPromotionRulesInfo() == null){
+                        ToastUtils.showToast(this,"暂时不能预订");
+                        return;
+                    }
+
+                    SelectTimeDialog dialog = new SelectTimeDialog(getContext());
+                    List<SelectTimePojo> data = new ArrayList<>();
+                    List<BilliardsGoods.BilliardsReserveRulesList> list = good.getBilliardsReserveRulesInfo().getBilliardsReserveRulesList();
+                    List<BilliardsGoods.BilliardsReserveRulesList> reserveRulesList = new ArrayList<>();
+                    for (BilliardsGoods.BilliardsReserveRulesList billiardsReserveRulesList : list) {
+                        if (billiardsReserveRulesList.getWeekNum() == weekNum){
+                            reserveRulesList.add(billiardsReserveRulesList);
+                        }
+
+                    }
+                    for (int i = 0; i < reserveRulesList.size(); i++) {
+                        boolean hasActive = false;
+                        SelectTimePojo selectTimePojo = new SelectTimePojo();
+                        selectTimePojo.setSelected(false);
+                        selectTimePojo.setActive(false);
+                        selectTimePojo.setAmount(good.getBilliardsCostRules().getHourPrice()+"");
+                        selectTimePojo.setClock(reserveRulesList.get(i).getClock()+":00");
+                        if (!CollectionUtils.isEmpty(promotionList)){
+                            for (int i1 = 0; i1 < promotionList.size(); i1++) {
+
+                                if (promotionList.get(i1).getClock() == promotionList.get(i).getClock()){
+                                    selectTimePojo.setActive(true);
+                                    hasActive = true;
+                                    selectTimePojo.setAmount(good.getMinPrice()+"");
+                                    break;
+                                }
+                            }
+                        }
+                        selectTimePojo.setActive(hasActive);
+                        data.add(selectTimePojo);
+                    }
+                    dialog.setData(data,good.getGoodsName(),mTimeLongs[curIndex],good.getBilliardsCostRules().getHourPrice()+"","",billiardsId,good.getId(),good.getBilliardsInfo().getBilliardsName());
+                    dialog.show();
+
+//                    getPresenter().testRevert(good.getBilliardsPoolTable().getId(),good.getId());
 
                 });
                 mReserveContainer.addView(itemView);

@@ -1,5 +1,6 @@
 package com.yuyuka.billiards.widget.dialog;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.view.Gravity;
@@ -12,12 +13,14 @@ import android.widget.TextView;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.ui.activity.common.PayActivity;
 import com.yuyuka.billiards.utils.ScreenUtils;
+import com.yuyuka.billiards.utils.log.LogUtil;
 
 import org.w3c.dom.Text;
 
 public class ReserveConfirmDialog extends Dialog {
     TextView dateTv;
     TextView durationTv;
+    int id;String name;String money;String beginDate;String endDate;String remark;int setmId;
     public ReserveConfirmDialog( Context context) {
         this(context, R.style.DialogTheme);
     }
@@ -33,7 +36,12 @@ public class ReserveConfirmDialog extends Dialog {
         durationTv = contentView.findViewById(R.id.tv_duration);
 
         confirmBtn.setOnClickListener(v -> {
-            PayActivity.launcher(context);
+            LogUtil.e("data","id="+id);
+            LogUtil.e("data","money="+money);
+            LogUtil.e("data","beginDate="+beginDate);
+            LogUtil.e("data","endDate="+endDate);
+            LogUtil.e("data","remark="+remark);
+            PayActivity.launcher((Activity) context,id,name,money,beginDate,endDate,remark,setmId);
         });
 
         setContentView(contentView);
@@ -44,9 +52,16 @@ public class ReserveConfirmDialog extends Dialog {
         layoutParams.gravity = Gravity.CENTER;
     }
 
-    public void setData(String duration,String date){
+    public void setData(String duration,String date,int id,String name,String money,String beginDate,String endDate,String remark,int setmId){
         durationTv.setText(duration);
         dateTv.setText(date);
+        this.id = id;
+        this.name = name;
+        this.money = money;
+        this.beginDate = beginDate;
+        this.endDate = endDate;
+        this.remark = remark;
+        this.setmId = setmId;
     }
 
 

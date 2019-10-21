@@ -26,7 +26,7 @@ public interface RoomDetailContract {
         Observable<HttpResult> getRoomInfo(String billiardsInfoId);
         Observable<HttpResult> collect(int billiardsInfoId);
         Observable<HttpResult> getGoodsInfo(String billiardsInfoId,int weekNum);
-        Observable<HttpResult> tackOrder(long tableId,int goodsId);
+        Observable<HttpResult> tackOrder(int setMealId,String remark,String beginDate,String endDate,int billiardsGood);
 
     }
 }

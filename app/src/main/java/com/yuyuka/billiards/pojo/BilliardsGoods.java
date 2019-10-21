@@ -22,6 +22,11 @@ public class BilliardsGoods implements Serializable {
     private int minPrice;
     private String goodsInfo;
     private BilliardsPoolTable billiardsPoolTable;
+    private MatchDetailPojo.BilliardsInfo billiardsInfo;
+
+    public MatchDetailPojo.BilliardsInfo getBilliardsInfo() {
+        return billiardsInfo;
+    }
 
     public BilliardsPoolTable getBilliardsPoolTable() {
         return billiardsPoolTable;

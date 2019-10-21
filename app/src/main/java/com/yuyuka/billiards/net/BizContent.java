@@ -56,7 +56,7 @@ public class BizContent {
     private BilliardsMakeAppOrderInfo billiardsMakeAppOrderInfo;
     private String beginDate;
     private String endDate;
-    private int billiardsGood;
+    private Integer billiardsGood;
 
     public void setBeginDate(String beginDate) {
         this.beginDate = beginDate;
@@ -324,6 +324,16 @@ public class BizContent {
         Integer userId;
         Integer payType;
         Integer payChannel;
+        Integer setMealId;
+        String remark;
+
+        public void setSetMealId(Integer setMealId) {
+            this.setMealId = setMealId;
+        }
+
+        public void setRemark(String remark) {
+            this.remark = remark;
+        }
 
         public void setUserId(Integer userId) {
             this.userId = userId;

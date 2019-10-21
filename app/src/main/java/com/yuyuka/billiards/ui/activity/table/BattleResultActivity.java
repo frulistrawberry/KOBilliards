@@ -12,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.RadarChart;
@@ -44,7 +45,7 @@ public class BattleResultActivity extends BaseActivity {
 
     CustomNoticePojo data;
 
-    int duanwei = 1;
+    String duanwei = "入门";
 
     boolean win;
 
@@ -56,6 +57,8 @@ public class BattleResultActivity extends BaseActivity {
     RelativeLayout xiangxishuju;
     @BindView(R.id.iv_result)
     ImageView resultIv;
+    @BindView(R.id.name)
+    TextView name;
 
     int[] colors = {Color.parseColor("#5FF199"),Color.parseColor("#F86B6D"),Color.parseColor("#F86B6D"),Color.parseColor("#BAA8FC"),Color.parseColor("#F86B6D")};
 
@@ -71,19 +74,19 @@ public class BattleResultActivity extends BaseActivity {
     @Override
     protected void initView() {
         switch (duanwei){
-            case 1:
+            case "入门":
                 setContentView(R.layout.activity_battle_win_2);
                 break;
-            case 2:
+            case "新手":
                 setContentView(R.layout.activity_battle_win_1);
                 break;
-            case 3:
+            case "业余":
                 setContentView(R.layout.activity_battle_win_3);
                 break;
-            case 4:
+            case "导师":
                 setContentView(R.layout.activity_battle_win_4);
                 break;
-            case 5:
+            case "大师":
                 setContentView(R.layout.activity_battle_win_5);
                 break;
                 default:
@@ -106,6 +109,8 @@ public class BattleResultActivity extends BaseActivity {
             resultIv.setImageResource(R.mipmap.shibai);
         }
 
+        name.setText(duanwei+data.getBizContent().getUserRank().getCurrentDuan().getUserAt().getRank()+"段");
+
 
     }
 
@@ -117,7 +122,7 @@ public class BattleResultActivity extends BaseActivity {
         win = getIntent().getExtras().getBoolean("win");
         CustomNoticePojo.UserRank rank = data.getBizContent().getUserRank();
         if (rank.getUserId() == CommonUtils.getUserId())
-            duanwei = rank.getCurrentDuan().getUserAt().getRank();
+            duanwei = rank.getCurrentDuan().getName();
 
     }
 
@@ -138,27 +143,27 @@ public class BattleResultActivity extends BaseActivity {
             entries2.add(new RadarEntry(val2));
         }
 
-
-        RadarDataSet set2 = new RadarDataSet(entries2, "");
-        set2.setColor(duanwei<=5?colors[duanwei-1]:colors[1]);
-        set2.setFillColor(duanwei<=5?colors[duanwei-1]:colors[1]);//二级图层填充色
-        set2.setDrawFilled(true);
-        set2.setFillAlpha(180);
-        set2.setLineWidth(2f);
-        set2.setDrawHighlightCircleEnabled(true);
-        set2.setDrawHighlightIndicators(false);
-
-        ArrayList<IRadarDataSet> sets = new ArrayList<IRadarDataSet>();
-        sets.add(set2);
-
-        RadarData data = new RadarData(sets);
-//        data.setValueTypeface(mTfLight);
-        data.setValueTextSize(8f);
-        data.setDrawValues(false);
-        data.setValueTextColor(Color.WHITE);
-
-        chart.setData(data);
-        chart.invalidate();
+//
+//        RadarDataSet set2 = new RadarDataSet(entries2, "");
+//        set2.setColor(duanwei<=5?colors[duanwei-1]:colors[1]);
+//        set2.setFillColor(duanwei<=5?colors[duanwei-1]:colors[1]);//二级图层填充色
+//        set2.setDrawFilled(true);
+//        set2.setFillAlpha(180);
+//        set2.setLineWidth(2f);
+//        set2.setDrawHighlightCircleEnabled(true);
+//        set2.setDrawHighlightIndicators(false);
+//
+//        ArrayList<IRadarDataSet> sets = new ArrayList<IRadarDataSet>();
+//        sets.add(set2);
+//
+//        RadarData data = new RadarData(sets);
+////        data.setValueTypeface(mTfLight);
+//        data.setValueTextSize(8f);
+//        data.setDrawValues(false);
+//        data.setValueTextColor(Color.WHITE);
+//
+//        chart.setData(data);
+//        chart.invalidate();
     }
 
     private void chartBanding() {

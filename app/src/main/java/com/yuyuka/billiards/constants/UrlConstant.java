@@ -30,6 +30,7 @@ public class UrlConstant {
     public static String SEARCH_INDEX = "com.yuyuka.billiards.api.search.index";
     //商户套餐接口
     public static String GOODS_SETMEAL_LIST = "com.yuyuka.billiards.api.goods.setmeal.list";
+    public static String GET_AMOUNT_ORDER = "com.yuyuka.billiards.api.get.amount.order";
     //商户评论接口
     public static String APPRASIE_PUT = "com.yuyuka.billiards.api.apprasie.put";
     //比赛详情接口

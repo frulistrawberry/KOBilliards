@@ -3,8 +3,10 @@ package com.yuyuka.billiards.ui.activity.merchant;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -14,6 +16,7 @@ import com.yuyuka.billiards.base.BaseActivity;
 import com.yuyuka.billiards.base.BaseMvpActivity;
 import com.yuyuka.billiards.mvp.contract.merchant.OrderConfirmContract;
 import com.yuyuka.billiards.mvp.presenter.merchant.OrderConfirmPresenter;
+import com.yuyuka.billiards.pojo.GoodsAmount;
 import com.yuyuka.billiards.pojo.TaoCan;
 import com.yuyuka.billiards.utils.CollectionUtils;
 import com.yuyuka.billiards.utils.DataOptionUtils;
@@ -58,8 +61,16 @@ public class OrderConfirmActivity extends BaseMvpActivity<OrderConfirmPresenter>
     long time;
     @BindView(R.id.iv_arrow)
     ImageView mArrowIv;
+    @BindView(R.id.et_beizhu)
+    EditText beizhuEt;
 
-    public static void launcher(Context context,String goodsName,String goodsInfo,String duration,String id,double price,int hours,double singlePrice,long time){
+    int goodsId;
+    private String starDate;
+    private String endDate;
+    private String billiardsName;
+    private int setmID;
+
+    public static void launcher(Context context,String goodsName,String goodsInfo,String duration,String id,double price,int hours,double singlePrice,long time,int goodsId,String startDate,String endDate,String billiardsName){
         Intent intent = new Intent(context, OrderConfirmActivity.class);
         intent.putExtra("goodsName",goodsName);
         intent.putExtra("goodsInfo",goodsInfo);
@@ -69,6 +80,10 @@ public class OrderConfirmActivity extends BaseMvpActivity<OrderConfirmPresenter>
         intent.putExtra("hours",hours);
         intent.putExtra("singlePrice",singlePrice);
         intent.putExtra("time",time);
+        intent.putExtra("goodsId",goodsId);
+        intent.putExtra("beginDate",startDate);
+        intent.putExtra("endDate",endDate);
+        intent.putExtra("billiardsName",billiardsName);
 
         context.startActivity(intent);
     }
@@ -86,12 +101,9 @@ public class OrderConfirmActivity extends BaseMvpActivity<OrderConfirmPresenter>
         mGoodsNameTv.setText(goodsName);
         mGoodsInfoTv.setText(goodsInfo);
         mDurationTv.setText(duration);
-        mPayPriceTv.setText("￥"+DataOptionUtils.getStringWithRound(price+""));
-        mPayPriceTv1.setText("￥"+DataOptionUtils.getStringWithRound(price+""));
-        mSinglePriceTv.setText("￥"+DataOptionUtils.getStringWithRound(price+""));
-        mDetailTv.setText(duration+("("+hours+"小时)"));
-        mPriceDetailTv.setText(hours+"x"+DataOptionUtils.getStringWithRound(singlePrice+""));
+
         getPresenter().getSetmeal(id);
+        getPresenter().getGoodsAmount(goodsId,starDate,endDate);
     }
 
     @Override
@@ -104,6 +116,10 @@ public class OrderConfirmActivity extends BaseMvpActivity<OrderConfirmPresenter>
         singlePrice = getIntent().getDoubleExtra("singlePrice",0);
         hours = getIntent().getIntExtra("hours",0);
         time = getIntent().getLongExtra("time",0);
+        goodsId = getIntent().getIntExtra("goodsId",0);
+        starDate = getIntent().getStringExtra("beginDate");
+        endDate = getIntent().getStringExtra("endDate");
+        billiardsName = getIntent().getStringExtra("billiardsName");
 
     }
 
@@ -134,7 +150,7 @@ public class OrderConfirmActivity extends BaseMvpActivity<OrderConfirmPresenter>
                 }else {
                     time1 = DateUtils.date2Str(new Date(time),DateUtils.MM_DD)+"("+DateUtils.date2Str( new Date(time),DateUtils.EEEE)+")";
                 }
-                dialog.setData("预定时间"+duration,"预定日期"+time1);
+                dialog.setData("预定时间"+duration,"预定日期"+time1,goodsId,billiardsName,mPayPriceTv.getText().toString(),starDate,endDate,beizhuEt.getText().toString(),setmID);
                 dialog.show();
                 break;
         }
@@ -195,11 +211,31 @@ public class OrderConfirmActivity extends BaseMvpActivity<OrderConfirmPresenter>
                     mPayPriceTv.setText("￥"+DataOptionUtils.getStringWithRound(price+""));
                     mPayPriceTv1.setText("￥"+DataOptionUtils.getStringWithRound(price+""));
                 }
+                if (finalI>0){
+                    setmID = data.get(finalI -1).getId();
+                }
 
             });
 
         }
 
 
+    }
+
+    @Override
+    public void showAmount(GoodsAmount data) {
+        price = data.getPayAmount();
+        mPayPriceTv.setText("￥"+DataOptionUtils.getStringWithRound(price+""));
+        mPayPriceTv1.setText("￥"+DataOptionUtils.getStringWithRound(price+""));
+        mSinglePriceTv.setText("￥"+DataOptionUtils.getStringWithRound(price+""));
+        mDetailTv.setText(duration+("("+hours+"小时)"));
+        mPriceDetailTv.setText(hours+"x"+DataOptionUtils.getStringWithRound(singlePrice+""));
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (resultCode == RESULT_OK)
+            finish();
     }
 }

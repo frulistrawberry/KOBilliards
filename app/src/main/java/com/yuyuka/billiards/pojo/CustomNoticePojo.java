@@ -181,6 +181,12 @@ public class CustomNoticePojo implements Serializable {
 
         private String realName;
 
+        private Duan rankingConfigurtion;
+
+        public Duan getRankingConfigurtion() {
+            return rankingConfigurtion;
+        }
+
         public void setId(int id){
             this.id = id;
         }

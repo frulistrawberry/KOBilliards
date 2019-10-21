@@ -101,9 +101,9 @@ public class RoomDetailPresenter extends BasePresenter<RoomDetailContract.IRoomD
                 });
     }
 
-    public void testRevert(long tableId,int goodsId){
+    public void testRevert(int setMealId,String remark,String beginDate,String endDate,int billiardsGood){
         getView().showProgressDialog();
-        mModel.tackOrder(tableId,goodsId)
+        mModel.tackOrder(setMealId,remark,beginDate,endDate,billiardsGood)
                 .compose(RxUtils.transform(getView()))
                 .subscribe(new RespObserver() {
 

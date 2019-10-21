@@ -37,7 +37,7 @@ public class MatchOrderConfirmActivity extends BaseActivity {
     public void onClick(View v){
         switch (v.getId()){
             case R.id.btn_commit:
-                PayActivity.launcher(this);
+//                PayActivity.launcher(this);
                 break;
         }
     }

@@ -1,5 +1,6 @@
 package com.yuyuka.billiards.ui.activity.table;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Build;
@@ -18,6 +19,7 @@ import com.yuyuka.billiards.pojo.CustomNoticePojo;
 import com.yuyuka.billiards.ui.activity.pay.TablePayActivity;
 import com.yuyuka.billiards.utils.BarUtils;
 import com.yuyuka.billiards.utils.CommonUtils;
+import com.yuyuka.billiards.utils.DataOptionUtils;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -29,6 +31,8 @@ public class SingleBattleActivity extends BaseActivity {
     ImageView userHead1;
     @BindView(R.id.tv_user_name1)
     TextView userName1;
+    @BindView(R.id.duanweiTv)
+    TextView duanweiTv;
 
 
 
@@ -39,6 +43,7 @@ public class SingleBattleActivity extends BaseActivity {
         context.startActivityForResult(intent,0);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     protected void initView() {
         setContentView(R.layout.activity_my_battle);
@@ -51,6 +56,8 @@ public class SingleBattleActivity extends BaseActivity {
 
         ImageManager.getInstance().loadNet(data.getBizContent().getUser1().getHeadImage(),userHead1);
         userName1.setText(data.getBizContent().getUser1().getUserName());
+        int rank = data.getBizContent().getUser1().getRankingConfigurtion().getUserAt().getRank();
+        duanweiTv.setText(data.getBizContent().getUser1().getRankingConfigurtion().getName()+rank+"级");
     }
 
     @OnClick(R.id.end_battle)

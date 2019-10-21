@@ -164,19 +164,21 @@ public class MerchantModel extends BaseModel implements BilliardsCoachListContra
     }
 
     @Override
-    public Observable<HttpResult> tackOrder(long billiardsPoolTable, int goodsId) {
+    public Observable<HttpResult> tackOrder(int setMealId,String remark,String beginDate,String endDate,int billiardsGood ) {
         BizContent content = new BizContent();
-        content.setBilliardsPoolTable(billiardsPoolTable);
         content.setOrderType(3);
         content.setCompetitionType(5);
         BizContent.BilliardsMakeAppOrderInfo info = new BizContent.BilliardsMakeAppOrderInfo();
         info.setUserId(CommonUtils.getUserId());
         info.setPayType(0);
         info.setPayChannel(0);
+        info.setRemark(remark);
+        if (setMealId!=0)
+            info.setSetMealId(setMealId);
         content.setBilliardsMakeAppOrderInfo(info);
-        content.setBeginDate("2019-10-22 12:00:00");
-        content.setEndDate("2019-10-22 14:00:00");
-        content.setBilliardsGood(goodsId);
+        content.setBeginDate(beginDate);
+        content.setEndDate(endDate);
+        content.setBilliardsGood(billiardsGood);
         RequestParam requestParam = new RequestParam(UrlConstant.PLACE_ORDER,convertBizContent(content));
         return mService.simpleRequest(requestParam);
     }
@@ -192,6 +194,16 @@ public class MerchantModel extends BaseModel implements BilliardsCoachListContra
         BizContent content = new BizContent();
         content.setBilliardsInfoId(billiardsInfoId);
         RequestParam requestParam = new RequestParam(UrlConstant.GOODS_SETMEAL_LIST,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
+    }
+
+    @Override
+    public Observable<HttpResult> getAmount(int goodsId,String startDate,String endDate) {
+        BizContent content = new BizContent();
+        content.setBilliardsGood(goodsId);
+        content.setBeginDate(startDate);
+        content.setEndDate(endDate);
+        RequestParam requestParam = new RequestParam(UrlConstant.GET_AMOUNT_ORDER,convertBizContent(content));
         return mService.simpleRequest(requestParam);
     }
 
