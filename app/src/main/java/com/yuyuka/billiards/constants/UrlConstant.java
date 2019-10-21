@@ -14,6 +14,7 @@ public class UrlConstant {
 
     public static String VERIFICATION_CODE = "com.yuyuka.api.verification.code";
     public static String LOGIN = "com.yuyuka.billiards.api.login";
+    public static String THIRD_LOGIN = "com.yuyuka.billiards.api.third.register";
     //业务搜索接口
     public static String SEARCH_BIZ = "com.yuyuka.billiards.api.search.biz";
     //商户活动接口

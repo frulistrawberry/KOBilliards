@@ -78,4 +78,44 @@ public class LoginPresenter extends BasePresenter<LoginContract.ILoginView, Logi
                     }
                 });
     }
+
+    public void thirdLogin(String loginName,String wxId,String headImage,String realName,String userName,int phoneNum){
+        getView().showProgressDialog();
+        mModel.thirdLogin(loginName,wxId,headImage,realName,userName,phoneNum)
+                .compose(RxUtils.transform(getView()))
+                .subscribe(new RespObserver() {
+                    @Override
+                    public void onResult(String msg, String bizEntity) {
+                        LoginPojo data = new Gson().fromJson(bizEntity,LoginPojo.class);
+                        CommonUtils.saveToken(data.getToken());
+                        UserInfo userInfo = new Gson().fromJson(data.getUserInfo(),UserInfo.class);
+                        CommonUtils.saveUserInfo(userInfo);
+
+                        NIMClient.getService(AuthService.class).login(CommonUtils.getLoginInfo()).setCallback(new RequestCallback<LoginInfo>() {
+                            @Override
+                            public void onSuccess(LoginInfo param) {
+                                getView().showLoginSuccess();
+                                getView().dismissProgressDialog();
+                            }
+
+                            @Override
+                            public void onFailed(int code) {
+                                getView().showLoginFailure("IM登录失败,错误码"+code);
+                                getView().dismissProgressDialog();
+                            }
+
+                            @Override
+                            public void onException(Throwable exception) {
+
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void onError(int errCode, String errMsg) {
+                        getView().dismissProgressDialog();
+                        getView().showLoginFailure(errMsg);
+                    }
+                });
+    }
 }

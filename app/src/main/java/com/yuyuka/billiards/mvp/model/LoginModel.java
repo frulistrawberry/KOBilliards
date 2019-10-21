@@ -26,4 +26,17 @@ public class LoginModel extends BaseModel implements LoginContract.ILoginModel {
         RequestParam requestParam = new RequestParam(UrlConstant.LOGIN,convertBizContent(content));
         return mService.simpleRequest(requestParam);
     }
+
+    @Override
+    public Observable<HttpResult> thirdLogin(String loginName, String wxId, String headImage, String realName, String userName, int phoneNum) {
+        BizContent content = new BizContent();
+        content.setLoginName(loginName);
+        content.setWxId(wxId);
+        content.setHeadImage(headImage);
+        content.setRealName(realName);
+        content.setUserName(userName);
+        content.setPhoneNum(0);
+        RequestParam requestParam = new RequestParam(UrlConstant.THIRD_LOGIN,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
+    }
 }

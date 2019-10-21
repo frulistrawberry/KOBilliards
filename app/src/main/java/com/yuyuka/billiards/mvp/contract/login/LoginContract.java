@@ -17,5 +17,6 @@ public interface LoginContract {
     interface ILoginModel extends IBaseModel{
         Observable<HttpResult> getVerifyCode(String phoneNum);
         Observable<HttpResult> login(String phoneNum,String verifyCode);
+        Observable<HttpResult> thirdLogin(String loginName,String wxId,String headImage,String realName,String userName,int phoneNum);
     }
 }

@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
 import com.umeng.socialize.UMAuthListener;
 import com.umeng.socialize.UMShareAPI;
 import com.umeng.socialize.bean.SHARE_MEDIA;
@@ -128,7 +129,11 @@ public class LoginActivity extends BaseMvpActivity<LoginPresenter> implements Lo
 
     @Override
     public void onComplete(SHARE_MEDIA share_media, int i, Map<String, String> map) {
-        LogUtil.e("umeng",map);
+        LogUtil.e("umeng",new Gson().toJson(map));
+        String name = map.get("name");
+        String headImage = map.get("iconurl");
+        String uid = map.get("uid");
+        getPresenter().thirdLogin(name,uid,headImage,name,name,0);
     }
 
     @Override

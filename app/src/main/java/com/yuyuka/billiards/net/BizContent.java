@@ -1,5 +1,7 @@
 package com.yuyuka.billiards.net;
 
+import android.content.Intent;
+
 import java.util.List;
 import java.util.Map;
 
@@ -57,6 +59,40 @@ public class BizContent {
     private String beginDate;
     private String endDate;
     private Integer billiardsGood;
+    String loginName;
+    String wxId;
+    String headImage;
+    String realName;
+    String userName;
+    Integer phoneNum;
+
+    public void setBilliardsGood(Integer billiardsGood) {
+        this.billiardsGood = billiardsGood;
+    }
+
+    public void setLoginName(String loginName) {
+        this.loginName = loginName;
+    }
+
+    public void setWxId(String wxId) {
+        this.wxId = wxId;
+    }
+
+    public void setHeadImage(String headImage) {
+        this.headImage = headImage;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPhoneNum(Integer phoneNum) {
+        this.phoneNum = phoneNum;
+    }
 
     public void setBeginDate(String beginDate) {
         this.beginDate = beginDate;
