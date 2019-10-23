@@ -28,7 +28,6 @@ public class BattleLoserWaitActivity extends BaseActivity {
             mStatusBar.setVisibility(View.GONE);
         }
 
-        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -36,19 +35,21 @@ public class BattleLoserWaitActivity extends BaseActivity {
 
     }
 
-    @Subscribe
-    public void onEvent(CustomNotification notification){
-        CustomNoticePojo noticePojo = new Gson().fromJson(notification.getContent(),CustomNoticePojo.class);
-        if (noticePojo.getNoticeType() == 3){
-            ConfirmPointActivity.launch(this,noticePojo);
-        }
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK){
             setResult(RESULT_OK);
+            finish();
+        }
+    }
+
+    @Override
+    public void onEvent(CustomNotification notification) {
+        super.onEvent(notification);
+        CustomNoticePojo data = new Gson().fromJson(notification.getContent(),CustomNoticePojo.class);
+        if (data.getNoticeType() == 2){
             finish();
         }
     }

@@ -108,7 +108,7 @@
         <activity android:name=".ui.activity.merchant.AddBusinessDateActivity" />
         <activity android:name=".ui.activity.merchant.AddSuccessActivity" />
         <activity android:name=".ui.activity.facetoface.FaceToFaceActivity" />
-        <activity android:name=".ui.activity.facetoface.FaceToFaceQualifyingActivity" />
+        <activity android:name=".ui.activity.facetoface.BattleWaitActivity" />
         <activity android:name=".ui.activity.news.ArticleDetailActivity" />
         <activity android:name=".ui.activity.news.VideoDetailActivity"
             android:configChanges="keyboard|orientation|keyboardHidden|screenSize"/>
@@ -198,7 +198,8 @@
         </activity>
         <activity android:name=".ui.activity.pay.TablePaySuccessActivity" />
         <activity android:name=".ui.activity.table.BattleActivity" />
-        <activity android:name=".ui.activity.table.BattleEndActivity" />
+        <activity android:name=".ui.activity.table.BattleEndActivity"
+            android:launchMode="singleTask"/>
         <activity android:name=".ui.activity.table.BattleLoserWaitActivity" />
         <activity android:name=".ui.activity.table.BattleWinnerActivity" />
         <activity android:name=".ui.activity.table.ConfirmPointActivity" />

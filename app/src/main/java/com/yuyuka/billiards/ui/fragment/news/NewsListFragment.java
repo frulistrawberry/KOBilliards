@@ -19,6 +19,7 @@ import com.yuyuka.billiards.mvp.presenter.news.NewsListPresenter;
 import com.yuyuka.billiards.pojo.BilliardsUsers;
 import com.yuyuka.billiards.pojo.NewsItem;
 import com.yuyuka.billiards.ui.adapter.news.NewsAdapter;
+import com.yuyuka.billiards.utils.CollectionUtils;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -155,6 +156,10 @@ public class NewsListFragment extends BaseListFragment<NewsListPresenter> implem
 
     @Override
     public void showUserList(List<BilliardsUsers> userList) {
+        if (CollectionUtils.isEmpty(userList)){
+            headerView.setVisibility(View.GONE);
+            return;
+        }
         headerView.setVisibility(View.VISIBLE);
         usersLayout.removeAllViews();
         for (int i = 0; i < userList.size(); i++) {

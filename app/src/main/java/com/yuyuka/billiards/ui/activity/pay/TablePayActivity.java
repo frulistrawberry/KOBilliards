@@ -2,8 +2,10 @@ package com.yuyuka.billiards.ui.activity.pay;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -45,6 +47,25 @@ public class TablePayActivity extends BaseMvpActivity<TablePresenter> implements
             TextView descTv;
     @BindView(R.id.tv_info)
             TextView infoTv;
+    @BindView(R.id.llyajin)
+    LinearLayout yajinll;
+    @BindView(R.id.tablename)
+    TextView tablename;
+    @BindView(R.id.battlename)
+    TextView battlename;
+    @BindView(R.id.paymoney)
+    TextView paymoney;
+    @BindView(R.id.order)
+    TextView order;
+
+    @BindView(R.id.date)
+    TextView date;
+    @BindView(R.id.position)
+    TextView position;
+    @BindView(R.id.yajin)
+    TextView yajin;
+    @BindView(R.id.lltaifei)
+    LinearLayout taifeill;
 
 
     int payChannel = 0;
@@ -54,6 +75,7 @@ public class TablePayActivity extends BaseMvpActivity<TablePresenter> implements
     int refOrderId;
 
     int payFor = 1;
+    CustomNoticePojo data;
 
 
 
@@ -74,9 +96,9 @@ public class TablePayActivity extends BaseMvpActivity<TablePresenter> implements
         context.startActivityForResult(intent,0);
     }
 
-    public static void launcher(Activity context,int id){
+    public static void launcher(Activity context,CustomNoticePojo data){
         Intent intent = new Intent(context,TablePayActivity.class);
-        intent.putExtra("id",id);
+        intent.putExtra("data",data);
         intent.putExtra("payFor",3);
         context.startActivityForResult(intent,0);
     }
@@ -93,11 +115,18 @@ public class TablePayActivity extends BaseMvpActivity<TablePresenter> implements
         setTitleStyle(1);
         setContentView(R.layout.activity_table_pay);
         if (payFor == 3){
-            nameTv.setVisibility(View.GONE);
-            moneyTv.setVisibility(View.GONE);
-            descTv.setVisibility(View.GONE);
-            infoTv.setVisibility(View.GONE);
+            yajinll.setVisibility(View.GONE);
+            taifeill.setVisibility(View.VISIBLE);
+            tablename.setText(data.getBizContent().getBilliardsName());
+            order.setText("订单号:"+data.getBizContent().getOrderId());
+            date.setText("时间:"+data.getBizContent().getData());
+            position.setText("地点:"+data.getBizContent().getPosition());
+            battlename.setText("排位赛");
+            paymoney.setText("￥"+data.getBizContent().getPayAmount() == null?"-.-":data.getBizContent().getPayAmount()+"");
+            yajin.setText("押金金额:￥"+data.getBizContent().getDeoisitprice()+"元");
         }else {
+            yajinll.setVisibility(View.VISIBLE);
+            taifeill.setVisibility(View.GONE);
             getPresenter().getTableInfo(tableId);
         }
     }
@@ -109,7 +138,7 @@ public class TablePayActivity extends BaseMvpActivity<TablePresenter> implements
         payFor = getIntent().getIntExtra("payFor",1);
         id = getIntent().getIntExtra("id",0);
         refOrderId = getIntent().getIntExtra("refOrderId",0);
-        EventBus.getDefault().register(this);
+        data = (CustomNoticePojo) getIntent().getSerializableExtra("data");
     }
 
     @OnClick({R.id.btn_wx_pay,R.id.btn_ali_pay,R.id.btn_pay})
@@ -131,7 +160,7 @@ public class TablePayActivity extends BaseMvpActivity<TablePresenter> implements
                 else if (payFor == PAY_FOR_ENTER_MATCH)
                     getPresenter().enterMatch(id,refOrderId,payChannel);
                 else if (payFor == PAY_FOR_TABLE){
-                    getPresenter().settle(id,payChannel);
+                    getPresenter().settle(data.getBizContent().getBattle().getId(),payChannel);
                 }
                 break;
 
@@ -178,24 +207,15 @@ public class TablePayActivity extends BaseMvpActivity<TablePresenter> implements
 
     @Subscribe
     public void onEvent(CustomNotification message){
-
         String json = message.getContent();
         CustomNoticePojo data = new Gson().fromJson(json,CustomNoticePojo.class);
         TablePaySuccessActivity.launcher(this,data,tableId);
         setResult(RESULT_OK);
         finish();
 
-    }
-
-    @Subscribe
-    public void onEvent(BaseResp message){
-
-        if (payFor == 3 && message.errCode == 0){
-            setResult(RESULT_OK);
-            finish();
-        }
-
 
     }
+
+
 
 }

@@ -18,12 +18,12 @@ import com.yuyuka.billiards.mvp.presenter.table.TablePresenter;
 import com.yuyuka.billiards.pojo.CustomNoticePojo;
 import com.yuyuka.billiards.pojo.OrderPojo;
 import com.yuyuka.billiards.pojo.TablePojo;
-import com.yuyuka.billiards.ui.activity.facetoface.FaceToFaceQualifyingActivity;
+import com.yuyuka.billiards.ui.activity.facetoface.BattleWaitActivity;
 import com.yuyuka.billiards.ui.activity.pay.TablePayActivity;
-import com.yuyuka.billiards.ui.activity.pay.TablePaySuccessActivity;
 import com.yuyuka.billiards.utils.BarUtils;
 import com.yuyuka.billiards.utils.log.LogUtil;
 
+import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
@@ -106,13 +106,20 @@ public class TableActivity extends BaseMvpActivity<TablePresenter> implements Ta
                 if (deoisitPrice>0)
                     OpenModeActivity.launcher(this,tableId,deoisitPrice,billiardsName);
                 else
-                    getPresenter().openTable(tableId,0,1);
+                    getPresenter().openTable(tableId,0,CompetitionType.OPEN_TABLE);
                 break;
             case R.id.btn_begin_rank:
                 if (deoisitPrice>0){
-                    TablePayActivity.launcher(this,tableId,7);
+                    TablePayActivity.launcher(this,tableId,CompetitionType.SCAN_RANK);
                 }else {
-                    getPresenter().openTable(tableId,2,7);
+                    getPresenter().openTable(tableId,2,CompetitionType.SCAN_RANK);
+                }
+                break;
+            case R.id.btn_begin_battle:
+                if (deoisitPrice>0){
+                    TablePayActivity.launcher(this,tableId,CompetitionType.SCAN_BATTLE);
+                }else {
+                    getPresenter().openTable(tableId,2,CompetitionType.SCAN_BATTLE);
                 }
                 break;
             case R.id.btn_back:
@@ -141,32 +148,18 @@ public class TableActivity extends BaseMvpActivity<TablePresenter> implements Ta
 
     }
 
-    @Subscribe
-    public void onEvent(CustomNotification message){
-        LogUtil.e("IM",message.getContent());
-        String json = message.getContent();
-        CustomNoticePojo data = new Gson().fromJson(json,CustomNoticePojo.class);
-        if (data.getNoticeType() == 0){
-            //等待比赛(调到二维码页面)
-            CustomNoticePojo.Battle battle = data.getBizContent().getBattle();
-            switch (battle.getBattleType()){
-                case CompetitionType.SCAN_RANK:
-                    FaceToFaceQualifyingActivity.launcher(this,tableId,battle.getId(),battle.getRefOrderId(),battle.getBattleType());
-                    break;
-                case CompetitionType.SCAN_BATTLE:
-                    break;
-            }
-        }else if (data.getNoticeType() == 1){
-            //比赛开始进入对战页面
-            CustomNoticePojo.Battle battle = data.getBizContent().getBattle();
-            switch (battle.getBattleType()){
-                case CompetitionType.SCAN_RANK:
-                    BattleActivity.launcher(this,data);
-                    break;
-                case CompetitionType.SCAN_BATTLE:
-                    break;
-            }
-        }
 
+    boolean isResume = false;
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isResume = true;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isResume = false;
     }
 }

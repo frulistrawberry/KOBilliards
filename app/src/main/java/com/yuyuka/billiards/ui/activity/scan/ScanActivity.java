@@ -9,22 +9,29 @@ import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
+import com.google.gson.Gson;
+import com.netease.nimlib.sdk.msg.model.CustomNotification;
 import com.uuzuche.lib_zxing.activity.CaptureFragment;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.yuyuka.billiards.R;
-import com.yuyuka.billiards.base.BaseActivity;
 import com.yuyuka.billiards.base.BaseMvpActivity;
 import com.yuyuka.billiards.constants.CompetitionType;
 import com.yuyuka.billiards.constants.UrlConstant;
 import com.yuyuka.billiards.mvp.contract.table.TableContract;
 import com.yuyuka.billiards.mvp.presenter.table.TablePresenter;
+import com.yuyuka.billiards.pojo.CustomNoticePojo;
 import com.yuyuka.billiards.pojo.OrderPojo;
 import com.yuyuka.billiards.pojo.TablePojo;
+import com.yuyuka.billiards.ui.activity.facetoface.BattleWaitActivity;
 import com.yuyuka.billiards.ui.activity.pay.TablePayActivity;
+import com.yuyuka.billiards.ui.activity.table.BattleActivity;
 import com.yuyuka.billiards.ui.activity.table.TableActivity;
 import com.yuyuka.billiards.utils.NetworkUtils;
 import com.yuyuka.billiards.utils.ToastUtils;
 import com.yuyuka.billiards.utils.log.LogUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.Map;
 import java.util.Objects;
@@ -69,7 +76,11 @@ public class ScanActivity extends BaseMvpActivity<TablePresenter> implements Tab
                 }else {
                     refOrderId = Integer.valueOf(Objects.requireNonNull(params.get("refOrderId")));
                     battleId = Integer.valueOf(Objects.requireNonNull(params.get("battleId")));
-                    getPresenter().getTableInfo(tableId);
+                    if (tableId == 0){
+                        getPresenter().enterMatch(battleId,refOrderId,2);
+                    }else {
+                        getPresenter().getTableInfo(tableId);
+                    }
                 }
             }
 
@@ -84,7 +95,6 @@ public class ScanActivity extends BaseMvpActivity<TablePresenter> implements Tab
 
     @Override
     protected void initData() {
-
     }
 
 
@@ -109,7 +119,7 @@ public class ScanActivity extends BaseMvpActivity<TablePresenter> implements Tab
 
     @Override
     public void showOrderFailure(String msg) {
-
+        finish();
     }
 
     @Override
@@ -120,7 +130,7 @@ public class ScanActivity extends BaseMvpActivity<TablePresenter> implements Tab
 
     @Override
     public void showEnterFailure() {
-
+        finish();
     }
 
     @Override
@@ -128,5 +138,12 @@ public class ScanActivity extends BaseMvpActivity<TablePresenter> implements Tab
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK)
             finish();
+    }
+
+    @Subscribe
+    public void onEvent(CustomNotification message){
+        super.onEvent(message);
+        finish();
+
     }
 }

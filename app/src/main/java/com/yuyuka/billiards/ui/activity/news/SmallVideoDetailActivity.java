@@ -79,7 +79,6 @@ public class SmallVideoDetailActivity extends BaseMvpActivity<NewsContentPresent
     @Override
     protected void initData() {
         id = getIntent().getIntExtra("id",0);
-        EventBus.getDefault().register(this);
     }
 
     @Subscribe

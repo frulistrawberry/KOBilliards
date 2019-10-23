@@ -19,6 +19,7 @@ import com.yuyuka.billiards.mvp.contract.table.PointContract;
 import com.yuyuka.billiards.mvp.presenter.table.PointPresenter;
 import com.yuyuka.billiards.pojo.CustomNoticePojo;
 import com.yuyuka.billiards.utils.BarUtils;
+import com.yuyuka.billiards.utils.CommonUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -33,24 +34,27 @@ public class BattleWinnerActivity extends BaseMvpActivity<PointPresenter> implem
     LinearLayout pointLayout;
 
     int point;
-    int id;
+    CustomNoticePojo data;
     int userId;
+    int id;
 
-    public static void launcher(Activity context, int id, int userId){
+    public static void launcher(Activity context,CustomNoticePojo data){
         Intent intent = new Intent(context,BattleWinnerActivity.class);
-        intent.putExtra("id",id);
-        intent.putExtra("userId",userId);
+        intent.putExtra("data",data);
         context.startActivityForResult(intent,0);
     }
 
     @Override
     protected void initView() {
         setContentView(R.layout.activity_winner);
+        super.mStatusBar.setVisibility(View.GONE);
         if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
             mStatusBar.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, BarUtils.getStatusBarHeight(this)));
         }else {
             mStatusBar.setVisibility(View.GONE);
         }
+
+
 
         for (int i = 0; i < pointLayout.getChildCount(); i++) {
             RelativeLayout rl = (RelativeLayout) pointLayout.getChildAt(i);
@@ -75,9 +79,14 @@ public class BattleWinnerActivity extends BaseMvpActivity<PointPresenter> implem
 
     @Override
     protected void initData() {
-        id = getIntent().getIntExtra("id",0);
-        userId = getIntent().getIntExtra("userId",0);
-        EventBus.getDefault().register(this);
+        data = (CustomNoticePojo) getIntent().getSerializableExtra("data");
+        CustomNoticePojo.Battle battle = data.getBizContent().getBattle();
+        if (battle.getUserId1() == CommonUtils.getUserId()){
+            userId = battle.getUserId2();
+        }else {
+            userId = battle.getUserId1();
+        }
+        id = battle.getId();
     }
 
     @OnClick({R.id.btn_send})
@@ -94,16 +103,15 @@ public class BattleWinnerActivity extends BaseMvpActivity<PointPresenter> implem
         return new PointPresenter(this);
     }
 
-    @Subscribe
-    public void onEvent(CustomNotification notification){
-        CustomNoticePojo noticePojo = new Gson().fromJson(notification.getContent(),CustomNoticePojo.class);
-        if (noticePojo.getNoticeType() == 4){
-            // TODO: 2019-10-14 结算页
-            BattleResultActivity.launcher(this,noticePojo,true);
+    @Override
+    public void onEvent(CustomNotification notification) {
+        super.onEvent(notification);
+        CustomNoticePojo data = new Gson().fromJson(notification.getContent(),CustomNoticePojo.class);
+        if (data.getNoticeType()== 4){
             setResult(RESULT_OK);
+            finish();
+        }else if (data.getNoticeType() == 2){
             finish();
         }
     }
-
-
 }

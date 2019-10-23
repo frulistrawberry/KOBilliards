@@ -23,7 +23,8 @@ public class TableModel extends BaseModel implements TableContract.ITableModel, 
     @Override
     public Observable<HttpResult> tackOrder(int orderType, long billiardsPoolTable, int competitionType, int payType, int payChannel) {
         BizContent content = new BizContent();
-        content.setBilliardsPoolTable(billiardsPoolTable);
+        if (billiardsPoolTable!=0)
+            content.setBilliardsPoolTable(billiardsPoolTable);
         content.setOrderType(orderType);
         content.setCompetitionType(competitionType);
         BizContent.BilliardsMakeAppOrderInfo info = new BizContent.BilliardsMakeAppOrderInfo();
@@ -39,7 +40,8 @@ public class TableModel extends BaseModel implements TableContract.ITableModel, 
     public Observable<HttpResult> enterMatch(int id, int refOrderId, int payChannel) {
         BizContent content = new BizContent();
         content.setId(id);
-        content.setRefOrderId(refOrderId);
+        if (refOrderId!=0)
+            content.setRefOrderId(refOrderId);
         content.setPayChannel(payChannel);
         content.setUserId(CommonUtils.getUserId());
         RequestParam requestParam = new RequestParam(UrlConstant.PLACE_JOIN,convertBizContent(content));
@@ -71,6 +73,31 @@ public class TableModel extends BaseModel implements TableContract.ITableModel, 
         content.setUserId(CommonUtils.getUserId());
         content.setPayChannel(payChannel);
         RequestParam requestParam = new RequestParam(UrlConstant.PLACE_SETTLE,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
+    }
+
+    @Override
+    public Observable<HttpResult> orderPush(int id) {
+        BizContent content = new BizContent();
+        content.setId(id);
+        RequestParam requestParam = new RequestParam(UrlConstant.PUSH_ORDER,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
+    }
+
+    @Override
+    public Observable<HttpResult> opendOrder(int id) {
+        BizContent content = new BizContent();
+        content.setId(id);
+        RequestParam requestParam = new RequestParam(UrlConstant.OPEND_ORDER,convertBizContent(content));
+        return mService.simpleRequest(requestParam);
+    }
+
+    @Override
+    public Observable<HttpResult> cancleOrder(int id) {
+        BizContent content = new BizContent();
+        content.setId(id);
+        content.setUserId(CommonUtils.getUserId());
+        RequestParam requestParam = new RequestParam(UrlConstant.PLACE_CANCEL,convertBizContent(content));
         return mService.simpleRequest(requestParam);
     }
 }

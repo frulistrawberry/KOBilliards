@@ -24,10 +24,84 @@ public class CustomNoticePojo implements Serializable {
     public static class BizContent implements Serializable{
         private Battle battle;
 
+        private MakeOrderInfo makeOrderInfo;
+
+        private int tableNum;
+
         private User user1;
         private User user2;
 
         private UserRank userRank;
+        private Double payAmount;
+        private String data;
+        private String orderId;
+        private String deoisitprice;
+        private String billiardsName;
+        private String position;
+
+        public MakeOrderInfo getMakeOrderInfo() {
+            return makeOrderInfo;
+        }
+
+        public void setMakeOrderInfo(MakeOrderInfo makeOrderInfo) {
+            this.makeOrderInfo = makeOrderInfo;
+        }
+
+        public int getTableNum() {
+            return tableNum;
+        }
+
+        public void setTableNum(int tableNum) {
+            this.tableNum = tableNum;
+        }
+
+        public Double getPayAmount() {
+            return payAmount;
+        }
+
+        public void setPayAmount(Double payAmount) {
+            this.payAmount = payAmount;
+        }
+
+        public String getData() {
+            return data;
+        }
+
+        public void setData(String data) {
+            this.data = data;
+        }
+
+        public String getOrderId() {
+            return orderId;
+        }
+
+        public void setOrderId(String orderId) {
+            this.orderId = orderId;
+        }
+
+        public String getDeoisitprice() {
+            return deoisitprice;
+        }
+
+        public void setDeoisitprice(String deoisitprice) {
+            this.deoisitprice = deoisitprice;
+        }
+
+        public String getBilliardsName() {
+            return billiardsName;
+        }
+
+        public void setBilliardsName(String billiardsName) {
+            this.billiardsName = billiardsName;
+        }
+
+        public String getPosition() {
+            return position;
+        }
+
+        public void setPosition(String position) {
+            this.position = position;
+        }
 
         public UserRank getUserRank() {
             return userRank;
@@ -64,6 +138,7 @@ public class CustomNoticePojo implements Serializable {
         private int id;
 
         private int userId1;
+        private int userId2;
 
         private int battleType;
 
@@ -80,6 +155,14 @@ public class CustomNoticePojo implements Serializable {
         private long beginTime;
         private int user1Point;
         private int user2Point;
+
+        public int getUserId2() {
+            return userId2;
+        }
+
+        public void setUserId2(int userId2) {
+            this.userId2 = userId2;
+        }
 
         public void setBeforeOne(long beforeOne) {
             this.beforeOne = beforeOne;
@@ -466,6 +549,36 @@ public class CustomNoticePojo implements Serializable {
             return this.rank;
         }
 
+    }
+
+    public static class MakeOrderInfo implements Serializable{
+        int id;
+        int userId;
+        double payRefundAmount;
+
+        public int getId() {
+            return id;
+        }
+
+        public void setId(int id) {
+            this.id = id;
+        }
+
+        public int getUserId() {
+            return userId;
+        }
+
+        public void setUserId(int userId) {
+            this.userId = userId;
+        }
+
+        public double getPayRefundAmount() {
+            return payRefundAmount;
+        }
+
+        public void setPayRefundAmount(double payRefundAmount) {
+            this.payRefundAmount = payRefundAmount;
+        }
     }
 
 }

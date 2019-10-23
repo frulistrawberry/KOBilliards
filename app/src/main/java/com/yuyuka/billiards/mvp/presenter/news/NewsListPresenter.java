@@ -45,9 +45,7 @@ public class NewsListPresenter extends BasePresenter<NewsListContract.INewsListV
                                     getView().showEmpty();
                                 else
                                     getView().showNewsList(newsList);
-                                if (!CollectionUtils.isEmpty(userList)){
-                                    getView().showUserList(userList);
-                                }
+                                getView().showUserList(userList);
                             }else {
                                 getView().showEmpty();
                                 return;

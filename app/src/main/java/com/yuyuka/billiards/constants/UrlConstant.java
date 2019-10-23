@@ -62,6 +62,9 @@ public class UrlConstant {
     public static String SEND_POINT = "com.yuyuka.billiards.api.send.point";
     public static String CONFIRM_POINT = "com.yuyuka.billiards.api.confirm.point";
     public static String PLACE_SETTLE = "com.yuyuka.billiards.api.place.settle";
+    public static String PUSH_ORDER = "com.yuyuka.billiards.api.push.order.info";
+    public static String OPEND_ORDER = "com.yuyuka.billiards.api.auto.openend.order";
+    public static String PLACE_CANCEL = "com.yuyuka.billiards.api.place.cancel";
     public static String AUTHORIZED_USER_MY_TABLE = "com.yuyuka.billiards.api.authorized.user.my.table";
     public static String AUTHORIZED_USER_PUSH_MY_TABLE = "com.yuyuka.billiards.api.authorized.user.push.my.sysmessage";
 

@@ -2,11 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:paddingTop="20dp"
     android:paddingBottom="10dp"
-    android:paddingLeft="28dp"
-    android:paddingRight="28dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
     <LinearLayout
         android:layout_width="match_parent"
@@ -14,36 +11,141 @@
         android:layout_weight="1"
         android:gravity="center_horizontal"
         android:orientation="vertical">
-        <TextView
-            android:id="@+id/tv_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_color_1"
-            android:textSize="18sp"
-            android:text="百胜桌球馆"/>
-        <TextView
-            android:id="@+id/tv_money"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_color_6"
-            android:textSize="40sp"
-            android:layout_marginTop="10dp"
-            android:text="-.-"/>
-        <TextView
-            android:id="@+id/tv_info"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/text_color_1"
-            android:textSize="14sp"
-            android:layout_marginTop="10dp"
-            android:text="临时押金卡"/>
-        <TextView
-            android:id="@+id/tv_desc"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="#F46113"
-            android:textSize="14sp"
-            android:text="结账后押金找零将"/>
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:id="@+id/llyajin"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="20dp"
+                android:gravity="center"
+                android:orientation="vertical">
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color_1"
+                    android:textSize="18sp"
+                    android:text="百胜桌球馆"/>
+                <TextView
+                    android:id="@+id/tv_money"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color_6"
+                    android:textSize="40sp"
+                    android:layout_marginTop="10dp"
+                    android:text="-.-"/>
+                <TextView
+                    android:id="@+id/tv_info"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color_1"
+                    android:textSize="14sp"
+                    android:layout_marginTop="10dp"
+                    android:text="临时押金卡"/>
+                <TextView
+                    android:id="@+id/tv_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#F46113"
+                    android:textSize="14sp"
+                    android:text="结账后押金找零将退还到支付账户"/>
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/lltaifei"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:paddingLeft="24dp"
+                    android:paddingRight="24dp"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp">
+                    <TextView
+                        android:id="@+id/order"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_color_1"
+                        android:text=""/>
+                    <TextView
+                        android:id="@+id/date"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_color_1"
+                        android:text=""/>
+                    <TextView
+                        android:id="@+id/position"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"
+                        android:textColor="@color/text_color_1"
+                        android:text=""/>
+                </LinearLayout>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="10dp"
+                    android:background="@color/color_spline"/>
+                <TextView
+                    android:id="@+id/tablename"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/text_color_1"
+                    android:text="百胜桌球馆"/>
+                <TextView
+                    android:id="@+id/battlename"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/text_color_1"
+                    android:text="排位赛"/>
+                <TextView
+                    android:id="@+id/paymoney"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_color_6"
+                    android:textSize="40sp"
+                    android:layout_marginTop="10dp"
+                    android:text="-.-"/>
+                <TextView
+                    android:id="@+id/shichang"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/text_color_6"
+                    android:text="对抗时长 : 00:54:00"/>
+                <TextView
+                    android:id="@+id/yajin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="18sp"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/text_color_6"
+                    android:text="押金金额：￥50.00元"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="14sp"
+                    android:layout_marginTop="5dp"
+                    android:gravity="center"
+                    android:textColor="@color/text_color_5"
+                    android:text="支付台费后，押金将退回支付账户\n请注意查收"/>
+
+            </LinearLayout>
+
+        </FrameLayout>
+
         <LinearLayout
             android:id="@+id/btn_wx_pay"
             android:layout_width="128dp"
@@ -104,6 +206,8 @@
         android:layout_height="40dp"
         app:normalColor="#1DB710"
         app:unClickableColor="#1DB710"
+        android:layout_marginLeft="28dp"
+        android:layout_marginRight="28dp"
         app:pressColor="#1DB710"
         app:RoundedConnerRadius="6dp"
         android:textColor="@color/white"

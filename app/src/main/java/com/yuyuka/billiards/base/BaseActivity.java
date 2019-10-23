@@ -17,13 +17,28 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 
+import com.google.gson.Gson;
+import com.netease.nimlib.sdk.msg.model.CustomNotification;
 import com.yuyuka.billiards.R;
+import com.yuyuka.billiards.constants.CompetitionType;
+import com.yuyuka.billiards.pojo.CustomNoticePojo;
+import com.yuyuka.billiards.ui.activity.facetoface.BattleWaitActivity;
+import com.yuyuka.billiards.ui.activity.pay.TablePayActivity;
+import com.yuyuka.billiards.ui.activity.table.BattleActivity;
+import com.yuyuka.billiards.ui.activity.table.BattleEndActivity;
+import com.yuyuka.billiards.ui.activity.table.BattleResultActivity;
+import com.yuyuka.billiards.ui.activity.table.ConfirmPointActivity;
+import com.yuyuka.billiards.ui.activity.table.SingleBattleActivity;
 import com.yuyuka.billiards.utils.BarUtils;
+import com.yuyuka.billiards.utils.CommonUtils;
+import com.yuyuka.billiards.utils.ToastUtils;
+import com.yuyuka.billiards.utils.log.LogUtil;
 import com.yuyuka.billiards.widget.TitleBar;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 import com.yuyuka.billiards.widget.dialog.ProgressDialog;
 
 import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.ButterKnife;
 
@@ -42,6 +57,8 @@ public abstract class BaseActivity extends RxAppCompatActivity {
     protected boolean fullScreen = true;
 
     protected boolean isCustom = false;
+
+    protected boolean isBackground;
 
     /**
      * 按键的监听，供页面设置自定义的按键行为
@@ -198,6 +215,7 @@ public abstract class BaseActivity extends RxAppCompatActivity {
         super.onCreate(savedInstanceState);
 
         mProgressDialog = new ProgressDialog.Builder(this).setMessage("拼命加载中...").setCancelable(true).build();
+        EventBus.getDefault().register(this);
         initData();
         initView();
         initTitle();
@@ -215,5 +233,72 @@ public abstract class BaseActivity extends RxAppCompatActivity {
 
     public void setTitleStyle(int titleStyle) {
         this.titleStyle = titleStyle;
+    }
+
+    @Subscribe
+    public void onEvent(CustomNotification notification){
+        if (!isBackground){
+            dismissProgressDialog();
+            LogUtil.json("onReceiveMsg",notification.getContent());
+            CustomNoticePojo data = new Gson().fromJson(notification.getContent(),CustomNoticePojo.class);
+            if (data.getNoticeType() == 0){
+                CustomNoticePojo.BizContent bizContent = data.getBizContent();
+                CustomNoticePojo.Battle battle = bizContent.getBattle();
+                if (battle.getBattleType() == CompetitionType.SCAN_BATTLE
+                        ||battle.getBattleType() == CompetitionType.SCAN_RANK
+                        ||battle.getBattleType() == CompetitionType.FACE_TO_FACE_BATTLE
+                        ||battle.getBattleType() == CompetitionType.FACE_TO_FACE_RANK){
+                    long tableNum = bizContent.getTableNum();
+                    BattleWaitActivity.launcher(this, tableNum,battle.getId(),battle.getRefOrderId(),battle.getBattleType());
+                }
+            }
+            else if (data.getNoticeType() == 1){
+                //比赛开始进入对战页面
+                CustomNoticePojo.Battle battle = data.getBizContent().getBattle();
+                if (battle.getBattleType() == CompetitionType.SCAN_BATTLE
+                        ||battle.getBattleType() == CompetitionType.SCAN_RANK
+                        ||battle.getBattleType() == CompetitionType.FACE_TO_FACE_BATTLE
+                        ||battle.getBattleType() == CompetitionType.FACE_TO_FACE_RANK) {
+                    BattleActivity.launcher(this,data);
+
+                }else if (battle.getBattleType() == CompetitionType.OPEN_TABLE){
+                    SingleBattleActivity.launcher(this,data);
+                }
+            }else if (data.getNoticeType() == 2){
+                BattleEndActivity.launcher(this,data);
+            }else if (data.getNoticeType() == 3){
+                ConfirmPointActivity.launch(this,data);
+            } else if (data.getNoticeType() == 4){
+                CustomNoticePojo.Battle battle = data.getBizContent().getBattle();
+                int myPoint = 0;
+                int otherPoint = 0;
+                if (CommonUtils.getUserId() == battle.getUserId1()){
+                    myPoint = battle.getUser1Point();
+                    otherPoint = battle.getUser2Point();
+                }else {
+                    myPoint = battle.getUser2Point();
+                    otherPoint = battle.getUser1Point();
+                }
+                BattleResultActivity.launcher(this,data,myPoint>otherPoint);
+            } else if (data.getNoticeType() == 5){
+                CustomNoticePojo.MakeOrderInfo info = data.getBizContent().getMakeOrderInfo();
+                ToastUtils.showToast(this,"成功退款"+info.getPayRefundAmount()+"元");
+            } else if (data.getNoticeType() == 7){
+                TablePayActivity.launcher(this,data);
+            }
+
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        isBackground = false;
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        isBackground = true;
     }
 }

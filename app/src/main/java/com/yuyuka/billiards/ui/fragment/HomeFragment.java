@@ -3,9 +3,7 @@ package com.yuyuka.billiards.ui.fragment;
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
 import android.content.Intent;
-import android.os.Handler;
 import android.support.design.widget.AppBarLayout;
-import android.support.design.widget.CoordinatorLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
@@ -22,11 +20,8 @@ import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.msg.MsgService;
 import com.netease.nimlib.sdk.msg.constant.SessionTypeEnum;
 import com.netease.nimlib.sdk.msg.model.CustomNotification;
-import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.yuyuka.billiards.R;
-import com.yuyuka.billiards.base.BaseFragment;
 import com.yuyuka.billiards.base.BaseListFragment;
-import com.yuyuka.billiards.base.BaseMvpActivity;
 import com.yuyuka.billiards.base.BaseMvpFragment;
 import com.yuyuka.billiards.constants.CompetitionType;
 import com.yuyuka.billiards.mvp.contract.HomeContract;
@@ -35,8 +30,7 @@ import com.yuyuka.billiards.pojo.CustomNoticePojo;
 import com.yuyuka.billiards.pojo.ImagePojo;
 import com.yuyuka.billiards.pojo.ModularPojo;
 import com.yuyuka.billiards.ui.activity.bonus.BonusPoolActivity;
-import com.yuyuka.billiards.ui.activity.facetoface.FaceToFaceQualifyingActivity;
-import com.yuyuka.billiards.ui.activity.message.MessageActivity;
+import com.yuyuka.billiards.ui.activity.facetoface.BattleWaitActivity;
 import com.yuyuka.billiards.ui.activity.scan.ScanActivity;
 import com.yuyuka.billiards.ui.activity.search.RoomSearchActivity;
 import com.yuyuka.billiards.ui.activity.table.BattleActivity;
@@ -45,7 +39,6 @@ import com.yuyuka.billiards.ui.adapter.common.NavigatorAdapter;
 import com.yuyuka.billiards.ui.adapter.common.PagerAdapter;
 import com.yuyuka.billiards.ui.fragment.news.NewsListFragment;
 import com.yuyuka.billiards.utils.CollectionUtils;
-import com.yuyuka.billiards.utils.SizeUtils;
 import com.yuyuka.billiards.utils.ViewUtils;
 import com.yuyuka.billiards.utils.log.LogUtil;
 import com.yuyuka.billiards.widget.AppBarStateChangeListener;
@@ -57,7 +50,6 @@ import com.yuyuka.billiards.widget.tabindicator.buildins.commonnavigator.CommonN
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -69,6 +61,7 @@ import butterknife.OnClick;
 import in.srain.cube.views.ptr.PtrClassicFrameLayout;
 import in.srain.cube.views.ptr.PtrDefaultHandler;
 import in.srain.cube.views.ptr.PtrFrameLayout;
+import io.reactivex.Single;
 
 public class HomeFragment extends BaseMvpFragment<HomePresenter> implements HomeContract.IHomeView {
     @BindView(R.id.app_bar)
@@ -117,7 +110,7 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
     // 动画隐藏浮动按钮
     private void hideFabAnim() {
         state = 0;
-        float x = tableIv.getWidth()/2;
+        float x = tableIv.getWidth()/2.2f;
         if (showAnimator != null && showAnimator.isRunning()) {
             showAnimator.cancel();
             isFabAnimg = false;
@@ -162,7 +155,7 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
             return;
         }
 
-        float x = tableIv.getWidth()/2;
+        float x = tableIv.getWidth()/2.2f;
         showAnimator = ObjectAnimator.ofFloat(tableIv, "translationX", -x, 0f);
         showAnimator.setDuration(500);
         showAnimator.addListener(new Animator.AnimatorListener() {
@@ -202,7 +195,6 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
         mFragmentList = new ArrayList<>();
         mFragmentList.add(NewsListFragment.newFragment(4,true));
         mAdapter = new PagerAdapter(getChildFragmentManager(),mFragmentList,mTitles);
-        EventBus.getDefault().register(this);
     }
 
     @Override
@@ -277,27 +269,7 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
         }
     }
 
-    @Subscribe
-    public void onEvent(CustomNotification message){
-        if (!isOnResume)
-            return;
-        String json = message.getContent();
-        CustomNoticePojo data = new Gson().fromJson(json,CustomNoticePojo.class);
-        if (data.getNoticeType() == 1){
-            //比赛开始进入对战页面
-            CustomNoticePojo.Battle battle = data.getBizContent().getBattle();
-            switch (battle.getBattleType()){
-                case CompetitionType.SCAN_BATTLE:
-                    break;
-                case CompetitionType.SCAN_RANK:
-                    BattleActivity.launcher(getActivity(),data);
-                    break;
-                case CompetitionType.OPEN_TABLE:
-                    SingleBattleActivity.launcher(getActivity(),data);
-                    break;
-            }
-        }
-    }
+
 
     @OnClick({R.id.btn_top,R.id.btn_bonus_rewards,R.id.iv_msg,R.id.ll_scan,R.id.btn_search,R.id.btn_search1,R.id.iv_table})
     public void onClick(View v){
@@ -311,30 +283,6 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
                 startActivity(new Intent(getContext(),BonusPoolActivity.class));
                 break;
              case R.id.iv_msg:
-//                 MessageActivity.launcher(getContext());
-                 // 构造自定义通知，指定接收者
-                 CustomNotification notification = new CustomNotification();
-                 notification.setSessionId("41");
-                 notification.setSessionType(SessionTypeEnum.P2P);
-
-// 构建通知的具体内容。为了可扩展性，这里采用 json 格式，以 "id" 作为类型区分。
-
-                 notification.setContent("asdfasdfasdfafsdaf");
-
-// 设置该消息需要保证送达
-                 notification.setSendToOnlineUserOnly(false);
-
-// 设置 APNS 的推送文本
-                 notification.setApnsText("the_content_for_apns");
-
-// 自定义推送属性
-                 Map<String,Object> pushPayload = new HashMap<>();
-                 pushPayload.put("key1", "payload 1");
-                 pushPayload.put("key2", 2015);
-                 notification.setPushPayload(pushPayload);
-
-// 发送自定义通知
-                 NIMClient.getService(MsgService.class).sendCustomNotification(notification);
                  break;
             case R.id.ll_scan:
                 Intent intent = new Intent(getContext(), ScanActivity.class);

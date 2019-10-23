@@ -1,7 +1,6 @@
 package com.yuyuka.billiards.ui.activity.table;
 
 import android.app.Activity;
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
@@ -19,25 +18,32 @@ import com.github.mikephil.charting.charts.RadarChart;
 import com.github.mikephil.charting.components.AxisBase;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
-import com.github.mikephil.charting.data.RadarData;
-import com.github.mikephil.charting.data.RadarDataSet;
 import com.github.mikephil.charting.data.RadarEntry;
 import com.github.mikephil.charting.formatter.IAxisValueFormatter;
-import com.github.mikephil.charting.interfaces.datasets.IRadarDataSet;
+import com.google.gson.Gson;
+import com.netease.nimlib.sdk.msg.model.CustomNotification;
 import com.yuyuka.billiards.R;
-import com.yuyuka.billiards.base.BaseActivity;
+import com.yuyuka.billiards.base.BaseMvpActivity;
+import com.yuyuka.billiards.mvp.contract.table.TableContract;
+import com.yuyuka.billiards.mvp.presenter.table.TablePresenter;
 import com.yuyuka.billiards.pojo.CustomNoticePojo;
+import com.yuyuka.billiards.pojo.OrderPojo;
+import com.yuyuka.billiards.pojo.TablePojo;
 import com.yuyuka.billiards.ui.activity.pay.TablePayActivity;
 import com.yuyuka.billiards.utils.BarUtils;
 import com.yuyuka.billiards.utils.CommonUtils;
+import com.yuyuka.billiards.utils.log.LogUtil;
 import com.yuyuka.billiards.widget.StateButton;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class BattleResultActivity extends BaseActivity {
+public class BattleResultActivity extends BaseMvpActivity<TablePresenter> implements TableContract.ITableView {
 
     @BindView(R.id.chart)
     RadarChart chart;
@@ -143,27 +149,6 @@ public class BattleResultActivity extends BaseActivity {
             entries2.add(new RadarEntry(val2));
         }
 
-//
-//        RadarDataSet set2 = new RadarDataSet(entries2, "");
-//        set2.setColor(duanwei<=5?colors[duanwei-1]:colors[1]);
-//        set2.setFillColor(duanwei<=5?colors[duanwei-1]:colors[1]);//二级图层填充色
-//        set2.setDrawFilled(true);
-//        set2.setFillAlpha(180);
-//        set2.setLineWidth(2f);
-//        set2.setDrawHighlightCircleEnabled(true);
-//        set2.setDrawHighlightIndicators(false);
-//
-//        ArrayList<IRadarDataSet> sets = new ArrayList<IRadarDataSet>();
-//        sets.add(set2);
-//
-//        RadarData data = new RadarData(sets);
-////        data.setValueTypeface(mTfLight);
-//        data.setValueTextSize(8f);
-//        data.setDrawValues(false);
-//        data.setValueTextColor(Color.WHITE);
-//
-//        chart.setData(data);
-//        chart.invalidate();
     }
 
     private void chartBanding() {
@@ -219,7 +204,7 @@ public class BattleResultActivity extends BaseActivity {
                     setResult(RESULT_OK);
                     finish();
                 }else {
-                    TablePayActivity.launcher(this,data.getBizContent().getBattle().getId());
+                    getPresenter().pushOrder(data.getBizContent().getBattle().getId());
                 }
                 break;
             case R.id.btn_xiangxishuju:
@@ -238,5 +223,37 @@ public class BattleResultActivity extends BaseActivity {
         super.onActivityResult(requestCode, resultCode, data);
         setResult(RESULT_OK);
         finish();
+    }
+
+
+
+    @Override
+    protected TablePresenter getPresenter() {
+        return new TablePresenter(this);
+    }
+
+    @Override
+    public void showTableInfo(TablePojo data) {
+
+    }
+
+    @Override
+    public void showOrderSuccess(OrderPojo data) {
+
+    }
+
+    @Override
+    public void showOrderFailure(String msg) {
+
+    }
+
+    @Override
+    public void showEnterSuccess() {
+
+    }
+
+    @Override
+    public void showEnterFailure() {
+
     }
 }

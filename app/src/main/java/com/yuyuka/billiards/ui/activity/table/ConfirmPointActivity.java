@@ -3,9 +3,12 @@ package com.yuyuka.billiards.ui.activity.table;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Build;
 import android.support.annotation.Nullable;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
@@ -15,8 +18,13 @@ import com.yuyuka.billiards.base.BaseActivity;
 import com.yuyuka.billiards.base.BaseMvpActivity;
 import com.yuyuka.billiards.image.ImageManager;
 import com.yuyuka.billiards.mvp.contract.table.PointContract;
+import com.yuyuka.billiards.mvp.contract.table.TableContract;
 import com.yuyuka.billiards.mvp.presenter.table.PointPresenter;
+import com.yuyuka.billiards.mvp.presenter.table.TablePresenter;
 import com.yuyuka.billiards.pojo.CustomNoticePojo;
+import com.yuyuka.billiards.pojo.OrderPojo;
+import com.yuyuka.billiards.pojo.TablePojo;
+import com.yuyuka.billiards.utils.BarUtils;
 import com.yuyuka.billiards.utils.CommonUtils;
 
 import org.greenrobot.eventbus.EventBus;
@@ -25,7 +33,7 @@ import org.greenrobot.eventbus.Subscribe;
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class ConfirmPointActivity extends BaseMvpActivity<PointPresenter> implements PointContract.IPointView {
+public class ConfirmPointActivity extends BaseMvpActivity<PointPresenter> implements PointContract.IPointView, TableContract.ITableView {
 
     CustomNoticePojo data;
     @BindView(R.id.tv_point)
@@ -38,6 +46,8 @@ public class ConfirmPointActivity extends BaseMvpActivity<PointPresenter> implem
     TextView userName1;
     @BindView(R.id.tv_user_name2)
     TextView userName2;
+
+    TablePresenter tablePresenter;
 
     public static void launch(Activity context, CustomNoticePojo data){
         Intent intent = new Intent(context,ConfirmPointActivity.class);
@@ -53,6 +63,12 @@ public class ConfirmPointActivity extends BaseMvpActivity<PointPresenter> implem
     @Override
     protected void initView() {
         setContentView(R.layout.activity_confirm_point);
+        super.mStatusBar.setVisibility(View.GONE);
+        if (Build.VERSION.SDK_INT>=Build.VERSION_CODES.KITKAT){
+            mStatusBar.setLayoutParams(new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, BarUtils.getStatusBarHeight(this)));
+        }else {
+            mStatusBar.setVisibility(View.GONE);
+        }
         ImageManager.getInstance().loadNet(data.getBizContent().getUser1().getHeadImage(),userHead1);
         ImageManager.getInstance().loadNet(data.getBizContent().getUser2().getHeadImage(),userHead2);
         userName1.setText(data.getBizContent().getUser1().getUserName());
@@ -64,24 +80,19 @@ public class ConfirmPointActivity extends BaseMvpActivity<PointPresenter> implem
     @Override
     protected void initData() {
         data = (CustomNoticePojo) getIntent().getSerializableExtra("data");
-        EventBus.getDefault().register(this);
+        tablePresenter = new TablePresenter(this);
     }
 
-    @OnClick({R.id.btn_send})
+
+    @OnClick({R.id.btn_send,R.id.btn_cancel})
     public void onClick(View v){
         switch (v.getId()){
             case R.id.btn_send:
                 getPresenter().confirmPoint(data.getBizContent().getBattle().getId());
                 break;
-        }
-    }
-
-    @Subscribe
-    public void onEvent(CustomNotification notification){
-        CustomNoticePojo noticePojo = new Gson().fromJson(notification.getContent(),CustomNoticePojo.class);
-        if (noticePojo.getNoticeType() == 4){
-            // TODO: 2019-10-14 结算页
-            BattleResultActivity.launcher(this,noticePojo,false);
+            case R.id.btn_cancel:
+                tablePresenter.cancelOrder(data.getBizContent().getBattle().getId());
+                break;
         }
     }
 
@@ -93,6 +104,40 @@ public class ConfirmPointActivity extends BaseMvpActivity<PointPresenter> implem
             setResult(RESULT_OK);
             finish();
         }
+
+    }
+
+    @Override
+    public void onEvent(CustomNotification notification) {
+        super.onEvent(notification);
+        CustomNoticePojo data = new Gson().fromJson(notification.getContent(),CustomNoticePojo.class);
+        if (data.getNoticeType() == 2){
+            finish();
+        }
+    }
+
+    @Override
+    public void showTableInfo(TablePojo data) {
+
+    }
+
+    @Override
+    public void showOrderSuccess(OrderPojo data) {
+
+    }
+
+    @Override
+    public void showOrderFailure(String msg) {
+
+    }
+
+    @Override
+    public void showEnterSuccess() {
+
+    }
+
+    @Override
+    public void showEnterFailure() {
 
     }
 }

@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#667f45">
+    android:background="@mipmap/bg_face_to_face">
     <View
         android:id="@+id/v_status"
         android:layout_width="match_parent"
@@ -17,7 +17,7 @@
             android:layout_width="match_parent"
             android:layout_height="44dp">
             <ImageView
-                android:id="@+id/iv_title_left"
+                android:id="@+id/btn_back"
                 android:layout_width="22dp"
                 android:layout_height="22dp"
                 android:layout_marginLeft="13dp"
@@ -62,7 +62,7 @@
         android:id="@+id/iv_paiwei"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:layout_marginLeft="13dp"
         android:layout_marginRight="13dp"
         android:layout_marginTop="10dp"
@@ -71,14 +71,14 @@
         android:id="@+id/iv_yule"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:layout_marginLeft="13dp"
         android:layout_marginRight="13dp"
         android:src="@mipmap/ic_face_to_face_yule"/>
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:scaleType="fitXY"
+        android:scaleType="centerCrop"
         android:layout_marginLeft="13dp"
         android:layout_marginRight="13dp"
         android:src="@mipmap/ic_face_to_face_other"/>

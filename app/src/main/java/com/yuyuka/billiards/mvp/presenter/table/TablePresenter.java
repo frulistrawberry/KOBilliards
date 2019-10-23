@@ -118,4 +118,76 @@ public class TablePresenter extends BasePresenter<TableContract.ITableView, Tabl
                 });
     }
 
+    public void pushOrder(int id){
+        getView().showProgressDialog();
+        mModel.orderPush(id)
+                .compose(RxUtils.transform(getView()))
+                .subscribe(new RespObserver() {
+
+                    @Override
+                    public void onResult(String msg, String bizContent) {
+                        getView().dismissProgressDialog();
+                        if (TextUtils.isEmpty(bizContent)){
+                            return;
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(int errCode, String errMsg) {
+                        getView().dismissProgressDialog();
+                        getView().showError(errMsg);
+                    }
+                });
+    }
+
+    public void opendOrder(int id){
+        getView().showProgressDialog();
+        mModel.opendOrder(id)
+                .compose(RxUtils.transform(getView()))
+                .subscribe(new RespObserver() {
+
+                    @Override
+                    public void onResult(String msg, String bizContent) {
+                        getView().dismissProgressDialog();
+                        if (TextUtils.isEmpty(bizContent)){
+                            return;
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(int errCode, String errMsg) {
+                        getView().dismissProgressDialog();
+                        getView().showError(errMsg);
+                    }
+                });
+    }
+
+    public void cancelOrder(int id){
+        getView().showProgressDialog();
+        mModel.cancleOrder(id)
+                .compose(RxUtils.transform(getView()))
+                .subscribe(new RespObserver() {
+
+                    @Override
+                    public void onResult(String msg, String bizContent) {
+                        getView().dismissProgressDialog();
+                        if (TextUtils.isEmpty(bizContent)){
+                            return;
+                        }
+
+
+                    }
+
+                    @Override
+                    public void onError(int errCode, String errMsg) {
+                        getView().dismissProgressDialog();
+                        getView().showError(errMsg);
+                    }
+                });
+    }
+
 }

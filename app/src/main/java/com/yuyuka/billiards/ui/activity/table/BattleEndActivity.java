@@ -23,13 +23,11 @@ import butterknife.OnClick;
 
 public class BattleEndActivity extends BaseActivity {
 
-    int id;
-    int otherUserId;
+    CustomNoticePojo data;
 
-    public static void launcher(Activity context, int userId, int id){
+    public static void launcher(Activity context, CustomNoticePojo data){
         Intent intent = new Intent(context,BattleEndActivity.class);
-        intent.putExtra("id",id);
-        intent.putExtra("userId",userId);
+        intent.putExtra("data",data);
         context.startActivityForResult(intent,0);
     }
 
@@ -43,21 +41,19 @@ public class BattleEndActivity extends BaseActivity {
             mStatusBar.setVisibility(View.GONE);
         }
 
-        EventBus.getDefault().register(this);
 
     }
 
     @Override
     protected void initData() {
-        id = getIntent().getIntExtra("id",0);
-        otherUserId = getIntent().getIntExtra("userId",0);
+        data = (CustomNoticePojo) getIntent().getSerializableExtra("data");
     }
 
     @OnClick({R.id.btn_win,R.id.btn_lose})
     public void onClick(View v){
         switch (v.getId()){
             case R.id.btn_win:
-                BattleWinnerActivity.launcher(this,id,otherUserId);
+                BattleWinnerActivity.launcher(this,data);
                 break;
             case R.id.btn_lose:
                 startActivityForResult(new Intent(this,BattleLoserWaitActivity.class),0);
@@ -65,16 +61,21 @@ public class BattleEndActivity extends BaseActivity {
         }
     }
 
-    @Subscribe
-    public void onEvent(CustomNotification notification){
-
-    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (resultCode == RESULT_OK){
             setResult(RESULT_OK);
+            finish();
+        }
+    }
+
+    @Override
+    public void onEvent(CustomNotification notification) {
+        super.onEvent(notification);
+        CustomNoticePojo data = new Gson().fromJson(notification.getContent(),CustomNoticePojo.class);
+        if (data.getNoticeType() == 2){
             finish();
         }
     }

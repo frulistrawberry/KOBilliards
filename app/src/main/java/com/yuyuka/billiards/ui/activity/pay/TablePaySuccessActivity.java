@@ -4,16 +4,16 @@ import android.content.Context;
 import android.content.Intent;
 import android.view.View;
 
+import com.netease.nimlib.sdk.msg.model.CustomNotification;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseActivity;
 import com.yuyuka.billiards.constants.CompetitionType;
 import com.yuyuka.billiards.pojo.CustomNoticePojo;
-import com.yuyuka.billiards.ui.activity.facetoface.FaceToFaceFunActivity;
-import com.yuyuka.billiards.ui.activity.facetoface.FaceToFaceQualifyingActivity;
+import com.yuyuka.billiards.ui.activity.facetoface.BattleWaitActivity;
 import com.yuyuka.billiards.ui.activity.table.BattleActivity;
 import com.yuyuka.billiards.ui.activity.table.SingleBattleActivity;
 
-import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.OnClick;
 
@@ -57,8 +57,14 @@ public class TablePaySuccessActivity extends BaseActivity {
     }
 
     @Override
+    public void onEvent(CustomNotification notification) {
+//        super.onEvent(notification);
+    }
+
+    @Override
     public void finish() {
         if (data == null){
+            setResult(RESULT_OK);
             super.finish();
             return;
         }
@@ -66,29 +72,33 @@ public class TablePaySuccessActivity extends BaseActivity {
         if (data.getNoticeType() == 0){
             //等待比赛(调到二维码页面)
             CustomNoticePojo.Battle battle = data.getBizContent().getBattle();
-            switch (battle.getBattleType()){
-                case CompetitionType.SCAN_BATTLE:
-                    break;
-                case CompetitionType.SCAN_RANK:
-                    FaceToFaceQualifyingActivity.launcher(this,tableId,battle.getId(),battle.getRefOrderId(),battle.getBattleType());
-                    break;
+            CustomNoticePojo.BizContent bizContent = data.getBizContent();
+            if (battle.getBattleType() == CompetitionType.SCAN_BATTLE
+                    ||battle.getBattleType() == CompetitionType.SCAN_RANK
+                    ||battle.getBattleType() == CompetitionType.FACE_TO_FACE_BATTLE
+                    ||battle.getBattleType() == CompetitionType.FACE_TO_FACE_RANK){
+                long tableNum = bizContent.getTableNum();
+                BattleWaitActivity.launcher(this, tableNum,battle.getId(),battle.getRefOrderId(),battle.getBattleType());
             }
         }else if (data.getNoticeType() == 1){
             //比赛开始进入对战页面
+            //比赛开始进入对战页面
             CustomNoticePojo.Battle battle = data.getBizContent().getBattle();
-            switch (battle.getBattleType()){
-                case CompetitionType.SCAN_BATTLE:
-                    break;
-                case CompetitionType.SCAN_RANK:
-                    BattleActivity.launcher(this,data);
-                    break;
-                    case CompetitionType.OPEN_TABLE:
-                        SingleBattleActivity.launcher(this,data);
-                        break;
+            if (battle.getBattleType() == CompetitionType.SCAN_BATTLE
+                    ||battle.getBattleType() == CompetitionType.SCAN_RANK
+                    ||battle.getBattleType() == CompetitionType.FACE_TO_FACE_BATTLE
+                    ||battle.getBattleType() == CompetitionType.FACE_TO_FACE_RANK) {
+                BattleActivity.launcher(this,data);
+
+            }else if (battle.getBattleType() == CompetitionType.OPEN_TABLE){
+                SingleBattleActivity.launcher(this,data);
             }
         }
 
+        setResult(RESULT_OK);
         super.finish();
+
+
 
     }
 }

@@ -81,7 +81,6 @@ public class RecommendMerchantFragment extends BaseListFragment<RecommendRoomPre
         mLocationOption.setOnceLocation(true);
         mLocationClient.setLocationOption(mLocationOption);
         mLocationClient.startLocation();
-        EventBus.getDefault().register(this);
     }
 
     @Override

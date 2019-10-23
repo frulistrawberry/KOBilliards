@@ -83,7 +83,6 @@ public class PayActivity extends BaseMvpActivity<RoomDetailPresenter> implements
         LogUtil.e("data","beginDate="+beginDate);
         LogUtil.e("data","endDate="+endDate);
         LogUtil.e("data","remark="+remark);
-        EventBus.getDefault().register(this);
     }
 
 

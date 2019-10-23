@@ -138,7 +138,6 @@ public class VideoDetailActivity extends BaseMvpActivity<NewsContentPresenter> i
     protected void initData() {
         url = getIntent().getStringExtra("url");
         id = getIntent().getIntExtra("id",0);
-        EventBus.getDefault().register(this);
     }
 
     @Override

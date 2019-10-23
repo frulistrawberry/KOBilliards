@@ -11,20 +11,27 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.google.gson.Gson;
+import com.netease.nimlib.sdk.msg.model.CustomNotification;
 import com.yuyuka.billiards.R;
-import com.yuyuka.billiards.base.BaseActivity;
 import com.yuyuka.billiards.base.BaseMvpActivity;
 import com.yuyuka.billiards.image.ImageManager;
+import com.yuyuka.billiards.mvp.contract.table.TableContract;
+import com.yuyuka.billiards.mvp.presenter.table.TablePresenter;
 import com.yuyuka.billiards.pojo.CustomNoticePojo;
+import com.yuyuka.billiards.pojo.OrderPojo;
+import com.yuyuka.billiards.pojo.TablePojo;
 import com.yuyuka.billiards.ui.activity.pay.TablePayActivity;
 import com.yuyuka.billiards.utils.BarUtils;
-import com.yuyuka.billiards.utils.CommonUtils;
-import com.yuyuka.billiards.utils.DataOptionUtils;
+import com.yuyuka.billiards.utils.log.LogUtil;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
 
 import butterknife.BindView;
 import butterknife.OnClick;
 
-public class SingleBattleActivity extends BaseActivity {
+public class SingleBattleActivity extends BaseMvpActivity<TablePresenter> implements TableContract.ITableView {
 
     CustomNoticePojo data;
     @BindView(R.id.iv_head_user1)
@@ -65,7 +72,7 @@ public class SingleBattleActivity extends BaseActivity {
         CustomNoticePojo.BizContent content = data.getBizContent();
         switch (v.getId()){
             case R.id.end_battle:
-                TablePayActivity.launcher(this,data.getBizContent().getBattle().getId());
+                getPresenter().opendOrder(content.getBattle().getId());
                 break;
         }
     }
@@ -81,5 +88,46 @@ public class SingleBattleActivity extends BaseActivity {
         if (resultCode == RESULT_OK){
             finish();
         }
+    }
+
+    @Override
+    protected TablePresenter getPresenter() {
+        return new TablePresenter(this);
+    }
+
+    @Override
+    public void showTableInfo(TablePojo data) {
+
+    }
+
+    @Override
+    public void showOrderSuccess(OrderPojo data) {
+
+    }
+
+    @Override
+    public void showOrderFailure(String msg) {
+
+    }
+
+    @Override
+    public void showEnterSuccess() {
+
+    }
+
+    @Override
+    public void showEnterFailure() {
+
+    }
+
+    @Subscribe
+    public void onEvent(CustomNotification message){
+        super.onEvent(message);
+        LogUtil.json("CustomNotification",message.getContent());
+        String json = message.getContent();
+        CustomNoticePojo data = new Gson().fromJson(json,CustomNoticePojo.class);
+        if (data.getNoticeType() == 6)
+            finish();
+
     }
 }
