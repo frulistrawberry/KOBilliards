@@ -338,9 +338,9 @@ public class CustomNoticePojo implements Serializable {
 
         private Duan hisDuan;
 
-        private int combatValue;
+        private long combatValue;
 
-        private int addCombatValue;
+        private long addCombatValue;
 
         private User billiardsUsers;
 
@@ -377,13 +377,13 @@ public class CustomNoticePojo implements Serializable {
         public void setCombatValue(int combatValue){
             this.combatValue = combatValue;
         }
-        public int getCombatValue(){
+        public long getCombatValue(){
             return this.combatValue;
         }
         public void setAddCombatValue(int addCombatValue){
             this.addCombatValue = addCombatValue;
         }
-        public int getAddCombatValue(){
+        public long getAddCombatValue(){
             return this.addCombatValue;
         }
         public void setBilliardsUsers(User billiardsUsers){

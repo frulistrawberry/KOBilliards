@@ -24,6 +24,7 @@ import com.google.gson.Gson;
 import com.netease.nimlib.sdk.msg.model.CustomNotification;
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseMvpActivity;
+import com.yuyuka.billiards.constants.CompetitionType;
 import com.yuyuka.billiards.mvp.contract.table.TableContract;
 import com.yuyuka.billiards.mvp.presenter.table.TablePresenter;
 import com.yuyuka.billiards.pojo.CustomNoticePojo;
@@ -200,7 +201,11 @@ public class BattleResultActivity extends BaseMvpActivity<TablePresenter> implem
                 finish();
                 break;
             case R.id.btn_send:
-                if (win){
+                CustomNoticePojo.Battle battle = data.getBizContent().getBattle();
+                if (battle.getBattleType() == CompetitionType.FACE_TO_FACE_BATTLE
+                        || battle.getBattleType() == CompetitionType.FACE_TO_FACE_RANK) {
+                    getPresenter().pushOrder(data.getBizContent().getBattle().getId());
+                }else if (win){
                     setResult(RESULT_OK);
                     finish();
                 }else {
@@ -226,6 +231,15 @@ public class BattleResultActivity extends BaseMvpActivity<TablePresenter> implem
     }
 
 
+    @Override
+    public void onEvent(CustomNotification notification) {
+        super.onEvent(notification);
+        CustomNoticePojo data = new Gson().fromJson(notification.getContent(),CustomNoticePojo.class);
+        if (data.getNoticeType() == 6){
+            setResult(RESULT_OK);
+            finish();
+        }
+    }
 
     @Override
     protected TablePresenter getPresenter() {
