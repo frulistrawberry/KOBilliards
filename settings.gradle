@@ -1,1 +1,1 @@
-include ':app', ':are'
+include ':app', ':are', ':NIM_Android_UIKit'

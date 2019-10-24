@@ -12,17 +12,21 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AlertDialog;
 import android.view.View;
 
+import com.netease.nim.uikit.common.CommonUtil;
 import com.netease.nimlib.sdk.NIMClient;
 import com.netease.nimlib.sdk.Observer;
 import com.netease.nimlib.sdk.RequestCallback;
 import com.netease.nimlib.sdk.StatusCode;
 import com.netease.nimlib.sdk.auth.AuthService;
+import com.netease.nimlib.sdk.auth.AuthServiceObserver;
 import com.netease.nimlib.sdk.auth.LoginInfo;
 import com.netease.nimlib.sdk.msg.MsgServiceObserve;
 import com.netease.nimlib.sdk.msg.model.CustomNotification;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.yuyuka.billiards.R;
+import com.yuyuka.billiards.base.ActivityManager;
 import com.yuyuka.billiards.base.BaseActivity;
+import com.yuyuka.billiards.ui.activity.login.LoginActivity;
 import com.yuyuka.billiards.ui.adapter.common.PagerAdapter;
 import com.yuyuka.billiards.ui.fragment.BetFragment;
 import com.yuyuka.billiards.ui.fragment.HomeFragment;
@@ -83,6 +87,14 @@ public class MainActivity extends BaseActivity implements TabBar.OnTabCheckListe
     }
 
     private void initIM(){
+
+        if (NIMClient.getStatus().wontAutoLogin() || NIMClient.getStatus() == StatusCode.UNLOGIN){
+            CommonUtils.clearUserInfo();
+            startActivity(new Intent(ActivityManager.getInstance().getCurrentActivity(), LoginActivity.class));
+        }
+
+
+
 
     }
 

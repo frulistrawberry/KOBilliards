@@ -35,6 +35,12 @@ public class CommonUtils {
         SPUtils.putBoolean(PreferenceConstant.IS_LOGIN,true);
     }
 
+    public static void clearUserInfo(){
+        SPUtils.putInt(PreferenceConstant.USER_ID,0);
+        SPUtils.putBoolean(PreferenceConstant.IS_LOGIN,false);
+        SPUtils.putString(PreferenceConstant.TOKEN,"");
+    }
+
     public static void saveLocationInfo(double lat,double lng){
         SPUtils.putFloat(PreferenceConstant.LATITUDE, (float) lat);
         SPUtils.putFloat(PreferenceConstant.LONGITUDE, (float) lng);
