@@ -17,9 +17,9 @@ import com.yuyuka.billiards.utils.SizeUtils;
  * 自动跟换背景的按钮
  */
 public class StateButton extends AppCompatButton {
-    public static final int DEFAULT_CLICKABLE_COLOR = Color.parseColor("#FA5552");
-    public static final int DEFAULT_UN_CLICKABLE_COLOR = Color.parseColor("#66FA5552");
-    public static final int DEFAULT_PRESS_COLOR = Color.parseColor("#DDFA5552");
+    public static final int DEFAULT_CLICKABLE_COLOR = Color.parseColor("#F1A82A");
+    public static final int DEFAULT_UN_CLICKABLE_COLOR = Color.parseColor("#F1A82A");
+    public static final int DEFAULT_PRESS_COLOR = Color.parseColor("#F1A82A");
 
     private int mColor;//可点击背景色
     private int mPressColor;//按下背景色

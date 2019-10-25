@@ -56,6 +56,7 @@ public class MainActivity extends BaseActivity implements TabBar.OnTabCheckListe
     @Override
     protected void initView() {
         setContentView(R.layout.activity_main);
+        mStatusBar.setVisibility(View.GONE);
         mTabIndicator.addTab(new TabBar.Tab()
                 .setCheckedColor(getResourceColor(R.color.text_color_6))
                 .setColor(getResourceColor(R.color.text_color_1))
@@ -88,10 +89,7 @@ public class MainActivity extends BaseActivity implements TabBar.OnTabCheckListe
 
     private void initIM(){
 
-        if (NIMClient.getStatus().wontAutoLogin() || NIMClient.getStatus() == StatusCode.UNLOGIN){
-            CommonUtils.clearUserInfo();
-            startActivity(new Intent(ActivityManager.getInstance().getCurrentActivity(), LoginActivity.class));
-        }
+
 
 
 

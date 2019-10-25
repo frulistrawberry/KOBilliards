@@ -2,6 +2,7 @@ package com.yuyuka.billiards.ui.fragment;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.support.design.widget.AppBarLayout;
 import android.support.v4.app.Fragment;
@@ -38,6 +39,7 @@ import com.yuyuka.billiards.ui.activity.table.SingleBattleActivity;
 import com.yuyuka.billiards.ui.adapter.common.NavigatorAdapter;
 import com.yuyuka.billiards.ui.adapter.common.PagerAdapter;
 import com.yuyuka.billiards.ui.fragment.news.NewsListFragment;
+import com.yuyuka.billiards.utils.BarUtils;
 import com.yuyuka.billiards.utils.CollectionUtils;
 import com.yuyuka.billiards.utils.ViewUtils;
 import com.yuyuka.billiards.utils.log.LogUtil;
@@ -86,6 +88,8 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
     FrameLayout mHeaderLayout;
     @BindView(R.id.layout_ptr)
     PtrClassicFrameLayout mPtrLayout;
+    @BindView(R.id.v_status)
+    View statusbar;
 
     List<Fragment> mFragmentList;
     PagerAdapter mAdapter;
@@ -197,17 +201,16 @@ public class HomeFragment extends BaseMvpFragment<HomePresenter> implements Home
         mAdapter = new PagerAdapter(getChildFragmentManager(),mFragmentList,mTitles);
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void initView() {
+        statusbar.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, BarUtils.getStatusBarHeight(getActivity())));
 
-        mRoot.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                if (tableIv.getVisibility() == View.VISIBLE){
-                    hideFabAnim();
-                }
-                return false;
+        mRoot.setOnTouchListener((view, motionEvent) -> {
+            if (tableIv.getVisibility() == View.VISIBLE){
+                hideFabAnim();
             }
+            return false;
         });
         mAppbarLayout.addOnOffsetChangedListener(new AppBarStateChangeListener() {
             @Override

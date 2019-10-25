@@ -5,6 +5,7 @@ import android.widget.TextView;
 
 import com.amap.api.maps.AMapUtils;
 import com.amap.api.maps.model.LatLng;
+import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.constants.PreferenceConstant;
 
 import java.math.BigDecimal;
@@ -59,6 +60,15 @@ public class DataOptionUtils {
         BigDecimal bd = new BigDecimal(String.valueOf(money));
         double  d = bd.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
         return String.format("%.2f", d);
+
+    }
+
+    public static String getStringWithRound1(String money){
+        if(TextUtils.isEmpty(money)){
+            return "";
+        }
+        BigDecimal bd = new BigDecimal(String.valueOf(money));
+        return  bd.setScale(0, BigDecimal.ROUND_HALF_UP)+"";
 
     }
 
@@ -124,6 +134,46 @@ public class DataOptionUtils {
                 break;
         }
         return duan+point+"级";
+    }
+
+    public static String getZhanli(long value){
+        long wan = 10000;
+        long yi = 100000000;
+        long zhao = 1000000000000L;
+        String result = "";
+        if (value>zhao){
+            result = result+(value/zhao)+"兆";
+            value = value%zhao;
+        }
+        if (value>yi){
+            result = result+(value/yi)+"亿";
+            value = value%yi;
+        }
+        if (value>wan){
+            result = result+(value/wan)+"万";
+            value = value%wan;
+        }
+        if (value>0)
+            return result+value;
+        else
+            return result;
+    }
+
+    public static int getduanwei(String duanwei){
+        switch (duanwei){
+            case "入门":
+                return R.mipmap.rumen;
+            case "新手":
+                return R.mipmap.xinshou;
+            case "业余":
+                return R.mipmap.yeyu;
+            case "导师":
+                return R.mipmap.daoshi;
+            case "大师":
+                return R.mipmap.dashi;
+            default:
+                return R.mipmap.rumen;
+        }
     }
 
 }

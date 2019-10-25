@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import com.yuyuka.billiards.R;
 import com.yuyuka.billiards.base.BaseFragment;
@@ -17,6 +18,7 @@ import com.yuyuka.billiards.ui.adapter.common.NavigatorAdapter;
 import com.yuyuka.billiards.ui.adapter.common.PagerAdapter;
 import com.yuyuka.billiards.ui.adapter.news.VideoPickAdapter;
 import com.yuyuka.billiards.ui.fragment.news.NewsListFragment;
+import com.yuyuka.billiards.utils.BarUtils;
 import com.yuyuka.billiards.utils.KeyboardUtils;
 import com.yuyuka.billiards.utils.SizeUtils;
 import com.yuyuka.billiards.widget.ListPop;
@@ -45,6 +47,8 @@ public class NewsFragment extends BaseFragment {
     @BindView(R.id.et_search)
      EditText mSearchEt;
     private String keywords="";
+    @BindView(R.id.v_status)
+    View statusbar;
 
     @Override
     protected View createView(LayoutInflater inflater, ViewGroup parent) {
@@ -64,6 +68,8 @@ public class NewsFragment extends BaseFragment {
 
     @Override
     protected void initView() {
+        statusbar.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, BarUtils.getStatusBarHeight(getContext())));
+
         CommonNavigator commonNavigator = new CommonNavigator(getContext());
         commonNavigator.setAdjustMode(false);
         commonNavigator.setAdapter(new NavigatorAdapter(mFragmentList,mViewPager,mAdapter));
